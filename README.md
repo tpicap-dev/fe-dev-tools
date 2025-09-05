@@ -148,7 +148,7 @@ FE dev helper tool for debugging and testing browser app. Provides options to di
             <tr>
                 <td class="confluenceTd">stub</td>
                 <td colspan="1" class="confluenceTd">
-                    Sends request to local dev-tools web-server
+                    Receives interface path string as parameter, returns promise resolving with stub implementing passed interface. Sends request to local dev-tools web-server.
                 </td>
                 <td class="confluenceTd">
                     <span style="color: rgb(0, 0, 255)">path</span>: string
