@@ -21,7 +21,6 @@ FE dev helper tool for debugging and testing browser app. Provides options to di
 - Navigate to dev-tool local repo
 - In terminal run `deno task build-external`
 - In terminal run `deno task launch-app`
-- Refresh browser tab
 
 ***
 
