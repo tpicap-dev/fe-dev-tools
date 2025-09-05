@@ -4,41 +4,23 @@
 
 ## Description
 
-FE dev helper tool for debugging and testing browser app. Provides options to dispatch actions, dump redux state, exposes few 3rd party libraries.
-
-## Updates in equities-client
-
-- dev-tools entry point import in `src/index.ts`
-- dev webpack config: `webpack.config.dev.js`
-- scripts updates in `package.json`
+FE dev helper tool for debugging and testing browser app. Provides options to dispatch redux actions, dump state, exposes few 3rd party libraries.
 
 ## Installation
 
-- Clone repo from https://scm.tpicapcloud.com/fusion/equities/dev-tools
+- Clone repo from https://github.com/tpicap-dev/fe-dev-tools
 
 ## Building
 
-***Pre requirements: Deno(v. 1.29.1) should be installed***
+***Pre requirements: Deno(v. 2.4.3) should be installed***
 
-- Modify `shared/constants.js` and set `PROJECT_PATH` to absolute equities-client project path
-- From dev-tools local repo root run `deno task start`
-which will prepare js files for usage in browser
+- Modify `shared/constants.js` and `internal/constants.sh` and set `PROJECT_PATH` to absolute project path
 
-### CLI OPtions
--  `--objectives`
-Possible values are comma delimitted strings: `actions`, `constants`, `messages`, `model`, `utils`, `all`
-Example: `deno task start --objectives=actions,constants`
-
-## Making features available in browser
-
-In order to make dev-tools available in equities-client app, dev-tools should be linked by npm.
+## Running application with Dev Tools
 
 - Navigate to dev-tool local repo
-- In terminal run `npm link`
-- Navigate to equities-client local repo
-- In terminal run `npm link dev-tools`
-- Stop the equities-client node server
-- Restart app build
+- In terminal run `deno task build-external`
+- In terminal run `deno task launch-app`
 - Refresh browser tab
 
 ***
@@ -206,15 +188,3 @@ In order to make dev-tools available in equities-client app, dev-tools should be
     </tr>
   </tbody>
 </table>
-
-<style>
-    td {
-        vertical-align: top;
-    }
-</style>
-
-
-## To-do considerations
-- Add all panels
-- Implement jest testing for separate test suites
-- Creating and exposing util functions, for example "get trade object by trade id", object can then be used to debug messages, actions etc
