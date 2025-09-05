@@ -1,0 +1,28 @@
+{
+  "PROJECT_PATH": "D:/Users/m_botezatu/projects/equities-client-1",
+  "SRC_PATH": "src",
+  "DIST_PATH": "dist",
+  "BUNDLE_FILE_NAME": "equities-client.js",
+  "APP_ID": "equities-client",
+  "REDUX_OUTPUT_FILE": "external/redux.js",
+  "REDUX_TEMPLATE_FILE": "internal/redux-template.js",
+  "OBJECTIVES": {
+    "actions": "actions",
+    "messages": "messages",
+    "utils": "utils",
+    "helpers": "helpers",
+    "constants": "constants",
+    "model": "model",
+    "components": "components"
+  },
+  "OBJECTIVES_PATH": "external",
+  "EXPORTS_PATH": "shared/exports",
+  "REEXPORTS_PATH": "external/reexports",
+  "SERVER_PORT": "8080",
+  "DEV_TOOLS_PATH": "D:/users/m_botezatu/projects/dev-tools",
+  "EXTERNAL_DEV_TOOLS_BUNDLE_FILENAME": "dev-tools.js",
+  "EXTERNAL_REDUX_BUNDLE_FILENAME": "redux.js",
+  "EXTERNAL_EXTENSIONS_BUNDLE_FILENAME": "extensions.js",
+  "DEV_TOOLS_EXTERNAL_DIST_PATH": "dist",
+  "ACTIONS_CACHE_LIMIT": 500
+}

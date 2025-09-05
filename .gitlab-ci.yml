@@ -1,0 +1,5 @@
+# gitlab application security defaults
+include:
+- project: 'internal-tpicap/gitlab/templates'
+  ref: master
+  file: '/gitlab-ci.yml'   

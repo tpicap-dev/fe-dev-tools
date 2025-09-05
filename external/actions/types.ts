@@ -1,0 +1,5 @@
+const DEV_TOOLS_PREFIX = 'DEV_TOOLS/'
+
+export default {
+  SET_STATE: `${DEV_TOOLS_PREFIX}SET_STATE`
+}

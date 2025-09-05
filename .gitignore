@@ -1,0 +1,12 @@
+.idea
+*.iml
+
+wdio.conf.js
+.*.swp
+.*.swo
+.*.swn
+.*.swm
+*.orig
+*.bak
+.vscode
+node_modules
