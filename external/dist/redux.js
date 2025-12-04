@@ -61,9 +61,9 @@ var toPropertyKeyExports = toPropertyKey.exports;
 	function _defineProperty(e, r, t) {
 	  return (r = toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
 	    value: t,
-	    enumerable: !0,
-	    configurable: !0,
-	    writable: !0
+	    enumerable: true,
+	    configurable: true,
+	    writable: true
 	  }) : e[r] = t, e;
 	}
 	module.exports = _defineProperty, module.exports.__esModule = true, module.exports["default"] = module.exports; 
@@ -86,7 +86,7 @@ var definePropertyExports = defineProperty.exports;
 	function _objectSpread2(e) {
 	  for (var r = 1; r < arguments.length; r++) {
 	    var t = null != arguments[r] ? arguments[r] : {};
-	    r % 2 ? ownKeys(Object(t), !0).forEach(function (r) {
+	    r % 2 ? ownKeys(Object(t), true).forEach(function (r) {
 	      defineProperty(e, r, t[r]);
 	    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) {
 	      Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
@@ -945,6 +945,103 @@ function _arity(n, fn) {
 }
 
 /**
+ * Internal curryN function.
+ *
+ * @private
+ * @category Function
+ * @param {Number} length The arity of the curried function.
+ * @param {Array} received An array of arguments received thus far.
+ * @param {Function} fn The function to curry.
+ * @return {Function} The curried function.
+ */
+
+function _curryN(length, received, fn) {
+  return function () {
+    var combined = [];
+    var argsIdx = 0;
+    var left = length;
+    var combinedIdx = 0;
+    var hasPlaceholder = false;
+
+    while (combinedIdx < received.length || argsIdx < arguments.length) {
+      var result;
+
+      if (combinedIdx < received.length && (!_isPlaceholder(received[combinedIdx]) || argsIdx >= arguments.length)) {
+        result = received[combinedIdx];
+      } else {
+        result = arguments[argsIdx];
+        argsIdx += 1;
+      }
+
+      combined[combinedIdx] = result;
+
+      if (!_isPlaceholder(result)) {
+        left -= 1;
+      } else {
+        hasPlaceholder = true;
+      }
+
+      combinedIdx += 1;
+    }
+
+    return !hasPlaceholder && left <= 0 ? fn.apply(this, combined) : _arity(Math.max(0, left), _curryN(length, combined, fn));
+  };
+}
+
+/**
+ * Returns a curried equivalent of the provided function, with the specified
+ * arity. The curried function has two unusual capabilities. First, its
+ * arguments needn't be provided one at a time. If `g` is `R.curryN(3, f)`, the
+ * following are equivalent:
+ *
+ *   - `g(1)(2)(3)`
+ *   - `g(1)(2, 3)`
+ *   - `g(1, 2)(3)`
+ *   - `g(1, 2, 3)`
+ *
+ * Secondly, the special placeholder value [`R.__`](#__) may be used to specify
+ * "gaps", allowing partial application of any combination of arguments,
+ * regardless of their positions. If `g` is as above and `_` is [`R.__`](#__),
+ * the following are equivalent:
+ *
+ *   - `g(1, 2, 3)`
+ *   - `g(_, 2, 3)(1)`
+ *   - `g(_, _, 3)(1)(2)`
+ *   - `g(_, _, 3)(1, 2)`
+ *   - `g(_, 2)(1)(3)`
+ *   - `g(_, 2)(1, 3)`
+ *   - `g(_, 2)(_, 3)(1)`
+ *
+ * @func
+ * @memberOf R
+ * @since v0.5.0
+ * @category Function
+ * @sig Number -> (* -> a) -> (* -> a)
+ * @param {Number} length The arity for the returned function.
+ * @param {Function} fn The function to curry.
+ * @return {Function} A new, curried function.
+ * @see R.curry
+ * @example
+ *
+ *      const sumArgs = (...args) => R.sum(args);
+ *
+ *      const curriedAddFourNumbers = R.curryN(4, sumArgs);
+ *      const f = curriedAddFourNumbers(1, 2);
+ *      const g = f(3);
+ *      g(4); //=> 10
+ */
+
+var curryN =
+/*#__PURE__*/
+_curry2(function curryN(length, fn) {
+  if (length === 1) {
+    return _curry1(fn);
+  }
+
+  return _arity(length, _curryN(length, [], fn));
+});
+
+/**
  * Optimized internal three-arity curry function.
  *
  * @private
@@ -1442,9 +1539,116 @@ _curry2(function equals(a, b) {
   return _equals(a, b, [], []);
 });
 
+function _map(fn, functor) {
+  var idx = 0;
+  var len = functor.length;
+  var result = Array(len);
+
+  while (idx < len) {
+    result[idx] = fn(functor[idx]);
+    idx += 1;
+  }
+
+  return result;
+}
+
+function _arrayReduce(reducer, acc, list) {
+  var index = 0;
+  var length = list.length;
+
+  while (index < length) {
+    acc = reducer(acc, list[index]);
+    index += 1;
+  }
+
+  return acc;
+}
+
 function _isObject(x) {
   return Object.prototype.toString.call(x) === '[object Object]';
 }
+
+var XMap =
+/*#__PURE__*/
+function () {
+  function XMap(f, xf) {
+    this.xf = xf;
+    this.f = f;
+  }
+
+  XMap.prototype['@@transducer/init'] = _xfBase.init;
+  XMap.prototype['@@transducer/result'] = _xfBase.result;
+
+  XMap.prototype['@@transducer/step'] = function (result, input) {
+    return this.xf['@@transducer/step'](result, this.f(input));
+  };
+
+  return XMap;
+}();
+
+var _xmap = function _xmap(f) {
+  return function (xf) {
+    return new XMap(f, xf);
+  };
+};
+
+/**
+ * Takes a function and
+ * a [functor](https://github.com/fantasyland/fantasy-land#functor),
+ * applies the function to each of the functor's values, and returns
+ * a functor of the same shape.
+ *
+ * Ramda provides suitable `map` implementations for `Array` and `Object`,
+ * so this function may be applied to `[1, 2, 3]` or `{x: 1, y: 2, z: 3}`.
+ *
+ * Dispatches to the `map` method of the second argument, if present.
+ *
+ * Acts as a transducer if a transformer is given in list position.
+ *
+ * Also treats functions as functors and will compose them together.
+ *
+ * @func
+ * @memberOf R
+ * @since v0.1.0
+ * @category List
+ * @sig Functor f => (a -> b) -> f a -> f b
+ * @param {Function} fn The function to be called on every element of the input `list`.
+ * @param {Array} list The list to be iterated over.
+ * @return {Array} The new list.
+ * @see R.transduce, R.addIndex, R.pluck, R.project
+ * @example
+ *
+ *      const double = x => x * 2;
+ *
+ *      R.map(double, [1, 2, 3]); //=> [2, 4, 6]
+ *
+ *      R.map(double, {x: 1, y: 2, z: 3}); //=> {x: 2, y: 4, z: 6}
+ * @symb R.map(f, [a, b]) = [f(a), f(b)]
+ * @symb R.map(f, { x: a, y: b }) = { x: f(a), y: f(b) }
+ * @symb R.map(f, functor_o) = functor_o.map(f)
+ */
+
+var map =
+/*#__PURE__*/
+_curry2(
+/*#__PURE__*/
+_dispatchable(['fantasy-land/map', 'map'], _xmap, function map(fn, functor) {
+  switch (Object.prototype.toString.call(functor)) {
+    case '[object Function]':
+      return curryN(functor.length, function () {
+        return fn.call(this, functor.apply(this, arguments));
+      });
+
+    case '[object Object]':
+      return _arrayReduce(function (acc, key) {
+        acc[key] = fn(functor[key]);
+        return acc;
+      }, {}, keys(functor));
+
+    default:
+      return _map(fn, functor);
+  }
+}));
 
 /**
  * Determine if the passed argument is an integer.
@@ -2202,6 +2406,126 @@ _dispatchable(['find'], _xfind, function find(fn, list) {
 }));
 
 /**
+ * Iterate over an input `list`, calling a provided function `fn` for each
+ * element in the list.
+ *
+ * `fn` receives one argument: *(value)*.
+ *
+ * Note: `R.forEach` does not skip deleted or unassigned indices (sparse
+ * arrays), unlike the native `Array.prototype.forEach` method. For more
+ * details on this behavior, see:
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach#Description
+ *
+ * Also note that, unlike `Array.prototype.forEach`, Ramda's `forEach` returns
+ * the original array. In some libraries this function is named `each`.
+ *
+ * Dispatches to the `forEach` method of the second argument, if present.
+ *
+ * @func
+ * @memberOf R
+ * @since v0.1.1
+ * @category List
+ * @sig (a -> *) -> [a] -> [a]
+ * @param {Function} fn The function to invoke. Receives one argument, `value`.
+ * @param {Array} list The list to iterate over.
+ * @return {Array} The original list.
+ * @see R.addIndex
+ * @example
+ *
+ *      const printXPlusFive = x => console.log(x + 5);
+ *      R.forEach(printXPlusFive, [1, 2, 3]); //=> [1, 2, 3]
+ *      // logs 6
+ *      // logs 7
+ *      // logs 8
+ * @symb R.forEach(f, [a, b, c]) = [a, b, c]
+ */
+
+var forEach =
+/*#__PURE__*/
+_curry2(
+/*#__PURE__*/
+_checkForMethod('forEach', function forEach(fn, list) {
+  var len = list.length;
+  var idx = 0;
+
+  while (idx < len) {
+    fn(list[idx]);
+    idx += 1;
+  }
+
+  return list;
+}));
+
+/**
+ * Iterate over an input `object`, calling a provided function `fn` for each
+ * key and value in the object.
+ *
+ * `fn` receives three argument: *(value, key, obj)*.
+ *
+ * @func
+ * @memberOf R
+ * @since v0.23.0
+ * @category Object
+ * @sig ((a, String, StrMap a) -> Any) -> StrMap a -> StrMap a
+ * @param {Function} fn The function to invoke. Receives three argument, `value`, `key`, `obj`.
+ * @param {Object} obj The object to iterate over.
+ * @return {Object} The original object.
+ * @example
+ *
+ *      const printKeyConcatValue = (value, key) => console.log(key + ':' + value);
+ *      R.forEachObjIndexed(printKeyConcatValue, {x: 1, y: 2}); //=> {x: 1, y: 2}
+ *      // logs x:1
+ *      // logs y:2
+ * @symb R.forEachObjIndexed(f, {x: a, y: b}) = {x: a, y: b}
+ */
+
+var forEachObjIndexed =
+/*#__PURE__*/
+_curry2(function forEachObjIndexed(fn, obj) {
+  var keyList = keys(obj);
+  var idx = 0;
+
+  while (idx < keyList.length) {
+    var key = keyList[idx];
+    fn(obj[key], key, obj);
+    idx += 1;
+  }
+
+  return obj;
+});
+
+/**
+ * See if an object (i.e. `val`) is an instance of the supplied constructor. This
+ * function will check up the inheritance chain, if any.
+ * If `val` was created using `Object.create`, `R.is(Object, val) === true`.
+ *
+ * @func
+ * @memberOf R
+ * @since v0.3.0
+ * @category Type
+ * @sig (* -> {*}) -> a -> Boolean
+ * @param {Object} ctor A constructor
+ * @param {*} val The value to test
+ * @return {Boolean}
+ * @example
+ *
+ *      R.is(Object, {}); //=> true
+ *      R.is(Number, 1); //=> true
+ *      R.is(Object, 1); //=> false
+ *      R.is(String, 's'); //=> true
+ *      R.is(String, new String('')); //=> true
+ *      R.is(Object, new String('')); //=> true
+ *      R.is(Object, 's'); //=> false
+ *      R.is(Number, {}); //=> false
+ */
+
+var is =
+/*#__PURE__*/
+_curry2(function is(Ctor, val) {
+  return val instanceof Ctor || val != null && (val.constructor === Ctor || Ctor.name === 'Object' && typeof val === 'object');
+});
+
+/**
  * Returns `true` if the given value is its type's empty value; `false`
  * otherwise.
  *
@@ -2228,6 +2552,198 @@ var isEmpty =
 /*#__PURE__*/
 _curry1(function isEmpty(x) {
   return x != null && equals(x, empty(x));
+});
+
+/**
+ * Retrieves the values at given paths of an object.
+ *
+ * @func
+ * @memberOf R
+ * @since v0.27.1
+ * @category Object
+ * @typedefn Idx = [String | Int | Symbol]
+ * @sig [Idx] -> {a} -> [a | Undefined]
+ * @param {Array} pathsArray The array of paths to be fetched.
+ * @param {Object} obj The object to retrieve the nested properties from.
+ * @return {Array} A list consisting of values at paths specified by "pathsArray".
+ * @see R.path
+ * @example
+ *
+ *      R.paths([['a', 'b'], ['p', 0, 'q']], {a: {b: 2}, p: [{q: 3}]}); //=> [2, 3]
+ *      R.paths([['a', 'b'], ['p', 'r']], {a: {b: 2}, p: [{q: 3}]}); //=> [2, undefined]
+ */
+
+var paths =
+/*#__PURE__*/
+_curry2(function paths(pathsArray, obj) {
+  return pathsArray.map(function (paths) {
+    var val = obj;
+    var idx = 0;
+    var p;
+
+    while (idx < paths.length) {
+      if (val == null) {
+        return;
+      }
+
+      p = paths[idx];
+      val = _isInteger(p) ? nth(p, val) : val[p];
+      idx += 1;
+    }
+
+    return val;
+  });
+});
+
+/**
+ * Retrieves the value at a given path. The nodes of the path can be arbitrary strings or non-negative integers.
+ * For anything else, the value is unspecified. Integer paths are meant to index arrays, strings are meant for objects.
+ *
+ * @func
+ * @memberOf R
+ * @since v0.2.0
+ * @category Object
+ * @typedefn Idx = String | Int | Symbol
+ * @sig [Idx] -> {a} -> a | Undefined
+ * @sig Idx = String | NonNegativeInt
+ * @param {Array} path The path to use.
+ * @param {Object} obj The object or array to retrieve the nested property from.
+ * @return {*} The data at `path`.
+ * @see R.prop, R.nth, R.assocPath, R.dissocPath
+ * @example
+ *
+ *      R.path(['a', 'b'], {a: {b: 2}}); //=> 2
+ *      R.path(['a', 'b'], {c: {b: 2}}); //=> undefined
+ *      R.path(['a', 'b', 0], {a: {b: [1, 2, 3]}}); //=> 1
+ *      R.path(['a', 'b', -2], {a: {b: [1, 2, 3]}}); //=> 2
+ *      R.path([2], {'2': 2}); //=> 2
+ *      R.path([-2], {'-2': 'a'}); //=> undefined
+ */
+
+var path =
+/*#__PURE__*/
+_curry2(function path(pathAr, obj) {
+  return paths([pathAr], obj)[0];
+});
+
+/**
+ * Creates a new object with the own properties of the two provided objects. If
+ * a key exists in both objects, the provided function is applied to the key
+ * and the values associated with the key in each object, with the result being
+ * used as the value associated with the key in the returned object.
+ *
+ * @func
+ * @memberOf R
+ * @since v0.19.0
+ * @category Object
+ * @sig ((String, a, a) -> a) -> {a} -> {a} -> {a}
+ * @param {Function} fn
+ * @param {Object} l
+ * @param {Object} r
+ * @return {Object}
+ * @see R.mergeDeepWithKey, R.merge, R.mergeWith
+ * @example
+ *
+ *      let concatValues = (k, l, r) => k == 'values' ? R.concat(l, r) : r
+ *      R.mergeWithKey(concatValues,
+ *                     { a: true, thing: 'foo', values: [10, 20] },
+ *                     { b: true, thing: 'bar', values: [15, 35] });
+ *      //=> { a: true, b: true, thing: 'bar', values: [10, 20, 15, 35] }
+ * @symb R.mergeWithKey(f, { x: 1, y: 2 }, { y: 5, z: 3 }) = { x: 1, y: f('y', 2, 5), z: 3 }
+ */
+
+var mergeWithKey =
+/*#__PURE__*/
+_curry3(function mergeWithKey(fn, l, r) {
+  var result = {};
+  var k;
+  l = l || {};
+  r = r || {};
+
+  for (k in l) {
+    if (_has(k, l)) {
+      result[k] = _has(k, r) ? fn(k, l[k], r[k]) : l[k];
+    }
+  }
+
+  for (k in r) {
+    if (_has(k, r) && !_has(k, result)) {
+      result[k] = r[k];
+    }
+  }
+
+  return result;
+});
+
+/**
+ * Creates a new object with the own properties of the two provided objects.
+ * If a key exists in both objects:
+ * - and both associated values are also objects then the values will be
+ *   recursively merged.
+ * - otherwise the provided function is applied to the key and associated values
+ *   using the resulting value as the new value associated with the key.
+ * If a key only exists in one object, the value will be associated with the key
+ * of the resulting object.
+ *
+ * @func
+ * @memberOf R
+ * @since v0.24.0
+ * @category Object
+ * @sig ((String, a, a) -> a) -> {a} -> {a} -> {a}
+ * @param {Function} fn
+ * @param {Object} lObj
+ * @param {Object} rObj
+ * @return {Object}
+ * @see R.mergeWithKey, R.mergeDeepWith
+ * @example
+ *
+ *      let concatValues = (k, l, r) => k == 'values' ? R.concat(l, r) : r
+ *      R.mergeDeepWithKey(concatValues,
+ *                         { a: true, c: { thing: 'foo', values: [10, 20] }},
+ *                         { b: true, c: { thing: 'bar', values: [15, 35] }});
+ *      //=> { a: true, b: true, c: { thing: 'bar', values: [10, 20, 15, 35] }}
+ */
+
+var mergeDeepWithKey =
+/*#__PURE__*/
+_curry3(function mergeDeepWithKey(fn, lObj, rObj) {
+  return mergeWithKey(function (k, lVal, rVal) {
+    if (_isObject(lVal) && _isObject(rVal)) {
+      return mergeDeepWithKey(fn, lVal, rVal);
+    } else {
+      return fn(k, lVal, rVal);
+    }
+  }, lObj, rObj);
+});
+
+/**
+ * Creates a new object with the own properties of the first object merged with
+ * the own properties of the second object. If a key exists in both objects:
+ * - and both values are objects, the two values will be recursively merged
+ * - otherwise the value from the second object will be used.
+ *
+ * @func
+ * @memberOf R
+ * @since v0.24.0
+ * @category Object
+ * @sig {a} -> {a} -> {a}
+ * @param {Object} lObj
+ * @param {Object} rObj
+ * @return {Object}
+ * @see R.merge, R.mergeDeepLeft, R.mergeDeepWith, R.mergeDeepWithKey
+ * @example
+ *
+ *      R.mergeDeepRight({ name: 'fred', age: 10, contact: { email: 'moo@example.com' }},
+ *                       { age: 40, contact: { email: 'baa@example.com' }});
+ *      //=> { name: 'fred', age: 40, contact: { email: 'baa@example.com' }}
+ */
+
+var mergeDeepRight =
+/*#__PURE__*/
+_curry2(function mergeDeepRight(lObj, rObj) {
+  return mergeDeepWithKey(function (k, lVal, rVal) {
+    return rVal;
+  }, lObj, rObj);
 });
 
 /**
@@ -2317,60 +2833,96 @@ _curry3(function modifyPath(path, fn, object) {
   return _assoc(idx, val, object);
 });
 
-var PROJECT_PATH = "D:/Users/m_botezatu/projects/equities-client-1";
-var SRC_PATH = "src";
-var DIST_PATH = "dist";
-var BUNDLE_FILE_NAME = "equities-client.js";
-var APP_ID = "equities-client";
-var REDUX_OUTPUT_FILE = "external/redux.js";
-var REDUX_TEMPLATE_FILE = "internal/redux-template.js";
-var OBJECTIVES = {
-	actions: "actions",
-	messages: "messages",
-	utils: "utils",
-	helpers: "helpers",
-	constants: "constants",
-	model: "model",
-	components: "components"
-};
-var OBJECTIVES_PATH = "external";
-var EXPORTS_PATH = "shared/exports";
-var REEXPORTS_PATH = "external/reexports";
-var SERVER_PORT = "8080";
-var DEV_TOOLS_PATH = "D:/users/m_botezatu/projects/dev-tools";
-var EXTERNAL_DEV_TOOLS_BUNDLE_FILENAME = "dev-tools.js";
-var EXTERNAL_REDUX_BUNDLE_FILENAME = "redux.js";
-var EXTERNAL_EXTENSIONS_BUNDLE_FILENAME = "extensions.js";
-var DEV_TOOLS_EXTERNAL_DIST_PATH = "dist";
-var ACTIONS_CACHE_LIMIT = 500;
-var constants = {
-	PROJECT_PATH: PROJECT_PATH,
-	SRC_PATH: SRC_PATH,
-	DIST_PATH: DIST_PATH,
-	BUNDLE_FILE_NAME: BUNDLE_FILE_NAME,
-	APP_ID: APP_ID,
-	REDUX_OUTPUT_FILE: REDUX_OUTPUT_FILE,
-	REDUX_TEMPLATE_FILE: REDUX_TEMPLATE_FILE,
-	OBJECTIVES: OBJECTIVES,
-	OBJECTIVES_PATH: OBJECTIVES_PATH,
-	EXPORTS_PATH: EXPORTS_PATH,
-	REEXPORTS_PATH: REEXPORTS_PATH,
-	SERVER_PORT: SERVER_PORT,
-	DEV_TOOLS_PATH: DEV_TOOLS_PATH,
-	EXTERNAL_DEV_TOOLS_BUNDLE_FILENAME: EXTERNAL_DEV_TOOLS_BUNDLE_FILENAME,
-	EXTERNAL_REDUX_BUNDLE_FILENAME: EXTERNAL_REDUX_BUNDLE_FILENAME,
-	EXTERNAL_EXTENSIONS_BUNDLE_FILENAME: EXTERNAL_EXTENSIONS_BUNDLE_FILENAME,
-	DEV_TOOLS_EXTERNAL_DIST_PATH: DEV_TOOLS_EXTERNAL_DIST_PATH,
-	ACTIONS_CACHE_LIMIT: ACTIONS_CACHE_LIMIT
-};
+/**
+ * Takes a spec object and a test object; returns true if the test satisfies
+ * the spec. Each of the spec's own properties must be a predicate function.
+ * Each predicate is applied to the value of the corresponding property of the
+ * test object. `where` returns true if all the predicates return true, false
+ * otherwise.
+ *
+ * `where` is well suited to declaratively expressing constraints for other
+ * functions such as [`filter`](#filter) and [`find`](#find).
+ *
+ * @func
+ * @memberOf R
+ * @since v0.1.1
+ * @category Object
+ * @sig {String: (* -> Boolean)} -> {String: *} -> Boolean
+ * @param {Object} spec
+ * @param {Object} testObj
+ * @return {Boolean}
+ * @see R.propSatisfies, R.whereEq
+ * @example
+ *
+ *      // pred :: Object -> Boolean
+ *      const pred = R.where({
+ *        a: R.equals('foo'),
+ *        b: R.complement(R.equals('bar')),
+ *        x: R.gt(R.__, 10),
+ *        y: R.lt(R.__, 20)
+ *      });
+ *
+ *      pred({a: 'foo', b: 'xxx', x: 11, y: 19}); //=> true
+ *      pred({a: 'xxx', b: 'xxx', x: 11, y: 19}); //=> false
+ *      pred({a: 'foo', b: 'bar', x: 11, y: 19}); //=> false
+ *      pred({a: 'foo', b: 'xxx', x: 10, y: 19}); //=> false
+ *      pred({a: 'foo', b: 'xxx', x: 11, y: 20}); //=> false
+ */
+
+var where =
+/*#__PURE__*/
+_curry2(function where(spec, testObj) {
+  for (var prop in spec) {
+    if (_has(prop, spec) && !spec[prop](testObj[prop])) {
+      return false;
+    }
+  }
+
+  return true;
+});
+
+/**
+ * Takes a spec object and a test object; returns true if the test satisfies
+ * the spec, false otherwise. An object satisfies the spec if, for each of the
+ * spec's own properties, accessing that property of the object gives the same
+ * value (in [`R.equals`](#equals) terms) as accessing that property of the
+ * spec.
+ *
+ * `whereEq` is a specialization of [`where`](#where).
+ *
+ * @func
+ * @memberOf R
+ * @since v0.14.0
+ * @category Object
+ * @sig {String: *} -> {String: *} -> Boolean
+ * @param {Object} spec
+ * @param {Object} testObj
+ * @return {Boolean}
+ * @see R.propEq, R.where
+ * @example
+ *
+ *      // pred :: Object -> Boolean
+ *      const pred = R.whereEq({a: 1, b: 2});
+ *
+ *      pred({a: 1});              //=> false
+ *      pred({a: 1, b: 2});        //=> true
+ *      pred({a: 1, b: 2, c: 3});  //=> true
+ *      pred({a: 1, b: 1});        //=> false
+ */
+
+var whereEq =
+/*#__PURE__*/
+_curry2(function whereEq(spec, testObj) {
+  return where(map(equals, spec), testObj);
+});
 
 let actions = [];
 const addAction = (action) => {
     actions.push(action);
-    actions = actions.slice(-(constants.ACTIONS_CACHE_LIMIT));
+    actions = actions.slice(-500);
 };
 const getActions = () => actions;
-const getActionByType = (type, { shift = 0, payload = {} } = {}) => {
+const getActionByType = (type, { shift = 0, payload = {}, customProp = {}, } = {}) => {
     const typeActions = actions.filter(action => action.type.includes(type));
     if (!typeActions || isEmpty(typeActions)) {
         return;
@@ -2379,7 +2931,20 @@ const getActionByType = (type, { shift = 0, payload = {} } = {}) => {
     if (!action) {
         return;
     }
-    return Object.assign(Object.assign({}, action), { payload: !isEmpty(payload) ? Object.assign({}, action.payload, payload) : action.payload });
+    let ret = action;
+    if (!isEmpty(payload)) {
+        ret = Object.assign(Object.assign({}, ret), { payload: Object.assign({}, ret.payload, payload) });
+    }
+    if (!isEmpty(customProp)) {
+        try {
+            ret = mergeDeepRight(ret, customProp);
+        }
+        catch (e) {
+            console.error('Could not assign custom prop to action');
+            console.error(e);
+        }
+    }
+    return ret;
 };
 
 const isPrimitive = value => {
@@ -2472,13 +3037,103 @@ const setVar = (varName, value) => {
 
   if (isPrimitive(value)) {
     adjustedValue = { ...adjustedValue, value: String(value) };
+  } if (typeof value === 'function') {
+    adjustedValue = { ...adjustedValue, value: value.toString() };
   } else {
-    adjustedValue = { ...adjustedValue, value: JSON.stringify(value) };
+    const seen = new WeakSet();
+
+    const replacer = (key, v) => {
+      if (typeof v === 'function') {
+        return v.toString();
+      }
+      if (typeof v === 'object' && v !== null) {
+        if (seen.has(v)) {
+          return '[Circular]';
+        }
+        seen.add(v);
+      }
+      return v;
+    };
+
+    adjustedValue = { ...adjustedValue, value: JSON.stringify(value, replacer) };
   }
 
   varsObj[String(varName)] = adjustedValue;
   localStorage.setItem(localStorageKey, JSON.stringify(varsObj));
   window[varName] = value;
+};
+
+function findProp(obj, propName) {
+    const results = [];
+    if (obj == null || typeof propName !== 'string' || propName.length === 0) {
+        return results;
+    }
+    const seen = new WeakSet();
+    const stack = [{ current: obj, path: [] }];
+    while (stack.length) {
+        const { current, path } = stack.pop();
+        if (current && (typeof current === 'object' || typeof current === 'function')) {
+            if (seen.has(current))
+                continue;
+            seen.add(current);
+            const entries = Array.isArray(current)
+                ? current.map((v, i) => [String(i), v])
+                : Object.keys(current).map(k => [k, current[k]]);
+            for (let i = 0; i < entries.length; i++) {
+                const [key, val] = entries[i];
+                const keyPathSegment = Array.isArray(current) ? Number(key) : key;
+                const newPath = path.concat(keyPathSegment);
+                if (key.toLowerCase().indexOf(propName.toLowerCase()) !== -1) {
+                    results.push({
+                        key,
+                        value: val,
+                        path: newPath
+                    });
+                }
+                if (val && (typeof val === 'object' || typeof val === 'function')) {
+                    stack.push({ current: val, path: newPath });
+                }
+            }
+        }
+    }
+    return results;
+}
+const findMatch = (obj1, obj2, path$1 = []) => {
+    let result = null;
+    const search = (obj, path = []) => {
+        if (!is(Object, obj) || isNil(obj))
+            return;
+        if (whereEq(obj2, obj)) {
+            if (!result) {
+                result = { path, value: obj };
+                return;
+            }
+        }
+        forEachObjIndexed((value, key) => {
+            if (is(Object, value) && !isNil(value)) {
+                search(value, [...path, key]);
+            }
+        }, obj);
+    };
+    search(path(path$1, obj1));
+    return result;
+};
+const findMatches = (obj1, obj2) => {
+    let results = [];
+    const search = (obj, path = []) => {
+        if (!is(Object, obj) || isNil(obj))
+            return;
+        if (whereEq(obj2, obj)) {
+            results.push({ path, value: obj });
+        }
+        forEachObjIndexed((value, key) => {
+            if (is(Object, value) && !isNil(value)) {
+                search(value, [...path, isNaN(key) ? key : Number(key)]);
+            }
+        }, obj);
+    };
+    search(obj1);
+    return results;
 };
 
 var devToolsStore = (store) => (Object.assign(Object.assign({}, store), { replaceReducer: (arg) => {
@@ -2489,6 +3144,9 @@ var devToolsStore = (store) => (Object.assign(Object.assign({}, store), { replac
         }
         return pipe(prop('panels'), (panels) => {
             const panelTypes = keys(panels);
+            if (panelType.endsWith('$')) {
+                return pipe(find((existingPanelType) => existingPanelType.toLowerCase() === panelType.toLowerCase().substring(0, panelType.length - 1)), (existingPanelType) => panels[existingPanelType])(panelTypes);
+            }
             return pipe(find((existingPanelType) => existingPanelType.toLowerCase().includes(panelType.toLowerCase())), (existingPanelType) => panels[existingPanelType])(panelTypes);
         }, values, (panels) => panels.length > 1 ? panels : panels[0])(store.getState());
     }, getActions: getActions, getAction: getActionByType, redispatch: (type, options = {}) => {
@@ -2527,6 +3185,25 @@ var devToolsStore = (store) => (Object.assign(Object.assign({}, store), { replac
             return `panels.${existingPanelType}.${String(panelId)}`;
         })(panels)))(store.getState());
         window.store.setField(`${panelPath}.${path}`, value);
+    }, setMatchingFields: (obj, value) => {
+        const state = store.getState();
+        const matches = findMatches(state, obj);
+        let newState = state;
+        forEach(({ path, value: prevValue }) => {
+            newState = Object.assign(Object.assign({}, newState), modifyPath(path, () => (Object.assign(Object.assign({}, prevValue), value)), newState));
+        }, matches);
+        setTimeout(() => store.dispatch(setState(newState)));
+        return matches.map(e => e.path);
+    }, setMatchingField: (obj, value, pathOrPropName = []) => {
+        var _a;
+        const state = store.getState();
+        const path = is(String, pathOrPropName) ? (_a = findProp(state, pathOrPropName)[0]) === null || _a === void 0 ? void 0 : _a.path : pathOrPropName;
+        const match = findMatch(state, obj, path);
+        if (!match) {
+            return [];
+        }
+        store.dispatch(setState(modifyPath([...path, ...match.path], () => (Object.assign(Object.assign({}, match.value), value)), state)));
+        return match.path;
     } }));
 
 const applyMiddleware = applyMiddleware_1;

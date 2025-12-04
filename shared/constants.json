@@ -1,5 +1,5 @@
 {
-  "PROJECT_PATH": "D:/Users/m_botezatu/projects/equities-client-1",
+  "PROJECT_PATH": "D:/Users/m_botezatu/projects/equities-client-2",
   "SRC_PATH": "src",
   "DIST_PATH": "dist",
   "BUNDLE_FILE_NAME": "equities-client.js",
@@ -19,7 +19,7 @@
   "EXPORTS_PATH": "shared/exports",
   "REEXPORTS_PATH": "external/reexports",
   "SERVER_PORT": "8080",
-  "DEV_TOOLS_PATH": "D:/users/m_botezatu/projects/dev-tools",
+  "DEV_TOOLS_PATH": "D:/users/m_botezatu/lab/dev-tools",
   "EXTERNAL_DEV_TOOLS_BUNDLE_FILENAME": "dev-tools.js",
   "EXTERNAL_REDUX_BUNDLE_FILENAME": "redux.js",
   "EXTERNAL_EXTENSIONS_BUNDLE_FILENAME": "extensions.js",

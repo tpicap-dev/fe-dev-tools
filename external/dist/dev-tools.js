@@ -229,7 +229,7 @@ this["dev-tools"] = (function () {
    * })
    * //=> Thu Jun 15 2017 15:29:20
    */
-  function add$3(date, duration) {
+  function add$2(date, duration) {
     const {
       years = 0,
       months = 0,
@@ -1147,7 +1147,7 @@ this["dev-tools"] = (function () {
    * ])
    * //=> Sun Jul 02 1995 00:00:00
    */
-  function max$3(dates) {
+  function max$2(dates) {
     let result;
     dates.forEach(function (dirtyDate) {
       const currentDate = toDate(dirtyDate);
@@ -1188,7 +1188,7 @@ this["dev-tools"] = (function () {
    * ])
    * //=> Wed Feb 11 1987 00:00:00
    */
-  function min$3(dates) {
+  function min$2(dates) {
     let result;
 
     dates.forEach((dirtyDate) => {
@@ -1229,8 +1229,8 @@ this["dev-tools"] = (function () {
    * })
    * //=> Mon Mar 22 2021 00:00:00
    */
-  function clamp$3(date, interval) {
-    return min$3([max$3([date, interval.start]), interval.end]);
+  function clamp$2(date, interval) {
+    return min$2([max$2([date, interval.start]), interval.end]);
   }
 
   /**
@@ -3905,7 +3905,7 @@ this["dev-tools"] = (function () {
         args.parsePatterns[args.defaultParseWidth];
 
       const key = Array.isArray(parsePatterns)
-        ? findIndex$2(parsePatterns, (pattern) => pattern.test(matchedString))
+        ? findIndex$1(parsePatterns, (pattern) => pattern.test(matchedString))
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any -- I challange you to fix the type
           findKey(parsePatterns, (pattern) => pattern.test(matchedString));
 
@@ -3935,7 +3935,7 @@ this["dev-tools"] = (function () {
     return undefined;
   }
 
-  function findIndex$2(array, predicate) {
+  function findIndex$1(array, predicate) {
     for (let key = 0; key < array.length; key++) {
       if (predicate(array[key])) {
         return key;
@@ -4051,7 +4051,7 @@ this["dev-tools"] = (function () {
     },
   };
 
-  const match$2 = {
+  const match$1 = {
     ordinalNumber: buildMatchPatternFn({
       matchPattern: matchOrdinalNumberPattern,
       parsePattern: parseOrdinalNumberPattern,
@@ -4109,7 +4109,7 @@ this["dev-tools"] = (function () {
     formatLong: formatLong,
     formatRelative: formatRelative$1,
     localize: localize,
-    match: match$2,
+    match: match$1,
     options: {
       weekStartsOn: 0 /* Sunday */,
       firstWeekContainsDate: 1,
@@ -4453,8 +4453,6 @@ this["dev-tools"] = (function () {
   };
 
   const dayPeriodEnum = {
-    am: "am",
-    pm: "pm",
     midnight: "midnight",
     noon: "noon",
     morning: "morning",
@@ -7595,27 +7593,27 @@ this["dev-tools"] = (function () {
     const years = differenceInYears(end, start);
     if (years) duration.years = years;
 
-    const remainingMonths = add$3(start, { years: duration.years });
+    const remainingMonths = add$2(start, { years: duration.years });
 
     const months = differenceInMonths(end, remainingMonths);
     if (months) duration.months = months;
 
-    const remainingDays = add$3(remainingMonths, { months: duration.months });
+    const remainingDays = add$2(remainingMonths, { months: duration.months });
 
     const days = differenceInDays(end, remainingDays);
     if (days) duration.days = days;
 
-    const remainingHours = add$3(remainingDays, { days: duration.days });
+    const remainingHours = add$2(remainingDays, { days: duration.days });
 
     const hours = differenceInHours(end, remainingHours);
     if (hours) duration.hours = hours;
 
-    const remainingMinutes = add$3(remainingHours, { hours: duration.hours });
+    const remainingMinutes = add$2(remainingHours, { hours: duration.hours });
 
     const minutes = differenceInMinutes(end, remainingMinutes);
     if (minutes) duration.minutes = minutes;
 
-    const remainingSeconds = add$3(remainingMinutes, { minutes: duration.minutes });
+    const remainingSeconds = add$2(remainingMinutes, { minutes: duration.minutes });
 
     const seconds = differenceInSeconds(end, remainingSeconds);
     if (seconds) duration.seconds = seconds;
@@ -8142,7 +8140,7 @@ this["dev-tools"] = (function () {
    * transpose(date, UTCDate)
    * //=> 'Sun Jul 10 2022 00:00:00 GMT+0000 (Coordinated Universal Time)'
    */
-  function transpose$2(fromDate, constructor) {
+  function transpose$1(fromDate, constructor) {
     const date =
       constructor instanceof Date
         ? constructFrom(constructor, 0)
@@ -8206,7 +8204,7 @@ this["dev-tools"] = (function () {
     subPriority = -1;
     set(date, flags) {
       if (flags.timestampIsSet) return date;
-      return constructFrom(date, transpose$2(date, Date));
+      return constructFrom(date, transpose$1(date, Date));
     }
   }
 
@@ -13369,7 +13367,7 @@ this["dev-tools"] = (function () {
    * //=> Mon Sep 01 2014 12:23:45
    */
 
-  function set$2(date, values) {
+  function set$1(date, values) {
     let _date = toDate(date);
 
     // Check if date is Invalid Date because Date.prototype.setFullYear ignores the value of Invalid Date
@@ -14230,7 +14228,7 @@ this["dev-tools"] = (function () {
 
   var datefns = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    add: add$3,
+    add: add$2,
     addBusinessDays: addBusinessDays,
     addDays: addDays,
     addHours: addHours,
@@ -14243,7 +14241,7 @@ this["dev-tools"] = (function () {
     addWeeks: addWeeks,
     addYears: addYears,
     areIntervalsOverlapping: areIntervalsOverlapping,
-    clamp: clamp$3,
+    clamp: clamp$2,
     closestIndexTo: closestIndexTo,
     closestTo: closestTo,
     compareAsc: compareAsc,
@@ -14390,12 +14388,12 @@ this["dev-tools"] = (function () {
     lightFormat: lightFormat,
     lightFormatters: lightFormatters,
     longFormatters: longFormatters,
-    max: max$3,
+    max: max$2,
     milliseconds: milliseconds,
     millisecondsToHours: millisecondsToHours,
     millisecondsToMinutes: millisecondsToMinutes,
     millisecondsToSeconds: millisecondsToSeconds,
-    min: min$3,
+    min: min$2,
     minutesToHours: minutesToHours,
     minutesToMilliseconds: minutesToMilliseconds,
     minutesToSeconds: minutesToSeconds,
@@ -14427,7 +14425,7 @@ this["dev-tools"] = (function () {
     secondsToHours: secondsToHours,
     secondsToMilliseconds: secondsToMilliseconds,
     secondsToMinutes: secondsToMinutes,
-    set: set$2,
+    set: set$1,
     setDate: setDate,
     setDay: setDay,
     setDayOfYear: setDayOfYear,
@@ -14472,7 +14470,7 @@ this["dev-tools"] = (function () {
     subWeeks: subWeeks,
     subYears: subYears,
     toDate: toDate,
-    transpose: transpose$2,
+    transpose: transpose$1,
     weeksToDays: weeksToDays,
     yearsToDays: yearsToDays,
     yearsToMonths: yearsToMonths,
@@ -14853,7 +14851,7 @@ this["dev-tools"] = (function () {
       t = r;
       t3 = t.times(t).times(t);
       t3plusx = t3.plus(x);
-      r = divide$2(t3plusx.plus(x).times(t), t3plusx.plus(t3), sd + 2, 1);
+      r = divide$1(t3plusx.plus(x).times(t), t3plusx.plus(t3), sd + 2, 1);
 
       // TODO? Replace with for-loop and checkRoundingDigits.
       if (digitsToString(t.d).slice(0, sd) === (n = digitsToString(r.d)).slice(0, sd)) {
@@ -14943,7 +14941,7 @@ this["dev-tools"] = (function () {
    *
    */
   P.dividedBy = P.div = function (y) {
-    return divide$2(this, new this.constructor(y));
+    return divide$1(this, new this.constructor(y));
   };
 
 
@@ -14955,7 +14953,7 @@ this["dev-tools"] = (function () {
   P.dividedToIntegerBy = P.divToInt = function (y) {
     var x = this,
       Ctor = x.constructor;
-    return finalise(divide$2(x, new Ctor(y), 0, 1, 1), Ctor.precision, Ctor.rounding);
+    return finalise(divide$1(x, new Ctor(y), 0, 1, 1), Ctor.precision, Ctor.rounding);
   };
 
 
@@ -15176,7 +15174,7 @@ this["dev-tools"] = (function () {
     Ctor.precision = pr + 7;
     Ctor.rounding = 1;
 
-    return divide$2(x.sinh(), x.cosh(), Ctor.precision = pr, Ctor.rounding = rm);
+    return divide$1(x.sinh(), x.cosh(), Ctor.precision = pr, Ctor.rounding = rm);
   };
 
 
@@ -15349,7 +15347,7 @@ this["dev-tools"] = (function () {
 
     Ctor.precision = wpr = xsd - x.e;
 
-    x = divide$2(x.plus(1), new Ctor(1).minus(x), wpr + pr, 1);
+    x = divide$1(x.plus(1), new Ctor(1).minus(x), wpr + pr, 1);
 
     Ctor.precision = pr + 4;
     Ctor.rounding = 1;
@@ -15651,7 +15649,7 @@ this["dev-tools"] = (function () {
     denominator = isBase10 ? getLn10(Ctor, sd + 10) : naturalLogarithm(base, sd);
 
     // The result will have 5 rounding digits.
-    r = divide$2(num, denominator, sd, 1);
+    r = divide$1(num, denominator, sd, 1);
 
     // If at a rounding boundary, i.e. the result's rounding digits are [49]9999 or [50]0000,
     // calculate 10 further digits.
@@ -15673,7 +15671,7 @@ this["dev-tools"] = (function () {
         sd += 10;
         num = naturalLogarithm(arg, sd);
         denominator = isBase10 ? getLn10(Ctor, sd + 10) : naturalLogarithm(base, sd);
-        r = divide$2(num, denominator, sd, 1);
+        r = divide$1(num, denominator, sd, 1);
 
         if (!inf) {
 
@@ -15934,10 +15932,10 @@ this["dev-tools"] = (function () {
 
       // Euclidian division: q = sign(y) * floor(x / abs(y))
       // result = x - q * y    where  0 <= result < abs(y)
-      q = divide$2(x, y.abs(), 0, 3, 1);
+      q = divide$1(x, y.abs(), 0, 3, 1);
       q.s *= y.s;
     } else {
-      q = divide$2(x, y, 0, Ctor.modulo, 1);
+      q = divide$1(x, y, 0, Ctor.modulo, 1);
     }
 
     q = q.times(y);
@@ -16244,7 +16242,7 @@ this["dev-tools"] = (function () {
     // Newton-Raphson iteration.
     for (;;) {
       t = r;
-      r = t.plus(divide$2(x, t, sd + 2, 1)).times(0.5);
+      r = t.plus(divide$1(x, t, sd + 2, 1)).times(0.5);
 
       // TODO? Replace with for-loop and checkRoundingDigits.
       if (digitsToString(t.d).slice(0, sd) === (n = digitsToString(r.d)).slice(0, sd)) {
@@ -16317,7 +16315,7 @@ this["dev-tools"] = (function () {
 
     x = x.sin();
     x.s = 1;
-    x = divide$2(x, new Ctor(1).minus(x.times(x)).sqrt(), pr + 10, 0);
+    x = divide$1(x, new Ctor(1).minus(x.times(x)).sqrt(), pr + 10, 0);
 
     Ctor.precision = pr;
     Ctor.rounding = rm;
@@ -16566,7 +16564,7 @@ this["dev-tools"] = (function () {
     Ctor.precision = e = xd.length * LOG_BASE * 2;
 
     for (;;)  {
-      q = divide$2(n, d, 0, 1, 1);
+      q = divide$1(n, d, 0, 1, 1);
       d2 = d0.plus(q.times(d1));
       if (d2.cmp(maxD) == 1) break;
       d0 = d1;
@@ -16579,13 +16577,13 @@ this["dev-tools"] = (function () {
       n = d2;
     }
 
-    d2 = divide$2(maxD.minus(d0), d1, 0, 1, 1);
+    d2 = divide$1(maxD.minus(d0), d1, 0, 1, 1);
     n0 = n0.plus(d2.times(n1));
     d0 = d0.plus(d2.times(d1));
     n0.s = n1.s = x.s;
 
     // Determine which fraction is closer to x, n0/d0 or n1/d1?
-    r = divide$2(n1, d1, e, 1).minus(x).abs().cmp(divide$2(n0, d0, e, 1).minus(x).abs()) < 1
+    r = divide$1(n1, d1, e, 1).minus(x).abs().cmp(divide$1(n0, d0, e, 1).minus(x).abs()) < 1
         ? [n1, d1] : [n0, d0];
 
     Ctor.precision = pr;
@@ -16660,7 +16658,7 @@ this["dev-tools"] = (function () {
     // If y is not zero, calculate the nearest multiple of y to x.
     if (y.d[0]) {
       external = false;
-      x = divide$2(x, y, 0, rm, 1).times(y);
+      x = divide$1(x, y, 0, rm, 1).times(y);
       external = true;
       finalise(x);
 
@@ -17152,7 +17150,7 @@ this["dev-tools"] = (function () {
   /*
    * Perform division in the specified base.
    */
-  var divide$2 = (function () {
+  var divide$1 = (function () {
 
     // Assumes non-zero x and k, and hence non-zero result.
     function multiplyInteger(x, k, base) {
@@ -17819,7 +17817,7 @@ this["dev-tools"] = (function () {
     for (;;) {
       pow = finalise(pow.times(x), wpr, 1);
       denominator = denominator.times(++i);
-      t = sum.plus(divide$2(pow, denominator, wpr, 1));
+      t = sum.plus(divide$1(pow, denominator, wpr, 1));
 
       if (digitsToString(t.d).slice(0, wpr) === digitsToString(sum.d).slice(0, wpr)) {
         j = k;
@@ -17938,13 +17936,13 @@ this["dev-tools"] = (function () {
     // Taylor series.
     // ln(y) = ln((1 + x)/(1 - x)) = 2(x + x^3/3 + x^5/5 + x^7/7 + ...)
     // where x = (y - 1)/(y + 1)    (|x| < 1)
-    sum = numerator = x = divide$2(x.minus(1), x.plus(1), wpr, 1);
+    sum = numerator = x = divide$1(x.minus(1), x.plus(1), wpr, 1);
     x2 = finalise(x.times(x), wpr, 1);
     denominator = 3;
 
     for (;;) {
       numerator = finalise(numerator.times(x2), wpr, 1);
-      t = sum.plus(divide$2(numerator, new Ctor(denominator), wpr, 1));
+      t = sum.plus(divide$1(numerator, new Ctor(denominator), wpr, 1));
 
       if (digitsToString(t.d).slice(0, wpr) === digitsToString(sum.d).slice(0, wpr)) {
         sum = sum.times(2);
@@ -17952,7 +17950,7 @@ this["dev-tools"] = (function () {
         // Reverse the argument reduction. Check that e is not 0 because, besides preventing an
         // unnecessary calculation, -0 + 0 = +0 and to ensure correct rounding -0 needs to stay -0.
         if (e !== 0) sum = sum.plus(getLn10(Ctor, wpr + 2, pr).times(e + ''));
-        sum = divide$2(sum, new Ctor(n), wpr, 1);
+        sum = divide$1(sum, new Ctor(n), wpr, 1);
 
         // Is rm > 3 and the first 4 rounding digits 4999, or rm < 4 (or the summation has
         // been repeated previously) and the first 4 rounding digits 9999?
@@ -17963,7 +17961,7 @@ this["dev-tools"] = (function () {
         if (sd == null) {
           if (checkRoundingDigits(sum.d, wpr - guard, rm, rep)) {
             Ctor.precision = wpr += guard;
-            t = numerator = x = divide$2(x1.minus(1), x1.plus(1), wpr, 1);
+            t = numerator = x = divide$1(x1.minus(1), x1.plus(1), wpr, 1);
             x2 = finalise(x.times(x), wpr, 1);
             denominator = rep = 1;
           } else {
@@ -18138,7 +18136,7 @@ this["dev-tools"] = (function () {
     // E.g. ceil(1.2 * 3) = 4, so up to 4 decimal digits are needed to represent 3 hex int digits.
     // maxDecimalFractionPartDigitCount = {Hex:4|Oct:3|Bin:1} * otherBaseFractionPartDigitCount
     // Therefore using 4 * the number of digits of str will always be enough.
-    if (isFloat) x = divide$2(x, divisor, len * 4);
+    if (isFloat) x = divide$1(x, divisor, len * 4);
 
     // Multiply by the binary exponent part if present.
     if (p) x = x.times(Math.abs(p) < 54 ? mathpow(2, p) : Decimal.pow(2, p));
@@ -18197,9 +18195,9 @@ this["dev-tools"] = (function () {
     u = new Ctor(y);
 
     for (;;) {
-      t = divide$2(u.times(x2), new Ctor(n++ * n++), pr, 1);
+      t = divide$1(u.times(x2), new Ctor(n++ * n++), pr, 1);
       u = isHyperbolic ? y.plus(t) : y.minus(t);
-      y = divide$2(t.times(x2), new Ctor(n++ * n++), pr, 1);
+      y = divide$1(t.times(x2), new Ctor(n++ * n++), pr, 1);
       t = u.plus(y);
 
       if (t.d[k] !== void 0) {
@@ -18330,7 +18328,7 @@ this["dev-tools"] = (function () {
           x = new Ctor(x);
           x.d = xd;
           x.e = e;
-          x = divide$2(x, y, sd, rm, 0, base);
+          x = divide$1(x, y, sd, rm, 0, base);
           xd = x.d;
           e = x.e;
           roundUp = inexact;
@@ -18498,7 +18496,7 @@ this["dev-tools"] = (function () {
    * y {number|string|Decimal}
    *
    */
-  function add$2(x, y) {
+  function add$1(x, y) {
     return new this(x).plus(y);
   }
 
@@ -18607,13 +18605,13 @@ this["dev-tools"] = (function () {
     } else if (x.s < 0) {
       this.precision = wpr;
       this.rounding = 1;
-      r = this.atan(divide$2(y, x, wpr, 1));
+      r = this.atan(divide$1(y, x, wpr, 1));
       x = getPi(this, wpr, 1);
       this.precision = pr;
       this.rounding = rm;
       r = y.s < 0 ? r.minus(x) : r.plus(x);
     } else {
-      r = this.atan(divide$2(y, x, wpr, 1));
+      r = this.atan(divide$1(y, x, wpr, 1));
     }
 
     return r;
@@ -18651,7 +18649,7 @@ this["dev-tools"] = (function () {
    * max {number|string|Decimal}
    *
    */
-  function clamp$2(x, min, max) {
+  function clamp$1(x, min, max) {
     return new this(x).clamp(min, max);
   }
 
@@ -18881,7 +18879,7 @@ this["dev-tools"] = (function () {
     Decimal.abs = abs;
     Decimal.acos = acos;
     Decimal.acosh = acosh;        // ES6
-    Decimal.add = add$2;
+    Decimal.add = add$1;
     Decimal.asin = asin;
     Decimal.asinh = asinh;        // ES6
     Decimal.atan = atan;
@@ -18889,7 +18887,7 @@ this["dev-tools"] = (function () {
     Decimal.atan2 = atan2;
     Decimal.cbrt = cbrt;          // ES6
     Decimal.ceil = ceil;
-    Decimal.clamp = clamp$2;
+    Decimal.clamp = clamp$1;
     Decimal.cos = cos;
     Decimal.cosh = cosh;          // ES6
     Decimal.div = div;
@@ -18900,8 +18898,8 @@ this["dev-tools"] = (function () {
     Decimal.log = log;
     Decimal.log10 = log10;        // ES6
     Decimal.log2 = log2;          // ES6
-    Decimal.max = max$2;
-    Decimal.min = min$2;
+    Decimal.max = max$1;
+    Decimal.min = min$1;
     Decimal.mod = mod;
     Decimal.mul = mul;
     Decimal.pow = pow;
@@ -18912,7 +18910,7 @@ this["dev-tools"] = (function () {
     Decimal.sinh = sinh;          // ES6
     Decimal.sqrt = sqrt;
     Decimal.sub = sub;
-    Decimal.sum = sum$2;
+    Decimal.sum = sum$1;
     Decimal.tan = tan;
     Decimal.tanh = tanh;          // ES6
     Decimal.trunc = trunc;        // ES6
@@ -19068,7 +19066,7 @@ this["dev-tools"] = (function () {
    * arguments {number|string|Decimal}
    *
    */
-  function max$2() {
+  function max$1() {
     return maxOrMin(this, arguments, 'lt');
   }
 
@@ -19079,7 +19077,7 @@ this["dev-tools"] = (function () {
    * arguments {number|string|Decimal}
    *
    */
-  function min$2() {
+  function min$1() {
     return maxOrMin(this, arguments, 'gt');
   }
 
@@ -19316,7 +19314,7 @@ this["dev-tools"] = (function () {
    * arguments {number|string|Decimal}
    *
    */
-  function sum$2() {
+  function sum$1() {
     var i = 0,
       args = arguments,
       x = new this(args[i]);
@@ -20410,11 +20408,9 @@ this["dev-tools"] = (function () {
    *
    *      R.F(); //=> false
    */
-  var F = function () {
+  var F$1 = function () {
     return false;
   };
-
-  var F$1 = F;
 
   /**
    * A function that always returns `true`. Any passed in parameters are ignored.
@@ -20434,8 +20430,6 @@ this["dev-tools"] = (function () {
   var T = function () {
     return true;
   };
-
-  var T$1 = T;
 
   /**
    * A special placeholder value used to specify "gaps" within curried functions,
@@ -20544,8 +20538,6 @@ this["dev-tools"] = (function () {
   _curry2(function add(a, b) {
     return Number(a) + Number(b);
   });
-
-  var add$1 = add;
 
   /**
    * Private `concat` function to merge two array-like objects.
@@ -20742,8 +20734,6 @@ this["dev-tools"] = (function () {
     return _arity(length, _curryN(length, [], fn));
   });
 
-  var curryN$1 = curryN;
-
   /**
    * Creates a new list iteration function from an existing one by adding two new
    * parameters to its callback function: the current index, and the entire list.
@@ -20772,7 +20762,7 @@ this["dev-tools"] = (function () {
   var addIndex =
   /*#__PURE__*/
   _curry1(function addIndex(fn) {
-    return curryN$1(fn.length, function () {
+    return curryN(fn.length, function () {
       var idx = 0;
       var origFn = arguments[0];
       var list = arguments[arguments.length - 1];
@@ -20787,8 +20777,6 @@ this["dev-tools"] = (function () {
       return fn.apply(this, args);
     });
   });
-
-  var addIndex$1 = addIndex;
 
   /**
    * As with `addIndex`, `addIndexRight` creates a new list iteration function
@@ -20816,7 +20804,7 @@ this["dev-tools"] = (function () {
   var addIndexRight =
   /*#__PURE__*/
   _curry1(function addIndex(fn) {
-    return curryN$1(fn.length, function () {
+    return curryN(fn.length, function () {
       var origFn = arguments[0];
       var list = arguments[arguments.length - 1];
       var idx = list.length - 1;
@@ -20831,8 +20819,6 @@ this["dev-tools"] = (function () {
       return fn.apply(this, args);
     });
   });
-
-  var addIndexRight$1 = addIndexRight;
 
   /**
    * Optimized internal three-arity curry function.
@@ -20923,8 +20909,6 @@ this["dev-tools"] = (function () {
     _list[_idx] = fn(list[_idx]);
     return _list;
   });
-
-  var adjust$1 = adjust;
 
   /**
    * Tests whether or not an object is an array.
@@ -21138,13 +21122,13 @@ this["dev-tools"] = (function () {
 
   var _objectIs$1 = typeof Object.is === 'function' ? Object.is : _objectIs;
 
-  var toString$2 = Object.prototype.toString;
+  var toString$1 = Object.prototype.toString;
 
   var _isArguments =
   /*#__PURE__*/
   function () {
-    return toString$2.call(arguments) === '[object Arguments]' ? function _isArguments(x) {
-      return toString$2.call(x) === '[object Arguments]';
+    return toString$1.call(arguments) === '[object Arguments]' ? function _isArguments(x) {
+      return toString$1.call(x) === '[object Arguments]';
     } : function _isArguments(x) {
       return _has('callee', x);
     };
@@ -21235,7 +21219,6 @@ this["dev-tools"] = (function () {
 
     return ks;
   });
-  var keys$1 = keys;
 
   /**
    * Gives a single-word string description of the (native) type of a value,
@@ -21270,8 +21253,6 @@ this["dev-tools"] = (function () {
     return val === null ? 'Null' : val === undefined ? 'Undefined' : Object.prototype.toString.call(val).slice(8, -1);
   });
 
-  var type$1 = type;
-
   /**
    * private _uniqContentEquals function.
    * That function is checking equality of 2 iterator contents with 2 assumptions
@@ -21303,9 +21284,9 @@ this["dev-tools"] = (function () {
       return true;
     }
 
-    var typeA = type$1(a);
+    var typeA = type(a);
 
-    if (typeA !== type$1(b)) {
+    if (typeA !== type(b)) {
       return false;
     }
 
@@ -21405,9 +21386,9 @@ this["dev-tools"] = (function () {
         return false;
     }
 
-    var keysA = keys$1(a);
+    var keysA = keys(a);
 
-    if (keysA.length !== keys$1(b).length) {
+    if (keysA.length !== keys(b).length) {
       return false;
     }
 
@@ -21665,7 +21646,7 @@ this["dev-tools"] = (function () {
       }
 
       return acc;
-    }, {}, keys$1(filterable)) : // else
+    }, {}, keys(filterable)) : // else
     _filter(pred, filterable);
   }));
 
@@ -21700,8 +21681,6 @@ this["dev-tools"] = (function () {
     return filter(_complement(pred), filterable);
   });
 
-  var reject$1 = reject;
-
   function _toString(x, seen) {
     var recur = function recur(y) {
       var xs = seen.concat([x]);
@@ -21720,9 +21699,9 @@ this["dev-tools"] = (function () {
         return '(function() { return arguments; }(' + _map(recur, x).join(', ') + '))';
 
       case '[object Array]':
-        return '[' + _map(recur, x).concat(mapPairs(x, reject$1(function (k) {
+        return '[' + _map(recur, x).concat(mapPairs(x, reject(function (k) {
           return /^\d+$/.test(k);
-        }, keys$1(x)))).join(', ') + ']';
+        }, keys(x)))).join(', ') + ']';
 
       case '[object Boolean]':
         return typeof x === 'object' ? 'new Boolean(' + recur(x.valueOf()) + ')' : x.toString();
@@ -21757,7 +21736,7 @@ this["dev-tools"] = (function () {
           }
         }
 
-        return '{' + mapPairs(x, keys$1(x)).join(', ') + '}';
+        return '{' + mapPairs(x, keys(x)).join(', ') + '}';
     }
   }
 
@@ -21804,8 +21783,6 @@ this["dev-tools"] = (function () {
     return _toString(val, []);
   });
 
-  var toString$1 = toString;
-
   /**
    * Returns the larger of its two arguments.
    *
@@ -21851,8 +21828,8 @@ this["dev-tools"] = (function () {
       return maxByType === typeof a ? a : b;
     }
 
-    var stringA = toString$1(a);
-    var maxByStringValue = safeMax(stringA, toString$1(b));
+    var stringA = toString(a);
+    var maxByStringValue = safeMax(stringA, toString(b));
 
     if (maxByStringValue !== undefined) {
       return maxByStringValue === stringA ? a : b;
@@ -21860,8 +21837,6 @@ this["dev-tools"] = (function () {
 
     return b;
   });
-
-  var max$1 = max;
 
   var XMap =
   /*#__PURE__*/
@@ -21930,7 +21905,7 @@ this["dev-tools"] = (function () {
   _dispatchable(['fantasy-land/map', 'map'], _xmap, function map(fn, functor) {
     switch (Object.prototype.toString.call(functor)) {
       case '[object Function]':
-        return curryN$1(functor.length, function () {
+        return curryN(functor.length, function () {
           return fn.call(this, functor.apply(this, arguments));
         });
 
@@ -21938,7 +21913,7 @@ this["dev-tools"] = (function () {
         return _arrayReduce(function (acc, key) {
           acc[key] = fn(functor[key]);
           return acc;
-        }, {}, keys$1(functor));
+        }, {}, keys(functor));
 
       default:
         return _map(fn, functor);
@@ -22027,8 +22002,6 @@ this["dev-tools"] = (function () {
     return _isInteger(p) ? nth(p, obj) : obj[p];
   });
 
-  var prop$1 = prop;
-
   /**
    * Returns a new list by plucking the same named property off all objects in
    * the list supplied.
@@ -22060,10 +22033,8 @@ this["dev-tools"] = (function () {
   var pluck =
   /*#__PURE__*/
   _curry2(function pluck(p, list) {
-    return map(prop$1(p), list);
+    return map(prop(p), list);
   });
-
-  var pluck$1 = pluck;
 
   /**
    * Tests whether or not an object is similar to an array.
@@ -22194,8 +22165,6 @@ this["dev-tools"] = (function () {
     });
   });
 
-  var bind$1 = bind;
-
   function _xIterableReduce(xf, acc, iter) {
     var step = iter.next();
 
@@ -22214,7 +22183,7 @@ this["dev-tools"] = (function () {
   }
 
   function _xMethodReduce(xf, acc, obj, methodName) {
-    return xf['@@transducer/result'](obj[methodName](bind$1(xf['@@transducer/step'], xf), acc));
+    return xf['@@transducer/result'](obj[methodName](bind(xf['@@transducer/step'], xf), acc));
   }
 
   var _xReduce =
@@ -22335,7 +22304,7 @@ this["dev-tools"] = (function () {
   var allPass =
   /*#__PURE__*/
   _curry1(function allPass(preds) {
-    return curryN$1(reduce(max$1, 0, pluck$1('length', preds)), function () {
+    return curryN(reduce(max, 0, pluck('length', preds)), function () {
       var idx = 0;
       var len = preds.length;
 
@@ -22350,8 +22319,6 @@ this["dev-tools"] = (function () {
       return true;
     });
   });
-
-  var allPass$1 = allPass;
 
   /**
    * Returns a function that always returns the given value. Note that for
@@ -22381,8 +22348,6 @@ this["dev-tools"] = (function () {
     };
   });
 
-  var always$1 = always;
-
   /**
    * Returns the first argument if it is falsy, otherwise the second argument.
    * Acts as the boolean `and` statement if both inputs are `Boolean`s.
@@ -22409,8 +22374,6 @@ this["dev-tools"] = (function () {
   _curry2(function and(a, b) {
     return a && b;
   });
-
-  var and$1 = and;
 
   var XAny =
   /*#__PURE__*/
@@ -22493,8 +22456,6 @@ this["dev-tools"] = (function () {
     return false;
   }));
 
-  var any$1 = any;
-
   /**
    * Takes a list of predicates and returns a predicate that returns true for a
    * given list of arguments if at least one of the provided predicates is
@@ -22525,7 +22486,7 @@ this["dev-tools"] = (function () {
   var anyPass =
   /*#__PURE__*/
   _curry1(function anyPass(preds) {
-    return curryN$1(reduce(max$1, 0, pluck$1('length', preds)), function () {
+    return curryN(reduce(max, 0, pluck('length', preds)), function () {
       var idx = 0;
       var len = preds.length;
 
@@ -22540,8 +22501,6 @@ this["dev-tools"] = (function () {
       return false;
     });
   });
-
-  var anyPass$1 = anyPass;
 
   function _iterableReduce(reducer, acc, iter) {
     var step = iter.next();
@@ -22598,8 +22557,6 @@ this["dev-tools"] = (function () {
       return _concat(acc, map(f, applyX));
     }, [], applyF);
   });
-
-  var ap$1 = ap;
 
   function _aperture(n, list) {
     var idx = 0;
@@ -22687,8 +22644,6 @@ this["dev-tools"] = (function () {
   /*#__PURE__*/
   _dispatchable([], _xaperture, _aperture));
 
-  var aperture$1 = aperture;
-
   /**
    * Returns a new list containing the contents of the given list, followed by
    * the given element.
@@ -22715,8 +22670,6 @@ this["dev-tools"] = (function () {
   _curry2(function append(el, list) {
     return _concat(list, [el]);
   });
-
-  var append$1 = append;
 
   /**
    * Applies function `fn` to the argument list `args`. This is useful for
@@ -22745,8 +22698,6 @@ this["dev-tools"] = (function () {
     return fn.apply(this, args);
   });
 
-  var apply$1 = apply;
-
   /**
    * Returns a list of all the enumerable own properties of the supplied object.
    * Note that the order of the output array is not guaranteed across different
@@ -22768,7 +22719,7 @@ this["dev-tools"] = (function () {
   var values =
   /*#__PURE__*/
   _curry1(function values(obj) {
-    var props = keys$1(obj);
+    var props = keys(obj);
     var len = props.length;
     var vals = [];
     var idx = 0;
@@ -22784,7 +22735,7 @@ this["dev-tools"] = (function () {
   // delegating calls to .map
 
   function mapValues(fn, obj) {
-    return _isArray(obj) ? obj.map(fn) : keys$1(obj).reduce(function (acc, key) {
+    return _isArray(obj) ? obj.map(fn) : keys(obj).reduce(function (acc, key) {
       acc[key] = fn(obj[key]);
       return acc;
     }, {});
@@ -22822,15 +22773,13 @@ this["dev-tools"] = (function () {
     spec = mapValues(function (v) {
       return typeof v == 'function' ? v : applySpec(v);
     }, spec);
-    return curryN$1(reduce(max$1, 0, pluck$1('length', values(spec))), function () {
+    return curryN(reduce(max, 0, pluck('length', values(spec))), function () {
       var args = arguments;
       return mapValues(function (f) {
-        return apply$1(f, args);
+        return apply(f, args);
       }, spec);
     });
   });
-
-  var applySpec$1 = applySpec;
 
   /**
    * Takes a value and applies a function to it.
@@ -22857,8 +22806,6 @@ this["dev-tools"] = (function () {
   _curry2(function applyTo(x, f) {
     return f(x);
   });
-
-  var applyTo$1 = applyTo;
 
   /**
    * Makes an ascending comparator function out of a function that returns a value
@@ -22893,8 +22840,6 @@ this["dev-tools"] = (function () {
     var bb = fn(b);
     return aa < bb ? -1 : aa > bb ? 1 : 0;
   });
-
-  var ascend$1 = ascend;
 
   /**
    * Makes a shallow clone of an object, setting or overriding the specified
@@ -22992,8 +22937,6 @@ this["dev-tools"] = (function () {
     return _assoc(idx, val, obj);
   });
 
-  var assocPath$1 = assocPath;
-
   /**
    * Makes a shallow clone of an object, setting or overriding the specified
    * property with the given value. Note that this copies and flattens prototype
@@ -23019,10 +22962,8 @@ this["dev-tools"] = (function () {
   var assoc =
   /*#__PURE__*/
   _curry3(function assoc(prop, val, obj) {
-    return assocPath$1([prop], val, obj);
+    return assocPath([prop], val, obj);
   });
-
-  var assoc$1 = assoc;
 
   /**
    * Wraps a function of any arity (including nullary) in a function that accepts
@@ -23119,8 +23060,6 @@ this["dev-tools"] = (function () {
     }
   });
 
-  var nAry$1 = nAry;
-
   /**
    * Wraps a function of any arity (including nullary) in a function that accepts
    * exactly 2 parameters. Any extraneous parameters will not be passed to the
@@ -23153,10 +23092,8 @@ this["dev-tools"] = (function () {
   var binary =
   /*#__PURE__*/
   _curry1(function binary(fn) {
-    return nAry$1(2, fn);
+    return nAry(2, fn);
   });
-
-  var binary$1 = binary;
 
   function _isFunction(x) {
     var type = Object.prototype.toString.call(x);
@@ -23184,13 +23121,11 @@ this["dev-tools"] = (function () {
   var liftN =
   /*#__PURE__*/
   _curry2(function liftN(arity, fn) {
-    var lifted = curryN$1(arity, fn);
-    return curryN$1(arity, function () {
-      return _arrayReduce(ap$1, map(lifted, arguments[0]), Array.prototype.slice.call(arguments, 1));
+    var lifted = curryN(arity, fn);
+    return curryN(arity, function () {
+      return _arrayReduce(ap, map(lifted, arguments[0]), Array.prototype.slice.call(arguments, 1));
     });
   });
-
-  var liftN$1 = liftN;
 
   /**
    * "lifts" a function of arity >= 1 so that it may "map over" a list, Function or other
@@ -23218,7 +23153,7 @@ this["dev-tools"] = (function () {
   var lift =
   /*#__PURE__*/
   _curry1(function lift(fn) {
-    return liftN$1(fn.length, fn);
+    return liftN(fn.length, fn);
   });
 
   /**
@@ -23258,10 +23193,8 @@ this["dev-tools"] = (function () {
   _curry2(function both(f, g) {
     return _isFunction(f) ? function _both() {
       return f.apply(this, arguments) && g.apply(this, arguments);
-    } : lift(and$1)(f, g);
+    } : lift(and)(f, g);
   });
-
-  var both$1 = both;
 
   /**
    * Returns the result of calling its first argument with the remaining
@@ -23306,8 +23239,6 @@ this["dev-tools"] = (function () {
   _curry1(function call(fn) {
     return fn.apply(this, Array.prototype.slice.call(arguments, 1));
   });
-
-  var call$1 = call;
 
   /**
    * `_makeFlat` is a helper function that returns a one-level or fully recursive
@@ -23441,8 +23372,6 @@ this["dev-tools"] = (function () {
     return _makeFlat(false)(map(fn, monad));
   }));
 
-  var chain$1 = chain;
-
   /**
    * Restricts a number to be within a range.
    *
@@ -23473,8 +23402,6 @@ this["dev-tools"] = (function () {
 
     return value < min ? min : value > max ? max : value;
   });
-
-  var clamp$1 = clamp;
 
   function _cloneRegExp(pattern) {
     return new RegExp(pattern.source, pattern.flags ? pattern.flags : (pattern.global ? 'g' : '') + (pattern.ignoreCase ? 'i' : '') + (pattern.multiline ? 'm' : '') + (pattern.sticky ? 'y' : '') + (pattern.unicode ? 'u' : '') + (pattern.dotAll ? 's' : ''));
@@ -23515,7 +23442,7 @@ this["dev-tools"] = (function () {
       return copiedValue;
     };
 
-    switch (type$1(value)) {
+    switch (type(value)) {
       case 'Object':
         return copy(Object.create(Object.getPrototypeOf(value)));
 
@@ -23649,13 +23576,11 @@ this["dev-tools"] = (function () {
    *      objects[0] === objectsClone[0]; //=> false
    */
 
-  var clone =
+  var clone$1 =
   /*#__PURE__*/
   _curry1(function clone(value) {
     return value != null && typeof value.clone === 'function' ? value.clone() : _clone(value, true);
   });
-
-  var clone$1 = clone;
 
   /**
    * Splits a list into sub-lists, based on the result of calling a key-returning function on each element,
@@ -23712,8 +23637,6 @@ this["dev-tools"] = (function () {
     return newList;
   });
 
-  var collectBy$1 = collectBy;
-
   /**
    * Makes a comparator function out of a function that reports whether the first
    * element is less than the second.
@@ -23746,8 +23669,6 @@ this["dev-tools"] = (function () {
     };
   });
 
-  var comparator$1 = comparator;
-
   /**
    * A function that returns the `!` of its argument. It will return `true` when
    * passed false-y value, and `false` when passed a truth-y one.
@@ -23774,8 +23695,6 @@ this["dev-tools"] = (function () {
     return !a;
   });
 
-  var not$1 = not;
-
   /**
    * Takes a function `f` and returns a function `g` such that if called with the same arguments
    * when `f` returns a "truthy" value, `g` returns `false` and when `f` returns a "falsy" value `g` returns `true`.
@@ -23801,8 +23720,7 @@ this["dev-tools"] = (function () {
 
   var complement =
   /*#__PURE__*/
-  lift(not$1);
-  var complement$1 = complement;
+  lift(not);
 
   function _pipe(f, g) {
     return function () {
@@ -24026,7 +23944,6 @@ this["dev-tools"] = (function () {
   var head =
   /*#__PURE__*/
   nth(0);
-  var head$1 = head;
 
   function _identity(x) {
     return x;
@@ -24055,8 +23972,6 @@ this["dev-tools"] = (function () {
   var identity =
   /*#__PURE__*/
   _curry1(_identity);
-
-  var identity$1 = identity;
 
   /**
    * Performs left-to-right function composition using transforming function. The first function may have
@@ -24087,10 +24002,10 @@ this["dev-tools"] = (function () {
   /*#__PURE__*/
   _curry2(function pipeWith(xf, list) {
     if (list.length <= 0) {
-      return identity$1;
+      return identity;
     }
 
-    var headList = head$1(list);
+    var headList = head(list);
     var tailList = tail(list);
     return _arity(headList.length, function () {
       return _reduce(function (result, f) {
@@ -24098,8 +24013,6 @@ this["dev-tools"] = (function () {
       }, headList.apply(this, arguments), tailList);
     });
   });
-
-  var pipeWith$1 = pipeWith;
 
   /**
    * Performs right-to-left function composition using transforming function. The last function may have
@@ -24130,10 +24043,8 @@ this["dev-tools"] = (function () {
   var composeWith =
   /*#__PURE__*/
   _curry2(function composeWith(xf, list) {
-    return pipeWith$1.apply(this, [xf, reverse(list)]);
+    return pipeWith.apply(this, [xf, reverse(list)]);
   });
-
-  var composeWith$1 = composeWith;
 
   /**
    * Returns the result of concatenating the given lists or strings.
@@ -24172,7 +24083,7 @@ this["dev-tools"] = (function () {
         return a.concat(b);
       }
 
-      throw new TypeError(toString$1(b) + ' is not an array');
+      throw new TypeError(toString(b) + ' is not an array');
     }
 
     if (_isString(a)) {
@@ -24180,7 +24091,7 @@ this["dev-tools"] = (function () {
         return a + b;
       }
 
-      throw new TypeError(toString$1(b) + ' is not a string');
+      throw new TypeError(toString(b) + ' is not a string');
     }
 
     if (a != null && _isFunction(a['fantasy-land/concat'])) {
@@ -24191,10 +24102,8 @@ this["dev-tools"] = (function () {
       return a.concat(b);
     }
 
-    throw new TypeError(toString$1(a) + ' does not have a method named "concat" or "fantasy-land/concat"');
+    throw new TypeError(toString(a) + ' does not have a method named "concat" or "fantasy-land/concat"');
   });
-
-  var concat$1 = concat;
 
   /**
    * Returns a function, `fn`, which encapsulates `if/else, if/else, ...` logic.
@@ -24231,7 +24140,7 @@ this["dev-tools"] = (function () {
   var cond =
   /*#__PURE__*/
   _curry1(function cond(pairs) {
-    var arity = reduce(max$1, 0, map(function (pair) {
+    var arity = reduce(max, 0, map(function (pair) {
       return pair[0].length;
     }, pairs));
     return _arity(arity, function () {
@@ -24246,8 +24155,6 @@ this["dev-tools"] = (function () {
       }
     });
   });
-
-  var cond$1 = cond;
 
   /**
    * Returns a curried equivalent of the provided function. The curried function
@@ -24300,7 +24207,7 @@ this["dev-tools"] = (function () {
   var curry =
   /*#__PURE__*/
   _curry1(function curry(fn) {
-    return curryN$1(fn.length, fn);
+    return curryN(fn.length, fn);
   });
 
   /**
@@ -24352,7 +24259,7 @@ this["dev-tools"] = (function () {
       };
     }
 
-    return curry(nAry$1(n, function ($0, $1, $2, $3, $4, $5, $6, $7, $8, $9) {
+    return curry(nAry(n, function ($0, $1, $2, $3, $4, $5, $6, $7, $8, $9) {
       switch (n) {
         case 1:
           return new Fn($0);
@@ -24386,8 +24293,6 @@ this["dev-tools"] = (function () {
       }
     }));
   });
-
-  var constructN$1 = constructN;
 
   /**
    * Wraps a constructor function inside a curried function that can be called
@@ -24425,10 +24330,8 @@ this["dev-tools"] = (function () {
   var construct =
   /*#__PURE__*/
   _curry1(function construct(Fn) {
-    return constructN$1(Fn.length, Fn);
+    return constructN(Fn.length, Fn);
   });
-
-  var construct$1 = construct;
 
   /**
    * Accepts a converging function and a list of branching functions and returns
@@ -24462,7 +24365,7 @@ this["dev-tools"] = (function () {
   var converge =
   /*#__PURE__*/
   _curry2(function converge(after, fns) {
-    return curryN$1(reduce(max$1, 0, pluck$1('length', fns)), function () {
+    return curryN(reduce(max, 0, pluck('length', fns)), function () {
       var args = arguments;
       var context = this;
       return after.apply(context, _map(function (fn) {
@@ -24470,8 +24373,6 @@ this["dev-tools"] = (function () {
       }, fns));
     });
   });
-
-  var converge$1 = converge;
 
   /**
    * Returns the number of items in a given `list` matching the predicate `f`
@@ -24498,7 +24399,6 @@ this["dev-tools"] = (function () {
       return pred(e) ? a + 1 : a;
     }, 0, list);
   });
-  var count$1 = count;
 
   var XReduceBy =
   /*#__PURE__*/
@@ -24642,7 +24542,6 @@ this["dev-tools"] = (function () {
   reduceBy(function (acc, elem) {
     return acc + 1;
   }, 0);
-  var countBy$1 = countBy;
 
   /**
    * Decrements its argument.
@@ -24662,8 +24561,7 @@ this["dev-tools"] = (function () {
 
   var dec =
   /*#__PURE__*/
-  add$1(-1);
-  var dec$1 = dec;
+  add(-1);
 
   /**
    * Returns the second argument if it is not `null`, `undefined` or `NaN`;
@@ -24694,8 +24592,6 @@ this["dev-tools"] = (function () {
   _curry2(function defaultTo(d, v) {
     return v == null || v !== v ? d : v;
   });
-
-  var defaultTo$1 = defaultTo;
 
   /**
    * Makes a descending comparator function out of a function that returns a value
@@ -24730,8 +24626,6 @@ this["dev-tools"] = (function () {
     var bb = fn(b);
     return aa > bb ? -1 : aa < bb ? 1 : 0;
   });
-
-  var descend$1 = descend;
 
   var _Set =
   /*#__PURE__*/
@@ -24975,8 +24869,6 @@ this["dev-tools"] = (function () {
     return out;
   });
 
-  var difference$1 = difference;
-
   /**
    * Finds the set (i.e. no duplicates) of all elements in the first list not
    * contained in the second list. Duplication is determined according to the
@@ -25021,8 +24913,6 @@ this["dev-tools"] = (function () {
     return out;
   });
 
-  var differenceWith$1 = differenceWith;
-
   /**
    * Removes the sub-list of `list` starting at index `start` and containing
    * `count` elements. _Note that this is not destructive_: it returns a copy of
@@ -25052,8 +24942,6 @@ this["dev-tools"] = (function () {
     return result;
   });
 
-  var remove$1 = remove;
-
   /**
    * Returns a new object that does not contain a `prop` property.
    *
@@ -25069,7 +24957,7 @@ this["dev-tools"] = (function () {
     }
 
     if (_isInteger(prop) && _isArray(obj)) {
-      return remove$1(prop, 1, obj);
+      return remove(prop, 1, obj);
     }
 
     var result = {};
@@ -25148,13 +25036,11 @@ this["dev-tools"] = (function () {
         if (obj[head] == null) {
           return _shallowCloneObject(head, obj);
         } else {
-          return assoc$1(head, dissocPath(tail, obj[head]), obj);
+          return assoc(head, dissocPath(tail, obj[head]), obj);
         }
 
     }
   });
-
-  var dissocPath$1 = dissocPath;
 
   /**
    * Returns a new object that does not contain a `prop` property.
@@ -25176,10 +25062,8 @@ this["dev-tools"] = (function () {
   var dissoc =
   /*#__PURE__*/
   _curry2(function dissoc(prop, obj) {
-    return dissocPath$1([prop], obj);
+    return dissocPath([prop], obj);
   });
-
-  var dissoc$1 = dissoc;
 
   /**
    * Divides two numbers. Equivalent to `a / b`.
@@ -25209,8 +25093,6 @@ this["dev-tools"] = (function () {
   _curry2(function divide(a, b) {
     return a / b;
   });
-
-  var divide$1 = divide;
 
   var XDrop =
   /*#__PURE__*/
@@ -25266,15 +25148,13 @@ this["dev-tools"] = (function () {
    *      R.drop(3, 'ramda');               //=> 'da'
    */
 
-  var drop =
+  var drop$1 =
   /*#__PURE__*/
   _curry2(
   /*#__PURE__*/
   _dispatchable(['drop'], _xdrop, function drop(n, xs) {
     return slice(Math.max(0, n), Infinity, xs);
   }));
-
-  var drop$1 = drop;
 
   var XTake =
   /*#__PURE__*/
@@ -25355,10 +25235,8 @@ this["dev-tools"] = (function () {
     return slice(0, n < 0 ? Infinity : n, xs);
   }));
 
-  var take$1 = take;
-
-  function dropLast$2(n, xs) {
-    return take$1(n < xs.length ? xs.length - n : 0, xs);
+  function dropLast$1(n, xs) {
+    return take(n < xs.length ? xs.length - n : 0, xs);
   }
 
   var XDropLast =
@@ -25438,11 +25316,9 @@ this["dev-tools"] = (function () {
   /*#__PURE__*/
   _curry2(
   /*#__PURE__*/
-  _dispatchable([], _xdropLast, dropLast$2));
+  _dispatchable([], _xdropLast, dropLast$1));
 
-  var dropLast$1 = dropLast;
-
-  function dropLastWhile$2(pred, xs) {
+  function dropLastWhile$1(pred, xs) {
     var idx = xs.length - 1;
 
     while (idx >= 0 && pred(xs[idx])) {
@@ -25524,9 +25400,7 @@ this["dev-tools"] = (function () {
   /*#__PURE__*/
   _curry2(
   /*#__PURE__*/
-  _dispatchable([], _xdropLastWhile, dropLastWhile$2));
-
-  var dropLastWhile$1 = dropLastWhile;
+  _dispatchable([], _xdropLastWhile, dropLastWhile$1));
 
   var XDropRepeatsWith =
   /*#__PURE__*/
@@ -25587,7 +25461,6 @@ this["dev-tools"] = (function () {
   var last =
   /*#__PURE__*/
   nth(-1);
-  var last$1 = last;
 
   /**
    * Returns a new list without any consecutively repeating elements. Equality is
@@ -25624,7 +25497,7 @@ this["dev-tools"] = (function () {
       result[0] = list[0];
 
       while (idx < len) {
-        if (!pred(last$1(result), list[idx])) {
+        if (!pred(last(result), list[idx])) {
           result[result.length] = list[idx];
         }
 
@@ -25634,8 +25507,6 @@ this["dev-tools"] = (function () {
 
     return result;
   }));
-
-  var dropRepeatsWith$1 = dropRepeatsWith;
 
   /**
    * Returns a new list without any consecutively repeating elements.
@@ -25664,9 +25535,7 @@ this["dev-tools"] = (function () {
     return _xdropRepeatsWith(equals);
   },
   /*#__PURE__*/
-  dropRepeatsWith$1(equals)));
-
-  var dropRepeats$1 = dropRepeats;
+  dropRepeatsWith(equals)));
 
   /**
    * Takes a function and two values in its domain and returns `true` if the
@@ -25691,8 +25560,6 @@ this["dev-tools"] = (function () {
   _curry3(function eqBy(f, x, y) {
     return equals(f(x), f(y));
   });
-
-  var eqBy$1 = eqBy;
 
   /**
    * Returns a new list without any consecutively repeating elements,
@@ -25719,11 +25586,9 @@ this["dev-tools"] = (function () {
   /*#__PURE__*/
   _curry2(function (fn, list) {
     return _dispatchable([], function () {
-      return _xdropRepeatsWith(eqBy$1(fn));
-    }, dropRepeatsWith$1(eqBy$1(fn)))(list);
+      return _xdropRepeatsWith(eqBy(fn));
+    }, dropRepeatsWith(eqBy(fn)))(list);
   });
-
-  var dropRepeatsBy$1 = dropRepeatsBy;
 
   var XDropWhile =
   /*#__PURE__*/
@@ -25801,8 +25666,6 @@ this["dev-tools"] = (function () {
     return slice(idx, Infinity, xs);
   }));
 
-  var dropWhile$1 = dropWhile;
-
   /**
    * Returns the first argument if it is truthy, otherwise the second argument.
    * Acts as the boolean `or` statement if both inputs are `Boolean`s.
@@ -25829,8 +25692,6 @@ this["dev-tools"] = (function () {
   _curry2(function or(a, b) {
     return a || b;
   });
-
-  var or$1 = or;
 
   /**
    * A function wrapping calls to the two functions in an `||` operation,
@@ -25868,10 +25729,8 @@ this["dev-tools"] = (function () {
   _curry2(function either(f, g) {
     return _isFunction(f) ? function _either() {
       return f.apply(this, arguments) || g.apply(this, arguments);
-    } : lift(or$1)(f, g);
+    } : lift(or)(f, g);
   });
-
-  var either$1 = either;
 
   /**
    * Tests whether or not an object is a typed array.
@@ -25927,8 +25786,6 @@ this["dev-tools"] = (function () {
     ;
   });
 
-  var empty$1 = empty;
-
   /**
    * Returns a new list containing the last `n` elements of the given list.
    * If `n > list.length`, returns a list of `list.length` elements.
@@ -25958,8 +25815,6 @@ this["dev-tools"] = (function () {
     return drop$1(n >= 0 ? xs.length - n : 0, xs);
   });
 
-  var takeLast$1 = takeLast;
-
   /**
    * Checks if a list ends with the provided sublist.
    *
@@ -25986,10 +25841,8 @@ this["dev-tools"] = (function () {
   var endsWith =
   /*#__PURE__*/
   _curry2(function (suffix, list) {
-    return equals(takeLast$1(suffix.length, list), suffix);
+    return equals(takeLast(suffix.length, list), suffix);
   });
-
-  var endsWith$1 = endsWith;
 
   /**
    * Reports whether two objects have the same value, in [`R.equals`](#equals)
@@ -26018,8 +25871,6 @@ this["dev-tools"] = (function () {
   _curry3(function eqProps(prop, obj1, obj2) {
     return equals(obj1[prop], obj2[prop]);
   });
-
-  var eqProps$1 = eqProps;
 
   /**
    * Creates a new object by recursively evolving a shallow copy of `object`,
@@ -26067,8 +25918,6 @@ this["dev-tools"] = (function () {
 
     return result;
   });
-
-  var evolve$1 = evolve;
 
   var XFind =
   /*#__PURE__*/
@@ -26132,7 +25981,7 @@ this["dev-tools"] = (function () {
    *      R.find(R.propEq(4, 'a'))(xs); //=> undefined
    */
 
-  var find =
+  var find$1 =
   /*#__PURE__*/
   _curry2(
   /*#__PURE__*/
@@ -26148,8 +25997,6 @@ this["dev-tools"] = (function () {
       idx += 1;
     }
   }));
-
-  var find$1 = find;
 
   var XFindIndex =
   /*#__PURE__*/
@@ -26233,8 +26080,6 @@ this["dev-tools"] = (function () {
     return -1;
   }));
 
-  var findIndex$1 = findIndex;
-
   var XFindLast =
   /*#__PURE__*/
   function () {
@@ -26304,8 +26149,6 @@ this["dev-tools"] = (function () {
       idx -= 1;
     }
   }));
-
-  var findLast$1 = findLast;
 
   var XFindLastIndex =
   /*#__PURE__*/
@@ -26383,8 +26226,6 @@ this["dev-tools"] = (function () {
     return -1;
   }));
 
-  var findLastIndex$1 = findLastIndex;
-
   /**
    * Returns a new list by pulling every item out of it (and all its sub-arrays)
    * and putting them in a new array, depth-first.
@@ -26433,15 +26274,13 @@ this["dev-tools"] = (function () {
   var flip =
   /*#__PURE__*/
   _curry1(function flip(fn) {
-    return curryN$1(fn.length, function (a, b) {
+    return curryN(fn.length, function (a, b) {
       var args = Array.prototype.slice.call(arguments, 0);
       args[0] = b;
       args[1] = a;
       return fn.apply(this, args);
     });
   });
-
-  var flip$1 = flip;
 
   /**
    * Iterate over an input `list`, calling a provided function `fn` for each
@@ -26494,8 +26333,6 @@ this["dev-tools"] = (function () {
     return list;
   }));
 
-  var forEach$1 = forEach;
-
   /**
    * Iterate over an input `object`, calling a provided function `fn` for each
    * key and value in the object.
@@ -26522,7 +26359,7 @@ this["dev-tools"] = (function () {
   var forEachObjIndexed =
   /*#__PURE__*/
   _curry2(function forEachObjIndexed(fn, obj) {
-    var keyList = keys$1(obj);
+    var keyList = keys(obj);
     var idx = 0;
 
     while (idx < keyList.length) {
@@ -26533,8 +26370,6 @@ this["dev-tools"] = (function () {
 
     return obj;
   });
-
-  var forEachObjIndexed$1 = forEachObjIndexed;
 
   /**
    * Creates a new object from a list key-value pairs. If a key appears in
@@ -26566,8 +26401,6 @@ this["dev-tools"] = (function () {
 
     return result;
   });
-
-  var fromPairs$1 = fromPairs;
 
   /**
    * Splits a list into sub-lists stored in an object, based on the result of
@@ -26622,8 +26455,6 @@ this["dev-tools"] = (function () {
     return acc;
   }, [])));
 
-  var groupBy$1 = groupBy;
-
   /**
    * Takes a list and returns a list of lists where each sublist's elements are
    * all satisfied pairwise comparison according to the provided function.
@@ -26677,8 +26508,6 @@ this["dev-tools"] = (function () {
     return res;
   });
 
-  var groupWith$1 = groupWith;
-
   /**
    * Returns `true` if the first argument is greater than the second; `false`
    * otherwise.
@@ -26707,8 +26536,6 @@ this["dev-tools"] = (function () {
     return a > b;
   });
 
-  var gt$1 = gt;
-
   /**
    * Returns `true` if the first argument is greater than or equal to the second;
    * `false` otherwise.
@@ -26736,8 +26563,6 @@ this["dev-tools"] = (function () {
   _curry2(function gte(a, b) {
     return a >= b;
   });
-
-  var gte$1 = gte;
 
   /**
    * Returns whether or not a path exists in an object. Only the object's
@@ -26783,8 +26608,6 @@ this["dev-tools"] = (function () {
     return true;
   });
 
-  var hasPath$1 = hasPath;
-
   /**
    * Returns whether or not an object has an own property with the specified name
    *
@@ -26813,10 +26636,8 @@ this["dev-tools"] = (function () {
   var has =
   /*#__PURE__*/
   _curry2(function has(prop, obj) {
-    return hasPath$1([prop], obj);
+    return hasPath([prop], obj);
   });
-
-  var has$1 = has;
 
   /**
    * Returns whether or not an object or its prototype chain has a property with
@@ -26854,8 +26675,6 @@ this["dev-tools"] = (function () {
 
     return prop in obj;
   });
-
-  var hasIn$1 = hasIn;
 
   /**
    * Returns true if its arguments are identical, false otherwise. Values are
@@ -26907,13 +26726,6 @@ this["dev-tools"] = (function () {
         return _objectIs$1(a, b);
     }
   }; // In order to support Cross-origin Window objects as arguments to identical,
-  // it cannot be implemented as _curry2(_objectIs).
-  // The reason is that _curry2 checks if a function argument is the placeholder __
-  // by accessing a paritcular property. However, across URL origins access
-  // to most properties of Window is forbidden.
-
-
-  var identical$1 = identical;
 
   /**
    * Creates a function that will process either the `onTrue` or the `onFalse`
@@ -26946,12 +26758,10 @@ this["dev-tools"] = (function () {
   var ifElse =
   /*#__PURE__*/
   _curry3(function ifElse(condition, onTrue, onFalse) {
-    return curryN$1(Math.max(condition.length, onTrue.length, onFalse.length), function _ifElse() {
+    return curryN(Math.max(condition.length, onTrue.length, onFalse.length), function _ifElse() {
       return condition.apply(this, arguments) ? onTrue.apply(this, arguments) : onFalse.apply(this, arguments);
     });
   });
-
-  var ifElse$1 = ifElse;
 
   /**
    * Increments its argument.
@@ -26971,8 +26781,7 @@ this["dev-tools"] = (function () {
 
   var inc =
   /*#__PURE__*/
-  add$1(1);
-  var inc$1 = inc;
+  add(1);
 
   /**
    * Returns `true` if the specified value is equal, in [`R.equals`](#equals)
@@ -27000,8 +26809,6 @@ this["dev-tools"] = (function () {
   var includes =
   /*#__PURE__*/
   _curry2(_includes);
-
-  var includes$1 = includes;
 
   /**
    * Given a function that generates a key, turns a list of objects into an
@@ -27033,7 +26840,6 @@ this["dev-tools"] = (function () {
   reduceBy(function (acc, elem) {
     return elem;
   }, null);
-  var indexBy$1 = indexBy;
 
   /**
    * Returns the position of the first occurrence of an item in an array, or -1
@@ -27060,8 +26866,6 @@ this["dev-tools"] = (function () {
   _curry2(function indexOf(target, xs) {
     return typeof xs.indexOf === 'function' && !_isArray(xs) ? xs.indexOf(target) : _indexOf(xs, target, 0);
   });
-
-  var indexOf$1 = indexOf;
 
   /**
    * Returns all but the last element of the given list or string.
@@ -27091,7 +26895,6 @@ this["dev-tools"] = (function () {
   var init =
   /*#__PURE__*/
   slice(0, -1);
-  var init$1 = init;
 
   /**
    * Takes a predicate `pred`, a list `xs`, and a list `ys`, and returns a list
@@ -27137,8 +26940,6 @@ this["dev-tools"] = (function () {
     }, xs);
   });
 
-  var innerJoin$1 = innerJoin;
-
   /**
    * Inserts the supplied element into the list, at the specified `index`. _Note that
 
@@ -27168,8 +26969,6 @@ this["dev-tools"] = (function () {
     return result;
   });
 
-  var insert$1 = insert;
-
   /**
    * Inserts the sub-list into the list, at the specified `index`. _Note that this is not
    * destructive_: it returns a copy of the list with the changes.
@@ -27195,8 +26994,6 @@ this["dev-tools"] = (function () {
     idx = idx < list.length && idx >= 0 ? idx : list.length;
     return [].concat(Array.prototype.slice.call(list, 0, idx), elts, Array.prototype.slice.call(list, idx));
   });
-
-  var insertAll$1 = insertAll;
 
   var XUniqBy =
   /*#__PURE__*/
@@ -27288,8 +27085,7 @@ this["dev-tools"] = (function () {
 
   var uniq =
   /*#__PURE__*/
-  uniqBy(identity$1);
-  var uniq$1 = uniq;
+  uniqBy(identity);
 
   /**
    * Combines two lists into a set (i.e. no duplicates) composed of those
@@ -27318,10 +27114,8 @@ this["dev-tools"] = (function () {
       toKeep.add(list1[i]);
     }
 
-    return uniq$1(_filter(toKeep.has.bind(toKeep), list2));
+    return uniq(_filter(toKeep.has.bind(toKeep), list2));
   });
-
-  var intersection$1 = intersection;
 
   /**
    * Creates a new list with the separator interposed between elements.
@@ -27362,8 +27156,6 @@ this["dev-tools"] = (function () {
 
     return out;
   }));
-
-  var intersperse$1 = intersperse;
 
   function _objectAssign(target) {
     if (target == null) {
@@ -27422,8 +27214,6 @@ this["dev-tools"] = (function () {
     return obj;
   });
 
-  var objOf$1 = objOf;
-
   var _stepCatArray = {
     '@@transducer/init': Array,
     '@@transducer/step': function (xs, x) {
@@ -27442,7 +27232,7 @@ this["dev-tools"] = (function () {
   var _stepCatObject = {
     '@@transducer/init': Object,
     '@@transducer/step': function (result, input) {
-      return _objectAssign$1(result, _isArrayLike(input) ? objOf$1(input[0], input[1]) : input);
+      return _objectAssign$1(result, _isArrayLike(input) ? objOf(input[0], input[1]) : input);
     },
     '@@transducer/result': _identity
   };
@@ -27513,8 +27303,6 @@ this["dev-tools"] = (function () {
     return _xReduce(xf, xf['@@transducer/init'](), list);
   });
 
-  var into$1 = into;
-
   /**
    * Same as [`R.invertObj`](#invertObj), however this accounts for objects with
    * duplicate values by putting the values into an array.
@@ -27541,7 +27329,7 @@ this["dev-tools"] = (function () {
   var invert =
   /*#__PURE__*/
   _curry1(function invert(obj) {
-    var props = keys$1(obj);
+    var props = keys(obj);
     var len = props.length;
     var idx = 0;
     var out = {};
@@ -27556,8 +27344,6 @@ this["dev-tools"] = (function () {
 
     return out;
   });
-
-  var invert$1 = invert;
 
   /**
    * Returns a new object with the keys of the given object as values, and the
@@ -27590,7 +27376,7 @@ this["dev-tools"] = (function () {
   var invertObj =
   /*#__PURE__*/
   _curry1(function invertObj(obj) {
-    var props = keys$1(obj);
+    var props = keys(obj);
     var len = props.length;
     var idx = 0;
     var out = {};
@@ -27603,8 +27389,6 @@ this["dev-tools"] = (function () {
 
     return out;
   });
-
-  var invertObj$1 = invertObj;
 
   /**
    * Given an `arity` (Number) and a `name` (String) the `invoker` function
@@ -27652,18 +27436,16 @@ this["dev-tools"] = (function () {
   var invoker =
   /*#__PURE__*/
   _curry2(function invoker(arity, method) {
-    return curryN$1(arity + 1, function () {
+    return curryN(arity + 1, function () {
       var target = arguments[arity];
 
       if (target != null && _isFunction(target[method])) {
         return target[method].apply(target, Array.prototype.slice.call(arguments, 0, arity));
       }
 
-      throw new TypeError(toString$1(target) + ' does not have a method named "' + method + '"');
+      throw new TypeError(toString(target) + ' does not have a method named "' + method + '"');
     });
   });
-
-  var invoker$1 = invoker;
 
   /**
    * See if an object (i.e. `val`) is an instance of the supplied constructor. This
@@ -27722,7 +27504,7 @@ this["dev-tools"] = (function () {
   var isEmpty =
   /*#__PURE__*/
   _curry1(function isEmpty(x) {
-    return x != null && equals(x, empty$1(x));
+    return x != null && equals(x, empty(x));
   });
 
   /**
@@ -27749,8 +27531,6 @@ this["dev-tools"] = (function () {
     return !isNil(x);
   });
 
-  var isNotNil$1 = isNotNil;
-
   /**
    * Returns a string made by inserting the `separator` between each element and
    * concatenating all the elements into a single string.
@@ -27773,8 +27553,7 @@ this["dev-tools"] = (function () {
 
   var join =
   /*#__PURE__*/
-  invoker$1(1, 'join');
-  var join$1 = join;
+  invoker(1, 'join');
 
   /**
    * juxt applies a list of functions to a list of values.
@@ -27797,12 +27576,10 @@ this["dev-tools"] = (function () {
   var juxt =
   /*#__PURE__*/
   _curry1(function juxt(fns) {
-    return converge$1(function () {
+    return converge(function () {
       return Array.prototype.slice.call(arguments, 0);
     }, fns);
   });
-
-  var juxt$1 = juxt;
 
   /**
    * Returns a list containing the names of all the properties of the supplied
@@ -27838,8 +27615,6 @@ this["dev-tools"] = (function () {
 
     return ks;
   });
-
-  var keysIn$1 = keysIn;
 
   /**
    * Returns the position of the last occurrence of an item in an array, or -1 if
@@ -27881,8 +27656,6 @@ this["dev-tools"] = (function () {
     }
   });
 
-  var lastIndexOf$1 = lastIndexOf;
-
   function _isNumber(x) {
     return Object.prototype.toString.call(x) === '[object Number]';
   }
@@ -27908,8 +27681,6 @@ this["dev-tools"] = (function () {
   _curry1(function length(list) {
     return list != null && _isNumber(list.length) ? list.length : NaN;
   });
-
-  var length$1 = length;
 
   /**
    * Returns a lens for the given getter and setter functions. The getter "gets"
@@ -27947,8 +27718,6 @@ this["dev-tools"] = (function () {
     };
   });
 
-  var lens$1 = lens;
-
   /**
    * Returns a new copy of the array with the element at the provided index
    * replaced with the given value.
@@ -27975,10 +27744,8 @@ this["dev-tools"] = (function () {
   var update =
   /*#__PURE__*/
   _curry3(function update(idx, x, list) {
-    return adjust$1(idx, always$1(x), list);
+    return adjust(idx, always(x), list);
   });
-
-  var update$1 = update;
 
   /**
    * Returns a lens whose focus is the specified index.
@@ -28004,10 +27771,8 @@ this["dev-tools"] = (function () {
   var lensIndex =
   /*#__PURE__*/
   _curry1(function lensIndex(n) {
-    return lens$1(nth(n), update$1(n));
+    return lens(nth(n), update(n));
   });
-
-  var lensIndex$1 = lensIndex;
 
   /**
    * Retrieves the values at given paths of an object.
@@ -28050,8 +27815,6 @@ this["dev-tools"] = (function () {
     });
   });
 
-  var paths$1 = paths;
-
   /**
    * Retrieves the value at a given path. The nodes of the path can be arbitrary strings or non-negative integers.
    * For anything else, the value is unspecified. Integer paths are meant to index arrays, strings are meant for objects.
@@ -28080,10 +27843,8 @@ this["dev-tools"] = (function () {
   var path =
   /*#__PURE__*/
   _curry2(function path(pathAr, obj) {
-    return paths$1([pathAr], obj)[0];
+    return paths([pathAr], obj)[0];
   });
-
-  var path$1 = path;
 
   /**
    * Returns a lens whose focus is the specified path.
@@ -28113,10 +27874,8 @@ this["dev-tools"] = (function () {
   var lensPath =
   /*#__PURE__*/
   _curry1(function lensPath(p) {
-    return lens$1(path$1(p), assocPath$1(p));
+    return lens(path(p), assocPath(p));
   });
-
-  var lensPath$1 = lensPath;
 
   /**
    * Returns a lens whose focus is the specified property.
@@ -28142,10 +27901,8 @@ this["dev-tools"] = (function () {
   var lensProp =
   /*#__PURE__*/
   _curry1(function lensProp(k) {
-    return lens$1(prop$1(k), assoc$1(k));
+    return lens(prop(k), assoc(k));
   });
-
-  var lensProp$1 = lensProp;
 
   /**
    * Returns `true` if the first argument is less than the second; `false`
@@ -28175,8 +27932,6 @@ this["dev-tools"] = (function () {
     return a < b;
   });
 
-  var lt$1 = lt;
-
   /**
    * Returns `true` if the first argument is less than or equal to the second;
    * `false` otherwise.
@@ -28204,8 +27959,6 @@ this["dev-tools"] = (function () {
   _curry2(function lte(a, b) {
     return a <= b;
   });
-
-  var lte$1 = lte;
 
   /**
    * The `mapAccum` function behaves like a combination of map and reduce; it
@@ -28258,8 +28011,6 @@ this["dev-tools"] = (function () {
 
     return [tuple[0], result];
   });
-
-  var mapAccum$1 = mapAccum;
 
   /**
    * The `mapAccumRight` function behaves like a combination of map and reduce; it
@@ -28315,8 +28066,6 @@ this["dev-tools"] = (function () {
     return [tuple[0], result];
   });
 
-  var mapAccumRight$1 = mapAccumRight;
-
   /**
    * An Object-specific version of [`map`](#map). The function is applied to three
    * arguments: *(value, key, obj)*. If only the value is significant, use
@@ -28345,10 +28094,8 @@ this["dev-tools"] = (function () {
     return _arrayReduce(function (acc, key) {
       acc[key] = fn(obj[key], key, obj);
       return acc;
-    }, {}, keys$1(obj));
+    }, {}, keys(obj));
   });
-
-  var mapObjIndexed$1 = mapObjIndexed;
 
   /**
    * Tests a regular expression against a String. Note that this function will
@@ -28377,8 +28124,6 @@ this["dev-tools"] = (function () {
   _curry2(function match(rx, str) {
     return str.match(rx) || [];
   });
-
-  var match$1 = match;
 
   /**
    * `mathMod` behaves like the modulo operator should mathematically, unlike the
@@ -28428,8 +28173,6 @@ this["dev-tools"] = (function () {
     return (m % p + p) % p;
   });
 
-  var mathMod$1 = mathMod;
-
   /**
    * Takes a function and two values, and returns whichever value produces the
    * larger result when passed to the provided function.
@@ -28459,10 +28202,8 @@ this["dev-tools"] = (function () {
   /*#__PURE__*/
   _curry3(function maxBy(f, a, b) {
     var resultB = f(b);
-    return max$1(f(a), resultB) === resultB ? b : a;
+    return max(f(a), resultB) === resultB ? b : a;
   });
-
-  var maxBy$1 = maxBy;
 
   /**
    * Adds together all the elements of a list.
@@ -28482,8 +28223,7 @@ this["dev-tools"] = (function () {
 
   var sum =
   /*#__PURE__*/
-  reduce(add$1, 0);
-  var sum$1 = sum;
+  reduce(add, 0);
 
   /**
    * Returns the mean of the given list of numbers.
@@ -28505,10 +28245,8 @@ this["dev-tools"] = (function () {
   var mean =
   /*#__PURE__*/
   _curry1(function mean(list) {
-    return sum$1(list) / list.length;
+    return sum(list) / list.length;
   });
-
-  var mean$1 = mean;
 
   /**
    * Returns the median of the given list of numbers.
@@ -28539,12 +28277,10 @@ this["dev-tools"] = (function () {
 
     var width = 2 - len % 2;
     var idx = (len - width) / 2;
-    return mean$1(Array.prototype.slice.call(list, 0).sort(function (a, b) {
+    return mean(Array.prototype.slice.call(list, 0).sort(function (a, b) {
       return a < b ? -1 : a > b ? 1 : 0;
     }).slice(idx, idx + width));
   });
-
-  var median$1 = median;
 
   /**
    * Takes a string-returning function `keyGen` and a function `fn` and returns
@@ -28600,8 +28336,6 @@ this["dev-tools"] = (function () {
     });
   });
 
-  var memoizeWith$1 = memoizeWith;
-
   /**
    * Creates one new object with the own properties from a list of objects.
    * If a key exists in more than one object, the value from the last
@@ -28627,8 +28361,6 @@ this["dev-tools"] = (function () {
   _curry1(function mergeAll(list) {
     return _objectAssign$1.apply(null, [{}].concat(list));
   });
-
-  var mergeAll$1 = mergeAll;
 
   /**
    * Creates a new object with the own properties of the two provided objects. If
@@ -28679,8 +28411,6 @@ this["dev-tools"] = (function () {
     return result;
   });
 
-  var mergeWithKey$1 = mergeWithKey;
-
   /**
    * Creates a new object with the own properties of the two provided objects.
    * If a key exists in both objects:
@@ -28713,7 +28443,7 @@ this["dev-tools"] = (function () {
   var mergeDeepWithKey =
   /*#__PURE__*/
   _curry3(function mergeDeepWithKey(fn, lObj, rObj) {
-    return mergeWithKey$1(function (k, lVal, rVal) {
+    return mergeWithKey(function (k, lVal, rVal) {
       if (_isObject(lVal) && _isObject(rVal)) {
         return mergeDeepWithKey(fn, lVal, rVal);
       } else {
@@ -28721,8 +28451,6 @@ this["dev-tools"] = (function () {
       }
     }, lObj, rObj);
   });
-
-  var mergeDeepWithKey$1 = mergeDeepWithKey;
 
   /**
    * Creates a new object with the own properties of the first object merged with
@@ -28749,12 +28477,10 @@ this["dev-tools"] = (function () {
   var mergeDeepLeft =
   /*#__PURE__*/
   _curry2(function mergeDeepLeft(lObj, rObj) {
-    return mergeDeepWithKey$1(function (k, lVal, rVal) {
+    return mergeDeepWithKey(function (k, lVal, rVal) {
       return lVal;
     }, lObj, rObj);
   });
-
-  var mergeDeepLeft$1 = mergeDeepLeft;
 
   /**
    * Creates a new object with the own properties of the first object merged with
@@ -28781,12 +28507,10 @@ this["dev-tools"] = (function () {
   var mergeDeepRight =
   /*#__PURE__*/
   _curry2(function mergeDeepRight(lObj, rObj) {
-    return mergeDeepWithKey$1(function (k, lVal, rVal) {
+    return mergeDeepWithKey(function (k, lVal, rVal) {
       return rVal;
     }, lObj, rObj);
   });
-
-  var mergeDeepRight$1 = mergeDeepRight;
 
   /**
    * Creates a new object with the own properties of the two provided objects.
@@ -28819,12 +28543,10 @@ this["dev-tools"] = (function () {
   var mergeDeepWith =
   /*#__PURE__*/
   _curry3(function mergeDeepWith(fn, lObj, rObj) {
-    return mergeDeepWithKey$1(function (k, lVal, rVal) {
+    return mergeDeepWithKey(function (k, lVal, rVal) {
       return fn(lVal, rVal);
     }, lObj, rObj);
   });
-
-  var mergeDeepWith$1 = mergeDeepWith;
 
   /**
    * Create a new object with the own properties of the first object merged with
@@ -28856,8 +28578,6 @@ this["dev-tools"] = (function () {
     return _objectAssign$1({}, r, l);
   });
 
-  var mergeLeft$1 = mergeLeft;
-
   /**
    * Create a new object with the own properties of the first object merged with
    * the own properties of the second object. If a key exists in both objects,
@@ -28888,8 +28608,6 @@ this["dev-tools"] = (function () {
     return _objectAssign$1({}, l, r);
   });
 
-  var mergeRight$1 = mergeRight;
-
   /**
    * Creates a new object with the own properties of the two provided objects. If
    * a key exists in both objects, the provided function is applied to the values
@@ -28917,12 +28635,10 @@ this["dev-tools"] = (function () {
   var mergeWith =
   /*#__PURE__*/
   _curry3(function mergeWith(fn, l, r) {
-    return mergeWithKey$1(function (_, _l, _r) {
+    return mergeWithKey(function (_, _l, _r) {
       return fn(_l, _r);
     }, l, r);
   });
-
-  var mergeWith$1 = mergeWith;
 
   /**
    * Returns the smaller of its two arguments.
@@ -28969,8 +28685,8 @@ this["dev-tools"] = (function () {
       return minByType === typeof a ? a : b;
     }
 
-    var stringA = toString$1(a);
-    var minByStringValue = safeMin(stringA, toString$1(b));
+    var stringA = toString(a);
+    var minByStringValue = safeMin(stringA, toString(b));
 
     if (minByStringValue !== undefined) {
       return minByStringValue === stringA ? a : b;
@@ -28978,8 +28694,6 @@ this["dev-tools"] = (function () {
 
     return a;
   });
-
-  var min$1 = min;
 
   /**
    * Takes a function and two values, and returns whichever value produces the
@@ -29010,10 +28724,8 @@ this["dev-tools"] = (function () {
   /*#__PURE__*/
   _curry3(function minBy(f, a, b) {
     var resultB = f(b);
-    return min$1(f(a), resultB) === resultB ? b : a;
+    return min(f(a), resultB) === resultB ? b : a;
   });
-
-  var minBy$1 = minBy;
 
   /**
    * Makes a shallow clone of an object, applying the given fn to the specified
@@ -29102,8 +28814,6 @@ this["dev-tools"] = (function () {
     return _assoc(idx, val, object);
   });
 
-  var modifyPath$1 = modifyPath;
-
   /**
    * Creates a copy of the passed object by applying an `fn` function to the given `prop` property.
    *
@@ -29130,10 +28840,8 @@ this["dev-tools"] = (function () {
   var modify =
   /*#__PURE__*/
   _curry3(function modify(prop, fn, object) {
-    return modifyPath$1([prop], fn, object);
+    return modifyPath([prop], fn, object);
   });
-
-  var modify$1 = modify;
 
   /**
    * Divides the first parameter by the second and returns the remainder. Note
@@ -29167,8 +28875,6 @@ this["dev-tools"] = (function () {
     return a % b;
   });
 
-  var modulo$1 = modulo;
-
   /**
    * Move an item, at index `from`, to index `to`, in a list of elements.
    * A new list will be created containing the new elements order.
@@ -29199,8 +28905,6 @@ this["dev-tools"] = (function () {
     return positiveFrom < 0 || positiveFrom >= list.length || positiveTo < 0 || positiveTo >= list.length ? list : [].concat(result.slice(0, positiveTo)).concat(item).concat(result.slice(positiveTo, list.length));
   });
 
-  var move$1 = move;
-
   /**
    * Multiplies two numbers. Equivalent to `a * b` but curried.
    *
@@ -29227,8 +28931,6 @@ this["dev-tools"] = (function () {
   _curry2(function multiply(a, b) {
     return a * b;
   });
-
-  var multiply$1 = multiply;
 
   /**
    * Takes a function `f` and an object, and returns a function `g`.
@@ -29261,9 +28963,7 @@ this["dev-tools"] = (function () {
 
   var partialObject =
   /*#__PURE__*/
-  _curry2((f, o) => props => f.call(undefined, mergeDeepRight$1(o, props)));
-
-  var partialObject$1 = partialObject;
+  _curry2((f, o) => props => f.call(undefined, mergeDeepRight(o, props)));
 
   /**
    * Negates its argument.
@@ -29285,8 +28985,6 @@ this["dev-tools"] = (function () {
   _curry1(function negate(n) {
     return -n;
   });
-
-  var negate$1 = negate;
 
   /**
    * Returns `true` if no elements of the list match the predicate, `false`
@@ -29320,8 +29018,6 @@ this["dev-tools"] = (function () {
     return all(_complement(fn), input);
   });
 
-  var none$1 = none;
-
   /**
    * Returns a function which returns its nth argument.
    *
@@ -29345,12 +29041,10 @@ this["dev-tools"] = (function () {
   /*#__PURE__*/
   _curry1(function nthArg(n) {
     var arity = n < 0 ? 1 : n + 1;
-    return curryN$1(arity, function () {
+    return curryN(arity, function () {
       return nth(n, arguments);
     });
   });
-
-  var nthArg$1 = nthArg;
 
   /**
    * `o` is a curried composition function that returns a unary function.
@@ -29386,8 +29080,6 @@ this["dev-tools"] = (function () {
     return f(g(x));
   });
 
-  var o$1 = o;
-
   /**
    * Given a constructor and a value, returns a new instance of that constructor
    * containing the value.
@@ -29419,8 +29111,6 @@ this["dev-tools"] = (function () {
   _curry2(function of(Ctor, val) {
     return typeof Ctor['fantasy-land/of'] === 'function' ? Ctor['fantasy-land/of'](val) : typeof Ctor.of === 'function' ? Ctor.of(val) : [val];
   });
-
-  var of$1 = of;
 
   /**
    * Returns a partial copy of an object omitting the keys specified.
@@ -29461,8 +29151,6 @@ this["dev-tools"] = (function () {
     return result;
   });
 
-  var omit$1 = omit;
-
   /**
    * Takes a binary function `f`, a unary function `g`, and two values.
    * Applies `g` to each value, then applies the result of each to `f`.
@@ -29489,12 +29177,11 @@ this["dev-tools"] = (function () {
    * @symb R.on(f, g, a, b) = f(g(a), g(b))
    */
 
-  var on =
+  var on$1 =
   /*#__PURE__*/
   _curryN(4, [], function on(f, g, a, b) {
     return f(g(a), g(b));
   });
-  var on$1 = on;
 
   /**
    * Accepts a function `fn` and returns a function that guards invocation of
@@ -29531,8 +29218,6 @@ this["dev-tools"] = (function () {
       return result;
     });
   });
-
-  var once$1 = once;
 
   function _assertPromise(name, p) {
     if (p == null || !_isFunction(p.then)) {
@@ -29576,8 +29261,6 @@ this["dev-tools"] = (function () {
 
     return p.then(null, f);
   });
-
-  var otherwise$1 = otherwise;
 
   // transforms the held value with the provided function.
 
@@ -29624,8 +29307,6 @@ this["dev-tools"] = (function () {
     })(x).value;
   });
 
-  var over$1 = over;
-
   /**
    * Takes two arguments, `fst` and `snd`, and returns `[fst, snd]`.
    *
@@ -29648,8 +29329,6 @@ this["dev-tools"] = (function () {
   _curry2(function pair(fst, snd) {
     return [fst, snd];
   });
-
-  var pair$1 = pair;
 
   function _createPartialApplicator(concat) {
     return _curry2(function (fn, args) {
@@ -29692,8 +29371,6 @@ this["dev-tools"] = (function () {
   /*#__PURE__*/
   _createPartialApplicator(_concat);
 
-  var partial$1 = partial;
-
   /**
    * Takes a function `f` and a list of arguments, and returns a function `g`.
    * When applied, `g` returns the result of applying `f` to the arguments
@@ -29723,9 +29400,7 @@ this["dev-tools"] = (function () {
   /*#__PURE__*/
   _createPartialApplicator(
   /*#__PURE__*/
-  flip$1(_concat));
-
-  var partialRight$1 = partialRight;
+  flip(_concat));
 
   /**
    * Takes a predicate and a list or other `Filterable` object and returns the
@@ -29754,8 +29429,7 @@ this["dev-tools"] = (function () {
 
   var partition =
   /*#__PURE__*/
-  juxt$1([filter, reject$1]);
-  var partition$1 = partition;
+  juxt([filter, reject]);
 
   /**
    * Determines whether a nested path on an object has a specific value, in
@@ -29786,10 +29460,8 @@ this["dev-tools"] = (function () {
   var pathEq =
   /*#__PURE__*/
   _curry3(function pathEq(val, _path, obj) {
-    return equals(path$1(_path, obj), val);
+    return equals(path(_path, obj), val);
   });
-
-  var pathEq$1 = pathEq;
 
   /**
    * If the given, non-null object has a value at the given path, returns the
@@ -29814,10 +29486,8 @@ this["dev-tools"] = (function () {
   var pathOr =
   /*#__PURE__*/
   _curry3(function pathOr(d, p, obj) {
-    return defaultTo$1(d, path$1(p, obj));
+    return defaultTo(d, path(p, obj));
   });
-
-  var pathOr$1 = pathOr;
 
   /**
    * Returns `true` if the specified object property at given path satisfies the
@@ -29843,10 +29513,8 @@ this["dev-tools"] = (function () {
   var pathSatisfies =
   /*#__PURE__*/
   _curry3(function pathSatisfies(pred, propPath, obj) {
-    return pred(path$1(propPath, obj));
+    return pred(path(propPath, obj));
   });
-
-  var pathSatisfies$1 = pathSatisfies;
 
   /**
    * Returns a partial copy of an object containing only the keys specified. If
@@ -29884,8 +29552,6 @@ this["dev-tools"] = (function () {
     return result;
   });
 
-  var pick$1 = pick;
-
   /**
    * Similar to `pick` except that this one includes a `key: undefined` pair for
    * properties that don't exist.
@@ -29920,8 +29586,6 @@ this["dev-tools"] = (function () {
 
     return result;
   });
-
-  var pickAll$1 = pickAll;
 
   /**
    * Returns a partial copy of an object containing only the keys that satisfy
@@ -29958,8 +29622,6 @@ this["dev-tools"] = (function () {
     return result;
   });
 
-  var pickBy$1 = pickBy;
-
   /**
    * Returns a new list with the given element at the front, followed by the
    * contents of the list.
@@ -29984,8 +29646,6 @@ this["dev-tools"] = (function () {
     return _concat([el], list);
   });
 
-  var prepend$1 = prepend;
-
   /**
    * Multiplies together all the elements of a list.
    *
@@ -30004,8 +29664,7 @@ this["dev-tools"] = (function () {
 
   var product =
   /*#__PURE__*/
-  reduce(multiply$1, 1);
-  var product$1 = product;
+  reduce(multiply, 1);
 
   /**
    * Accepts a function `fn` and a list of transformer functions and returns a
@@ -30040,7 +29699,7 @@ this["dev-tools"] = (function () {
   var useWith =
   /*#__PURE__*/
   _curry2(function useWith(fn, transformers) {
-    return curryN$1(transformers.length, function () {
+    return curryN(transformers.length, function () {
       var args = [];
       var idx = 0;
 
@@ -30076,9 +29735,7 @@ this["dev-tools"] = (function () {
 
   var project =
   /*#__PURE__*/
-  useWith(_map, [pickAll$1, identity$1]); // passing `identity` gives correct arity
-
-  var project$1 = project;
+  useWith(_map, [pickAll, identity]); // passing `identity` gives correct arity
 
   function _promap(f, g, profunctor) {
     return function (x) {
@@ -30147,8 +29804,6 @@ this["dev-tools"] = (function () {
   /*#__PURE__*/
   _dispatchable(['fantasy-land/promap', 'promap'], _xpromap, _promap));
 
-  var promap$1 = promap;
-
   /**
    * Returns `true` if the specified object property is equal, in
    * [`R.equals`](#equals) terms, to the given value; `false` otherwise.
@@ -30180,10 +29835,8 @@ this["dev-tools"] = (function () {
   var propEq =
   /*#__PURE__*/
   _curry3(function propEq(val, name, obj) {
-    return equals(val, prop$1(name, obj));
+    return equals(val, prop(name, obj));
   });
-
-  var propEq$1 = propEq;
 
   /**
    * Returns `true` if the specified object property is of the given type;
@@ -30209,10 +29862,8 @@ this["dev-tools"] = (function () {
   var propIs =
   /*#__PURE__*/
   _curry3(function propIs(type, name, obj) {
-    return is(type, prop$1(name, obj));
+    return is(type, prop(name, obj));
   });
-
-  var propIs$1 = propIs;
 
   /**
    * Return the specified property of the given non-null object if the property
@@ -30245,10 +29896,8 @@ this["dev-tools"] = (function () {
   var propOr =
   /*#__PURE__*/
   _curry3(function propOr(val, p, obj) {
-    return defaultTo$1(val, prop$1(p, obj));
+    return defaultTo(val, prop(p, obj));
   });
-
-  var propOr$1 = propOr;
 
   /**
    * Returns `true` if the specified object property satisfies the given
@@ -30273,10 +29922,8 @@ this["dev-tools"] = (function () {
   var propSatisfies =
   /*#__PURE__*/
   _curry3(function propSatisfies(pred, name, obj) {
-    return pred(prop$1(name, obj));
+    return pred(prop(name, obj));
   });
-
-  var propSatisfies$1 = propSatisfies;
 
   /**
    * Acts as multiple `prop`: array of keys in, array of values out. Preserves
@@ -30304,11 +29951,9 @@ this["dev-tools"] = (function () {
   /*#__PURE__*/
   _curry2(function props(ps, obj) {
     return ps.map(function (p) {
-      return path$1([p], obj);
+      return path([p], obj);
     });
   });
-
-  var props$1 = props;
 
   /**
    * Returns a list of numbers from `from` (inclusive) to `to` (exclusive).
@@ -30344,8 +29989,6 @@ this["dev-tools"] = (function () {
 
     return result;
   });
-
-  var range$1 = range;
 
   /**
    * Returns a single item by iterating through the list, successively calling
@@ -30416,8 +30059,6 @@ this["dev-tools"] = (function () {
     return acc;
   });
 
-  var reduceRight$1 = reduceRight;
-
   /**
    * Like [`reduce`](#reduce), `reduceWhile` returns a single item by iterating
    * through the list, successively calling the iterator function. `reduceWhile`
@@ -30459,8 +30100,6 @@ this["dev-tools"] = (function () {
     return _xReduce(xf, a, list);
   });
 
-  var reduceWhile$1 = reduceWhile;
-
   /**
    * Returns a value wrapped to indicate that it is the final value of the reduce
    * and transduce functions. The returned value should be considered a black
@@ -30492,8 +30131,6 @@ this["dev-tools"] = (function () {
   var reduced =
   /*#__PURE__*/
   _curry1(_reduced);
-
-  var reduced$1 = reduced;
 
   /**
    * Calls an input function `n` times, returning an array containing the results
@@ -30540,8 +30177,6 @@ this["dev-tools"] = (function () {
     return list;
   });
 
-  var times$1 = times;
-
   /**
    * Returns a fixed list of size `n` containing a specified identical value.
    *
@@ -30569,10 +30204,8 @@ this["dev-tools"] = (function () {
   var repeat =
   /*#__PURE__*/
   _curry2(function repeat(value, n) {
-    return times$1(always$1(value), n);
+    return times(always(value), n);
   });
-
-  var repeat$1 = repeat;
 
   /**
    * Replace a substring or regex match in a string with a replacement.
@@ -30604,8 +30237,6 @@ this["dev-tools"] = (function () {
   _curry3(function replace(regex, replacement, str) {
     return str.replace(regex, replacement);
   });
-
-  var replace$1 = replace;
 
   var tInit = '@@transducer/init';
   var tStep = '@@transducer/step';
@@ -30685,8 +30316,6 @@ this["dev-tools"] = (function () {
     return result;
   }));
 
-  var scan$1 = scan;
-
   /**
    * Transforms a [Traversable](https://github.com/fantasyland/fantasy-land#traversable)
    * of [Applicative](https://github.com/fantasyland/fantasy-land#applicative) into an
@@ -30721,12 +30350,10 @@ this["dev-tools"] = (function () {
     var TypeRep = {
       'fantasy-land/of': of
     };
-    return typeof traversable['fantasy-land/traverse'] === 'function' ? traversable['fantasy-land/traverse'](TypeRep, _identity) : typeof traversable.traverse === 'function' ? traversable.traverse(TypeRep, _identity) : reduceRight$1(function (x, acc) {
-      return ap$1(map(prepend$1, x), acc);
+    return typeof traversable['fantasy-land/traverse'] === 'function' ? traversable['fantasy-land/traverse'](TypeRep, _identity) : typeof traversable.traverse === 'function' ? traversable.traverse(TypeRep, _identity) : reduceRight(function (x, acc) {
+      return ap(map(prepend, x), acc);
     }, of([]), traversable);
   });
-
-  var sequence$1 = sequence;
 
   /**
    * Returns the result of "setting" the portion of the given data structure
@@ -30754,10 +30381,8 @@ this["dev-tools"] = (function () {
   var set =
   /*#__PURE__*/
   _curry3(function set(lens, v, x) {
-    return over$1(lens, always$1(v), x);
+    return over(lens, always(v), x);
   });
-
-  var set$1 = set;
 
   /**
    * Returns a copy of the list, sorted according to the comparator function,
@@ -30786,8 +30411,6 @@ this["dev-tools"] = (function () {
   _curry2(function sort(comparator, list) {
     return Array.prototype.slice.call(list, 0).sort(comparator);
   });
-
-  var sort$1 = sort;
 
   /**
    * Sorts the list according to the supplied function.
@@ -30832,8 +30455,6 @@ this["dev-tools"] = (function () {
       return aa < bb ? -1 : aa > bb ? 1 : 0;
     });
   });
-
-  var sortBy$1 = sortBy;
 
   /**
    * Sorts a list according to a list of comparators.
@@ -30885,8 +30506,6 @@ this["dev-tools"] = (function () {
     });
   });
 
-  var sortWith$1 = sortWith;
-
   /**
    * Splits a string into an array of strings based on the given
    * separator.
@@ -30910,8 +30529,7 @@ this["dev-tools"] = (function () {
 
   var split =
   /*#__PURE__*/
-  invoker$1(1, 'split');
-  var split$1 = split;
+  invoker(1, 'split');
 
   /**
    * Splits a given list or string at a given index.
@@ -30935,10 +30553,8 @@ this["dev-tools"] = (function () {
   var splitAt =
   /*#__PURE__*/
   _curry2(function splitAt(index, array) {
-    return [slice(0, index, array), slice(index, length$1(array), array)];
+    return [slice(0, index, array), slice(index, length(array), array)];
   });
-
-  var splitAt$1 = splitAt;
 
   /**
    * Splits a collection into slices of the specified length.
@@ -30975,8 +30591,6 @@ this["dev-tools"] = (function () {
     return result;
   });
 
-  var splitEvery$1 = splitEvery;
-
   /**
    * Takes a list and a predicate and returns a pair of lists with the following properties:
    *
@@ -31011,8 +30625,6 @@ this["dev-tools"] = (function () {
 
     return [prefix, Array.prototype.slice.call(list, idx)];
   });
-
-  var splitWhen$1 = splitWhen;
 
   /**
    * Splits an array into slices on every occurrence of a value.
@@ -31050,8 +30662,6 @@ this["dev-tools"] = (function () {
     return acc;
   });
 
-  var splitWhenever$1 = splitWhenever;
-
   /**
    * Checks if a list starts with the provided sublist.
    *
@@ -31078,10 +30688,8 @@ this["dev-tools"] = (function () {
   var startsWith =
   /*#__PURE__*/
   _curry2(function (prefix, list) {
-    return equals(take$1(prefix.length, list), prefix);
+    return equals(take(prefix.length, list), prefix);
   });
-
-  var startsWith$1 = startsWith;
 
   /**
    * Subtracts its second argument from its first argument.
@@ -31112,8 +30720,6 @@ this["dev-tools"] = (function () {
   _curry2(function subtract(a, b) {
     return Number(a) - Number(b);
   });
-
-  var subtract$1 = subtract;
 
   var swapObject = function (indexA, indexB, o) {
     var copy = clone$1(o);
@@ -31190,8 +30796,6 @@ this["dev-tools"] = (function () {
     }
   });
 
-  var swap$1 = swap;
-
   /**
    * Finds the set (i.e. no duplicates) of all elements contained in the first or
    * second list, but not both.
@@ -31214,10 +30818,8 @@ this["dev-tools"] = (function () {
   var symmetricDifference =
   /*#__PURE__*/
   _curry2(function symmetricDifference(list1, list2) {
-    return concat$1(difference$1(list1, list2), difference$1(list2, list1));
+    return concat(difference(list1, list2), difference(list2, list1));
   });
-
-  var symmetricDifference$1 = symmetricDifference;
 
   /**
    * Finds the set (i.e. no duplicates) of all elements contained in the first or
@@ -31245,10 +30847,8 @@ this["dev-tools"] = (function () {
   var symmetricDifferenceWith =
   /*#__PURE__*/
   _curry3(function symmetricDifferenceWith(pred, list1, list2) {
-    return concat$1(differenceWith$1(pred, list1, list2), differenceWith$1(pred, list2, list1));
+    return concat(differenceWith(pred, list1, list2), differenceWith(pred, list2, list1));
   });
-
-  var symmetricDifferenceWith$1 = symmetricDifferenceWith;
 
   /**
    * Returns a new list containing the last `n` elements of a given list, passing
@@ -31287,8 +30887,6 @@ this["dev-tools"] = (function () {
 
     return slice(idx + 1, Infinity, xs);
   });
-
-  var takeLastWhile$1 = takeLastWhile;
 
   var XTakeWhile =
   /*#__PURE__*/
@@ -31359,8 +30957,6 @@ this["dev-tools"] = (function () {
     return slice(0, idx, xs);
   }));
 
-  var takeWhile$1 = takeWhile;
-
   var XTap =
   /*#__PURE__*/
   function () {
@@ -31416,8 +31012,6 @@ this["dev-tools"] = (function () {
     return x;
   }));
 
-  var tap$1 = tap;
-
   function _isRegExp(x) {
     return Object.prototype.toString.call(x) === '[object RegExp]';
   }
@@ -31444,13 +31038,11 @@ this["dev-tools"] = (function () {
   /*#__PURE__*/
   _curry2(function test(pattern, str) {
     if (!_isRegExp(pattern)) {
-      throw new TypeError('‘test’ requires a value of type RegExp as its first argument; received ' + toString$1(pattern));
+      throw new TypeError('‘test’ requires a value of type RegExp as its first argument; received ' + toString(pattern));
     }
 
     return _cloneRegExp(pattern).test(str);
   });
-
-  var test$1 = test;
 
   /**
    * Returns the result of applying the onSuccess function to the value inside
@@ -31491,8 +31083,6 @@ this["dev-tools"] = (function () {
     return p.then(f);
   });
 
-  var andThen$1 = andThen;
-
   /**
    * The lower case version of a string.
    *
@@ -31511,8 +31101,7 @@ this["dev-tools"] = (function () {
 
   var toLower =
   /*#__PURE__*/
-  invoker$1(0, 'toLowerCase');
-  var toLower$1 = toLower;
+  invoker(0, 'toLowerCase');
 
   /**
    * Converts an object into an array of key, value arrays. Only the object's
@@ -31546,8 +31135,6 @@ this["dev-tools"] = (function () {
 
     return pairs;
   });
-
-  var toPairs$1 = toPairs;
 
   /**
    * Converts an object into an array of key, value arrays. The object's own
@@ -31583,8 +31170,6 @@ this["dev-tools"] = (function () {
     return pairs;
   });
 
-  var toPairsIn$1 = toPairsIn;
-
   /**
    * The upper case version of a string.
    *
@@ -31603,8 +31188,7 @@ this["dev-tools"] = (function () {
 
   var toUpper =
   /*#__PURE__*/
-  invoker$1(0, 'toUpperCase');
-  var toUpper$1 = toUpper;
+  invoker(0, 'toUpperCase');
 
   /**
    * Initializes a transducer using supplied iterator function. Returns a single
@@ -31656,10 +31240,9 @@ this["dev-tools"] = (function () {
 
   var transduce =
   /*#__PURE__*/
-  curryN$1(4, function transduce(xf, fn, acc, list) {
+  curryN(4, function transduce(xf, fn, acc, list) {
     return _xReduce(xf(typeof fn === 'function' ? _xwrap(fn) : fn), acc, list);
   });
-  var transduce$1 = transduce;
 
   /**
    * Transposes the rows and columns of a 2D list.
@@ -31711,8 +31294,6 @@ this["dev-tools"] = (function () {
     return result;
   });
 
-  var transpose$1 = transpose;
-
   /**
    * Maps an [Applicative](https://github.com/fantasyland/fantasy-land#applicative)-returning
    * function over a [Traversable](https://github.com/fantasyland/fantasy-land#traversable),
@@ -31754,10 +31335,8 @@ this["dev-tools"] = (function () {
     var TypeRep = {
       'fantasy-land/of': of
     };
-    return typeof traversable['fantasy-land/traverse'] === 'function' ? traversable['fantasy-land/traverse'](TypeRep, f) : typeof traversable.traverse === 'function' ? traversable.traverse(TypeRep, f) : sequence$1(TypeRep, map(f, traversable));
+    return typeof traversable['fantasy-land/traverse'] === 'function' ? traversable['fantasy-land/traverse'](TypeRep, f) : typeof traversable.traverse === 'function' ? traversable.traverse(TypeRep, f) : sequence(TypeRep, map(f, traversable));
   });
-
-  var traverse$1 = traverse;
 
   var ws = '\x09\x0A\x0B\x0C\x0D\x20\xA0\u1680\u2000\u2001\u2002\u2003' + '\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u3000\u2028' + '\u2029\uFEFF';
   var zeroWidth = '\u200b';
@@ -31793,7 +31372,6 @@ this["dev-tools"] = (function () {
   _curry1(function trim(str) {
     return str.trim();
   });
-  var trim$1 = trim;
 
   /**
    * `tryCatch` takes two functions, a `tryer` and a `catcher`. The returned
@@ -31832,8 +31410,6 @@ this["dev-tools"] = (function () {
     });
   });
 
-  var tryCatch$1 = tryCatch;
-
   /**
    * Takes a function `fn`, which takes a single array argument, and returns a
    * function which:
@@ -31867,8 +31443,6 @@ this["dev-tools"] = (function () {
     };
   });
 
-  var unapply$1 = unapply;
-
   /**
    * Wraps a function of any arity (including nullary) in a function that accepts
    * exactly 1 parameter. Any extraneous parameters will not be passed to the
@@ -31901,10 +31475,8 @@ this["dev-tools"] = (function () {
   var unary =
   /*#__PURE__*/
   _curry1(function unary(fn) {
-    return nAry$1(1, fn);
+    return nAry(1, fn);
   });
-
-  var unary$1 = unary;
 
   /**
    * Returns a function of arity `n` from a (manually) curried function.
@@ -31932,7 +31504,7 @@ this["dev-tools"] = (function () {
   var uncurryN =
   /*#__PURE__*/
   _curry2(function uncurryN(depth, fn) {
-    return curryN$1(depth, function () {
+    return curryN(depth, function () {
       var currentDepth = 1;
       var value = fn;
       var idx = 0;
@@ -31948,8 +31520,6 @@ this["dev-tools"] = (function () {
       return value;
     });
   });
-
-  var uncurryN$1 = uncurryN;
 
   /**
    * Builds a list from a seed value. Accepts an iterator function, which returns
@@ -31991,8 +31561,6 @@ this["dev-tools"] = (function () {
     return result;
   });
 
-  var unfold$1 = unfold;
-
   /**
    * Combines two lists into a set (i.e. no duplicates) composed of the elements
    * of each list.
@@ -32015,9 +31583,7 @@ this["dev-tools"] = (function () {
   /*#__PURE__*/
   _curry2(
   /*#__PURE__*/
-  compose(uniq$1, _concat));
-
-  var union$1 = union;
+  compose(uniq, _concat));
 
   var XUniqWith =
   /*#__PURE__*/
@@ -32097,8 +31663,6 @@ this["dev-tools"] = (function () {
     return result;
   }));
 
-  var uniqWith$1 = uniqWith;
-
   /**
    * Combines two lists into a set (i.e. no duplicates) composed of the elements
    * of each list. Duplication is determined according to the value returned by
@@ -32126,10 +31690,8 @@ this["dev-tools"] = (function () {
   var unionWith =
   /*#__PURE__*/
   _curry3(function unionWith(pred, list1, list2) {
-    return uniqWith$1(pred, _concat(list1, list2));
+    return uniqWith(pred, _concat(list1, list2));
   });
-
-  var unionWith$1 = unionWith;
 
   /**
    * Tests the final argument by passing it to the given predicate function. If
@@ -32162,8 +31724,6 @@ this["dev-tools"] = (function () {
     return pred(x) ? x : whenFalseFn(x);
   });
 
-  var unless$1 = unless;
-
   /**
    * Shorthand for `R.chain(R.identity)`, which removes one level of nesting from
    * any [Chain](https://github.com/fantasyland/fantasy-land#chain).
@@ -32184,8 +31744,7 @@ this["dev-tools"] = (function () {
 
   var unnest =
   /*#__PURE__*/
-  chain$1(_identity);
-  var unnest$1 = unnest;
+  chain(_identity);
 
   /**
    * Takes a predicate, a transformation function, and an initial value,
@@ -32218,8 +31777,6 @@ this["dev-tools"] = (function () {
 
     return val;
   });
-
-  var until$1 = until;
 
   /**
    *
@@ -32261,8 +31818,6 @@ this["dev-tools"] = (function () {
     }, object[key]);
   });
 
-  var unwind$1 = unwind;
-
   /**
    * Returns a list of all the properties, including prototype properties, of the
    * supplied object.
@@ -32297,8 +31852,6 @@ this["dev-tools"] = (function () {
 
     return vs;
   });
-
-  var valuesIn$1 = valuesIn;
 
   var Const = function (x) {
     return {
@@ -32339,8 +31892,6 @@ this["dev-tools"] = (function () {
     return lens(Const)(x).value;
   });
 
-  var view$1 = view;
-
   /**
    * Tests the final argument by passing it to the given predicate function. If
    * the predicate is satisfied, the function will return the result of calling
@@ -32375,8 +31926,6 @@ this["dev-tools"] = (function () {
   _curry3(function when(pred, whenTrueFn, x) {
     return pred(x) ? whenTrueFn(x) : x;
   });
-
-  var when$1 = when;
 
   /**
    * Takes a spec object and a test object; returns true if the test satisfies
@@ -32426,8 +31975,6 @@ this["dev-tools"] = (function () {
     return true;
   });
 
-  var where$1 = where;
-
   /**
    * Takes a spec object and a test object; each of the spec's own properties must be a predicate function.
    * Each predicate is applied to the value of the corresponding property of the
@@ -32475,8 +32022,6 @@ this["dev-tools"] = (function () {
     return false;
   });
 
-  var whereAny$1 = whereAny;
-
   /**
    * Takes a spec object and a test object; returns true if the test satisfies
    * the spec, false otherwise. An object satisfies the spec if, for each of the
@@ -32509,10 +32054,8 @@ this["dev-tools"] = (function () {
   var whereEq =
   /*#__PURE__*/
   _curry2(function whereEq(spec, testObj) {
-    return where$1(map(equals, spec), testObj);
+    return where(map(equals, spec), testObj);
   });
-
-  var whereEq$1 = whereEq;
 
   /**
    * Returns a new list without values in the first argument.
@@ -32543,10 +32086,8 @@ this["dev-tools"] = (function () {
       toRemove.add(xs[i]);
     }
 
-    return reject$1(toRemove.has.bind(toRemove), list);
+    return reject(toRemove.has.bind(toRemove), list);
   });
-
-  var without$1 = without;
 
   /**
    * Exclusive disjunction logical operation.
@@ -32575,8 +32116,6 @@ this["dev-tools"] = (function () {
   _curry2(function xor(a, b) {
     return Boolean(!a ^ !b);
   });
-
-  var xor$1 = xor;
 
   /**
    * Creates a new list out of the two supplied by creating each possible pair
@@ -32621,8 +32160,6 @@ this["dev-tools"] = (function () {
     return result;
   });
 
-  var xprod$1 = xprod;
-
   /**
    * Creates a new list out of the two supplied by pairing up equally-positioned
    * items from both lists. The returned list is truncated to the length of the
@@ -32658,8 +32195,6 @@ this["dev-tools"] = (function () {
     return rv;
   });
 
-  var zip$1 = zip;
-
   /**
    * Creates a new object out of a list of keys and a list of values.
    * Key/value pairing is truncated to the length of the shorter of the two lists.
@@ -32692,8 +32227,6 @@ this["dev-tools"] = (function () {
 
     return out;
   });
-
-  var zipObj$1 = zipObj;
 
   /**
    * Creates a new list out of the two supplied by applying the function to each
@@ -32735,8 +32268,6 @@ this["dev-tools"] = (function () {
     return rv;
   });
 
-  var zipWith$1 = zipWith;
-
   /**
    * Creates a thunk out of a function. A thunk delays a calculation until
    * its result is needed, providing lazy evaluation of arguments.
@@ -32759,7 +32290,7 @@ this["dev-tools"] = (function () {
   var thunkify =
   /*#__PURE__*/
   _curry1(function thunkify(fn) {
-    return curryN$1(fn.length, function createThunk() {
+    return curryN(fn.length, function createThunk() {
       var fnArgs = arguments;
       return function invokeThunk() {
         return fn.apply(this, fnArgs);
@@ -32767,275 +32298,273 @@ this["dev-tools"] = (function () {
     });
   });
 
-  var thunkify$1 = thunkify;
-
   var ramda = /*#__PURE__*/Object.freeze({
     __proto__: null,
     F: F$1,
-    T: T$1,
+    T: T,
     __: __,
-    add: add$1,
-    addIndex: addIndex$1,
-    addIndexRight: addIndexRight$1,
-    adjust: adjust$1,
+    add: add,
+    addIndex: addIndex,
+    addIndexRight: addIndexRight,
+    adjust: adjust,
     all: all,
-    allPass: allPass$1,
-    always: always$1,
-    and: and$1,
-    andThen: andThen$1,
-    any: any$1,
-    anyPass: anyPass$1,
-    ap: ap$1,
-    aperture: aperture$1,
-    append: append$1,
-    apply: apply$1,
-    applySpec: applySpec$1,
-    applyTo: applyTo$1,
-    ascend: ascend$1,
-    assoc: assoc$1,
-    assocPath: assocPath$1,
-    binary: binary$1,
-    bind: bind$1,
-    both: both$1,
-    call: call$1,
-    chain: chain$1,
-    clamp: clamp$1,
+    allPass: allPass,
+    always: always,
+    and: and,
+    andThen: andThen,
+    any: any,
+    anyPass: anyPass,
+    ap: ap,
+    aperture: aperture,
+    append: append,
+    apply: apply,
+    applySpec: applySpec,
+    applyTo: applyTo,
+    ascend: ascend,
+    assoc: assoc,
+    assocPath: assocPath,
+    binary: binary,
+    bind: bind,
+    both: both,
+    call: call,
+    chain: chain,
+    clamp: clamp,
     clone: clone$1,
-    collectBy: collectBy$1,
-    comparator: comparator$1,
-    complement: complement$1,
+    collectBy: collectBy,
+    comparator: comparator,
+    complement: complement,
     compose: compose,
-    composeWith: composeWith$1,
-    concat: concat$1,
-    cond: cond$1,
-    construct: construct$1,
-    constructN: constructN$1,
-    converge: converge$1,
-    count: count$1,
-    countBy: countBy$1,
+    composeWith: composeWith,
+    concat: concat,
+    cond: cond,
+    construct: construct,
+    constructN: constructN,
+    converge: converge,
+    count: count,
+    countBy: countBy,
     curry: curry,
-    curryN: curryN$1,
-    dec: dec$1,
-    defaultTo: defaultTo$1,
-    descend: descend$1,
-    difference: difference$1,
-    differenceWith: differenceWith$1,
-    dissoc: dissoc$1,
-    dissocPath: dissocPath$1,
-    divide: divide$1,
+    curryN: curryN,
+    dec: dec,
+    defaultTo: defaultTo,
+    descend: descend,
+    difference: difference,
+    differenceWith: differenceWith,
+    dissoc: dissoc,
+    dissocPath: dissocPath,
+    divide: divide,
     drop: drop$1,
-    dropLast: dropLast$1,
-    dropLastWhile: dropLastWhile$1,
-    dropRepeats: dropRepeats$1,
-    dropRepeatsBy: dropRepeatsBy$1,
-    dropRepeatsWith: dropRepeatsWith$1,
-    dropWhile: dropWhile$1,
-    either: either$1,
-    empty: empty$1,
-    endsWith: endsWith$1,
-    eqBy: eqBy$1,
-    eqProps: eqProps$1,
+    dropLast: dropLast,
+    dropLastWhile: dropLastWhile,
+    dropRepeats: dropRepeats,
+    dropRepeatsBy: dropRepeatsBy,
+    dropRepeatsWith: dropRepeatsWith,
+    dropWhile: dropWhile,
+    either: either,
+    empty: empty,
+    endsWith: endsWith,
+    eqBy: eqBy,
+    eqProps: eqProps,
     equals: equals,
-    evolve: evolve$1,
+    evolve: evolve,
     filter: filter,
     find: find$1,
-    findIndex: findIndex$1,
-    findLast: findLast$1,
-    findLastIndex: findLastIndex$1,
+    findIndex: findIndex,
+    findLast: findLast,
+    findLastIndex: findLastIndex,
     flatten: flatten,
-    flip: flip$1,
-    forEach: forEach$1,
-    forEachObjIndexed: forEachObjIndexed$1,
-    fromPairs: fromPairs$1,
-    groupBy: groupBy$1,
-    groupWith: groupWith$1,
-    gt: gt$1,
-    gte: gte$1,
-    has: has$1,
-    hasIn: hasIn$1,
-    hasPath: hasPath$1,
-    head: head$1,
-    identical: identical$1,
-    identity: identity$1,
-    ifElse: ifElse$1,
-    inc: inc$1,
-    includes: includes$1,
-    indexBy: indexBy$1,
-    indexOf: indexOf$1,
-    init: init$1,
-    innerJoin: innerJoin$1,
-    insert: insert$1,
-    insertAll: insertAll$1,
-    intersection: intersection$1,
-    intersperse: intersperse$1,
-    into: into$1,
-    invert: invert$1,
-    invertObj: invertObj$1,
-    invoker: invoker$1,
+    flip: flip,
+    forEach: forEach,
+    forEachObjIndexed: forEachObjIndexed,
+    fromPairs: fromPairs,
+    groupBy: groupBy,
+    groupWith: groupWith,
+    gt: gt,
+    gte: gte,
+    has: has,
+    hasIn: hasIn,
+    hasPath: hasPath,
+    head: head,
+    identical: identical,
+    identity: identity,
+    ifElse: ifElse,
+    inc: inc,
+    includes: includes,
+    indexBy: indexBy,
+    indexOf: indexOf,
+    init: init,
+    innerJoin: innerJoin,
+    insert: insert,
+    insertAll: insertAll,
+    intersection: intersection,
+    intersperse: intersperse,
+    into: into,
+    invert: invert,
+    invertObj: invertObj,
+    invoker: invoker,
     is: is,
     isEmpty: isEmpty,
     isNil: isNil,
-    isNotNil: isNotNil$1,
-    join: join$1,
-    juxt: juxt$1,
-    keys: keys$1,
-    keysIn: keysIn$1,
-    last: last$1,
-    lastIndexOf: lastIndexOf$1,
-    length: length$1,
-    lens: lens$1,
-    lensIndex: lensIndex$1,
-    lensPath: lensPath$1,
-    lensProp: lensProp$1,
+    isNotNil: isNotNil,
+    join: join,
+    juxt: juxt,
+    keys: keys,
+    keysIn: keysIn,
+    last: last,
+    lastIndexOf: lastIndexOf,
+    length: length,
+    lens: lens,
+    lensIndex: lensIndex,
+    lensPath: lensPath,
+    lensProp: lensProp,
     lift: lift,
-    liftN: liftN$1,
-    lt: lt$1,
-    lte: lte$1,
+    liftN: liftN,
+    lt: lt,
+    lte: lte,
     map: map,
-    mapAccum: mapAccum$1,
-    mapAccumRight: mapAccumRight$1,
-    mapObjIndexed: mapObjIndexed$1,
-    match: match$1,
-    mathMod: mathMod$1,
-    max: max$1,
-    maxBy: maxBy$1,
-    mean: mean$1,
-    median: median$1,
-    memoizeWith: memoizeWith$1,
-    mergeAll: mergeAll$1,
-    mergeDeepLeft: mergeDeepLeft$1,
-    mergeDeepRight: mergeDeepRight$1,
-    mergeDeepWith: mergeDeepWith$1,
-    mergeDeepWithKey: mergeDeepWithKey$1,
-    mergeLeft: mergeLeft$1,
-    mergeRight: mergeRight$1,
-    mergeWith: mergeWith$1,
-    mergeWithKey: mergeWithKey$1,
-    min: min$1,
-    minBy: minBy$1,
-    modify: modify$1,
-    modifyPath: modifyPath$1,
-    modulo: modulo$1,
-    move: move$1,
-    multiply: multiply$1,
-    nAry: nAry$1,
-    negate: negate$1,
-    none: none$1,
-    not: not$1,
+    mapAccum: mapAccum,
+    mapAccumRight: mapAccumRight,
+    mapObjIndexed: mapObjIndexed,
+    match: match,
+    mathMod: mathMod,
+    max: max,
+    maxBy: maxBy,
+    mean: mean,
+    median: median,
+    memoizeWith: memoizeWith,
+    mergeAll: mergeAll,
+    mergeDeepLeft: mergeDeepLeft,
+    mergeDeepRight: mergeDeepRight,
+    mergeDeepWith: mergeDeepWith,
+    mergeDeepWithKey: mergeDeepWithKey,
+    mergeLeft: mergeLeft,
+    mergeRight: mergeRight,
+    mergeWith: mergeWith,
+    mergeWithKey: mergeWithKey,
+    min: min,
+    minBy: minBy,
+    modify: modify,
+    modifyPath: modifyPath,
+    modulo: modulo,
+    move: move,
+    multiply: multiply,
+    nAry: nAry,
+    negate: negate,
+    none: none,
+    not: not,
     nth: nth,
-    nthArg: nthArg$1,
-    o: o$1,
-    objOf: objOf$1,
-    of: of$1,
-    omit: omit$1,
+    nthArg: nthArg,
+    o: o,
+    objOf: objOf,
+    of: of,
+    omit: omit,
     on: on$1,
-    once: once$1,
-    or: or$1,
-    otherwise: otherwise$1,
-    over: over$1,
-    pair: pair$1,
-    partial: partial$1,
-    partialObject: partialObject$1,
-    partialRight: partialRight$1,
-    partition: partition$1,
-    path: path$1,
-    pathEq: pathEq$1,
-    pathOr: pathOr$1,
-    pathSatisfies: pathSatisfies$1,
-    paths: paths$1,
-    pick: pick$1,
-    pickAll: pickAll$1,
-    pickBy: pickBy$1,
+    once: once,
+    or: or,
+    otherwise: otherwise,
+    over: over,
+    pair: pair,
+    partial: partial,
+    partialObject: partialObject,
+    partialRight: partialRight,
+    partition: partition,
+    path: path,
+    pathEq: pathEq,
+    pathOr: pathOr,
+    pathSatisfies: pathSatisfies,
+    paths: paths,
+    pick: pick,
+    pickAll: pickAll,
+    pickBy: pickBy,
     pipe: pipe,
-    pipeWith: pipeWith$1,
-    pluck: pluck$1,
-    prepend: prepend$1,
-    product: product$1,
-    project: project$1,
-    promap: promap$1,
-    prop: prop$1,
-    propEq: propEq$1,
-    propIs: propIs$1,
-    propOr: propOr$1,
-    propSatisfies: propSatisfies$1,
-    props: props$1,
-    range: range$1,
+    pipeWith: pipeWith,
+    pluck: pluck,
+    prepend: prepend,
+    product: product,
+    project: project,
+    promap: promap,
+    prop: prop,
+    propEq: propEq,
+    propIs: propIs,
+    propOr: propOr,
+    propSatisfies: propSatisfies,
+    props: props,
+    range: range,
     reduce: reduce,
     reduceBy: reduceBy,
-    reduceRight: reduceRight$1,
-    reduceWhile: reduceWhile$1,
-    reduced: reduced$1,
-    reject: reject$1,
-    remove: remove$1,
-    repeat: repeat$1,
-    replace: replace$1,
+    reduceRight: reduceRight,
+    reduceWhile: reduceWhile,
+    reduced: reduced,
+    reject: reject,
+    remove: remove,
+    repeat: repeat,
+    replace: replace,
     reverse: reverse,
-    scan: scan$1,
-    sequence: sequence$1,
-    set: set$1,
+    scan: scan,
+    sequence: sequence,
+    set: set,
     slice: slice,
-    sort: sort$1,
-    sortBy: sortBy$1,
-    sortWith: sortWith$1,
-    split: split$1,
-    splitAt: splitAt$1,
-    splitEvery: splitEvery$1,
-    splitWhen: splitWhen$1,
-    splitWhenever: splitWhenever$1,
-    startsWith: startsWith$1,
-    subtract: subtract$1,
-    sum: sum$1,
-    swap: swap$1,
-    symmetricDifference: symmetricDifference$1,
-    symmetricDifferenceWith: symmetricDifferenceWith$1,
+    sort: sort,
+    sortBy: sortBy,
+    sortWith: sortWith,
+    split: split,
+    splitAt: splitAt,
+    splitEvery: splitEvery,
+    splitWhen: splitWhen,
+    splitWhenever: splitWhenever,
+    startsWith: startsWith,
+    subtract: subtract,
+    sum: sum,
+    swap: swap,
+    symmetricDifference: symmetricDifference,
+    symmetricDifferenceWith: symmetricDifferenceWith,
     tail: tail,
-    take: take$1,
-    takeLast: takeLast$1,
-    takeLastWhile: takeLastWhile$1,
-    takeWhile: takeWhile$1,
-    tap: tap$1,
-    test: test$1,
-    thunkify: thunkify$1,
-    times: times$1,
-    toLower: toLower$1,
-    toPairs: toPairs$1,
-    toPairsIn: toPairsIn$1,
-    toString: toString$1,
-    toUpper: toUpper$1,
-    transduce: transduce$1,
-    transpose: transpose$1,
-    traverse: traverse$1,
-    trim: trim$1,
-    tryCatch: tryCatch$1,
-    type: type$1,
-    unapply: unapply$1,
-    unary: unary$1,
-    uncurryN: uncurryN$1,
-    unfold: unfold$1,
-    union: union$1,
-    unionWith: unionWith$1,
-    uniq: uniq$1,
+    take: take,
+    takeLast: takeLast,
+    takeLastWhile: takeLastWhile,
+    takeWhile: takeWhile,
+    tap: tap,
+    test: test,
+    thunkify: thunkify,
+    times: times,
+    toLower: toLower,
+    toPairs: toPairs,
+    toPairsIn: toPairsIn,
+    toString: toString,
+    toUpper: toUpper,
+    transduce: transduce,
+    transpose: transpose,
+    traverse: traverse,
+    trim: trim,
+    tryCatch: tryCatch,
+    type: type,
+    unapply: unapply,
+    unary: unary,
+    uncurryN: uncurryN,
+    unfold: unfold,
+    union: union,
+    unionWith: unionWith,
+    uniq: uniq,
     uniqBy: uniqBy,
-    uniqWith: uniqWith$1,
-    unless: unless$1,
-    unnest: unnest$1,
-    until: until$1,
-    unwind: unwind$1,
-    update: update$1,
+    uniqWith: uniqWith,
+    unless: unless,
+    unnest: unnest,
+    until: until,
+    unwind: unwind,
+    update: update,
     useWith: useWith,
     values: values,
-    valuesIn: valuesIn$1,
-    view: view$1,
-    when: when$1,
-    where: where$1,
-    whereAny: whereAny$1,
-    whereEq: whereEq$1,
-    without: without$1,
-    xor: xor$1,
-    xprod: xprod$1,
-    zip: zip$1,
-    zipObj: zipObj$1,
-    zipWith: zipWith$1
+    valuesIn: valuesIn,
+    view: view,
+    when: when,
+    where: where,
+    whereAny: whereAny,
+    whereEq: whereEq,
+    without: without,
+    xor: xor,
+    xprod: xprod,
+    zip: zip,
+    zipObj: zipObj,
+    zipWith: zipWith
   });
 
   function defaultFormatter(value) {
@@ -33547,6 +33076,36 @@ this["dev-tools"] = (function () {
       TokenParserState[TokenParserState["SEPARATOR"] = 6] = "SEPARATOR";
   })(TokenParserState || (TokenParserState = {}));
 
+  function styleInject(css, ref) {
+    if ( ref === void 0 ) ref = {};
+    var insertAt = ref.insertAt;
+
+    if (!css || typeof document === 'undefined') { return; }
+
+    var head = document.head || document.getElementsByTagName('head')[0];
+    var style = document.createElement('style');
+    style.type = 'text/css';
+
+    if (insertAt === 'top') {
+      if (head.firstChild) {
+        head.insertBefore(style, head.firstChild);
+      } else {
+        head.appendChild(style);
+      }
+    } else {
+      head.appendChild(style);
+    }
+
+    if (style.styleSheet) {
+      style.styleSheet.cssText = css;
+    } else {
+      style.appendChild(document.createTextNode(css));
+    }
+  }
+
+  var css_248z$3 = ":root{--sans-font:-apple-system,BlinkMacSystemFont,\"Avenir Next\",Avenir,\"Nimbus Sans L\",Roboto,\"Noto Sans\",\"Segoe UI\",Arial,Helvetica,\"Helvetica Neue\",sans-serif;--mono-font:Consolas,Menlo,Monaco,\"Andale Mono\",\"Ubuntu Mono\",monospace;--standard-border-radius:5px;--border-width:1px;--bg:#fff;--accent-bg:#f5f7ff;--text:#212121;--text-light:#585858;--border:#898ea4;--accent:#0d47a1;--accent-hover:#1266e2;--accent-text:var(--bg);--code:#d81b60;--preformatted:#444;--marked:#fd3;--disabled:#efefef}@media (prefers-color-scheme:dark){.demo-tools :root{--bg:#212121;--accent-bg:#2b2b2b;--text:#dcdcdc;--text-light:#ababab;--accent:#ffb300;--accent-hover:#ffe099;--accent-text:var(--bg);--code:#f06292;--preformatted:#ccc;--disabled:#111;color-scheme:dark}.demo-tools img,.demo-tools video{opacity:.8}}.demo-tools *,.demo-tools :after,.demo-tools :before{box-sizing:border-box}.demo-tools input,.demo-tools progress,.demo-tools select,.demo-tools textarea{appearance:none;-webkit-appearance:none;-moz-appearance:none}.demo-tools header{background-color:var(--accent-bg);border-bottom:var(--border-width) solid var(--border);grid-column:-1;padding:0 .5rem 2rem;text-align:center}.demo-tools header>:only-child{margin-block-start:2rem}.demo-tools header h1{margin:1rem auto;max-width:1200px}.demo-tools header p{margin:1rem auto;max-width:40rem}.demo-tools main{padding-top:1.5rem}.demo-tools footer{border-top:var(--border-width) solid var(--border);color:var(--text-light);font-size:.9rem;margin-top:4rem;padding:2rem 1rem 1.5rem;text-align:center}.demo-tools h1{font-size:3rem}.demo-tools h2{font-size:2.6rem;margin-top:3rem}.demo-tools h3{font-size:2rem;margin-top:3rem}.demo-tools h4{font-size:1.44rem}.demo-tools h5{font-size:1.15rem}.demo-tools h6{font-size:.96rem}.demo-tools p{margin:1.5rem 0}.demo-tools h1,.demo-tools h2,.demo-tools h3,.demo-tools h4,.demo-tools h5,.demo-tools h6,.demo-tools p{overflow-wrap:break-word}.demo-tools h1,.demo-tools h2,.demo-tools h3{line-height:1.1}@media only screen and (max-width:720px){.demo-tools h1{font-size:2.5rem}.demo-tools h2{font-size:2.1rem}.demo-tools h3{font-size:1.75rem}.demo-tools h4{font-size:1.25rem}}.demo-tools a,.demo-tools a:visited{color:var(--accent)}.demo-tools a:hover{text-decoration:none}.demo-tools .button,.demo-tools a.button,.demo-tools button,.demo-tools input[type=button],.demo-tools input[type=reset],.demo-tools input[type=submit]{background-color:var(--accent);border:var(--border-width) solid var(--accent);color:var(--accent-text);line-height:normal;padding:.5em;text-decoration:none}.demo-tools .button[aria-disabled=true],.demo-tools button[disabled],.demo-tools input:disabled,.demo-tools select:disabled,.demo-tools textarea:disabled{background-color:var(--disabled);border-color:var(--disabled);color:var(--text-light);cursor:not-allowed}.demo-tools input[type=range]{padding:0}.demo-tools abbr[title]{cursor:help;text-decoration-line:underline;text-decoration-style:dotted}.demo-tools .button:not([aria-disabled=true]):hover,.demo-tools button:enabled:hover,.demo-tools input[type=button]:enabled:hover,.demo-tools input[type=reset]:enabled:hover,.demo-tools input[type=submit]:enabled:hover{background-color:var(--accent-hover);border-color:var(--accent-hover);cursor:pointer}.demo-tools .button:focus-visible,.demo-tools button:focus-visible:where(:enabled),.demo-tools input:enabled:focus-visible:where([type=submit],[type=reset],[type=button]){outline:2px solid var(--accent);outline-offset:1px}.demo-tools header nav{font-size:1rem;line-height:2;padding:1rem 0 0}.demo-tools header nav ol,.demo-tools header nav ul{align-content:space-around;align-items:center;display:flex;flex-direction:row;flex-wrap:wrap;justify-content:center;list-style-type:none;margin:0;padding:0}.demo-tools header nav ol li,.demo-tools header nav ul li{display:inline-block}.demo-tools header nav a,.demo-tools header nav a:visited{border:var(--border-width) solid var(--border);border-radius:var(--standard-border-radius);color:var(--text);display:inline-block;margin:0 .5rem 1rem;padding:.1rem 1rem;text-decoration:none}.demo-tools header nav a.current,.demo-tools header nav a:hover,.demo-tools header nav a[aria-current=page],.demo-tools header nav a[aria-current=true]{background:var(--bg);border-color:var(--accent);color:var(--accent);cursor:pointer}@media only screen and (max-width:720px){.demo-tools header nav a{border:none;line-height:1;padding:0;text-decoration:underline}.demo-tools header nav a.current{background:none}}.demo-tools aside,.demo-tools details,.demo-tools pre,.demo-tools progress{background-color:var(--accent-bg);border:var(--border-width) solid var(--border);border-radius:var(--standard-border-radius);margin-bottom:1rem}.demo-tools aside{float:right;font-size:1rem;margin-inline-start:15px;padding:0 15px;width:30%}.demo-tools [dir=rtl] aside{float:left}@media only screen and (max-width:720px){.demo-tools aside{float:none;margin-inline-start:0;width:100%}}.demo-tools article,.demo-tools dialog,.demo-tools fieldset{border:var(--border-width) solid var(--border);border-radius:var(--standard-border-radius);margin-bottom:1rem;padding:1rem}.demo-tools article h2:first-child,.demo-tools article h3:first-child,.demo-tools section h2:first-child,.demo-tools section h3:first-child{margin-top:1rem}.demo-tools section{border-bottom:var(--border-width) solid var(--border);border-top:var(--border-width) solid var(--border);margin:3rem 0;padding:2rem 1rem}.demo-tools section+section,.demo-tools section:first-child{border-top:0;padding-top:0}.demo-tools section+section{margin-top:0}.demo-tools section:last-child{border-bottom:0;padding-bottom:0}.demo-tools details{padding:.7rem 1rem}.demo-tools summary{cursor:pointer;font-weight:700;margin:-.7rem -1rem;padding:.7rem 1rem;word-break:break-all}.demo-tools details[open]>summary+*{margin-top:0}.demo-tools details[open]>summary{margin-bottom:.5rem}.demo-tools details[open]>:last-child{margin-bottom:0}.demo-tools table{border-collapse:collapse;margin:1.5rem 0}.demo-tools figure>table{margin:0;width:max-content}.demo-tools td,.demo-tools th{border:var(--border-width) solid var(--border);padding:.5rem;text-align:start}.demo-tools th{font-weight:700}.demo-tools th,.demo-tools tr:nth-child(2n){background-color:var(--accent-bg)}.demo-tools table caption{font-weight:700;margin-bottom:.5rem}.demo-tools .button,.demo-tools button,.demo-tools input,.demo-tools select,.demo-tools textarea{border-radius:var(--standard-border-radius);box-shadow:none;display:inline-block;font-family:inherit;font-size:inherit;margin-bottom:.5rem;max-width:100%;padding:.5em}.demo-tools input,.demo-tools select,.demo-tools textarea{background-color:var(--bg);border:var(--border-width) solid var(--border);color:var(--text)}.demo-tools label{display:block}.demo-tools textarea:not([cols]){width:100%}.demo-tools select:not([multiple]){background-image:linear-gradient(45deg,transparent 49%,var(--text) 51%),linear-gradient(135deg,var(--text) 51%,transparent 49%);background-position:calc(100% - 15px),calc(100% - 10px);background-repeat:no-repeat;background-size:5px 5px,5px 5px;padding-inline-end:25px}.demo-tools [dir=rtl] select:not([multiple]){background-position:10px,15px}.demo-tools input[type=checkbox],.demo-tools input[type=radio]{position:relative;vertical-align:middle;width:min-content}.demo-tools input[type=checkbox]+label,.demo-tools input[type=radio]+label{display:inline-block}.demo-tools input[type=radio]{border-radius:100%}.demo-tools input[type=checkbox]:checked,.demo-tools input[type=radio]:checked{background-color:var(--accent)}.demo-tools input[type=checkbox]:checked:after{background-color:transparent;border-bottom:.08em solid var(--bg);border-radius:0;border-right:.08em solid var(--bg);content:\" \";font-size:1.8em;height:.4em;left:.18em;position:absolute;top:.04em;transform:rotate(45deg);width:.2em}.demo-tools input[type=radio]:checked:after{background-color:var(--bg);border-radius:100%;content:\" \";font-size:1.8em;height:.3em;left:.125em;position:absolute;top:.125em;width:.3em}@media only screen and (max-width:720px){.demo-tools input,.demo-tools select,.demo-tools textarea{width:100%}}.demo-tools input[type=color]{height:2.5rem;padding:.2rem}.demo-tools input[type=file]{border:0}.demo-tools hr{background:var(--border);border:none;height:var(--border-width);margin:1rem auto}.demo-tools mark{background-color:var(--marked);border-radius:var(--standard-border-radius);color:#000;padding:2px 5px}.demo-tools mark a{color:#0d47a1}.demo-tools img,.demo-tools video{border-radius:var(--standard-border-radius);height:auto;max-width:100%}.demo-tools figure{display:block;margin:0;overflow-x:auto}.demo-tools figure>img,.demo-tools figure>picture>img{display:block;margin-inline:auto}.demo-tools figcaption{color:var(--text-light);font-size:.9rem;left:0;margin-block:1rem;position:sticky;text-align:center}.demo-tools blockquote{border-inline-start:.35rem solid var(--accent);color:var(--text-light);font-style:italic;margin-block:2rem;margin-inline-end:0;margin-inline-start:2rem;padding:.4rem .8rem}.demo-tools cite{font-size:.9rem;font-style:normal}.demo-tools cite,.demo-tools dt{color:var(--text-light)}.demo-tools code,.demo-tools kbd,.demo-tools pre,.demo-tools pre span,.demo-tools samp{color:var(--code);font-family:var(--mono-font)}.demo-tools kbd{border:var(--border-width) solid var(--preformatted);border-bottom:3px solid var(--preformatted);border-radius:var(--standard-border-radius);color:var(--preformatted);padding:.1rem .4rem}.demo-tools pre{color:var(--preformatted);max-width:100%;overflow:auto;padding:1rem 1.4rem}.demo-tools pre code{background:none;color:var(--preformatted);margin:0;padding:0}.demo-tools progress{width:100%}.demo-tools progress:indeterminate{background-color:var(--accent-bg)}.demo-tools progress::-webkit-progress-bar{background-color:var(--accent-bg);border-radius:var(--standard-border-radius)}.demo-tools progress::-webkit-progress-value{background-color:var(--accent);border-radius:var(--standard-border-radius)}.demo-tools progress::-moz-progress-bar{background-color:var(--accent);border-radius:var(--standard-border-radius);transition-duration:.3s;transition-property:width}.demo-tools progress:indeterminate::-moz-progress-bar{background-color:var(--accent-bg)}.demo-tools dialog{background-color:var(--bg);margin:auto;max-width:40rem}.demo-tools dialog::backdrop{background-color:var(--bg);opacity:.8}@media only screen and (max-width:720px){.demo-tools dialog{max-width:calc(100vw - 2rem)}}.demo-tools sub,.demo-tools sup{position:relative;vertical-align:baseline}.demo-tools sup{top:-.4em}.demo-tools sub{top:.3em}.demo-tools .notice{background:var(--accent-bg);border:var(--border-width) solid var(--border);border-radius:var(--standard-border-radius);margin:2rem 0;padding:1.5rem}.demo-tools div.notice p:first-of-type{margin-top:0}.demo-tools div.notice p:last-of-type{margin-bottom:0}@media print{@page{margin:1cm}.demo-tools header{background-color:unset}.demo-tools footer,.demo-tools header nav{display:none}.demo-tools article{border:none;padding:0}.demo-tools a[href^=http]:after{content:\" <\" attr(href) \">\"}.demo-tools abbr[title]:after{content:\" (\" attr(title) \")\"}.demo-tools a{text-decoration:none}.demo-tools p{orphans:3;widows:3}.demo-tools hr{border-top:var(--border-width) solid var(--border)}.demo-tools mark{border:var(--border-width) solid var(--border)}.demo-tools figure,.demo-tools img,.demo-tools pre,.demo-tools svg,.demo-tools table{break-inside:avoid}.demo-tools pre code{white-space:pre-wrap}}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImV4dGVybmFsL3N0eWxlLmxlc3MiLCJzdHlsZS5sZXNzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUVBLE1BRUUsMkpBQUEsQ0FHQSx1RUFBQSxDQUNBLDRCQUFBLENBQ0Esa0JBQUEsQ0FHQSxTQUFBLENBQ0EsbUJBQUEsQ0FDQSxjQUFBLENBQ0Esb0JBQUEsQ0FDQSxnQkFBQSxDQUNBLGdCQUFBLENBQ0Esc0JBQUEsQ0FDQSx1QkFBQSxDQUNBLGNBQUEsQ0FDQSxtQkFBQSxDQUNBLGFBQUEsQ0FDQSxrQkNERixDRE9FLG1DQUFBLGtCQUdJLFlBQUEsQ0FDQSxtQkFBQSxDQUNBLGNBQUEsQ0FDQSxvQkFBQSxDQUNBLGdCQUFBLENBQ0Esc0JBQUEsQ0FDQSx1QkFBQSxDQUNBLGNBQUEsQ0FDQSxtQkFBQSxDQUNBLGVBQUEsQ0FWQSxpQkM2Q0osQ0QvQ0Esa0NBa0JJLFVDaUNKLENBQ0YsQ0R2REEscURBNEJJLHFCQ2dDSixDRDVEQSwrRUFxQ0ksZUFBQSxDQUNBLHVCQUFBLENBQ0Esb0JDNkJKLENEcEVBLG1CQThDSSxpQ0FBQSxDQUNBLHFEQUFBLENBR0EsY0FBQSxDQURBLG9CQUFBLENBREEsaUJDMkJKLENEM0VBLCtCQXNESSx1QkN3QkosQ0Q5RUEsc0JBMkRJLGdCQUFBLENBREEsZ0JDd0JKLENEbEZBLHFCQWdFSSxnQkFBQSxDQURBLGVDdUJKLENEdEZBLGlCQXNFSSxrQkNtQkosQ0R6RkEsbUJBK0VJLGtEQUFBLENBSEEsdUJBQUEsQ0FDQSxlQUFBLENBSEEsZUFBQSxDQUNBLHdCQUFBLENBR0EsaUJDbUJKLENEakdBLGVBcUZJLGNDZUosQ0RwR0EsZUF5RkksZ0JBQUEsQ0FDQSxlQ2NKLENEeEdBLGVBOEZJLGNBQUEsQ0FDQSxlQ2FKLENENUdBLGVBbUdJLGlCQ1lKLENEL0dBLGVBdUdJLGlCQ1dKLENEbEhBLGVBMkdJLGdCQ1VKLENEckhBLGNBK0dJLGVDU0osQ0R4SEEsd0dBcUhJLHdCQ1lKLENEaklBLDZDQTZISSxlQ1NKLENETEUseUNBQUEsZUFFSSxnQkNPSixDRFRBLGVBTUksZ0JDTUosQ0RaQSxlQVVJLGlCQ0tKLENEZkEsZUFjSSxpQkNJSixDQUNGLENEcEpBLG9DQXVKSSxtQkNDSixDRHhKQSxvQkEySkksb0JDQUosQ0QzSkEsd0pBcUtJLDhCQUFBLENBREEsOENBQUEsQ0FFQSx3QkFBQSxDQUdBLGtCQUFBLENBRkEsWUFBQSxDQUNBLG9CQ0FKLENEeEtBLDBKQWtMSSxnQ0FBQSxDQUNBLDRCQUFBLENBQ0EsdUJBQUEsQ0FIQSxrQkNDSixDRGxMQSw4QkF3TEksU0NISixDRHJMQSx3QkE4TEksV0FBQSxDQUNBLDhCQUFBLENBQ0EsNEJDTkosQ0QxTEEsMk5Bd01JLG9DQUFBLENBQ0EsZ0NBQUEsQ0FDQSxjQ1BKLENEbk1BLDJLQW9OSSwrQkFBQSxDQUNBLGtCQ1JKLENEN01BLHVCQTJOSSxjQUFBLENBQ0EsYUFBQSxDQUNBLGdCQ1hKLENEbE5BLG9EQW9PSSwwQkFBQSxDQUNBLGtCQUFBLENBQ0EsWUFBQSxDQUNBLGtCQUFBLENBQ0EsY0FBQSxDQUNBLHNCQUFBLENBQ0Esb0JBQUEsQ0FDQSxRQUFBLENBQ0EsU0NkSixDRDlOQSwwREFtUEksb0JDakJKLENEbE9BLDBEQXlQSSw4Q0FBQSxDQUNBLDJDQUFBLENBQ0EsaUJBQUEsQ0FDQSxvQkFBQSxDQUpBLG1CQUFBLENBS0Esa0JBQUEsQ0FDQSxvQkNsQkosQ0Q1T0Esd0pBcVFJLG9CQUFBLENBQ0EsMEJBQUEsQ0FDQSxtQkFBQSxDQUNBLGNDbkJKLENEdUJFLHlDQUFBLHlCQUVJLFdBQUEsQ0FHQSxhQUFBLENBRkEsU0FBQSxDQUNBLHlCQ3BCSixDRGdCQSxpQ0FTSSxlQ3RCSixDQUNGLENEaFFBLDJFQTRSSSxpQ0FBQSxDQUNBLDhDQUFBLENBQ0EsMkNBQUEsQ0FDQSxrQkN0QkosQ0R6UUEsa0JBdVNJLFdBQUEsQ0FKQSxjQUFBLENBR0Esd0JBQUEsQ0FEQSxjQUFBLENBREEsU0NwQkosQ0RoUkEsNEJBMlNJLFVDeEJKLENENEJFLHlDQUFBLGtCQUdJLFVBQUEsQ0FDQSxxQkFBQSxDQUZBLFVDeEJKLENBQ0YsQ0QxUkEsNERBd1RJLDhDQUFBLENBRUEsMkNBQUEsQ0FDQSxrQkFBQSxDQUZBLFlDdkJKLENEbFNBLDRJQWtVSSxlQzFCSixDRHhTQSxvQkF1VUkscURBQUEsQ0FEQSxrREFBQSxDQUdBLGFBQUEsQ0FEQSxpQkMxQkosQ0Q5U0EsNERBZ1ZJLFlBQUEsQ0FDQSxhQzlCSixDRG5UQSw0QkFxVkksWUMvQkosQ0R0VEEsK0JBeVZJLGVBQUEsQ0FDQSxnQkNoQ0osQ0QxVEEsb0JBOFZJLGtCQ2pDSixDRDdUQSxvQkFrV0ksY0FBQSxDQUNBLGVBQUEsQ0FFQSxtQkFBQSxDQURBLGtCQUFBLENBRUEsb0JDbENKLENEcFVBLG9DQTBXSSxZQ25DSixDRHZVQSxrQ0E4V0ksbUJDcENKLENEMVVBLHNDQWtYSSxlQ3JDSixDRDdVQSxrQkF3WEksd0JBQUEsQ0FDQSxlQ3hDSixDRGpWQSx5QkE4WEksUUFBQSxDQURBLGlCQ3hDSixDRHJWQSw4QkFtWUksOENBQUEsQ0FFQSxhQUFBLENBREEsZ0JDekNKLENEM1ZBLGVBMFlJLGVDM0NKLENEL1ZBLDRDQXlZSSxpQ0N0Q0osQ0RuV0EsMEJBbVpJLGVBQUEsQ0FDQSxtQkM3Q0osQ0R2V0EsaUdBa2FJLDJDQUFBLENBQ0EsZUFBQSxDQUVBLG9CQUFBLENBTkEsbUJBQUEsQ0FEQSxpQkFBQSxDQUdBLG1CQUFBLENBR0EsY0FBQSxDQUpBLFlDM0NKLENEclhBLDBEQTRhSSwwQkFBQSxDQUNBLDhDQUFBLENBRkEsaUJDL0NKLENENVhBLGtCQWliSSxhQ2xESixDRC9YQSxpQ0FxYkksVUNuREosQ0RsWUEsbUNBMmJJLCtIQUFBLENBRUEsdURBQUEsQ0FFQSwyQkFBQSxDQURBLCtCQUFBLENBRUEsdUJDdkRKLENEellBLDZDQW9jSSw2QkN4REosQ0Q1WUEsK0RBNGNJLGlCQUFBLENBREEscUJBQUEsQ0FFQSxpQkMzREosQ0RsWkEsMkVBa2RJLG9CQzVESixDRHRaQSw4QkFzZEksa0JDN0RKLENEelpBLCtFQTJkSSw4QkM5REosQ0Q3WkEsK0NBdWVJLDRCQUFBLENBRUEsbUNBQUEsQ0FOQSxlQUFBLENBS0Esa0NBQUEsQ0FSQSxXQUFBLENBVUEsZUFBQSxDQVJBLFdBQUEsQ0FJQSxVQUFBLENBRkEsaUJBQUEsQ0FDQSxTQUFBLENBTUEsdUJBQUEsQ0FWQSxVQ3JESixDRDVhQSw0Q0FzZkksMEJBQUEsQ0FIQSxrQkFBQSxDQUhBLFdBQUEsQ0FRQSxlQUFBLENBTkEsV0FBQSxDQUtBLFdBQUEsQ0FIQSxpQkFBQSxDQUNBLFVBQUEsQ0FKQSxVQ3pESixDRG9FRSx5Q0FBQSwwREFJSSxVQ2xFSixDQUNGLENEL2JBLDhCQXVnQkksYUFBQSxDQUNBLGFDckVKLENEbmNBLDZCQThnQkksUUN4RUosQ0R0Y0EsZUFzaEJJLHdCQUFBLENBRkEsV0FBQSxDQUNBLDBCQUFBLENBRUEsZ0JDM0VKLENENWNBLGlCQTZoQkksOEJBQUEsQ0FEQSwyQ0FBQSxDQUVBLFVBQUEsQ0FIQSxlQ3pFSixDRGxkQSxtQkFraUJJLGFDN0VKLENEcmRBLGtDQXlpQkksMkNBQUEsQ0FEQSxXQUFBLENBREEsY0M1RUosQ0QzZEEsbUJBOGlCSSxhQUFBLENBREEsUUFBQSxDQUVBLGVDL0VKLENEaGVBLHNEQW9qQkksYUFBQSxDQUNBLGtCQ2hGSixDRHJlQSx1QkE2akJJLHVCQUFBLENBREEsZUFBQSxDQUZBLE1BQUEsQ0FJQSxpQkFBQSxDQUxBLGVBQUEsQ0FFQSxpQkM5RUosQ0Q3ZUEsdUJBc2tCSSw4Q0FBQSxDQUNBLHVCQUFBLENBQ0EsaUJBQUEsQ0FKQSxpQkFBQSxDQURBLG1CQUFBLENBREEsd0JBQUEsQ0FHQSxtQkMvRUosQ0R0ZkEsaUJBNGtCSSxlQUFBLENBRUEsaUJDbkZKLENEM2ZBLGdDQTZrQkksdUJDL0VKLENEOWZBLHVGQTZsQkksaUJBQUEsQ0FEQSw0QkN0RkosQ0R0Z0JBLGdCQWttQkksb0RBQUEsQ0FDQSwyQ0FBQSxDQUNBLDJDQUFBLENBSEEseUJBQUEsQ0FJQSxtQkN4RkosQ0Q3Z0JBLGdCQTRtQkkseUJBQUEsQ0FGQSxjQUFBLENBQ0EsYUFBQSxDQUZBLG1CQ3RGSixDRG5oQkEscUJBbW5CSSxlQUFBLENBREEseUJBQUEsQ0FFQSxRQUFBLENBQ0EsU0M1RkosQ0R6aEJBLHFCQTZuQkksVUNqR0osQ0Q1aEJBLG1DQWlvQkksaUNDbEdKLENEL2hCQSwyQ0Fzb0JJLGlDQUFBLENBREEsMkNDbEdKLENEbmlCQSw2Q0Eyb0JJLDhCQUFBLENBREEsMkNDbkdKLENEdmlCQSx3Q0FncEJJLDhCQUFBLENBREEsMkNBQUEsQ0FHQSx1QkFBQSxDQURBLHlCQ3BHSixDRDdpQkEsc0RBc3BCSSxpQ0N0R0osQ0RoakJBLG1CQTBwQkksMEJBQUEsQ0FFQSxXQUFBLENBREEsZUN0R0osQ0RyakJBLDZCQWdxQkksMEJBQUEsQ0FDQSxVQ3hHSixDRDJHRSx5Q0FBQSxtQkFFSSw0QkN6R0osQ0FDRixDRDlqQkEsZ0NBK3FCSSxpQkFBQSxDQURBLHVCQzNHSixDRG5rQkEsZ0JBbXJCSSxTQzdHSixDRHRrQkEsZ0JBdXJCSSxRQzlHSixDRHprQkEsb0JBNnJCSSwyQkFBQSxDQUNBLDhDQUFBLENBQ0EsMkNBQUEsQ0FFQSxhQUFBLENBREEsY0NoSEosQ0RobEJBLHVDQXFzQkksWUNsSEosQ0RubEJBLHNDQXlzQkksZUNuSEosQ0R1SEUsYUFDRSxNQUNFLFVDckhKLENEbUhBLG1CQU1JLHNCQ3RISixDRGdIQSwwQ0FXSSxZQ3ZISixDRDRHQSxvQkFlSSxXQUFBLENBQ0EsU0N4SEosQ0R3R0EsZ0NBb0JJLDJCQ3pISixDRHFHQSw4QkF3QkksNEJDMUhKLENEa0dBLGNBNEJJLG9CQzNISixDRCtGQSxjQWlDSSxTQUFBLENBREEsUUMzSEosQ0QyRkEsZUFxQ0ksa0RDN0hKLENEd0ZBLGlCQXlDSSw4Q0M5SEosQ0RxRkEscUZBNkNJLGtCQzNISixDRDhFQSxxQkFpREksb0JDNUhKLENBQ0YiLCJmaWxlIjoic3R5bGUubGVzcyJ9 */";
+  styleInject(css_248z$3);
+
   function diff$1(obj1 = {}, obj2 = {}, exclude) {
       var r = {};
       if (!exclude)
@@ -33834,11 +33393,91 @@ this["dev-tools"] = (function () {
     return true
   };
 
+  function isFunctionLikeString(s) {
+    // Heuristic: common function source patterns
+    // - function foo(...) { ... }
+    // - (args) => ...
+    // - args => ...
+    // - async function ...
+    // - class methods are not considered
+    // We'll consider it function-like if it contains 'function' keyword at start,
+    // or contains '=>' token, or starts with '(' and contains '=>'
+    if (typeof s !== 'string') return false;
+    const trimmed = s.trim();
+
+    if (trimmed.length === 0) return false;
+    if (/^function\b/.test(trimmed)) return true;           // function declaration/expression
+    if (/^async function\b/.test(trimmed)) return true;     // async function
+    if (trimmed.includes('=>')) return true;                // arrow function
+    // some engines output "function name() { [native code] }" or similar; treat as function-like
+    if (/^\[native code\]$/.test(trimmed)) return true;
+
+    return false;
+  }
+
+  function isNumber(string) {
+    return /^[0-9\.]+$/.test(String(string))
+  }
+
+  function isBoolean(string) {
+    return String(string).toLowerCase() === 'true' || String(string).toLowerCase() === 'false'
+  }
+
+  function isObject(string) {
+    try {
+      const obj = JSON.parse(string);
+      return obj !== null && typeof obj === 'object'
+    } catch {
+      return false
+    }
+  }
+
   const setOnLoad = (fn) => {
     setVar('onLoad', String(fn));
   };
 
+  const getElementByXPath = (xpath) => {
+    if (isEmpty(xpath) || !is(String, xpath)) {
+      return null
+    }
+    let result;
+    let xpath1 = xpath;
+    do {
+      // 1. Evaluate the XPath expression
+      result = document.evaluate(
+        xpath1,                            // The XPath string to evaluate
+        document,                         // The context node (usually the entire document)
+        null,                             // Namespace resolver (not needed for simple HTML)
+        XPathResult.FIRST_ORDERED_NODE_TYPE, // Result type: we want the first matching element
+        null                              // The result object to reuse (start with null)
+      );
+
+      // 2. Extract the element
+      // singleNodeValue contains the node found when using FIRST_ORDERED_NODE_TYPE
+      if (result.singleNodeValue) {
+        return result.singleNodeValue;
+      }
+
+      xpath1 = xpath1.substring(0, xpath1.lastIndexOf('/'));
+    }while (!isEmpty(xpath1) && !result?.singleNodeValue)
+  };
+
   const localStorageKey = 'dev-tools';
+
+  const reviveVar = (value) => {
+    if (isNumber(value)) {
+      return Number(value);
+    } else if (isBoolean(value)) {
+      return String(value).toLowerCase() === 'true'
+    } else if (isObject(value) || typeof value === 'object') {
+      return mapObjIndexed(reviveVar, isObject(value) ? JSON.parse(value) : value);
+    } else if (isFunctionLikeString(value)){
+      const wrapped = `(${value})`;
+      return eval(wrapped);
+    } else {
+      return value
+    }
+  };
 
   const setVar$1 = (varName, value) => {
     if (!/^[a-z_A-Z0-9]+$/.test(varName)) {
@@ -33851,8 +33490,25 @@ this["dev-tools"] = (function () {
 
     if (isPrimitive(value)) {
       adjustedValue = { ...adjustedValue, value: String(value) };
+    } if (typeof value === 'function') {
+      adjustedValue = { ...adjustedValue, value: value.toString() };
     } else {
-      adjustedValue = { ...adjustedValue, value: JSON.stringify(value) };
+      const seen = new WeakSet();
+
+      const replacer = (key, v) => {
+        if (typeof v === 'function') {
+          return v.toString();
+        }
+        if (typeof v === 'object' && v !== null) {
+          if (seen.has(v)) {
+            return '[Circular]';
+          }
+          seen.add(v);
+        }
+        return v;
+      };
+
+      adjustedValue = { ...adjustedValue, value: JSON.stringify(value, replacer) };
     }
 
     varsObj[String(varName)] = adjustedValue;
@@ -33865,10 +33521,10 @@ this["dev-tools"] = (function () {
     const varsObj = JSON.parse(vars);
     const varsParsed = [];
 
-    mapObjIndexed$1((variable, varName) => {
+    mapObjIndexed((variable, varName) => {
       switch (variable.type) {
         case 'object':
-          varsParsed.push({ name: varName, value: JSON.parse(variable.value) });
+          varsParsed.push({ name: varName, value: reviveVar(variable.value) });
           break;
 
         case 'number':
@@ -33899,13 +33555,13 @@ this["dev-tools"] = (function () {
     const vars = localStorage.getItem(localStorageKey);
     const varsObj = JSON.parse(vars);
 
-    mapObjIndexed$1((variable, varName) => {
+    mapObjIndexed((variable, varName) => {
       delete window[varName];
     }, varsObj);
     localStorage.removeItem(localStorageKey);
   };
 
-  var PROJECT_PATH = "D:/Users/m_botezatu/projects/equities-client-1";
+  var PROJECT_PATH = "D:/Users/m_botezatu/projects/equities-client-2";
   var SRC_PATH = "src";
   var SERVER_PORT = "8080";
 
@@ -33979,6 +33635,4257 @@ this["dev-tools"] = (function () {
   }
   var storage = new Storage();
 
+  function findProp(obj, propName) {
+      const results = [];
+      if (obj == null || typeof propName !== 'string' || propName.length === 0) {
+          return results;
+      }
+      const seen = new WeakSet();
+      const stack = [{ current: obj, path: [] }];
+      while (stack.length) {
+          const { current, path } = stack.pop();
+          if (current && (typeof current === 'object' || typeof current === 'function')) {
+              if (seen.has(current))
+                  continue;
+              seen.add(current);
+              const entries = Array.isArray(current)
+                  ? current.map((v, i) => [String(i), v])
+                  : Object.keys(current).map(k => [k, current[k]]);
+              for (let i = 0; i < entries.length; i++) {
+                  const [key, val] = entries[i];
+                  const keyPathSegment = Array.isArray(current) ? Number(key) : key;
+                  const newPath = path.concat(keyPathSegment);
+                  if (key.toLowerCase().indexOf(propName.toLowerCase()) !== -1) {
+                      results.push({
+                          key,
+                          value: val,
+                          path: newPath
+                      });
+                  }
+                  if (val && (typeof val === 'object' || typeof val === 'function')) {
+                      stack.push({ current: val, path: newPath });
+                  }
+              }
+          }
+      }
+      return results;
+  }
+  const findMatch = (obj1, obj2, path$1 = []) => {
+      let result = null;
+      const search = (obj, path = []) => {
+          if (!is(Object, obj) || isNil(obj))
+              return;
+          if (whereEq(obj2, obj)) {
+              if (!result) {
+                  result = { path, value: obj };
+                  return;
+              }
+          }
+          forEachObjIndexed((value, key) => {
+              if (is(Object, value) && !isNil(value)) {
+                  search(value, [...path, key]);
+              }
+          }, obj);
+      };
+      search(path(path$1, obj1));
+      return result;
+  };
+  const findMatches = (obj1, obj2) => {
+      let results = [];
+      const search = (obj, path = []) => {
+          if (!is(Object, obj) || isNil(obj))
+              return;
+          if (whereEq(obj2, obj)) {
+              results.push({ path, value: obj });
+          }
+          forEachObjIndexed((value, key) => {
+              if (is(Object, value) && !isNil(value)) {
+                  search(value, [...path, isNaN(key) ? key : Number(key)]);
+              }
+          }, obj);
+      };
+      search(obj1);
+      return results;
+  };
+
+  var _$1 = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    diff: diff$1,
+    findMatch: findMatch,
+    findMatches: findMatches,
+    findProp: findProp
+  });
+
+  /******************************************************************************
+  Copyright (c) Microsoft Corporation.
+
+  Permission to use, copy, modify, and/or distribute this software for any
+  purpose with or without fee is hereby granted.
+
+  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+  REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+  AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+  INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+  LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+  OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+  PERFORMANCE OF THIS SOFTWARE.
+  ***************************************************************************** */
+  /* global Reflect, Promise, SuppressedError, Symbol, Iterator */
+
+
+  function __awaiter(thisArg, _arguments, P, generator) {
+      function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+      return new (P || (P = Promise))(function (resolve, reject) {
+          function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+          function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+          function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+          step((generator = generator.apply(thisArg, _arguments || [])).next());
+      });
+  }
+
+  typeof SuppressedError === "function" ? SuppressedError : function (error, suppressed, message) {
+      var e = new Error(message);
+      return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
+  };
+
+  let z = {}, J;
+  function F(e = {}) {
+    z = {
+      animate: true,
+      allowClose: true,
+      overlayClickBehavior: "close",
+      overlayOpacity: 0.7,
+      smoothScroll: false,
+      disableActiveInteraction: false,
+      showProgress: false,
+      stagePadding: 10,
+      stageRadius: 5,
+      popoverOffset: 10,
+      showButtons: ["next", "previous", "close"],
+      disableButtons: [],
+      overlayColor: "#000",
+      ...e
+    };
+  }
+  function s(e) {
+    return e ? z[e] : z;
+  }
+  function le(e) {
+    J = e;
+  }
+  function _() {
+    return J;
+  }
+  let I = {};
+  function N(e, o) {
+    I[e] = o;
+  }
+  function L(e) {
+    var o;
+    (o = I[e]) == null || o.call(I);
+  }
+  function de() {
+    I = {};
+  }
+  function O(e, o, t, i) {
+    return (e /= i / 2) < 1 ? t / 2 * e * e + o : -t / 2 * (--e * (e - 2) - 1) + o;
+  }
+  function U(e) {
+    const o = 'a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled])';
+    return e.flatMap((t) => {
+      const i = t.matches(o), d = Array.from(t.querySelectorAll(o));
+      return [...i ? [t] : [], ...d];
+    }).filter((t) => getComputedStyle(t).pointerEvents !== "none" && ve(t));
+  }
+  function ee(e) {
+    if (!e || ue(e))
+      return;
+    const o = s("smoothScroll"), t = e.offsetHeight > window.innerHeight;
+    e.scrollIntoView({
+      // Removing the smooth scrolling for elements which exist inside the scrollable parent
+      // This was causing the highlight to not properly render
+      behavior: !o || pe(e) ? "auto" : "smooth",
+      inline: "center",
+      block: t ? "start" : "center"
+    });
+  }
+  function pe(e) {
+    if (!e || !e.parentElement)
+      return;
+    const o = e.parentElement;
+    return o.scrollHeight > o.clientHeight;
+  }
+  function ue(e) {
+    const o = e.getBoundingClientRect();
+    return o.top >= 0 && o.left >= 0 && o.bottom <= (window.innerHeight || document.documentElement.clientHeight) && o.right <= (window.innerWidth || document.documentElement.clientWidth);
+  }
+  function ve(e) {
+    return !!(e.offsetWidth || e.offsetHeight || e.getClientRects().length);
+  }
+  let D = {};
+  function k(e, o) {
+    D[e] = o;
+  }
+  function l(e) {
+    return e ? D[e] : D;
+  }
+  function X() {
+    D = {};
+  }
+  function fe(e, o, t, i) {
+    let d = l("__activeStagePosition");
+    const n = d || t.getBoundingClientRect(), f = i.getBoundingClientRect(), w = O(e, n.x, f.x - n.x, o), r = O(e, n.y, f.y - n.y, o), v = O(e, n.width, f.width - n.width, o), g = O(e, n.height, f.height - n.height, o);
+    d = {
+      x: w,
+      y: r,
+      width: v,
+      height: g
+    }, oe(d), k("__activeStagePosition", d);
+  }
+  function te(e) {
+    if (!e)
+      return;
+    const o = e.getBoundingClientRect(), t = {
+      x: o.x,
+      y: o.y,
+      width: o.width,
+      height: o.height
+    };
+    k("__activeStagePosition", t), oe(t);
+  }
+  function he() {
+    const e = l("__activeStagePosition"), o = l("__overlaySvg");
+    if (!e)
+      return;
+    if (!o) {
+      console.warn("No stage svg found.");
+      return;
+    }
+    const t = window.innerWidth, i = window.innerHeight;
+    o.setAttribute("viewBox", `0 0 ${t} ${i}`);
+  }
+  function ge(e) {
+    const o = we(e);
+    document.body.appendChild(o), re(o, (t) => {
+      t.target.tagName === "path" && L("overlayClick");
+    }), k("__overlaySvg", o);
+  }
+  function oe(e) {
+    const o = l("__overlaySvg");
+    if (!o) {
+      ge(e);
+      return;
+    }
+    const t = o.firstElementChild;
+    if ((t == null ? void 0 : t.tagName) !== "path")
+      throw new Error("no path element found in stage svg");
+    t.setAttribute("d", ie(e));
+  }
+  function we(e) {
+    const o = window.innerWidth, t = window.innerHeight, i = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    i.classList.add("driver-overlay", "driver-overlay-animated"), i.setAttribute("viewBox", `0 0 ${o} ${t}`), i.setAttribute("xmlSpace", "preserve"), i.setAttribute("xmlnsXlink", "http://www.w3.org/1999/xlink"), i.setAttribute("version", "1.1"), i.setAttribute("preserveAspectRatio", "xMinYMin slice"), i.style.fillRule = "evenodd", i.style.clipRule = "evenodd", i.style.strokeLinejoin = "round", i.style.strokeMiterlimit = "2", i.style.zIndex = "10000", i.style.position = "fixed", i.style.top = "0", i.style.left = "0", i.style.width = "100%", i.style.height = "100%";
+    const d = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    return d.setAttribute("d", ie(e)), d.style.fill = s("overlayColor") || "rgb(0,0,0)", d.style.opacity = `${s("overlayOpacity")}`, d.style.pointerEvents = "auto", d.style.cursor = "auto", i.appendChild(d), i;
+  }
+  function ie(e) {
+    const o = window.innerWidth, t = window.innerHeight, i = s("stagePadding") || 0, d = s("stageRadius") || 0, n = e.width + i * 2, f = e.height + i * 2, w = Math.min(d, n / 2, f / 2), r = Math.floor(Math.max(w, 0)), v = e.x - i + r, g = e.y - i, y = n - r * 2, a = f - r * 2;
+    return `M${o},0L0,0L0,${t}L${o},${t}L${o},0Z
+    M${v},${g} h${y} a${r},${r} 0 0 1 ${r},${r} v${a} a${r},${r} 0 0 1 -${r},${r} h-${y} a${r},${r} 0 0 1 -${r},-${r} v-${a} a${r},${r} 0 0 1 ${r},-${r} z`;
+  }
+  function me() {
+    const e = l("__overlaySvg");
+    e && e.remove();
+  }
+  function ye() {
+    const e = document.getElementById("driver-dummy-element");
+    if (e)
+      return e;
+    let o = document.createElement("div");
+    return o.id = "driver-dummy-element", o.style.width = "0", o.style.height = "0", o.style.pointerEvents = "none", o.style.opacity = "0", o.style.position = "fixed", o.style.top = "50%", o.style.left = "50%", document.body.appendChild(o), o;
+  }
+  function j(e) {
+    const { element: o } = e;
+    let t = typeof o == "function" ? o() : typeof o == "string" ? document.querySelector(o) : o;
+    t || (t = ye()), be(t, e);
+  }
+  function xe() {
+    const e = l("__activeElement"), o = l("__activeStep");
+    e && (te(e), he(), ae(e, o));
+  }
+  function be(e, o) {
+    var C;
+    const i = Date.now(), d = l("__activeStep"), n = l("__activeElement") || e, f = !n || n === e, w = e.id === "driver-dummy-element", r = n.id === "driver-dummy-element", v = s("animate"), g = o.onHighlightStarted || s("onHighlightStarted"), y = (o == null ? void 0 : o.onHighlighted) || s("onHighlighted"), a = (d == null ? void 0 : d.onDeselected) || s("onDeselected"), p = s(), c = l();
+    !f && a && a(r ? void 0 : n, d, {
+      config: p,
+      state: c,
+      driver: _()
+    }), g && g(w ? void 0 : e, o, {
+      config: p,
+      state: c,
+      driver: _()
+    });
+    const u = !f && v;
+    let h = false;
+    _e(), k("previousStep", d), k("previousElement", n), k("activeStep", o), k("activeElement", e);
+    const m = () => {
+      if (l("__transitionCallback") !== m)
+        return;
+      const b = Date.now() - i, E = 400 - b <= 400 / 2;
+      o.popover && E && !h && u && (Q(e, o), h = true), s("animate") && b < 400 ? fe(b, 400, n, e) : (te(e), y && y(w ? void 0 : e, o, {
+        config: s(),
+        state: l(),
+        driver: _()
+      }), k("__transitionCallback", void 0), k("__previousStep", d), k("__previousElement", n), k("__activeStep", o), k("__activeElement", e)), window.requestAnimationFrame(m);
+    };
+    k("__transitionCallback", m), window.requestAnimationFrame(m), ee(e), !u && o.popover && Q(e, o), n.classList.remove("driver-active-element", "driver-no-interaction"), n.removeAttribute("aria-haspopup"), n.removeAttribute("aria-expanded"), n.removeAttribute("aria-controls"), ((C = o.disableActiveInteraction) != null ? C : s("disableActiveInteraction")) && e.classList.add("driver-no-interaction"), e.classList.add("driver-active-element"), e.setAttribute("aria-haspopup", "dialog"), e.setAttribute("aria-expanded", "true"), e.setAttribute("aria-controls", "driver-popover-content");
+  }
+  function Ce() {
+    var e;
+    (e = document.getElementById("driver-dummy-element")) == null || e.remove(), document.querySelectorAll(".driver-active-element").forEach((o) => {
+      o.classList.remove("driver-active-element", "driver-no-interaction"), o.removeAttribute("aria-haspopup"), o.removeAttribute("aria-expanded"), o.removeAttribute("aria-controls");
+    });
+  }
+  function M() {
+    const e = l("__resizeTimeout");
+    e && window.cancelAnimationFrame(e), k("__resizeTimeout", window.requestAnimationFrame(xe));
+  }
+  function Pe(e) {
+    var r;
+    if (!l("isInitialized") || !(e.key === "Tab" || e.keyCode === 9))
+      return;
+    const i = l("__activeElement"), d = (r = l("popover")) == null ? void 0 : r.wrapper, n = U([
+      ...d ? [d] : [],
+      ...i ? [i] : []
+    ]), f = n[0], w = n[n.length - 1];
+    if (e.preventDefault(), e.shiftKey) {
+      const v = n[n.indexOf(document.activeElement) - 1] || w;
+      v == null || v.focus();
+    } else {
+      const v = n[n.indexOf(document.activeElement) + 1] || f;
+      v == null || v.focus();
+    }
+  }
+  function ne(e) {
+    var t;
+    ((t = s("allowKeyboardControl")) == null || t) && (e.key === "Escape" ? L("escapePress") : e.key === "ArrowRight" ? L("arrowRightPress") : e.key === "ArrowLeft" && L("arrowLeftPress"));
+  }
+  function re(e, o, t) {
+    const i = (n, f) => {
+      const w = n.target;
+      e.contains(w) && ((!t || t(w)) && (n.preventDefault(), n.stopPropagation(), n.stopImmediatePropagation()), f == null || f(n));
+    };
+    document.addEventListener("pointerdown", i, true), document.addEventListener("mousedown", i, true), document.addEventListener("pointerup", i, true), document.addEventListener("mouseup", i, true), document.addEventListener(
+      "click",
+      (n) => {
+        i(n, o);
+      },
+      true
+    );
+  }
+  function ke() {
+    window.addEventListener("keyup", ne, false), window.addEventListener("keydown", Pe, false), window.addEventListener("resize", M), window.addEventListener("scroll", M);
+  }
+  function Se() {
+    window.removeEventListener("keyup", ne), window.removeEventListener("resize", M), window.removeEventListener("scroll", M);
+  }
+  function _e() {
+    const e = l("popover");
+    e && (e.wrapper.style.display = "none");
+  }
+  function Q(e, o) {
+    var b, P;
+    let t = l("popover");
+    t && document.body.removeChild(t.wrapper), t = Le(), document.body.appendChild(t.wrapper);
+    const {
+      title: i,
+      description: d,
+      showButtons: n,
+      disableButtons: f,
+      showProgress: w,
+      nextBtnText: r = s("nextBtnText") || "Next &rarr;",
+      prevBtnText: v = s("prevBtnText") || "&larr; Previous",
+      progressText: g = s("progressText") || "{current} of {total}"
+    } = o.popover || {};
+    t.nextButton.innerHTML = r, t.previousButton.innerHTML = v, t.progress.innerHTML = g, i ? (t.title.innerHTML = i, t.title.style.display = "block") : t.title.style.display = "none", d ? (t.description.innerHTML = d, t.description.style.display = "block") : t.description.style.display = "none";
+    const y = n || s("showButtons"), a = w || s("showProgress") || false, p = (y == null ? void 0 : y.includes("next")) || (y == null ? void 0 : y.includes("previous")) || a;
+    t.closeButton.style.display = y.includes("close") ? "block" : "none", p ? (t.footer.style.display = "flex", t.progress.style.display = a ? "block" : "none", t.nextButton.style.display = y.includes("next") ? "block" : "none", t.previousButton.style.display = y.includes("previous") ? "block" : "none") : t.footer.style.display = "none";
+    const c = f || s("disableButtons") || [];
+    c != null && c.includes("next") && (t.nextButton.disabled = true, t.nextButton.classList.add("driver-popover-btn-disabled")), c != null && c.includes("previous") && (t.previousButton.disabled = true, t.previousButton.classList.add("driver-popover-btn-disabled")), c != null && c.includes("close") && (t.closeButton.disabled = true, t.closeButton.classList.add("driver-popover-btn-disabled"));
+    const u = t.wrapper;
+    u.style.display = "block", u.style.left = "", u.style.top = "", u.style.bottom = "", u.style.right = "", u.id = "driver-popover-content", u.setAttribute("role", "dialog"), u.setAttribute("aria-labelledby", "driver-popover-title"), u.setAttribute("aria-describedby", "driver-popover-description");
+    const h = t.arrow;
+    h.className = "driver-popover-arrow";
+    const m = ((b = o.popover) == null ? void 0 : b.popoverClass) || s("popoverClass") || "";
+    u.className = `driver-popover ${m}`.trim(), re(
+      t.wrapper,
+      (E) => {
+        var B, R, W;
+        const T = E.target, A = ((B = o.popover) == null ? void 0 : B.onNextClick) || s("onNextClick"), H = ((R = o.popover) == null ? void 0 : R.onPrevClick) || s("onPrevClick"), $ = ((W = o.popover) == null ? void 0 : W.onCloseClick) || s("onCloseClick");
+        if (T.closest(".driver-popover-next-btn"))
+          return A ? A(e, o, {
+            config: s(),
+            state: l(),
+            driver: _()
+          }) : L("nextClick");
+        if (T.closest(".driver-popover-prev-btn"))
+          return H ? H(e, o, {
+            config: s(),
+            state: l(),
+            driver: _()
+          }) : L("prevClick");
+        if (T.closest(".driver-popover-close-btn"))
+          return $ ? $(e, o, {
+            config: s(),
+            state: l(),
+            driver: _()
+          }) : L("closeClick");
+      },
+      (E) => !(t != null && t.description.contains(E)) && !(t != null && t.title.contains(E)) && typeof E.className == "string" && E.className.includes("driver-popover")
+    ), k("popover", t);
+    const x = ((P = o.popover) == null ? void 0 : P.onPopoverRender) || s("onPopoverRender");
+    x && x(t, {
+      config: s(),
+      state: l(),
+      driver: _()
+    }), ae(e, o), ee(u);
+    const C = e.classList.contains("driver-dummy-element"), S = U([u, ...C ? [] : [e]]);
+    S.length > 0 && S[0].focus();
+  }
+  function se() {
+    const e = l("popover");
+    if (!(e != null && e.wrapper))
+      return;
+    const o = e.wrapper.getBoundingClientRect(), t = s("stagePadding") || 0, i = s("popoverOffset") || 0;
+    return {
+      width: o.width + t + i,
+      height: o.height + t + i,
+      realWidth: o.width,
+      realHeight: o.height
+    };
+  }
+  function Z(e, o) {
+    const { elementDimensions: t, popoverDimensions: i, popoverPadding: d, popoverArrowDimensions: n } = o;
+    return e === "start" ? Math.max(
+      Math.min(
+        t.top - d,
+        window.innerHeight - i.realHeight - n.width
+      ),
+      n.width
+    ) : e === "end" ? Math.max(
+      Math.min(
+        t.top - (i == null ? void 0 : i.realHeight) + t.height + d,
+        window.innerHeight - (i == null ? void 0 : i.realHeight) - n.width
+      ),
+      n.width
+    ) : e === "center" ? Math.max(
+      Math.min(
+        t.top + t.height / 2 - (i == null ? void 0 : i.realHeight) / 2,
+        window.innerHeight - (i == null ? void 0 : i.realHeight) - n.width
+      ),
+      n.width
+    ) : 0;
+  }
+  function G(e, o) {
+    const { elementDimensions: t, popoverDimensions: i, popoverPadding: d, popoverArrowDimensions: n } = o;
+    return e === "start" ? Math.max(
+      Math.min(
+        t.left - d,
+        window.innerWidth - i.realWidth - n.width
+      ),
+      n.width
+    ) : e === "end" ? Math.max(
+      Math.min(
+        t.left - (i == null ? void 0 : i.realWidth) + t.width + d,
+        window.innerWidth - (i == null ? void 0 : i.realWidth) - n.width
+      ),
+      n.width
+    ) : e === "center" ? Math.max(
+      Math.min(
+        t.left + t.width / 2 - (i == null ? void 0 : i.realWidth) / 2,
+        window.innerWidth - (i == null ? void 0 : i.realWidth) - n.width
+      ),
+      n.width
+    ) : 0;
+  }
+  function ae(e, o) {
+    const t = l("popover");
+    if (!t)
+      return;
+    const { align: i = "start", side: d = "left" } = (o == null ? void 0 : o.popover) || {}, n = i, f = e.id === "driver-dummy-element" ? "over" : d, w = s("stagePadding") || 0, r = se(), v = t.arrow.getBoundingClientRect(), g = e.getBoundingClientRect(), y = g.top - r.height;
+    let a = y >= 0;
+    const p = window.innerHeight - (g.bottom + r.height);
+    let c = p >= 0;
+    const u = g.left - r.width;
+    let h = u >= 0;
+    const m = window.innerWidth - (g.right + r.width);
+    let x = m >= 0;
+    const C = !a && !c && !h && !x;
+    let S = f;
+    if (f === "top" && a ? x = h = c = false : f === "bottom" && c ? x = h = a = false : f === "left" && h ? x = a = c = false : f === "right" && x && (h = a = c = false), f === "over") {
+      const b = window.innerWidth / 2 - r.realWidth / 2, P = window.innerHeight / 2 - r.realHeight / 2;
+      t.wrapper.style.left = `${b}px`, t.wrapper.style.right = "auto", t.wrapper.style.top = `${P}px`, t.wrapper.style.bottom = "auto";
+    } else if (C) {
+      const b = window.innerWidth / 2 - (r == null ? void 0 : r.realWidth) / 2, P = 10;
+      t.wrapper.style.left = `${b}px`, t.wrapper.style.right = "auto", t.wrapper.style.bottom = `${P}px`, t.wrapper.style.top = "auto";
+    } else if (h) {
+      const b = Math.min(
+        u,
+        window.innerWidth - (r == null ? void 0 : r.realWidth) - v.width
+      ), P = Z(n, {
+        elementDimensions: g,
+        popoverDimensions: r,
+        popoverPadding: w,
+        popoverArrowDimensions: v
+      });
+      t.wrapper.style.left = `${b}px`, t.wrapper.style.top = `${P}px`, t.wrapper.style.bottom = "auto", t.wrapper.style.right = "auto", S = "left";
+    } else if (x) {
+      const b = Math.min(
+        m,
+        window.innerWidth - (r == null ? void 0 : r.realWidth) - v.width
+      ), P = Z(n, {
+        elementDimensions: g,
+        popoverDimensions: r,
+        popoverPadding: w,
+        popoverArrowDimensions: v
+      });
+      t.wrapper.style.right = `${b}px`, t.wrapper.style.top = `${P}px`, t.wrapper.style.bottom = "auto", t.wrapper.style.left = "auto", S = "right";
+    } else if (a) {
+      const b = Math.min(
+        y,
+        window.innerHeight - r.realHeight - v.width
+      );
+      let P = G(n, {
+        elementDimensions: g,
+        popoverDimensions: r,
+        popoverPadding: w,
+        popoverArrowDimensions: v
+      });
+      t.wrapper.style.top = `${b}px`, t.wrapper.style.left = `${P}px`, t.wrapper.style.bottom = "auto", t.wrapper.style.right = "auto", S = "top";
+    } else if (c) {
+      const b = Math.min(
+        p,
+        window.innerHeight - (r == null ? void 0 : r.realHeight) - v.width
+      );
+      let P = G(n, {
+        elementDimensions: g,
+        popoverDimensions: r,
+        popoverPadding: w,
+        popoverArrowDimensions: v
+      });
+      t.wrapper.style.left = `${P}px`, t.wrapper.style.bottom = `${b}px`, t.wrapper.style.top = "auto", t.wrapper.style.right = "auto", S = "bottom";
+    }
+    C ? t.arrow.classList.add("driver-popover-arrow-none") : Ee(n, S, e);
+  }
+  function Ee(e, o, t) {
+    const i = l("popover");
+    if (!i)
+      return;
+    const d = t.getBoundingClientRect(), n = se(), f = i.arrow, w = n.width, r = window.innerWidth, v = d.width, g = d.left, y = n.height, a = window.innerHeight, p = d.top, c = d.height;
+    f.className = "driver-popover-arrow";
+    let u = o, h = e;
+    if (o === "top" ? (g + v <= 0 ? (u = "right", h = "end") : g + v - w <= 0 && (u = "top", h = "start"), g >= r ? (u = "left", h = "end") : g + w >= r && (u = "top", h = "end")) : o === "bottom" ? (g + v <= 0 ? (u = "right", h = "start") : g + v - w <= 0 && (u = "bottom", h = "start"), g >= r ? (u = "left", h = "start") : g + w >= r && (u = "bottom", h = "end")) : o === "left" ? (p + c <= 0 ? (u = "bottom", h = "end") : p + c - y <= 0 && (u = "left", h = "start"), p >= a ? (u = "top", h = "end") : p + y >= a && (u = "left", h = "end")) : o === "right" && (p + c <= 0 ? (u = "bottom", h = "start") : p + c - y <= 0 && (u = "right", h = "start"), p >= a ? (u = "top", h = "start") : p + y >= a && (u = "right", h = "end")), !u)
+      f.classList.add("driver-popover-arrow-none");
+    else {
+      f.classList.add(`driver-popover-arrow-side-${u}`), f.classList.add(`driver-popover-arrow-align-${h}`);
+      const m = t.getBoundingClientRect(), x = f.getBoundingClientRect(), C = s("stagePadding") || 0, S = m.left - C < window.innerWidth && m.right + C > 0 && m.top - C < window.innerHeight && m.bottom + C > 0;
+      o === "bottom" && S && (x.x > m.x && x.x + x.width < m.x + m.width ? i.wrapper.style.transform = "translateY(0)" : (f.classList.remove(`driver-popover-arrow-align-${h}`), f.classList.add("driver-popover-arrow-none"), i.wrapper.style.transform = `translateY(-${C / 2}px)`));
+    }
+  }
+  function Le() {
+    const e = document.createElement("div");
+    e.classList.add("driver-popover");
+    const o = document.createElement("div");
+    o.classList.add("driver-popover-arrow");
+    const t = document.createElement("header");
+    t.id = "driver-popover-title", t.classList.add("driver-popover-title"), t.style.display = "none", t.innerText = "Popover Title";
+    const i = document.createElement("div");
+    i.id = "driver-popover-description", i.classList.add("driver-popover-description"), i.style.display = "none", i.innerText = "Popover description is here";
+    const d = document.createElement("button");
+    d.type = "button", d.classList.add("driver-popover-close-btn"), d.setAttribute("aria-label", "Close"), d.innerHTML = "&times;";
+    const n = document.createElement("footer");
+    n.classList.add("driver-popover-footer");
+    const f = document.createElement("span");
+    f.classList.add("driver-popover-progress-text"), f.innerText = "";
+    const w = document.createElement("span");
+    w.classList.add("driver-popover-navigation-btns");
+    const r = document.createElement("button");
+    r.type = "button", r.classList.add("driver-popover-prev-btn"), r.innerHTML = "&larr; Previous";
+    const v = document.createElement("button");
+    return v.type = "button", v.classList.add("driver-popover-next-btn"), v.innerHTML = "Next &rarr;", w.appendChild(r), w.appendChild(v), n.appendChild(f), n.appendChild(w), e.appendChild(d), e.appendChild(o), e.appendChild(t), e.appendChild(i), e.appendChild(n), {
+      wrapper: e,
+      arrow: o,
+      title: t,
+      description: i,
+      footer: n,
+      previousButton: r,
+      nextButton: v,
+      closeButton: d,
+      footerButtons: w,
+      progress: f
+    };
+  }
+  function Te() {
+    var o;
+    const e = l("popover");
+    e && ((o = e.wrapper.parentElement) == null || o.removeChild(e.wrapper));
+  }
+  function Ae(e = {}) {
+    F(e);
+    function o() {
+      s("allowClose") && g();
+    }
+    function t() {
+      const a = s("overlayClickBehavior");
+      if (s("allowClose") && a === "close") {
+        g();
+        return;
+      }
+      a === "nextStep" && i();
+    }
+    function i() {
+      const a = l("activeIndex"), p = s("steps") || [];
+      if (typeof a == "undefined")
+        return;
+      const c = a + 1;
+      p[c] ? v(c) : g();
+    }
+    function d() {
+      const a = l("activeIndex"), p = s("steps") || [];
+      if (typeof a == "undefined")
+        return;
+      const c = a - 1;
+      p[c] ? v(c) : g();
+    }
+    function n(a) {
+      (s("steps") || [])[a] ? v(a) : g();
+    }
+    function f() {
+      var x;
+      if (l("__transitionCallback"))
+        return;
+      const p = l("activeIndex"), c = l("__activeStep"), u = l("__activeElement");
+      if (typeof p == "undefined" || typeof c == "undefined" || typeof l("activeIndex") == "undefined")
+        return;
+      const m = ((x = c.popover) == null ? void 0 : x.onPrevClick) || s("onPrevClick");
+      if (m)
+        return m(u, c, {
+          config: s(),
+          state: l(),
+          driver: _()
+        });
+      d();
+    }
+    function w() {
+      var m;
+      if (l("__transitionCallback"))
+        return;
+      const p = l("activeIndex"), c = l("__activeStep"), u = l("__activeElement");
+      if (typeof p == "undefined" || typeof c == "undefined")
+        return;
+      const h = ((m = c.popover) == null ? void 0 : m.onNextClick) || s("onNextClick");
+      if (h)
+        return h(u, c, {
+          config: s(),
+          state: l(),
+          driver: _()
+        });
+      i();
+    }
+    function r() {
+      l("isInitialized") || (k("isInitialized", true), document.body.classList.add("driver-active", s("animate") ? "driver-fade" : "driver-simple"), ke(), N("overlayClick", t), N("escapePress", o), N("arrowLeftPress", f), N("arrowRightPress", w));
+    }
+    function v(a = 0) {
+      var $, B, R, W, V, q, K, Y;
+      const p = s("steps");
+      if (!p) {
+        console.error("No steps to drive through"), g();
+        return;
+      }
+      if (!p[a]) {
+        g();
+        return;
+      }
+      k("__activeOnDestroyed", document.activeElement), k("activeIndex", a);
+      const c = p[a], u = p[a + 1], h = p[a - 1], m = (($ = c.popover) == null ? void 0 : $.doneBtnText) || s("doneBtnText") || "Done", x = s("allowClose"), C = typeof ((B = c.popover) == null ? void 0 : B.showProgress) != "undefined" ? (R = c.popover) == null ? void 0 : R.showProgress : s("showProgress"), b = (((W = c.popover) == null ? void 0 : W.progressText) || s("progressText") || "{{current}} of {{total}}").replace("{{current}}", `${a + 1}`).replace("{{total}}", `${p.length}`), P = ((V = c.popover) == null ? void 0 : V.showButtons) || s("showButtons"), E = [
+        "next",
+        "previous",
+        ...x ? ["close"] : []
+      ].filter((ce) => !(P != null && P.length) || P.includes(ce)), T = ((q = c.popover) == null ? void 0 : q.onNextClick) || s("onNextClick"), A = ((K = c.popover) == null ? void 0 : K.onPrevClick) || s("onPrevClick"), H = ((Y = c.popover) == null ? void 0 : Y.onCloseClick) || s("onCloseClick");
+      j({
+        ...c,
+        popover: {
+          showButtons: E,
+          nextBtnText: u ? void 0 : m,
+          disableButtons: [...h ? [] : ["previous"]],
+          showProgress: C,
+          progressText: b,
+          onNextClick: T || (() => {
+            u ? v(a + 1) : g();
+          }),
+          onPrevClick: A || (() => {
+            v(a - 1);
+          }),
+          onCloseClick: H || (() => {
+            g();
+          }),
+          ...(c == null ? void 0 : c.popover) || {}
+        }
+      });
+    }
+    function g(a = true) {
+      const p = l("__activeElement"), c = l("__activeStep"), u = l("__activeOnDestroyed"), h = s("onDestroyStarted");
+      if (a && h) {
+        const C = !p || (p == null ? void 0 : p.id) === "driver-dummy-element";
+        h(C ? void 0 : p, c, {
+          config: s(),
+          state: l(),
+          driver: _()
+        });
+        return;
+      }
+      const m = (c == null ? void 0 : c.onDeselected) || s("onDeselected"), x = s("onDestroyed");
+      if (document.body.classList.remove("driver-active", "driver-fade", "driver-simple"), Se(), Te(), Ce(), me(), de(), X(), p && c) {
+        const C = p.id === "driver-dummy-element";
+        m && m(C ? void 0 : p, c, {
+          config: s(),
+          state: l(),
+          driver: _()
+        }), x && x(C ? void 0 : p, c, {
+          config: s(),
+          state: l(),
+          driver: _()
+        });
+      }
+      u && u.focus();
+    }
+    const y = {
+      isActive: () => l("isInitialized") || false,
+      refresh: M,
+      drive: (a = 0) => {
+        r(), v(a);
+      },
+      setConfig: F,
+      setSteps: (a) => {
+        X(), F({
+          ...s(),
+          steps: a
+        });
+      },
+      getConfig: s,
+      getState: l,
+      getActiveIndex: () => l("activeIndex"),
+      isFirstStep: () => l("activeIndex") === 0,
+      isLastStep: () => {
+        const a = s("steps") || [], p = l("activeIndex");
+        return p !== void 0 && p === a.length - 1;
+      },
+      getActiveStep: () => l("activeStep"),
+      getActiveElement: () => l("activeElement"),
+      getPreviousElement: () => l("previousElement"),
+      getPreviousStep: () => l("previousStep"),
+      moveNext: i,
+      movePrevious: d,
+      moveTo: n,
+      hasNextStep: () => {
+        const a = s("steps") || [], p = l("activeIndex");
+        return p !== void 0 && !!a[p + 1];
+      },
+      hasPreviousStep: () => {
+        const a = s("steps") || [], p = l("activeIndex");
+        return p !== void 0 && !!a[p - 1];
+      },
+      highlight: (a) => {
+        r(), j({
+          ...a,
+          popover: a.popover ? {
+            showButtons: [],
+            showProgress: false,
+            progressText: "",
+            ...a.popover
+          } : void 0
+        });
+      },
+      destroy: () => {
+        g(false);
+      }
+    };
+    return le(y), y;
+  }
+
+  var css_248z$2 = ".driver-active *,.driver-active .driver-overlay{pointer-events:none}.driver-active .driver-active-element,.driver-active .driver-active-element *,.driver-popover,.driver-popover *{pointer-events:auto}@keyframes animate-fade-in{0%{opacity:0}to{opacity:1}}.driver-fade .driver-overlay{animation:animate-fade-in .2s ease-in-out}.driver-fade .driver-popover{animation:animate-fade-in .2s}.driver-popover{all:unset;background-color:#fff;border-radius:5px;box-shadow:0 1px 10px #0006;box-sizing:border-box;color:#2d2d2d;margin:0;max-width:300px;min-width:250px;padding:15px;position:fixed;right:0;top:0;z-index:1000000000}.driver-popover *{font-family:Helvetica Neue,Inter,ui-sans-serif,Apple Color Emoji,Helvetica,Arial,sans-serif}.driver-popover-title{zoom:1;display:block;font:19px/normal sans-serif;font-weight:700;line-height:1.5;margin:0;position:relative}.driver-popover-close-btn{all:unset;color:#d2d2d2;cursor:pointer;font-size:18px;font-weight:500;height:28px;position:absolute;right:0;text-align:center;top:0;transition:color;transition-duration:.2s;width:32px;z-index:1}.driver-popover-close-btn:focus,.driver-popover-close-btn:hover{color:#2d2d2d}.driver-popover-title[style*=block]+.driver-popover-description{margin-top:5px}.driver-popover-description{zoom:1;font:14px/normal sans-serif;font-weight:400;line-height:1.5;margin-bottom:0}.driver-popover-footer{zoom:1;align-items:center;display:flex;justify-content:space-between;margin-top:15px;text-align:right}.driver-popover-progress-text{zoom:1;color:#727272;font-size:13px;font-weight:400}.driver-popover-footer button{zoom:1;all:unset;background-color:#fff;border:1px solid #ccc;border-radius:3px;box-sizing:border-box;color:#2d2d2d;cursor:pointer;display:inline-block;font:12px/normal sans-serif;line-height:1.3;outline:0;padding:3px 7px;text-decoration:none;text-shadow:1px 1px 0 #fff}.driver-popover-footer .driver-popover-btn-disabled{opacity:.5;pointer-events:none}:not(body):has(>.driver-active-element){overflow:hidden!important}.driver-no-interaction,.driver-no-interaction *{pointer-events:none!important}.driver-popover-footer button:focus,.driver-popover-footer button:hover{background-color:#f7f7f7}.driver-popover-navigation-btns{display:flex;flex-grow:1;justify-content:flex-end}.driver-popover-navigation-btns button+button{margin-left:4px}.driver-popover-arrow{border:5px solid #fff;content:\"\";position:absolute}.driver-popover-arrow-side-over{display:none}.driver-popover-arrow-side-left{border-bottom-color:transparent;border-right-color:transparent;border-top-color:transparent;left:100%}.driver-popover-arrow-side-right{border-bottom-color:transparent;border-left-color:transparent;border-top-color:transparent;right:100%}.driver-popover-arrow-side-top{border-bottom-color:transparent;border-left-color:transparent;border-right-color:transparent;top:100%}.driver-popover-arrow-side-bottom{border-left-color:transparent;border-right-color:transparent;border-top-color:transparent;bottom:100%}.driver-popover-arrow-side-center{display:none}.driver-popover-arrow-side-left.driver-popover-arrow-align-start,.driver-popover-arrow-side-right.driver-popover-arrow-align-start{top:15px}.driver-popover-arrow-side-bottom.driver-popover-arrow-align-start,.driver-popover-arrow-side-top.driver-popover-arrow-align-start{left:15px}.driver-popover-arrow-align-end.driver-popover-arrow-side-left,.driver-popover-arrow-align-end.driver-popover-arrow-side-right{bottom:15px}.driver-popover-arrow-side-bottom.driver-popover-arrow-align-end,.driver-popover-arrow-side-top.driver-popover-arrow-align-end{right:15px}.driver-popover-arrow-side-left.driver-popover-arrow-align-center,.driver-popover-arrow-side-right.driver-popover-arrow-align-center{margin-top:-5px;top:50%}.driver-popover-arrow-side-bottom.driver-popover-arrow-align-center,.driver-popover-arrow-side-top.driver-popover-arrow-align-center{left:50%;margin-left:-5px}.driver-popover-arrow-none{display:none}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImRyaXZlci5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsZ0RBQWdELG1CQUFtQixDQUFDLGdIQUFnSCxtQkFBbUIsQ0FBQywyQkFBMkIsR0FBRyxTQUFTLENBQUMsR0FBRyxTQUFTLENBQUMsQ0FBQyw2QkFBNkIseUNBQXlDLENBQUMsNkJBQTZCLDZCQUE2QixDQUFDLGdCQUFnQixTQUFTLENBQXlMLHFCQUFvQixDQUFsSixpQkFBaUIsQ0FBaUMsMkJBQTJCLENBQXZJLHFCQUFxQixDQUFDLGFBQWEsQ0FBQyxRQUFRLENBQWdELGVBQWUsQ0FBL0IsZUFBZSxDQUE5QyxZQUFZLENBQWtHLGNBQWMsQ0FBTyxPQUFPLENBQWIsS0FBSyxDQUF2QyxrQkFBcUUsQ0FBQyxrQkFBa0IsMkZBQTZGLENBQUMsc0JBQWtILE1BQU0sQ0FBdEQsYUFBYSxDQUF6RCwyQkFBMkIsQ0FBQyxlQUFlLENBQWlDLGVBQWUsQ0FBUSxRQUFPLENBQWhELGlCQUFpRCxDQUFDLDBCQUEwQixTQUFTLENBQXNHLGFBQWEsQ0FBM0QsY0FBYyxDQUFDLGNBQWMsQ0FBQyxlQUFlLENBQXpELFdBQVcsQ0FBdEQsaUJBQWlCLENBQU8sT0FBTyxDQUE4RixpQkFBaUIsQ0FBNUgsS0FBSyxDQUF3SCxnQkFBZ0IsQ0FBQyx1QkFBc0IsQ0FBdEosVUFBVSxDQUF5RSxTQUFvRSxDQUFDLGdFQUFnRSxhQUFhLENBQUMsZ0VBQWdFLGNBQWMsQ0FBQyw0QkFBd0csTUFBSyxDQUFqRSwyQkFBMkIsQ0FBaUIsZUFBZSxDQUEvQixlQUFlLENBQTNELGVBQWtGLENBQUMsdUJBQXdELE1BQU0sQ0FBYyxrQkFBa0IsQ0FBL0IsWUFBWSxDQUFvQiw2QkFBNEIsQ0FBcEcsZUFBZSxDQUFDLGdCQUFxRixDQUFDLDhCQUEyRSxNQUFLLENBQW5CLGFBQWEsQ0FBNUMsY0FBYyxDQUFDLGVBQW9DLENBQUMsOEJBQTRPLE1BQU0sQ0FBcE4sU0FBUyxDQUE0RyxxQkFBcUIsQ0FBMkYscUJBQXFCLENBQUMsaUJBQWdCLENBQTVPLHFCQUFxQixDQUF1RixhQUFhLENBQTZCLGNBQWMsQ0FBekwsb0JBQW9CLENBQTJILDJCQUEyQixDQUFpQyxlQUFlLENBQWhDLFNBQVMsQ0FBeEosZUFBZSxDQUFDLG9CQUFvQixDQUFDLDBCQUFrTCxDQUFDLG9EQUFvRCxVQUFVLENBQUMsbUJBQW1CLENBQUMsd0NBQXdDLHlCQUF5QixDQUFDLGdEQUFnRCw2QkFBNkIsQ0FBQyx3RUFBd0Usd0JBQXdCLENBQUMsZ0NBQWdDLFlBQVksQ0FBQyxXQUFXLENBQUMsd0JBQXdCLENBQUMsOENBQThDLGVBQWUsQ0FBQyxzQkFBbUQscUJBQW9CLENBQWpELFVBQVUsQ0FBQyxpQkFBdUMsQ0FBQyxnQ0FBZ0MsWUFBWSxDQUFDLGdDQUF5RSwrQkFBK0IsQ0FBOUQsOEJBQThCLENBQWlDLDRCQUEyQixDQUFwRyxTQUFxRyxDQUFDLGlDQUEwRSwrQkFBK0IsQ0FBN0QsNkJBQTZCLENBQWlDLDRCQUEyQixDQUFwRyxVQUFxRyxDQUFDLCtCQUF1RSwrQkFBK0IsQ0FBQyw2QkFBNEIsQ0FBM0YsOEJBQThCLENBQXZDLFFBQXFHLENBQUMsa0NBQThDLDZCQUE2QixDQUE4Qiw4QkFBNkIsQ0FBMUQsNEJBQTRCLENBQXRFLFdBQXFHLENBQUMsa0NBQWtDLFlBQVksQ0FBQyxtSUFBbUksUUFBUSxDQUFDLG1JQUFtSSxTQUFTLENBQUMsK0hBQStILFdBQVcsQ0FBQywrSEFBK0gsVUFBVSxDQUFDLHFJQUE2SSxlQUFjLENBQXRCLE9BQXVCLENBQUMscUlBQXFJLFFBQVEsQ0FBQyxnQkFBZ0IsQ0FBQywyQkFBMkIsWUFBWSIsImZpbGUiOiJkcml2ZXIuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmRyaXZlci1hY3RpdmUgLmRyaXZlci1vdmVybGF5LC5kcml2ZXItYWN0aXZlICp7cG9pbnRlci1ldmVudHM6bm9uZX0uZHJpdmVyLWFjdGl2ZSAuZHJpdmVyLWFjdGl2ZS1lbGVtZW50LC5kcml2ZXItYWN0aXZlIC5kcml2ZXItYWN0aXZlLWVsZW1lbnQgKiwuZHJpdmVyLXBvcG92ZXIsLmRyaXZlci1wb3BvdmVyICp7cG9pbnRlci1ldmVudHM6YXV0b31Aa2V5ZnJhbWVzIGFuaW1hdGUtZmFkZS1pbnswJXtvcGFjaXR5OjB9dG97b3BhY2l0eToxfX0uZHJpdmVyLWZhZGUgLmRyaXZlci1vdmVybGF5e2FuaW1hdGlvbjphbmltYXRlLWZhZGUtaW4gLjJzIGVhc2UtaW4tb3V0fS5kcml2ZXItZmFkZSAuZHJpdmVyLXBvcG92ZXJ7YW5pbWF0aW9uOmFuaW1hdGUtZmFkZS1pbiAuMnN9LmRyaXZlci1wb3BvdmVye2FsbDp1bnNldDtib3gtc2l6aW5nOmJvcmRlci1ib3g7Y29sb3I6IzJkMmQyZDttYXJnaW46MDtwYWRkaW5nOjE1cHg7Ym9yZGVyLXJhZGl1czo1cHg7bWluLXdpZHRoOjI1MHB4O21heC13aWR0aDozMDBweDtib3gtc2hhZG93OjAgMXB4IDEwcHggIzAwMDY7ei1pbmRleDoxMDAwMDAwMDAwO3Bvc2l0aW9uOmZpeGVkO3RvcDowO3JpZ2h0OjA7YmFja2dyb3VuZC1jb2xvcjojZmZmfS5kcml2ZXItcG9wb3ZlciAqe2ZvbnQtZmFtaWx5OkhlbHZldGljYSBOZXVlLEludGVyLHVpLXNhbnMtc2VyaWYsXCJBcHBsZSBDb2xvciBFbW9qaVwiLEhlbHZldGljYSxBcmlhbCxzYW5zLXNlcmlmfS5kcml2ZXItcG9wb3Zlci10aXRsZXtmb250OjE5cHgvbm9ybWFsIHNhbnMtc2VyaWY7Zm9udC13ZWlnaHQ6NzAwO2Rpc3BsYXk6YmxvY2s7cG9zaXRpb246cmVsYXRpdmU7bGluZS1oZWlnaHQ6MS41O3pvb206MTttYXJnaW46MH0uZHJpdmVyLXBvcG92ZXItY2xvc2UtYnRue2FsbDp1bnNldDtwb3NpdGlvbjphYnNvbHV0ZTt0b3A6MDtyaWdodDowO3dpZHRoOjMycHg7aGVpZ2h0OjI4cHg7Y3Vyc29yOnBvaW50ZXI7Zm9udC1zaXplOjE4cHg7Zm9udC13ZWlnaHQ6NTAwO2NvbG9yOiNkMmQyZDI7ei1pbmRleDoxO3RleHQtYWxpZ246Y2VudGVyO3RyYW5zaXRpb246Y29sb3I7dHJhbnNpdGlvbi1kdXJhdGlvbjouMnN9LmRyaXZlci1wb3BvdmVyLWNsb3NlLWJ0bjpob3ZlciwuZHJpdmVyLXBvcG92ZXItY2xvc2UtYnRuOmZvY3Vze2NvbG9yOiMyZDJkMmR9LmRyaXZlci1wb3BvdmVyLXRpdGxlW3N0eWxlKj1ibG9ja10rLmRyaXZlci1wb3BvdmVyLWRlc2NyaXB0aW9ue21hcmdpbi10b3A6NXB4fS5kcml2ZXItcG9wb3Zlci1kZXNjcmlwdGlvbnttYXJnaW4tYm90dG9tOjA7Zm9udDoxNHB4L25vcm1hbCBzYW5zLXNlcmlmO2xpbmUtaGVpZ2h0OjEuNTtmb250LXdlaWdodDo0MDA7em9vbToxfS5kcml2ZXItcG9wb3Zlci1mb290ZXJ7bWFyZ2luLXRvcDoxNXB4O3RleHQtYWxpZ246cmlnaHQ7em9vbToxO2Rpc3BsYXk6ZmxleDthbGlnbi1pdGVtczpjZW50ZXI7anVzdGlmeS1jb250ZW50OnNwYWNlLWJldHdlZW59LmRyaXZlci1wb3BvdmVyLXByb2dyZXNzLXRleHR7Zm9udC1zaXplOjEzcHg7Zm9udC13ZWlnaHQ6NDAwO2NvbG9yOiM3MjcyNzI7em9vbToxfS5kcml2ZXItcG9wb3Zlci1mb290ZXIgYnV0dG9ue2FsbDp1bnNldDtkaXNwbGF5OmlubGluZS1ibG9jaztib3gtc2l6aW5nOmJvcmRlci1ib3g7cGFkZGluZzozcHggN3B4O3RleHQtZGVjb3JhdGlvbjpub25lO3RleHQtc2hhZG93OjFweCAxcHggMCAjZmZmO2JhY2tncm91bmQtY29sb3I6I2ZmZjtjb2xvcjojMmQyZDJkO2ZvbnQ6MTJweC9ub3JtYWwgc2Fucy1zZXJpZjtjdXJzb3I6cG9pbnRlcjtvdXRsaW5lOjA7em9vbToxO2xpbmUtaGVpZ2h0OjEuMztib3JkZXI6MXB4IHNvbGlkICNjY2M7Ym9yZGVyLXJhZGl1czozcHh9LmRyaXZlci1wb3BvdmVyLWZvb3RlciAuZHJpdmVyLXBvcG92ZXItYnRuLWRpc2FibGVke29wYWNpdHk6LjU7cG9pbnRlci1ldmVudHM6bm9uZX06bm90KGJvZHkpOmhhcyg+LmRyaXZlci1hY3RpdmUtZWxlbWVudCl7b3ZlcmZsb3c6aGlkZGVuIWltcG9ydGFudH0uZHJpdmVyLW5vLWludGVyYWN0aW9uLC5kcml2ZXItbm8taW50ZXJhY3Rpb24gKntwb2ludGVyLWV2ZW50czpub25lIWltcG9ydGFudH0uZHJpdmVyLXBvcG92ZXItZm9vdGVyIGJ1dHRvbjpob3ZlciwuZHJpdmVyLXBvcG92ZXItZm9vdGVyIGJ1dHRvbjpmb2N1c3tiYWNrZ3JvdW5kLWNvbG9yOiNmN2Y3Zjd9LmRyaXZlci1wb3BvdmVyLW5hdmlnYXRpb24tYnRuc3tkaXNwbGF5OmZsZXg7ZmxleC1ncm93OjE7anVzdGlmeS1jb250ZW50OmZsZXgtZW5kfS5kcml2ZXItcG9wb3Zlci1uYXZpZ2F0aW9uLWJ0bnMgYnV0dG9uK2J1dHRvbnttYXJnaW4tbGVmdDo0cHh9LmRyaXZlci1wb3BvdmVyLWFycm93e2NvbnRlbnQ6XCJcIjtwb3NpdGlvbjphYnNvbHV0ZTtib3JkZXI6NXB4IHNvbGlkICNmZmZ9LmRyaXZlci1wb3BvdmVyLWFycm93LXNpZGUtb3ZlcntkaXNwbGF5Om5vbmV9LmRyaXZlci1wb3BvdmVyLWFycm93LXNpZGUtbGVmdHtsZWZ0OjEwMCU7Ym9yZGVyLXJpZ2h0LWNvbG9yOnRyYW5zcGFyZW50O2JvcmRlci1ib3R0b20tY29sb3I6dHJhbnNwYXJlbnQ7Ym9yZGVyLXRvcC1jb2xvcjp0cmFuc3BhcmVudH0uZHJpdmVyLXBvcG92ZXItYXJyb3ctc2lkZS1yaWdodHtyaWdodDoxMDAlO2JvcmRlci1sZWZ0LWNvbG9yOnRyYW5zcGFyZW50O2JvcmRlci1ib3R0b20tY29sb3I6dHJhbnNwYXJlbnQ7Ym9yZGVyLXRvcC1jb2xvcjp0cmFuc3BhcmVudH0uZHJpdmVyLXBvcG92ZXItYXJyb3ctc2lkZS10b3B7dG9wOjEwMCU7Ym9yZGVyLXJpZ2h0LWNvbG9yOnRyYW5zcGFyZW50O2JvcmRlci1ib3R0b20tY29sb3I6dHJhbnNwYXJlbnQ7Ym9yZGVyLWxlZnQtY29sb3I6dHJhbnNwYXJlbnR9LmRyaXZlci1wb3BvdmVyLWFycm93LXNpZGUtYm90dG9te2JvdHRvbToxMDAlO2JvcmRlci1sZWZ0LWNvbG9yOnRyYW5zcGFyZW50O2JvcmRlci10b3AtY29sb3I6dHJhbnNwYXJlbnQ7Ym9yZGVyLXJpZ2h0LWNvbG9yOnRyYW5zcGFyZW50fS5kcml2ZXItcG9wb3Zlci1hcnJvdy1zaWRlLWNlbnRlcntkaXNwbGF5Om5vbmV9LmRyaXZlci1wb3BvdmVyLWFycm93LXNpZGUtbGVmdC5kcml2ZXItcG9wb3Zlci1hcnJvdy1hbGlnbi1zdGFydCwuZHJpdmVyLXBvcG92ZXItYXJyb3ctc2lkZS1yaWdodC5kcml2ZXItcG9wb3Zlci1hcnJvdy1hbGlnbi1zdGFydHt0b3A6MTVweH0uZHJpdmVyLXBvcG92ZXItYXJyb3ctc2lkZS10b3AuZHJpdmVyLXBvcG92ZXItYXJyb3ctYWxpZ24tc3RhcnQsLmRyaXZlci1wb3BvdmVyLWFycm93LXNpZGUtYm90dG9tLmRyaXZlci1wb3BvdmVyLWFycm93LWFsaWduLXN0YXJ0e2xlZnQ6MTVweH0uZHJpdmVyLXBvcG92ZXItYXJyb3ctYWxpZ24tZW5kLmRyaXZlci1wb3BvdmVyLWFycm93LXNpZGUtbGVmdCwuZHJpdmVyLXBvcG92ZXItYXJyb3ctYWxpZ24tZW5kLmRyaXZlci1wb3BvdmVyLWFycm93LXNpZGUtcmlnaHR7Ym90dG9tOjE1cHh9LmRyaXZlci1wb3BvdmVyLWFycm93LXNpZGUtdG9wLmRyaXZlci1wb3BvdmVyLWFycm93LWFsaWduLWVuZCwuZHJpdmVyLXBvcG92ZXItYXJyb3ctc2lkZS1ib3R0b20uZHJpdmVyLXBvcG92ZXItYXJyb3ctYWxpZ24tZW5ke3JpZ2h0OjE1cHh9LmRyaXZlci1wb3BvdmVyLWFycm93LXNpZGUtbGVmdC5kcml2ZXItcG9wb3Zlci1hcnJvdy1hbGlnbi1jZW50ZXIsLmRyaXZlci1wb3BvdmVyLWFycm93LXNpZGUtcmlnaHQuZHJpdmVyLXBvcG92ZXItYXJyb3ctYWxpZ24tY2VudGVye3RvcDo1MCU7bWFyZ2luLXRvcDotNXB4fS5kcml2ZXItcG9wb3Zlci1hcnJvdy1zaWRlLXRvcC5kcml2ZXItcG9wb3Zlci1hcnJvdy1hbGlnbi1jZW50ZXIsLmRyaXZlci1wb3BvdmVyLWFycm93LXNpZGUtYm90dG9tLmRyaXZlci1wb3BvdmVyLWFycm93LWFsaWduLWNlbnRlcntsZWZ0OjUwJTttYXJnaW4tbGVmdDotNXB4fS5kcml2ZXItcG9wb3Zlci1hcnJvdy1ub25le2Rpc3BsYXk6bm9uZX1cbiJdfQ== */";
+  styleInject(css_248z$2);
+
+  /**!
+   * Sortable 1.15.6
+   * @author	RubaXa   <trash@rubaxa.org>
+   * @author	owenm    <owen23355@gmail.com>
+   * @license MIT
+   */
+  function ownKeys(object, enumerableOnly) {
+    var keys = Object.keys(object);
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      if (enumerableOnly) {
+        symbols = symbols.filter(function (sym) {
+          return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+        });
+      }
+      keys.push.apply(keys, symbols);
+    }
+    return keys;
+  }
+  function _objectSpread2(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i] != null ? arguments[i] : {};
+      if (i % 2) {
+        ownKeys(Object(source), true).forEach(function (key) {
+          _defineProperty(target, key, source[key]);
+        });
+      } else if (Object.getOwnPropertyDescriptors) {
+        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+      } else {
+        ownKeys(Object(source)).forEach(function (key) {
+          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+        });
+      }
+    }
+    return target;
+  }
+  function _typeof(obj) {
+    "@babel/helpers - typeof";
+
+    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+      _typeof = function (obj) {
+        return typeof obj;
+      };
+    } else {
+      _typeof = function (obj) {
+        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+      };
+    }
+    return _typeof(obj);
+  }
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+    return obj;
+  }
+  function _extends() {
+    _extends = Object.assign || function (target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    return _extends.apply(this, arguments);
+  }
+  function _objectWithoutPropertiesLoose(source, excluded) {
+    if (source == null) return {};
+    var target = {};
+    var sourceKeys = Object.keys(source);
+    var key, i;
+    for (i = 0; i < sourceKeys.length; i++) {
+      key = sourceKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      target[key] = source[key];
+    }
+    return target;
+  }
+  function _objectWithoutProperties(source, excluded) {
+    if (source == null) return {};
+    var target = _objectWithoutPropertiesLoose(source, excluded);
+    var key, i;
+    if (Object.getOwnPropertySymbols) {
+      var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+      for (i = 0; i < sourceSymbolKeys.length; i++) {
+        key = sourceSymbolKeys[i];
+        if (excluded.indexOf(key) >= 0) continue;
+        if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+        target[key] = source[key];
+      }
+    }
+    return target;
+  }
+
+  var version = "1.15.6";
+
+  function userAgent(pattern) {
+    if (typeof window !== 'undefined' && window.navigator) {
+      return !! /*@__PURE__*/navigator.userAgent.match(pattern);
+    }
+  }
+  var IE11OrLess = userAgent(/(?:Trident.*rv[ :]?11\.|msie|iemobile|Windows Phone)/i);
+  var Edge = userAgent(/Edge/i);
+  var FireFox = userAgent(/firefox/i);
+  var Safari = userAgent(/safari/i) && !userAgent(/chrome/i) && !userAgent(/android/i);
+  var IOS = userAgent(/iP(ad|od|hone)/i);
+  var ChromeForAndroid = userAgent(/chrome/i) && userAgent(/android/i);
+
+  var captureMode = {
+    capture: false,
+    passive: false
+  };
+  function on(el, event, fn) {
+    el.addEventListener(event, fn, !IE11OrLess && captureMode);
+  }
+  function off(el, event, fn) {
+    el.removeEventListener(event, fn, !IE11OrLess && captureMode);
+  }
+  function matches( /**HTMLElement*/el, /**String*/selector) {
+    if (!selector) return;
+    selector[0] === '>' && (selector = selector.substring(1));
+    if (el) {
+      try {
+        if (el.matches) {
+          return el.matches(selector);
+        } else if (el.msMatchesSelector) {
+          return el.msMatchesSelector(selector);
+        } else if (el.webkitMatchesSelector) {
+          return el.webkitMatchesSelector(selector);
+        }
+      } catch (_) {
+        return false;
+      }
+    }
+    return false;
+  }
+  function getParentOrHost(el) {
+    return el.host && el !== document && el.host.nodeType ? el.host : el.parentNode;
+  }
+  function closest( /**HTMLElement*/el, /**String*/selector, /**HTMLElement*/ctx, includeCTX) {
+    if (el) {
+      ctx = ctx || document;
+      do {
+        if (selector != null && (selector[0] === '>' ? el.parentNode === ctx && matches(el, selector) : matches(el, selector)) || includeCTX && el === ctx) {
+          return el;
+        }
+        if (el === ctx) break;
+        /* jshint boss:true */
+      } while (el = getParentOrHost(el));
+    }
+    return null;
+  }
+  var R_SPACE = /\s+/g;
+  function toggleClass(el, name, state) {
+    if (el && name) {
+      if (el.classList) {
+        el.classList[state ? 'add' : 'remove'](name);
+      } else {
+        var className = (' ' + el.className + ' ').replace(R_SPACE, ' ').replace(' ' + name + ' ', ' ');
+        el.className = (className + (state ? ' ' + name : '')).replace(R_SPACE, ' ');
+      }
+    }
+  }
+  function css(el, prop, val) {
+    var style = el && el.style;
+    if (style) {
+      if (val === void 0) {
+        if (document.defaultView && document.defaultView.getComputedStyle) {
+          val = document.defaultView.getComputedStyle(el, '');
+        } else if (el.currentStyle) {
+          val = el.currentStyle;
+        }
+        return prop === void 0 ? val : val[prop];
+      } else {
+        if (!(prop in style) && prop.indexOf('webkit') === -1) {
+          prop = '-webkit-' + prop;
+        }
+        style[prop] = val + (typeof val === 'string' ? '' : 'px');
+      }
+    }
+  }
+  function matrix(el, selfOnly) {
+    var appliedTransforms = '';
+    if (typeof el === 'string') {
+      appliedTransforms = el;
+    } else {
+      do {
+        var transform = css(el, 'transform');
+        if (transform && transform !== 'none') {
+          appliedTransforms = transform + ' ' + appliedTransforms;
+        }
+        /* jshint boss:true */
+      } while (!selfOnly && (el = el.parentNode));
+    }
+    var matrixFn = window.DOMMatrix || window.WebKitCSSMatrix || window.CSSMatrix || window.MSCSSMatrix;
+    /*jshint -W056 */
+    return matrixFn && new matrixFn(appliedTransforms);
+  }
+  function find(ctx, tagName, iterator) {
+    if (ctx) {
+      var list = ctx.getElementsByTagName(tagName),
+        i = 0,
+        n = list.length;
+      if (iterator) {
+        for (; i < n; i++) {
+          iterator(list[i], i);
+        }
+      }
+      return list;
+    }
+    return [];
+  }
+  function getWindowScrollingElement() {
+    var scrollingElement = document.scrollingElement;
+    if (scrollingElement) {
+      return scrollingElement;
+    } else {
+      return document.documentElement;
+    }
+  }
+
+  /**
+   * Returns the "bounding client rect" of given element
+   * @param  {HTMLElement} el                       The element whose boundingClientRect is wanted
+   * @param  {[Boolean]} relativeToContainingBlock  Whether the rect should be relative to the containing block of (including) the container
+   * @param  {[Boolean]} relativeToNonStaticParent  Whether the rect should be relative to the relative parent of (including) the contaienr
+   * @param  {[Boolean]} undoScale                  Whether the container's scale() should be undone
+   * @param  {[HTMLElement]} container              The parent the element will be placed in
+   * @return {Object}                               The boundingClientRect of el, with specified adjustments
+   */
+  function getRect(el, relativeToContainingBlock, relativeToNonStaticParent, undoScale, container) {
+    if (!el.getBoundingClientRect && el !== window) return;
+    var elRect, top, left, bottom, right, height, width;
+    if (el !== window && el.parentNode && el !== getWindowScrollingElement()) {
+      elRect = el.getBoundingClientRect();
+      top = elRect.top;
+      left = elRect.left;
+      bottom = elRect.bottom;
+      right = elRect.right;
+      height = elRect.height;
+      width = elRect.width;
+    } else {
+      top = 0;
+      left = 0;
+      bottom = window.innerHeight;
+      right = window.innerWidth;
+      height = window.innerHeight;
+      width = window.innerWidth;
+    }
+    if ((relativeToContainingBlock || relativeToNonStaticParent) && el !== window) {
+      // Adjust for translate()
+      container = container || el.parentNode;
+
+      // solves #1123 (see: https://stackoverflow.com/a/37953806/6088312)
+      // Not needed on <= IE11
+      if (!IE11OrLess) {
+        do {
+          if (container && container.getBoundingClientRect && (css(container, 'transform') !== 'none' || relativeToNonStaticParent && css(container, 'position') !== 'static')) {
+            var containerRect = container.getBoundingClientRect();
+
+            // Set relative to edges of padding box of container
+            top -= containerRect.top + parseInt(css(container, 'border-top-width'));
+            left -= containerRect.left + parseInt(css(container, 'border-left-width'));
+            bottom = top + elRect.height;
+            right = left + elRect.width;
+            break;
+          }
+          /* jshint boss:true */
+        } while (container = container.parentNode);
+      }
+    }
+    if (undoScale && el !== window) {
+      // Adjust for scale()
+      var elMatrix = matrix(container || el),
+        scaleX = elMatrix && elMatrix.a,
+        scaleY = elMatrix && elMatrix.d;
+      if (elMatrix) {
+        top /= scaleY;
+        left /= scaleX;
+        width /= scaleX;
+        height /= scaleY;
+        bottom = top + height;
+        right = left + width;
+      }
+    }
+    return {
+      top: top,
+      left: left,
+      bottom: bottom,
+      right: right,
+      width: width,
+      height: height
+    };
+  }
+
+  /**
+   * Checks if a side of an element is scrolled past a side of its parents
+   * @param  {HTMLElement}  el           The element who's side being scrolled out of view is in question
+   * @param  {String}       elSide       Side of the element in question ('top', 'left', 'right', 'bottom')
+   * @param  {String}       parentSide   Side of the parent in question ('top', 'left', 'right', 'bottom')
+   * @return {HTMLElement}               The parent scroll element that the el's side is scrolled past, or null if there is no such element
+   */
+  function isScrolledPast(el, elSide, parentSide) {
+    var parent = getParentAutoScrollElement(el, true),
+      elSideVal = getRect(el)[elSide];
+
+    /* jshint boss:true */
+    while (parent) {
+      var parentSideVal = getRect(parent)[parentSide],
+        visible = void 0;
+      {
+        visible = elSideVal >= parentSideVal;
+      }
+      if (!visible) return parent;
+      if (parent === getWindowScrollingElement()) break;
+      parent = getParentAutoScrollElement(parent, false);
+    }
+    return false;
+  }
+
+  /**
+   * Gets nth child of el, ignoring hidden children, sortable's elements (does not ignore clone if it's visible)
+   * and non-draggable elements
+   * @param  {HTMLElement} el       The parent element
+   * @param  {Number} childNum      The index of the child
+   * @param  {Object} options       Parent Sortable's options
+   * @return {HTMLElement}          The child at index childNum, or null if not found
+   */
+  function getChild(el, childNum, options, includeDragEl) {
+    var currentChild = 0,
+      i = 0,
+      children = el.children;
+    while (i < children.length) {
+      if (children[i].style.display !== 'none' && children[i] !== Sortable.ghost && (includeDragEl || children[i] !== Sortable.dragged) && closest(children[i], options.draggable, el, false)) {
+        if (currentChild === childNum) {
+          return children[i];
+        }
+        currentChild++;
+      }
+      i++;
+    }
+    return null;
+  }
+
+  /**
+   * Gets the last child in the el, ignoring ghostEl or invisible elements (clones)
+   * @param  {HTMLElement} el       Parent element
+   * @param  {selector} selector    Any other elements that should be ignored
+   * @return {HTMLElement}          The last child, ignoring ghostEl
+   */
+  function lastChild(el, selector) {
+    var last = el.lastElementChild;
+    while (last && (last === Sortable.ghost || css(last, 'display') === 'none' || selector && !matches(last, selector))) {
+      last = last.previousElementSibling;
+    }
+    return last || null;
+  }
+
+  /**
+   * Returns the index of an element within its parent for a selected set of
+   * elements
+   * @param  {HTMLElement} el
+   * @param  {selector} selector
+   * @return {number}
+   */
+  function index$1(el, selector) {
+    var index = 0;
+    if (!el || !el.parentNode) {
+      return -1;
+    }
+
+    /* jshint boss:true */
+    while (el = el.previousElementSibling) {
+      if (el.nodeName.toUpperCase() !== 'TEMPLATE' && el !== Sortable.clone && (!selector || matches(el, selector))) {
+        index++;
+      }
+    }
+    return index;
+  }
+
+  /**
+   * Returns the scroll offset of the given element, added with all the scroll offsets of parent elements.
+   * The value is returned in real pixels.
+   * @param  {HTMLElement} el
+   * @return {Array}             Offsets in the format of [left, top]
+   */
+  function getRelativeScrollOffset(el) {
+    var offsetLeft = 0,
+      offsetTop = 0,
+      winScroller = getWindowScrollingElement();
+    if (el) {
+      do {
+        var elMatrix = matrix(el),
+          scaleX = elMatrix.a,
+          scaleY = elMatrix.d;
+        offsetLeft += el.scrollLeft * scaleX;
+        offsetTop += el.scrollTop * scaleY;
+      } while (el !== winScroller && (el = el.parentNode));
+    }
+    return [offsetLeft, offsetTop];
+  }
+
+  /**
+   * Returns the index of the object within the given array
+   * @param  {Array} arr   Array that may or may not hold the object
+   * @param  {Object} obj  An object that has a key-value pair unique to and identical to a key-value pair in the object you want to find
+   * @return {Number}      The index of the object in the array, or -1
+   */
+  function indexOfObject(arr, obj) {
+    for (var i in arr) {
+      if (!arr.hasOwnProperty(i)) continue;
+      for (var key in obj) {
+        if (obj.hasOwnProperty(key) && obj[key] === arr[i][key]) return Number(i);
+      }
+    }
+    return -1;
+  }
+  function getParentAutoScrollElement(el, includeSelf) {
+    // skip to window
+    if (!el || !el.getBoundingClientRect) return getWindowScrollingElement();
+    var elem = el;
+    var gotSelf = false;
+    do {
+      // we don't need to get elem css if it isn't even overflowing in the first place (performance)
+      if (elem.clientWidth < elem.scrollWidth || elem.clientHeight < elem.scrollHeight) {
+        var elemCSS = css(elem);
+        if (elem.clientWidth < elem.scrollWidth && (elemCSS.overflowX == 'auto' || elemCSS.overflowX == 'scroll') || elem.clientHeight < elem.scrollHeight && (elemCSS.overflowY == 'auto' || elemCSS.overflowY == 'scroll')) {
+          if (!elem.getBoundingClientRect || elem === document.body) return getWindowScrollingElement();
+          if (gotSelf || includeSelf) return elem;
+          gotSelf = true;
+        }
+      }
+      /* jshint boss:true */
+    } while (elem = elem.parentNode);
+    return getWindowScrollingElement();
+  }
+  function extend(dst, src) {
+    if (dst && src) {
+      for (var key in src) {
+        if (src.hasOwnProperty(key)) {
+          dst[key] = src[key];
+        }
+      }
+    }
+    return dst;
+  }
+  function isRectEqual(rect1, rect2) {
+    return Math.round(rect1.top) === Math.round(rect2.top) && Math.round(rect1.left) === Math.round(rect2.left) && Math.round(rect1.height) === Math.round(rect2.height) && Math.round(rect1.width) === Math.round(rect2.width);
+  }
+  var _throttleTimeout;
+  function throttle(callback, ms) {
+    return function () {
+      if (!_throttleTimeout) {
+        var args = arguments,
+          _this = this;
+        if (args.length === 1) {
+          callback.call(_this, args[0]);
+        } else {
+          callback.apply(_this, args);
+        }
+        _throttleTimeout = setTimeout(function () {
+          _throttleTimeout = void 0;
+        }, ms);
+      }
+    };
+  }
+  function cancelThrottle() {
+    clearTimeout(_throttleTimeout);
+    _throttleTimeout = void 0;
+  }
+  function scrollBy(el, x, y) {
+    el.scrollLeft += x;
+    el.scrollTop += y;
+  }
+  function clone(el) {
+    var Polymer = window.Polymer;
+    var $ = window.jQuery || window.Zepto;
+    if (Polymer && Polymer.dom) {
+      return Polymer.dom(el).cloneNode(true);
+    } else if ($) {
+      return $(el).clone(true)[0];
+    } else {
+      return el.cloneNode(true);
+    }
+  }
+  function getChildContainingRectFromElement(container, options, ghostEl) {
+    var rect = {};
+    Array.from(container.children).forEach(function (child) {
+      var _rect$left, _rect$top, _rect$right, _rect$bottom;
+      if (!closest(child, options.draggable, container, false) || child.animated || child === ghostEl) return;
+      var childRect = getRect(child);
+      rect.left = Math.min((_rect$left = rect.left) !== null && _rect$left !== void 0 ? _rect$left : Infinity, childRect.left);
+      rect.top = Math.min((_rect$top = rect.top) !== null && _rect$top !== void 0 ? _rect$top : Infinity, childRect.top);
+      rect.right = Math.max((_rect$right = rect.right) !== null && _rect$right !== void 0 ? _rect$right : -Infinity, childRect.right);
+      rect.bottom = Math.max((_rect$bottom = rect.bottom) !== null && _rect$bottom !== void 0 ? _rect$bottom : -Infinity, childRect.bottom);
+    });
+    rect.width = rect.right - rect.left;
+    rect.height = rect.bottom - rect.top;
+    rect.x = rect.left;
+    rect.y = rect.top;
+    return rect;
+  }
+  var expando = 'Sortable' + new Date().getTime();
+
+  function AnimationStateManager() {
+    var animationStates = [],
+      animationCallbackId;
+    return {
+      captureAnimationState: function captureAnimationState() {
+        animationStates = [];
+        if (!this.options.animation) return;
+        var children = [].slice.call(this.el.children);
+        children.forEach(function (child) {
+          if (css(child, 'display') === 'none' || child === Sortable.ghost) return;
+          animationStates.push({
+            target: child,
+            rect: getRect(child)
+          });
+          var fromRect = _objectSpread2({}, animationStates[animationStates.length - 1].rect);
+
+          // If animating: compensate for current animation
+          if (child.thisAnimationDuration) {
+            var childMatrix = matrix(child, true);
+            if (childMatrix) {
+              fromRect.top -= childMatrix.f;
+              fromRect.left -= childMatrix.e;
+            }
+          }
+          child.fromRect = fromRect;
+        });
+      },
+      addAnimationState: function addAnimationState(state) {
+        animationStates.push(state);
+      },
+      removeAnimationState: function removeAnimationState(target) {
+        animationStates.splice(indexOfObject(animationStates, {
+          target: target
+        }), 1);
+      },
+      animateAll: function animateAll(callback) {
+        var _this = this;
+        if (!this.options.animation) {
+          clearTimeout(animationCallbackId);
+          if (typeof callback === 'function') callback();
+          return;
+        }
+        var animating = false,
+          animationTime = 0;
+        animationStates.forEach(function (state) {
+          var time = 0,
+            target = state.target,
+            fromRect = target.fromRect,
+            toRect = getRect(target),
+            prevFromRect = target.prevFromRect,
+            prevToRect = target.prevToRect,
+            animatingRect = state.rect,
+            targetMatrix = matrix(target, true);
+          if (targetMatrix) {
+            // Compensate for current animation
+            toRect.top -= targetMatrix.f;
+            toRect.left -= targetMatrix.e;
+          }
+          target.toRect = toRect;
+          if (target.thisAnimationDuration) {
+            // Could also check if animatingRect is between fromRect and toRect
+            if (isRectEqual(prevFromRect, toRect) && !isRectEqual(fromRect, toRect) &&
+            // Make sure animatingRect is on line between toRect & fromRect
+            (animatingRect.top - toRect.top) / (animatingRect.left - toRect.left) === (fromRect.top - toRect.top) / (fromRect.left - toRect.left)) {
+              // If returning to same place as started from animation and on same axis
+              time = calculateRealTime(animatingRect, prevFromRect, prevToRect, _this.options);
+            }
+          }
+
+          // if fromRect != toRect: animate
+          if (!isRectEqual(toRect, fromRect)) {
+            target.prevFromRect = fromRect;
+            target.prevToRect = toRect;
+            if (!time) {
+              time = _this.options.animation;
+            }
+            _this.animate(target, animatingRect, toRect, time);
+          }
+          if (time) {
+            animating = true;
+            animationTime = Math.max(animationTime, time);
+            clearTimeout(target.animationResetTimer);
+            target.animationResetTimer = setTimeout(function () {
+              target.animationTime = 0;
+              target.prevFromRect = null;
+              target.fromRect = null;
+              target.prevToRect = null;
+              target.thisAnimationDuration = null;
+            }, time);
+            target.thisAnimationDuration = time;
+          }
+        });
+        clearTimeout(animationCallbackId);
+        if (!animating) {
+          if (typeof callback === 'function') callback();
+        } else {
+          animationCallbackId = setTimeout(function () {
+            if (typeof callback === 'function') callback();
+          }, animationTime);
+        }
+        animationStates = [];
+      },
+      animate: function animate(target, currentRect, toRect, duration) {
+        if (duration) {
+          css(target, 'transition', '');
+          css(target, 'transform', '');
+          var elMatrix = matrix(this.el),
+            scaleX = elMatrix && elMatrix.a,
+            scaleY = elMatrix && elMatrix.d,
+            translateX = (currentRect.left - toRect.left) / (scaleX || 1),
+            translateY = (currentRect.top - toRect.top) / (scaleY || 1);
+          target.animatingX = !!translateX;
+          target.animatingY = !!translateY;
+          css(target, 'transform', 'translate3d(' + translateX + 'px,' + translateY + 'px,0)');
+          this.forRepaintDummy = repaint(target); // repaint
+
+          css(target, 'transition', 'transform ' + duration + 'ms' + (this.options.easing ? ' ' + this.options.easing : ''));
+          css(target, 'transform', 'translate3d(0,0,0)');
+          typeof target.animated === 'number' && clearTimeout(target.animated);
+          target.animated = setTimeout(function () {
+            css(target, 'transition', '');
+            css(target, 'transform', '');
+            target.animated = false;
+            target.animatingX = false;
+            target.animatingY = false;
+          }, duration);
+        }
+      }
+    };
+  }
+  function repaint(target) {
+    return target.offsetWidth;
+  }
+  function calculateRealTime(animatingRect, fromRect, toRect, options) {
+    return Math.sqrt(Math.pow(fromRect.top - animatingRect.top, 2) + Math.pow(fromRect.left - animatingRect.left, 2)) / Math.sqrt(Math.pow(fromRect.top - toRect.top, 2) + Math.pow(fromRect.left - toRect.left, 2)) * options.animation;
+  }
+
+  var plugins = [];
+  var defaults = {
+    initializeByDefault: true
+  };
+  var PluginManager = {
+    mount: function mount(plugin) {
+      // Set default static properties
+      for (var option in defaults) {
+        if (defaults.hasOwnProperty(option) && !(option in plugin)) {
+          plugin[option] = defaults[option];
+        }
+      }
+      plugins.forEach(function (p) {
+        if (p.pluginName === plugin.pluginName) {
+          throw "Sortable: Cannot mount plugin ".concat(plugin.pluginName, " more than once");
+        }
+      });
+      plugins.push(plugin);
+    },
+    pluginEvent: function pluginEvent(eventName, sortable, evt) {
+      var _this = this;
+      this.eventCanceled = false;
+      evt.cancel = function () {
+        _this.eventCanceled = true;
+      };
+      var eventNameGlobal = eventName + 'Global';
+      plugins.forEach(function (plugin) {
+        if (!sortable[plugin.pluginName]) return;
+        // Fire global events if it exists in this sortable
+        if (sortable[plugin.pluginName][eventNameGlobal]) {
+          sortable[plugin.pluginName][eventNameGlobal](_objectSpread2({
+            sortable: sortable
+          }, evt));
+        }
+
+        // Only fire plugin event if plugin is enabled in this sortable,
+        // and plugin has event defined
+        if (sortable.options[plugin.pluginName] && sortable[plugin.pluginName][eventName]) {
+          sortable[plugin.pluginName][eventName](_objectSpread2({
+            sortable: sortable
+          }, evt));
+        }
+      });
+    },
+    initializePlugins: function initializePlugins(sortable, el, defaults, options) {
+      plugins.forEach(function (plugin) {
+        var pluginName = plugin.pluginName;
+        if (!sortable.options[pluginName] && !plugin.initializeByDefault) return;
+        var initialized = new plugin(sortable, el, sortable.options);
+        initialized.sortable = sortable;
+        initialized.options = sortable.options;
+        sortable[pluginName] = initialized;
+
+        // Add default options from plugin
+        _extends(defaults, initialized.defaults);
+      });
+      for (var option in sortable.options) {
+        if (!sortable.options.hasOwnProperty(option)) continue;
+        var modified = this.modifyOption(sortable, option, sortable.options[option]);
+        if (typeof modified !== 'undefined') {
+          sortable.options[option] = modified;
+        }
+      }
+    },
+    getEventProperties: function getEventProperties(name, sortable) {
+      var eventProperties = {};
+      plugins.forEach(function (plugin) {
+        if (typeof plugin.eventProperties !== 'function') return;
+        _extends(eventProperties, plugin.eventProperties.call(sortable[plugin.pluginName], name));
+      });
+      return eventProperties;
+    },
+    modifyOption: function modifyOption(sortable, name, value) {
+      var modifiedValue;
+      plugins.forEach(function (plugin) {
+        // Plugin must exist on the Sortable
+        if (!sortable[plugin.pluginName]) return;
+
+        // If static option listener exists for this option, call in the context of the Sortable's instance of this plugin
+        if (plugin.optionListeners && typeof plugin.optionListeners[name] === 'function') {
+          modifiedValue = plugin.optionListeners[name].call(sortable[plugin.pluginName], value);
+        }
+      });
+      return modifiedValue;
+    }
+  };
+
+  function dispatchEvent(_ref) {
+    var sortable = _ref.sortable,
+      rootEl = _ref.rootEl,
+      name = _ref.name,
+      targetEl = _ref.targetEl,
+      cloneEl = _ref.cloneEl,
+      toEl = _ref.toEl,
+      fromEl = _ref.fromEl,
+      oldIndex = _ref.oldIndex,
+      newIndex = _ref.newIndex,
+      oldDraggableIndex = _ref.oldDraggableIndex,
+      newDraggableIndex = _ref.newDraggableIndex,
+      originalEvent = _ref.originalEvent,
+      putSortable = _ref.putSortable,
+      extraEventProperties = _ref.extraEventProperties;
+    sortable = sortable || rootEl && rootEl[expando];
+    if (!sortable) return;
+    var evt,
+      options = sortable.options,
+      onName = 'on' + name.charAt(0).toUpperCase() + name.substr(1);
+    // Support for new CustomEvent feature
+    if (window.CustomEvent && !IE11OrLess && !Edge) {
+      evt = new CustomEvent(name, {
+        bubbles: true,
+        cancelable: true
+      });
+    } else {
+      evt = document.createEvent('Event');
+      evt.initEvent(name, true, true);
+    }
+    evt.to = toEl || rootEl;
+    evt.from = fromEl || rootEl;
+    evt.item = targetEl || rootEl;
+    evt.clone = cloneEl;
+    evt.oldIndex = oldIndex;
+    evt.newIndex = newIndex;
+    evt.oldDraggableIndex = oldDraggableIndex;
+    evt.newDraggableIndex = newDraggableIndex;
+    evt.originalEvent = originalEvent;
+    evt.pullMode = putSortable ? putSortable.lastPutMode : undefined;
+    var allEventProperties = _objectSpread2(_objectSpread2({}, extraEventProperties), PluginManager.getEventProperties(name, sortable));
+    for (var option in allEventProperties) {
+      evt[option] = allEventProperties[option];
+    }
+    if (rootEl) {
+      rootEl.dispatchEvent(evt);
+    }
+    if (options[onName]) {
+      options[onName].call(sortable, evt);
+    }
+  }
+
+  var _excluded = ["evt"];
+  var pluginEvent = function pluginEvent(eventName, sortable) {
+    var _ref = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {},
+      originalEvent = _ref.evt,
+      data = _objectWithoutProperties(_ref, _excluded);
+    PluginManager.pluginEvent.bind(Sortable)(eventName, sortable, _objectSpread2({
+      dragEl: dragEl,
+      parentEl: parentEl,
+      ghostEl: ghostEl,
+      rootEl: rootEl,
+      nextEl: nextEl,
+      lastDownEl: lastDownEl,
+      cloneEl: cloneEl,
+      cloneHidden: cloneHidden,
+      dragStarted: moved,
+      putSortable: putSortable,
+      activeSortable: Sortable.active,
+      originalEvent: originalEvent,
+      oldIndex: oldIndex,
+      oldDraggableIndex: oldDraggableIndex,
+      newIndex: newIndex,
+      newDraggableIndex: newDraggableIndex,
+      hideGhostForTarget: _hideGhostForTarget,
+      unhideGhostForTarget: _unhideGhostForTarget,
+      cloneNowHidden: function cloneNowHidden() {
+        cloneHidden = true;
+      },
+      cloneNowShown: function cloneNowShown() {
+        cloneHidden = false;
+      },
+      dispatchSortableEvent: function dispatchSortableEvent(name) {
+        _dispatchEvent({
+          sortable: sortable,
+          name: name,
+          originalEvent: originalEvent
+        });
+      }
+    }, data));
+  };
+  function _dispatchEvent(info) {
+    dispatchEvent(_objectSpread2({
+      putSortable: putSortable,
+      cloneEl: cloneEl,
+      targetEl: dragEl,
+      rootEl: rootEl,
+      oldIndex: oldIndex,
+      oldDraggableIndex: oldDraggableIndex,
+      newIndex: newIndex,
+      newDraggableIndex: newDraggableIndex
+    }, info));
+  }
+  var dragEl,
+    parentEl,
+    ghostEl,
+    rootEl,
+    nextEl,
+    lastDownEl,
+    cloneEl,
+    cloneHidden,
+    oldIndex,
+    newIndex,
+    oldDraggableIndex,
+    newDraggableIndex,
+    activeGroup,
+    putSortable,
+    awaitingDragStarted = false,
+    ignoreNextClick = false,
+    sortables = [],
+    tapEvt,
+    touchEvt,
+    lastDx,
+    lastDy,
+    tapDistanceLeft,
+    tapDistanceTop,
+    moved,
+    lastTarget,
+    lastDirection,
+    pastFirstInvertThresh = false,
+    isCircumstantialInvert = false,
+    targetMoveDistance,
+    // For positioning ghost absolutely
+    ghostRelativeParent,
+    ghostRelativeParentInitialScroll = [],
+    // (left, top)
+
+    _silent = false,
+    savedInputChecked = [];
+
+  /** @const */
+  var documentExists = typeof document !== 'undefined',
+    PositionGhostAbsolutely = IOS,
+    CSSFloatProperty = Edge || IE11OrLess ? 'cssFloat' : 'float',
+    // This will not pass for IE9, because IE9 DnD only works on anchors
+    supportDraggable = documentExists && !ChromeForAndroid && !IOS && 'draggable' in document.createElement('div'),
+    supportCssPointerEvents = function () {
+      if (!documentExists) return;
+      // false when <= IE11
+      if (IE11OrLess) {
+        return false;
+      }
+      var el = document.createElement('x');
+      el.style.cssText = 'pointer-events:auto';
+      return el.style.pointerEvents === 'auto';
+    }(),
+    _detectDirection = function _detectDirection(el, options) {
+      var elCSS = css(el),
+        elWidth = parseInt(elCSS.width) - parseInt(elCSS.paddingLeft) - parseInt(elCSS.paddingRight) - parseInt(elCSS.borderLeftWidth) - parseInt(elCSS.borderRightWidth),
+        child1 = getChild(el, 0, options),
+        child2 = getChild(el, 1, options),
+        firstChildCSS = child1 && css(child1),
+        secondChildCSS = child2 && css(child2),
+        firstChildWidth = firstChildCSS && parseInt(firstChildCSS.marginLeft) + parseInt(firstChildCSS.marginRight) + getRect(child1).width,
+        secondChildWidth = secondChildCSS && parseInt(secondChildCSS.marginLeft) + parseInt(secondChildCSS.marginRight) + getRect(child2).width;
+      if (elCSS.display === 'flex') {
+        return elCSS.flexDirection === 'column' || elCSS.flexDirection === 'column-reverse' ? 'vertical' : 'horizontal';
+      }
+      if (elCSS.display === 'grid') {
+        return elCSS.gridTemplateColumns.split(' ').length <= 1 ? 'vertical' : 'horizontal';
+      }
+      if (child1 && firstChildCSS["float"] && firstChildCSS["float"] !== 'none') {
+        var touchingSideChild2 = firstChildCSS["float"] === 'left' ? 'left' : 'right';
+        return child2 && (secondChildCSS.clear === 'both' || secondChildCSS.clear === touchingSideChild2) ? 'vertical' : 'horizontal';
+      }
+      return child1 && (firstChildCSS.display === 'block' || firstChildCSS.display === 'flex' || firstChildCSS.display === 'table' || firstChildCSS.display === 'grid' || firstChildWidth >= elWidth && elCSS[CSSFloatProperty] === 'none' || child2 && elCSS[CSSFloatProperty] === 'none' && firstChildWidth + secondChildWidth > elWidth) ? 'vertical' : 'horizontal';
+    },
+    _dragElInRowColumn = function _dragElInRowColumn(dragRect, targetRect, vertical) {
+      var dragElS1Opp = vertical ? dragRect.left : dragRect.top,
+        dragElS2Opp = vertical ? dragRect.right : dragRect.bottom,
+        dragElOppLength = vertical ? dragRect.width : dragRect.height,
+        targetS1Opp = vertical ? targetRect.left : targetRect.top,
+        targetS2Opp = vertical ? targetRect.right : targetRect.bottom,
+        targetOppLength = vertical ? targetRect.width : targetRect.height;
+      return dragElS1Opp === targetS1Opp || dragElS2Opp === targetS2Opp || dragElS1Opp + dragElOppLength / 2 === targetS1Opp + targetOppLength / 2;
+    },
+    /**
+     * Detects first nearest empty sortable to X and Y position using emptyInsertThreshold.
+     * @param  {Number} x      X position
+     * @param  {Number} y      Y position
+     * @return {HTMLElement}   Element of the first found nearest Sortable
+     */
+    _detectNearestEmptySortable = function _detectNearestEmptySortable(x, y) {
+      var ret;
+      sortables.some(function (sortable) {
+        var threshold = sortable[expando].options.emptyInsertThreshold;
+        if (!threshold || lastChild(sortable)) return;
+        var rect = getRect(sortable),
+          insideHorizontally = x >= rect.left - threshold && x <= rect.right + threshold,
+          insideVertically = y >= rect.top - threshold && y <= rect.bottom + threshold;
+        if (insideHorizontally && insideVertically) {
+          return ret = sortable;
+        }
+      });
+      return ret;
+    },
+    _prepareGroup = function _prepareGroup(options) {
+      function toFn(value, pull) {
+        return function (to, from, dragEl, evt) {
+          var sameGroup = to.options.group.name && from.options.group.name && to.options.group.name === from.options.group.name;
+          if (value == null && (pull || sameGroup)) {
+            // Default pull value
+            // Default pull and put value if same group
+            return true;
+          } else if (value == null || value === false) {
+            return false;
+          } else if (pull && value === 'clone') {
+            return value;
+          } else if (typeof value === 'function') {
+            return toFn(value(to, from, dragEl, evt), pull)(to, from, dragEl, evt);
+          } else {
+            var otherGroup = (pull ? to : from).options.group.name;
+            return value === true || typeof value === 'string' && value === otherGroup || value.join && value.indexOf(otherGroup) > -1;
+          }
+        };
+      }
+      var group = {};
+      var originalGroup = options.group;
+      if (!originalGroup || _typeof(originalGroup) != 'object') {
+        originalGroup = {
+          name: originalGroup
+        };
+      }
+      group.name = originalGroup.name;
+      group.checkPull = toFn(originalGroup.pull, true);
+      group.checkPut = toFn(originalGroup.put);
+      group.revertClone = originalGroup.revertClone;
+      options.group = group;
+    },
+    _hideGhostForTarget = function _hideGhostForTarget() {
+      if (!supportCssPointerEvents && ghostEl) {
+        css(ghostEl, 'display', 'none');
+      }
+    },
+    _unhideGhostForTarget = function _unhideGhostForTarget() {
+      if (!supportCssPointerEvents && ghostEl) {
+        css(ghostEl, 'display', '');
+      }
+    };
+
+  // #1184 fix - Prevent click event on fallback if dragged but item not changed position
+  if (documentExists && !ChromeForAndroid) {
+    document.addEventListener('click', function (evt) {
+      if (ignoreNextClick) {
+        evt.preventDefault();
+        evt.stopPropagation && evt.stopPropagation();
+        evt.stopImmediatePropagation && evt.stopImmediatePropagation();
+        ignoreNextClick = false;
+        return false;
+      }
+    }, true);
+  }
+  var nearestEmptyInsertDetectEvent = function nearestEmptyInsertDetectEvent(evt) {
+    if (dragEl) {
+      evt = evt.touches ? evt.touches[0] : evt;
+      var nearest = _detectNearestEmptySortable(evt.clientX, evt.clientY);
+      if (nearest) {
+        // Create imitation event
+        var event = {};
+        for (var i in evt) {
+          if (evt.hasOwnProperty(i)) {
+            event[i] = evt[i];
+          }
+        }
+        event.target = event.rootEl = nearest;
+        event.preventDefault = void 0;
+        event.stopPropagation = void 0;
+        nearest[expando]._onDragOver(event);
+      }
+    }
+  };
+  var _checkOutsideTargetEl = function _checkOutsideTargetEl(evt) {
+    if (dragEl) {
+      dragEl.parentNode[expando]._isOutsideThisEl(evt.target);
+    }
+  };
+
+  /**
+   * @class  Sortable
+   * @param  {HTMLElement}  el
+   * @param  {Object}       [options]
+   */
+  function Sortable(el, options) {
+    if (!(el && el.nodeType && el.nodeType === 1)) {
+      throw "Sortable: `el` must be an HTMLElement, not ".concat({}.toString.call(el));
+    }
+    this.el = el; // root element
+    this.options = options = _extends({}, options);
+
+    // Export instance
+    el[expando] = this;
+    var defaults = {
+      group: null,
+      sort: true,
+      disabled: false,
+      store: null,
+      handle: null,
+      draggable: /^[uo]l$/i.test(el.nodeName) ? '>li' : '>*',
+      swapThreshold: 1,
+      // percentage; 0 <= x <= 1
+      invertSwap: false,
+      // invert always
+      invertedSwapThreshold: null,
+      // will be set to same as swapThreshold if default
+      removeCloneOnHide: true,
+      direction: function direction() {
+        return _detectDirection(el, this.options);
+      },
+      ghostClass: 'sortable-ghost',
+      chosenClass: 'sortable-chosen',
+      dragClass: 'sortable-drag',
+      ignore: 'a, img',
+      filter: null,
+      preventOnFilter: true,
+      animation: 0,
+      easing: null,
+      setData: function setData(dataTransfer, dragEl) {
+        dataTransfer.setData('Text', dragEl.textContent);
+      },
+      dropBubble: false,
+      dragoverBubble: false,
+      dataIdAttr: 'data-id',
+      delay: 0,
+      delayOnTouchOnly: false,
+      touchStartThreshold: (Number.parseInt ? Number : window).parseInt(window.devicePixelRatio, 10) || 1,
+      forceFallback: false,
+      fallbackClass: 'sortable-fallback',
+      fallbackOnBody: false,
+      fallbackTolerance: 0,
+      fallbackOffset: {
+        x: 0,
+        y: 0
+      },
+      // Disabled on Safari: #1571; Enabled on Safari IOS: #2244
+      supportPointer: Sortable.supportPointer !== false && 'PointerEvent' in window && (!Safari || IOS),
+      emptyInsertThreshold: 5
+    };
+    PluginManager.initializePlugins(this, el, defaults);
+
+    // Set default options
+    for (var name in defaults) {
+      !(name in options) && (options[name] = defaults[name]);
+    }
+    _prepareGroup(options);
+
+    // Bind all private methods
+    for (var fn in this) {
+      if (fn.charAt(0) === '_' && typeof this[fn] === 'function') {
+        this[fn] = this[fn].bind(this);
+      }
+    }
+
+    // Setup drag mode
+    this.nativeDraggable = options.forceFallback ? false : supportDraggable;
+    if (this.nativeDraggable) {
+      // Touch start threshold cannot be greater than the native dragstart threshold
+      this.options.touchStartThreshold = 1;
+    }
+
+    // Bind events
+    if (options.supportPointer) {
+      on(el, 'pointerdown', this._onTapStart);
+    } else {
+      on(el, 'mousedown', this._onTapStart);
+      on(el, 'touchstart', this._onTapStart);
+    }
+    if (this.nativeDraggable) {
+      on(el, 'dragover', this);
+      on(el, 'dragenter', this);
+    }
+    sortables.push(this.el);
+
+    // Restore sorting
+    options.store && options.store.get && this.sort(options.store.get(this) || []);
+
+    // Add animation state manager
+    _extends(this, AnimationStateManager());
+  }
+  Sortable.prototype = /** @lends Sortable.prototype */{
+    constructor: Sortable,
+    _isOutsideThisEl: function _isOutsideThisEl(target) {
+      if (!this.el.contains(target) && target !== this.el) {
+        lastTarget = null;
+      }
+    },
+    _getDirection: function _getDirection(evt, target) {
+      return typeof this.options.direction === 'function' ? this.options.direction.call(this, evt, target, dragEl) : this.options.direction;
+    },
+    _onTapStart: function _onTapStart( /** Event|TouchEvent */evt) {
+      if (!evt.cancelable) return;
+      var _this = this,
+        el = this.el,
+        options = this.options,
+        preventOnFilter = options.preventOnFilter,
+        type = evt.type,
+        touch = evt.touches && evt.touches[0] || evt.pointerType && evt.pointerType === 'touch' && evt,
+        target = (touch || evt).target,
+        originalTarget = evt.target.shadowRoot && (evt.path && evt.path[0] || evt.composedPath && evt.composedPath()[0]) || target,
+        filter = options.filter;
+      _saveInputCheckedState(el);
+
+      // Don't trigger start event when an element is been dragged, otherwise the evt.oldindex always wrong when set option.group.
+      if (dragEl) {
+        return;
+      }
+      if (/mousedown|pointerdown/.test(type) && evt.button !== 0 || options.disabled) {
+        return; // only left button and enabled
+      }
+
+      // cancel dnd if original target is content editable
+      if (originalTarget.isContentEditable) {
+        return;
+      }
+
+      // Safari ignores further event handling after mousedown
+      if (!this.nativeDraggable && Safari && target && target.tagName.toUpperCase() === 'SELECT') {
+        return;
+      }
+      target = closest(target, options.draggable, el, false);
+      if (target && target.animated) {
+        return;
+      }
+      if (lastDownEl === target) {
+        // Ignoring duplicate `down`
+        return;
+      }
+
+      // Get the index of the dragged element within its parent
+      oldIndex = index$1(target);
+      oldDraggableIndex = index$1(target, options.draggable);
+
+      // Check filter
+      if (typeof filter === 'function') {
+        if (filter.call(this, evt, target, this)) {
+          _dispatchEvent({
+            sortable: _this,
+            rootEl: originalTarget,
+            name: 'filter',
+            targetEl: target,
+            toEl: el,
+            fromEl: el
+          });
+          pluginEvent('filter', _this, {
+            evt: evt
+          });
+          preventOnFilter && evt.preventDefault();
+          return; // cancel dnd
+        }
+      } else if (filter) {
+        filter = filter.split(',').some(function (criteria) {
+          criteria = closest(originalTarget, criteria.trim(), el, false);
+          if (criteria) {
+            _dispatchEvent({
+              sortable: _this,
+              rootEl: criteria,
+              name: 'filter',
+              targetEl: target,
+              fromEl: el,
+              toEl: el
+            });
+            pluginEvent('filter', _this, {
+              evt: evt
+            });
+            return true;
+          }
+        });
+        if (filter) {
+          preventOnFilter && evt.preventDefault();
+          return; // cancel dnd
+        }
+      }
+      if (options.handle && !closest(originalTarget, options.handle, el, false)) {
+        return;
+      }
+
+      // Prepare `dragstart`
+      this._prepareDragStart(evt, touch, target);
+    },
+    _prepareDragStart: function _prepareDragStart( /** Event */evt, /** Touch */touch, /** HTMLElement */target) {
+      var _this = this,
+        el = _this.el,
+        options = _this.options,
+        ownerDocument = el.ownerDocument,
+        dragStartFn;
+      if (target && !dragEl && target.parentNode === el) {
+        var dragRect = getRect(target);
+        rootEl = el;
+        dragEl = target;
+        parentEl = dragEl.parentNode;
+        nextEl = dragEl.nextSibling;
+        lastDownEl = target;
+        activeGroup = options.group;
+        Sortable.dragged = dragEl;
+        tapEvt = {
+          target: dragEl,
+          clientX: (touch || evt).clientX,
+          clientY: (touch || evt).clientY
+        };
+        tapDistanceLeft = tapEvt.clientX - dragRect.left;
+        tapDistanceTop = tapEvt.clientY - dragRect.top;
+        this._lastX = (touch || evt).clientX;
+        this._lastY = (touch || evt).clientY;
+        dragEl.style['will-change'] = 'all';
+        dragStartFn = function dragStartFn() {
+          pluginEvent('delayEnded', _this, {
+            evt: evt
+          });
+          if (Sortable.eventCanceled) {
+            _this._onDrop();
+            return;
+          }
+          // Delayed drag has been triggered
+          // we can re-enable the events: touchmove/mousemove
+          _this._disableDelayedDragEvents();
+          if (!FireFox && _this.nativeDraggable) {
+            dragEl.draggable = true;
+          }
+
+          // Bind the events: dragstart/dragend
+          _this._triggerDragStart(evt, touch);
+
+          // Drag start event
+          _dispatchEvent({
+            sortable: _this,
+            name: 'choose',
+            originalEvent: evt
+          });
+
+          // Chosen item
+          toggleClass(dragEl, options.chosenClass, true);
+        };
+
+        // Disable "draggable"
+        options.ignore.split(',').forEach(function (criteria) {
+          find(dragEl, criteria.trim(), _disableDraggable);
+        });
+        on(ownerDocument, 'dragover', nearestEmptyInsertDetectEvent);
+        on(ownerDocument, 'mousemove', nearestEmptyInsertDetectEvent);
+        on(ownerDocument, 'touchmove', nearestEmptyInsertDetectEvent);
+        if (options.supportPointer) {
+          on(ownerDocument, 'pointerup', _this._onDrop);
+          // Native D&D triggers pointercancel
+          !this.nativeDraggable && on(ownerDocument, 'pointercancel', _this._onDrop);
+        } else {
+          on(ownerDocument, 'mouseup', _this._onDrop);
+          on(ownerDocument, 'touchend', _this._onDrop);
+          on(ownerDocument, 'touchcancel', _this._onDrop);
+        }
+
+        // Make dragEl draggable (must be before delay for FireFox)
+        if (FireFox && this.nativeDraggable) {
+          this.options.touchStartThreshold = 4;
+          dragEl.draggable = true;
+        }
+        pluginEvent('delayStart', this, {
+          evt: evt
+        });
+
+        // Delay is impossible for native DnD in Edge or IE
+        if (options.delay && (!options.delayOnTouchOnly || touch) && (!this.nativeDraggable || !(Edge || IE11OrLess))) {
+          if (Sortable.eventCanceled) {
+            this._onDrop();
+            return;
+          }
+          // If the user moves the pointer or let go the click or touch
+          // before the delay has been reached:
+          // disable the delayed drag
+          if (options.supportPointer) {
+            on(ownerDocument, 'pointerup', _this._disableDelayedDrag);
+            on(ownerDocument, 'pointercancel', _this._disableDelayedDrag);
+          } else {
+            on(ownerDocument, 'mouseup', _this._disableDelayedDrag);
+            on(ownerDocument, 'touchend', _this._disableDelayedDrag);
+            on(ownerDocument, 'touchcancel', _this._disableDelayedDrag);
+          }
+          on(ownerDocument, 'mousemove', _this._delayedDragTouchMoveHandler);
+          on(ownerDocument, 'touchmove', _this._delayedDragTouchMoveHandler);
+          options.supportPointer && on(ownerDocument, 'pointermove', _this._delayedDragTouchMoveHandler);
+          _this._dragStartTimer = setTimeout(dragStartFn, options.delay);
+        } else {
+          dragStartFn();
+        }
+      }
+    },
+    _delayedDragTouchMoveHandler: function _delayedDragTouchMoveHandler( /** TouchEvent|PointerEvent **/e) {
+      var touch = e.touches ? e.touches[0] : e;
+      if (Math.max(Math.abs(touch.clientX - this._lastX), Math.abs(touch.clientY - this._lastY)) >= Math.floor(this.options.touchStartThreshold / (this.nativeDraggable && window.devicePixelRatio || 1))) {
+        this._disableDelayedDrag();
+      }
+    },
+    _disableDelayedDrag: function _disableDelayedDrag() {
+      dragEl && _disableDraggable(dragEl);
+      clearTimeout(this._dragStartTimer);
+      this._disableDelayedDragEvents();
+    },
+    _disableDelayedDragEvents: function _disableDelayedDragEvents() {
+      var ownerDocument = this.el.ownerDocument;
+      off(ownerDocument, 'mouseup', this._disableDelayedDrag);
+      off(ownerDocument, 'touchend', this._disableDelayedDrag);
+      off(ownerDocument, 'touchcancel', this._disableDelayedDrag);
+      off(ownerDocument, 'pointerup', this._disableDelayedDrag);
+      off(ownerDocument, 'pointercancel', this._disableDelayedDrag);
+      off(ownerDocument, 'mousemove', this._delayedDragTouchMoveHandler);
+      off(ownerDocument, 'touchmove', this._delayedDragTouchMoveHandler);
+      off(ownerDocument, 'pointermove', this._delayedDragTouchMoveHandler);
+    },
+    _triggerDragStart: function _triggerDragStart( /** Event */evt, /** Touch */touch) {
+      touch = touch || evt.pointerType == 'touch' && evt;
+      if (!this.nativeDraggable || touch) {
+        if (this.options.supportPointer) {
+          on(document, 'pointermove', this._onTouchMove);
+        } else if (touch) {
+          on(document, 'touchmove', this._onTouchMove);
+        } else {
+          on(document, 'mousemove', this._onTouchMove);
+        }
+      } else {
+        on(dragEl, 'dragend', this);
+        on(rootEl, 'dragstart', this._onDragStart);
+      }
+      try {
+        if (document.selection) {
+          _nextTick(function () {
+            document.selection.empty();
+          });
+        } else {
+          window.getSelection().removeAllRanges();
+        }
+      } catch (err) {}
+    },
+    _dragStarted: function _dragStarted(fallback, evt) {
+      awaitingDragStarted = false;
+      if (rootEl && dragEl) {
+        pluginEvent('dragStarted', this, {
+          evt: evt
+        });
+        if (this.nativeDraggable) {
+          on(document, 'dragover', _checkOutsideTargetEl);
+        }
+        var options = this.options;
+
+        // Apply effect
+        !fallback && toggleClass(dragEl, options.dragClass, false);
+        toggleClass(dragEl, options.ghostClass, true);
+        Sortable.active = this;
+        fallback && this._appendGhost();
+
+        // Drag start event
+        _dispatchEvent({
+          sortable: this,
+          name: 'start',
+          originalEvent: evt
+        });
+      } else {
+        this._nulling();
+      }
+    },
+    _emulateDragOver: function _emulateDragOver() {
+      if (touchEvt) {
+        this._lastX = touchEvt.clientX;
+        this._lastY = touchEvt.clientY;
+        _hideGhostForTarget();
+        var target = document.elementFromPoint(touchEvt.clientX, touchEvt.clientY);
+        var parent = target;
+        while (target && target.shadowRoot) {
+          target = target.shadowRoot.elementFromPoint(touchEvt.clientX, touchEvt.clientY);
+          if (target === parent) break;
+          parent = target;
+        }
+        dragEl.parentNode[expando]._isOutsideThisEl(target);
+        if (parent) {
+          do {
+            if (parent[expando]) {
+              var inserted = void 0;
+              inserted = parent[expando]._onDragOver({
+                clientX: touchEvt.clientX,
+                clientY: touchEvt.clientY,
+                target: target,
+                rootEl: parent
+              });
+              if (inserted && !this.options.dragoverBubble) {
+                break;
+              }
+            }
+            target = parent; // store last element
+          }
+          /* jshint boss:true */ while (parent = getParentOrHost(parent));
+        }
+        _unhideGhostForTarget();
+      }
+    },
+    _onTouchMove: function _onTouchMove( /**TouchEvent*/evt) {
+      if (tapEvt) {
+        var options = this.options,
+          fallbackTolerance = options.fallbackTolerance,
+          fallbackOffset = options.fallbackOffset,
+          touch = evt.touches ? evt.touches[0] : evt,
+          ghostMatrix = ghostEl && matrix(ghostEl, true),
+          scaleX = ghostEl && ghostMatrix && ghostMatrix.a,
+          scaleY = ghostEl && ghostMatrix && ghostMatrix.d,
+          relativeScrollOffset = PositionGhostAbsolutely && ghostRelativeParent && getRelativeScrollOffset(ghostRelativeParent),
+          dx = (touch.clientX - tapEvt.clientX + fallbackOffset.x) / (scaleX || 1) + (relativeScrollOffset ? relativeScrollOffset[0] - ghostRelativeParentInitialScroll[0] : 0) / (scaleX || 1),
+          dy = (touch.clientY - tapEvt.clientY + fallbackOffset.y) / (scaleY || 1) + (relativeScrollOffset ? relativeScrollOffset[1] - ghostRelativeParentInitialScroll[1] : 0) / (scaleY || 1);
+
+        // only set the status to dragging, when we are actually dragging
+        if (!Sortable.active && !awaitingDragStarted) {
+          if (fallbackTolerance && Math.max(Math.abs(touch.clientX - this._lastX), Math.abs(touch.clientY - this._lastY)) < fallbackTolerance) {
+            return;
+          }
+          this._onDragStart(evt, true);
+        }
+        if (ghostEl) {
+          if (ghostMatrix) {
+            ghostMatrix.e += dx - (lastDx || 0);
+            ghostMatrix.f += dy - (lastDy || 0);
+          } else {
+            ghostMatrix = {
+              a: 1,
+              b: 0,
+              c: 0,
+              d: 1,
+              e: dx,
+              f: dy
+            };
+          }
+          var cssMatrix = "matrix(".concat(ghostMatrix.a, ",").concat(ghostMatrix.b, ",").concat(ghostMatrix.c, ",").concat(ghostMatrix.d, ",").concat(ghostMatrix.e, ",").concat(ghostMatrix.f, ")");
+          css(ghostEl, 'webkitTransform', cssMatrix);
+          css(ghostEl, 'mozTransform', cssMatrix);
+          css(ghostEl, 'msTransform', cssMatrix);
+          css(ghostEl, 'transform', cssMatrix);
+          lastDx = dx;
+          lastDy = dy;
+          touchEvt = touch;
+        }
+        evt.cancelable && evt.preventDefault();
+      }
+    },
+    _appendGhost: function _appendGhost() {
+      // Bug if using scale(): https://stackoverflow.com/questions/2637058
+      // Not being adjusted for
+      if (!ghostEl) {
+        var container = this.options.fallbackOnBody ? document.body : rootEl,
+          rect = getRect(dragEl, true, PositionGhostAbsolutely, true, container),
+          options = this.options;
+
+        // Position absolutely
+        if (PositionGhostAbsolutely) {
+          // Get relatively positioned parent
+          ghostRelativeParent = container;
+          while (css(ghostRelativeParent, 'position') === 'static' && css(ghostRelativeParent, 'transform') === 'none' && ghostRelativeParent !== document) {
+            ghostRelativeParent = ghostRelativeParent.parentNode;
+          }
+          if (ghostRelativeParent !== document.body && ghostRelativeParent !== document.documentElement) {
+            if (ghostRelativeParent === document) ghostRelativeParent = getWindowScrollingElement();
+            rect.top += ghostRelativeParent.scrollTop;
+            rect.left += ghostRelativeParent.scrollLeft;
+          } else {
+            ghostRelativeParent = getWindowScrollingElement();
+          }
+          ghostRelativeParentInitialScroll = getRelativeScrollOffset(ghostRelativeParent);
+        }
+        ghostEl = dragEl.cloneNode(true);
+        toggleClass(ghostEl, options.ghostClass, false);
+        toggleClass(ghostEl, options.fallbackClass, true);
+        toggleClass(ghostEl, options.dragClass, true);
+        css(ghostEl, 'transition', '');
+        css(ghostEl, 'transform', '');
+        css(ghostEl, 'box-sizing', 'border-box');
+        css(ghostEl, 'margin', 0);
+        css(ghostEl, 'top', rect.top);
+        css(ghostEl, 'left', rect.left);
+        css(ghostEl, 'width', rect.width);
+        css(ghostEl, 'height', rect.height);
+        css(ghostEl, 'opacity', '0.8');
+        css(ghostEl, 'position', PositionGhostAbsolutely ? 'absolute' : 'fixed');
+        css(ghostEl, 'zIndex', '100000');
+        css(ghostEl, 'pointerEvents', 'none');
+        Sortable.ghost = ghostEl;
+        container.appendChild(ghostEl);
+
+        // Set transform-origin
+        css(ghostEl, 'transform-origin', tapDistanceLeft / parseInt(ghostEl.style.width) * 100 + '% ' + tapDistanceTop / parseInt(ghostEl.style.height) * 100 + '%');
+      }
+    },
+    _onDragStart: function _onDragStart( /**Event*/evt, /**boolean*/fallback) {
+      var _this = this;
+      var dataTransfer = evt.dataTransfer;
+      var options = _this.options;
+      pluginEvent('dragStart', this, {
+        evt: evt
+      });
+      if (Sortable.eventCanceled) {
+        this._onDrop();
+        return;
+      }
+      pluginEvent('setupClone', this);
+      if (!Sortable.eventCanceled) {
+        cloneEl = clone(dragEl);
+        cloneEl.removeAttribute("id");
+        cloneEl.draggable = false;
+        cloneEl.style['will-change'] = '';
+        this._hideClone();
+        toggleClass(cloneEl, this.options.chosenClass, false);
+        Sortable.clone = cloneEl;
+      }
+
+      // #1143: IFrame support workaround
+      _this.cloneId = _nextTick(function () {
+        pluginEvent('clone', _this);
+        if (Sortable.eventCanceled) return;
+        if (!_this.options.removeCloneOnHide) {
+          rootEl.insertBefore(cloneEl, dragEl);
+        }
+        _this._hideClone();
+        _dispatchEvent({
+          sortable: _this,
+          name: 'clone'
+        });
+      });
+      !fallback && toggleClass(dragEl, options.dragClass, true);
+
+      // Set proper drop events
+      if (fallback) {
+        ignoreNextClick = true;
+        _this._loopId = setInterval(_this._emulateDragOver, 50);
+      } else {
+        // Undo what was set in _prepareDragStart before drag started
+        off(document, 'mouseup', _this._onDrop);
+        off(document, 'touchend', _this._onDrop);
+        off(document, 'touchcancel', _this._onDrop);
+        if (dataTransfer) {
+          dataTransfer.effectAllowed = 'move';
+          options.setData && options.setData.call(_this, dataTransfer, dragEl);
+        }
+        on(document, 'drop', _this);
+
+        // #1276 fix:
+        css(dragEl, 'transform', 'translateZ(0)');
+      }
+      awaitingDragStarted = true;
+      _this._dragStartId = _nextTick(_this._dragStarted.bind(_this, fallback, evt));
+      on(document, 'selectstart', _this);
+      moved = true;
+      window.getSelection().removeAllRanges();
+      if (Safari) {
+        css(document.body, 'user-select', 'none');
+      }
+    },
+    // Returns true - if no further action is needed (either inserted or another condition)
+    _onDragOver: function _onDragOver( /**Event*/evt) {
+      var el = this.el,
+        target = evt.target,
+        dragRect,
+        targetRect,
+        revert,
+        options = this.options,
+        group = options.group,
+        activeSortable = Sortable.active,
+        isOwner = activeGroup === group,
+        canSort = options.sort,
+        fromSortable = putSortable || activeSortable,
+        vertical,
+        _this = this,
+        completedFired = false;
+      if (_silent) return;
+      function dragOverEvent(name, extra) {
+        pluginEvent(name, _this, _objectSpread2({
+          evt: evt,
+          isOwner: isOwner,
+          axis: vertical ? 'vertical' : 'horizontal',
+          revert: revert,
+          dragRect: dragRect,
+          targetRect: targetRect,
+          canSort: canSort,
+          fromSortable: fromSortable,
+          target: target,
+          completed: completed,
+          onMove: function onMove(target, after) {
+            return _onMove(rootEl, el, dragEl, dragRect, target, getRect(target), evt, after);
+          },
+          changed: changed
+        }, extra));
+      }
+
+      // Capture animation state
+      function capture() {
+        dragOverEvent('dragOverAnimationCapture');
+        _this.captureAnimationState();
+        if (_this !== fromSortable) {
+          fromSortable.captureAnimationState();
+        }
+      }
+
+      // Return invocation when dragEl is inserted (or completed)
+      function completed(insertion) {
+        dragOverEvent('dragOverCompleted', {
+          insertion: insertion
+        });
+        if (insertion) {
+          // Clones must be hidden before folding animation to capture dragRectAbsolute properly
+          if (isOwner) {
+            activeSortable._hideClone();
+          } else {
+            activeSortable._showClone(_this);
+          }
+          if (_this !== fromSortable) {
+            // Set ghost class to new sortable's ghost class
+            toggleClass(dragEl, putSortable ? putSortable.options.ghostClass : activeSortable.options.ghostClass, false);
+            toggleClass(dragEl, options.ghostClass, true);
+          }
+          if (putSortable !== _this && _this !== Sortable.active) {
+            putSortable = _this;
+          } else if (_this === Sortable.active && putSortable) {
+            putSortable = null;
+          }
+
+          // Animation
+          if (fromSortable === _this) {
+            _this._ignoreWhileAnimating = target;
+          }
+          _this.animateAll(function () {
+            dragOverEvent('dragOverAnimationComplete');
+            _this._ignoreWhileAnimating = null;
+          });
+          if (_this !== fromSortable) {
+            fromSortable.animateAll();
+            fromSortable._ignoreWhileAnimating = null;
+          }
+        }
+
+        // Null lastTarget if it is not inside a previously swapped element
+        if (target === dragEl && !dragEl.animated || target === el && !target.animated) {
+          lastTarget = null;
+        }
+
+        // no bubbling and not fallback
+        if (!options.dragoverBubble && !evt.rootEl && target !== document) {
+          dragEl.parentNode[expando]._isOutsideThisEl(evt.target);
+
+          // Do not detect for empty insert if already inserted
+          !insertion && nearestEmptyInsertDetectEvent(evt);
+        }
+        !options.dragoverBubble && evt.stopPropagation && evt.stopPropagation();
+        return completedFired = true;
+      }
+
+      // Call when dragEl has been inserted
+      function changed() {
+        newIndex = index$1(dragEl);
+        newDraggableIndex = index$1(dragEl, options.draggable);
+        _dispatchEvent({
+          sortable: _this,
+          name: 'change',
+          toEl: el,
+          newIndex: newIndex,
+          newDraggableIndex: newDraggableIndex,
+          originalEvent: evt
+        });
+      }
+      if (evt.preventDefault !== void 0) {
+        evt.cancelable && evt.preventDefault();
+      }
+      target = closest(target, options.draggable, el, true);
+      dragOverEvent('dragOver');
+      if (Sortable.eventCanceled) return completedFired;
+      if (dragEl.contains(evt.target) || target.animated && target.animatingX && target.animatingY || _this._ignoreWhileAnimating === target) {
+        return completed(false);
+      }
+      ignoreNextClick = false;
+      if (activeSortable && !options.disabled && (isOwner ? canSort || (revert = parentEl !== rootEl) // Reverting item into the original list
+      : putSortable === this || (this.lastPutMode = activeGroup.checkPull(this, activeSortable, dragEl, evt)) && group.checkPut(this, activeSortable, dragEl, evt))) {
+        vertical = this._getDirection(evt, target) === 'vertical';
+        dragRect = getRect(dragEl);
+        dragOverEvent('dragOverValid');
+        if (Sortable.eventCanceled) return completedFired;
+        if (revert) {
+          parentEl = rootEl; // actualization
+          capture();
+          this._hideClone();
+          dragOverEvent('revert');
+          if (!Sortable.eventCanceled) {
+            if (nextEl) {
+              rootEl.insertBefore(dragEl, nextEl);
+            } else {
+              rootEl.appendChild(dragEl);
+            }
+          }
+          return completed(true);
+        }
+        var elLastChild = lastChild(el, options.draggable);
+        if (!elLastChild || _ghostIsLast(evt, vertical, this) && !elLastChild.animated) {
+          // Insert to end of list
+
+          // If already at end of list: Do not insert
+          if (elLastChild === dragEl) {
+            return completed(false);
+          }
+
+          // if there is a last element, it is the target
+          if (elLastChild && el === evt.target) {
+            target = elLastChild;
+          }
+          if (target) {
+            targetRect = getRect(target);
+          }
+          if (_onMove(rootEl, el, dragEl, dragRect, target, targetRect, evt, !!target) !== false) {
+            capture();
+            if (elLastChild && elLastChild.nextSibling) {
+              // the last draggable element is not the last node
+              el.insertBefore(dragEl, elLastChild.nextSibling);
+            } else {
+              el.appendChild(dragEl);
+            }
+            parentEl = el; // actualization
+
+            changed();
+            return completed(true);
+          }
+        } else if (elLastChild && _ghostIsFirst(evt, vertical, this)) {
+          // Insert to start of list
+          var firstChild = getChild(el, 0, options, true);
+          if (firstChild === dragEl) {
+            return completed(false);
+          }
+          target = firstChild;
+          targetRect = getRect(target);
+          if (_onMove(rootEl, el, dragEl, dragRect, target, targetRect, evt, false) !== false) {
+            capture();
+            el.insertBefore(dragEl, firstChild);
+            parentEl = el; // actualization
+
+            changed();
+            return completed(true);
+          }
+        } else if (target.parentNode === el) {
+          targetRect = getRect(target);
+          var direction = 0,
+            targetBeforeFirstSwap,
+            differentLevel = dragEl.parentNode !== el,
+            differentRowCol = !_dragElInRowColumn(dragEl.animated && dragEl.toRect || dragRect, target.animated && target.toRect || targetRect, vertical),
+            side1 = vertical ? 'top' : 'left',
+            scrolledPastTop = isScrolledPast(target, 'top', 'top') || isScrolledPast(dragEl, 'top', 'top'),
+            scrollBefore = scrolledPastTop ? scrolledPastTop.scrollTop : void 0;
+          if (lastTarget !== target) {
+            targetBeforeFirstSwap = targetRect[side1];
+            pastFirstInvertThresh = false;
+            isCircumstantialInvert = !differentRowCol && options.invertSwap || differentLevel;
+          }
+          direction = _getSwapDirection(evt, target, targetRect, vertical, differentRowCol ? 1 : options.swapThreshold, options.invertedSwapThreshold == null ? options.swapThreshold : options.invertedSwapThreshold, isCircumstantialInvert, lastTarget === target);
+          var sibling;
+          if (direction !== 0) {
+            // Check if target is beside dragEl in respective direction (ignoring hidden elements)
+            var dragIndex = index$1(dragEl);
+            do {
+              dragIndex -= direction;
+              sibling = parentEl.children[dragIndex];
+            } while (sibling && (css(sibling, 'display') === 'none' || sibling === ghostEl));
+          }
+          // If dragEl is already beside target: Do not insert
+          if (direction === 0 || sibling === target) {
+            return completed(false);
+          }
+          lastTarget = target;
+          lastDirection = direction;
+          var nextSibling = target.nextElementSibling,
+            after = false;
+          after = direction === 1;
+          var moveVector = _onMove(rootEl, el, dragEl, dragRect, target, targetRect, evt, after);
+          if (moveVector !== false) {
+            if (moveVector === 1 || moveVector === -1) {
+              after = moveVector === 1;
+            }
+            _silent = true;
+            setTimeout(_unsilent, 30);
+            capture();
+            if (after && !nextSibling) {
+              el.appendChild(dragEl);
+            } else {
+              target.parentNode.insertBefore(dragEl, after ? nextSibling : target);
+            }
+
+            // Undo chrome's scroll adjustment (has no effect on other browsers)
+            if (scrolledPastTop) {
+              scrollBy(scrolledPastTop, 0, scrollBefore - scrolledPastTop.scrollTop);
+            }
+            parentEl = dragEl.parentNode; // actualization
+
+            // must be done before animation
+            if (targetBeforeFirstSwap !== undefined && !isCircumstantialInvert) {
+              targetMoveDistance = Math.abs(targetBeforeFirstSwap - getRect(target)[side1]);
+            }
+            changed();
+            return completed(true);
+          }
+        }
+        if (el.contains(dragEl)) {
+          return completed(false);
+        }
+      }
+      return false;
+    },
+    _ignoreWhileAnimating: null,
+    _offMoveEvents: function _offMoveEvents() {
+      off(document, 'mousemove', this._onTouchMove);
+      off(document, 'touchmove', this._onTouchMove);
+      off(document, 'pointermove', this._onTouchMove);
+      off(document, 'dragover', nearestEmptyInsertDetectEvent);
+      off(document, 'mousemove', nearestEmptyInsertDetectEvent);
+      off(document, 'touchmove', nearestEmptyInsertDetectEvent);
+    },
+    _offUpEvents: function _offUpEvents() {
+      var ownerDocument = this.el.ownerDocument;
+      off(ownerDocument, 'mouseup', this._onDrop);
+      off(ownerDocument, 'touchend', this._onDrop);
+      off(ownerDocument, 'pointerup', this._onDrop);
+      off(ownerDocument, 'pointercancel', this._onDrop);
+      off(ownerDocument, 'touchcancel', this._onDrop);
+      off(document, 'selectstart', this);
+    },
+    _onDrop: function _onDrop( /**Event*/evt) {
+      var el = this.el,
+        options = this.options;
+
+      // Get the index of the dragged element within its parent
+      newIndex = index$1(dragEl);
+      newDraggableIndex = index$1(dragEl, options.draggable);
+      pluginEvent('drop', this, {
+        evt: evt
+      });
+      parentEl = dragEl && dragEl.parentNode;
+
+      // Get again after plugin event
+      newIndex = index$1(dragEl);
+      newDraggableIndex = index$1(dragEl, options.draggable);
+      if (Sortable.eventCanceled) {
+        this._nulling();
+        return;
+      }
+      awaitingDragStarted = false;
+      isCircumstantialInvert = false;
+      pastFirstInvertThresh = false;
+      clearInterval(this._loopId);
+      clearTimeout(this._dragStartTimer);
+      _cancelNextTick(this.cloneId);
+      _cancelNextTick(this._dragStartId);
+
+      // Unbind events
+      if (this.nativeDraggable) {
+        off(document, 'drop', this);
+        off(el, 'dragstart', this._onDragStart);
+      }
+      this._offMoveEvents();
+      this._offUpEvents();
+      if (Safari) {
+        css(document.body, 'user-select', '');
+      }
+      css(dragEl, 'transform', '');
+      if (evt) {
+        if (moved) {
+          evt.cancelable && evt.preventDefault();
+          !options.dropBubble && evt.stopPropagation();
+        }
+        ghostEl && ghostEl.parentNode && ghostEl.parentNode.removeChild(ghostEl);
+        if (rootEl === parentEl || putSortable && putSortable.lastPutMode !== 'clone') {
+          // Remove clone(s)
+          cloneEl && cloneEl.parentNode && cloneEl.parentNode.removeChild(cloneEl);
+        }
+        if (dragEl) {
+          if (this.nativeDraggable) {
+            off(dragEl, 'dragend', this);
+          }
+          _disableDraggable(dragEl);
+          dragEl.style['will-change'] = '';
+
+          // Remove classes
+          // ghostClass is added in dragStarted
+          if (moved && !awaitingDragStarted) {
+            toggleClass(dragEl, putSortable ? putSortable.options.ghostClass : this.options.ghostClass, false);
+          }
+          toggleClass(dragEl, this.options.chosenClass, false);
+
+          // Drag stop event
+          _dispatchEvent({
+            sortable: this,
+            name: 'unchoose',
+            toEl: parentEl,
+            newIndex: null,
+            newDraggableIndex: null,
+            originalEvent: evt
+          });
+          if (rootEl !== parentEl) {
+            if (newIndex >= 0) {
+              // Add event
+              _dispatchEvent({
+                rootEl: parentEl,
+                name: 'add',
+                toEl: parentEl,
+                fromEl: rootEl,
+                originalEvent: evt
+              });
+
+              // Remove event
+              _dispatchEvent({
+                sortable: this,
+                name: 'remove',
+                toEl: parentEl,
+                originalEvent: evt
+              });
+
+              // drag from one list and drop into another
+              _dispatchEvent({
+                rootEl: parentEl,
+                name: 'sort',
+                toEl: parentEl,
+                fromEl: rootEl,
+                originalEvent: evt
+              });
+              _dispatchEvent({
+                sortable: this,
+                name: 'sort',
+                toEl: parentEl,
+                originalEvent: evt
+              });
+            }
+            putSortable && putSortable.save();
+          } else {
+            if (newIndex !== oldIndex) {
+              if (newIndex >= 0) {
+                // drag & drop within the same list
+                _dispatchEvent({
+                  sortable: this,
+                  name: 'update',
+                  toEl: parentEl,
+                  originalEvent: evt
+                });
+                _dispatchEvent({
+                  sortable: this,
+                  name: 'sort',
+                  toEl: parentEl,
+                  originalEvent: evt
+                });
+              }
+            }
+          }
+          if (Sortable.active) {
+            /* jshint eqnull:true */
+            if (newIndex == null || newIndex === -1) {
+              newIndex = oldIndex;
+              newDraggableIndex = oldDraggableIndex;
+            }
+            _dispatchEvent({
+              sortable: this,
+              name: 'end',
+              toEl: parentEl,
+              originalEvent: evt
+            });
+
+            // Save sorting
+            this.save();
+          }
+        }
+      }
+      this._nulling();
+    },
+    _nulling: function _nulling() {
+      pluginEvent('nulling', this);
+      rootEl = dragEl = parentEl = ghostEl = nextEl = cloneEl = lastDownEl = cloneHidden = tapEvt = touchEvt = moved = newIndex = newDraggableIndex = oldIndex = oldDraggableIndex = lastTarget = lastDirection = putSortable = activeGroup = Sortable.dragged = Sortable.ghost = Sortable.clone = Sortable.active = null;
+      savedInputChecked.forEach(function (el) {
+        el.checked = true;
+      });
+      savedInputChecked.length = lastDx = lastDy = 0;
+    },
+    handleEvent: function handleEvent( /**Event*/evt) {
+      switch (evt.type) {
+        case 'drop':
+        case 'dragend':
+          this._onDrop(evt);
+          break;
+        case 'dragenter':
+        case 'dragover':
+          if (dragEl) {
+            this._onDragOver(evt);
+            _globalDragOver(evt);
+          }
+          break;
+        case 'selectstart':
+          evt.preventDefault();
+          break;
+      }
+    },
+    /**
+     * Serializes the item into an array of string.
+     * @returns {String[]}
+     */
+    toArray: function toArray() {
+      var order = [],
+        el,
+        children = this.el.children,
+        i = 0,
+        n = children.length,
+        options = this.options;
+      for (; i < n; i++) {
+        el = children[i];
+        if (closest(el, options.draggable, this.el, false)) {
+          order.push(el.getAttribute(options.dataIdAttr) || _generateId(el));
+        }
+      }
+      return order;
+    },
+    /**
+     * Sorts the elements according to the array.
+     * @param  {String[]}  order  order of the items
+     */
+    sort: function sort(order, useAnimation) {
+      var items = {},
+        rootEl = this.el;
+      this.toArray().forEach(function (id, i) {
+        var el = rootEl.children[i];
+        if (closest(el, this.options.draggable, rootEl, false)) {
+          items[id] = el;
+        }
+      }, this);
+      useAnimation && this.captureAnimationState();
+      order.forEach(function (id) {
+        if (items[id]) {
+          rootEl.removeChild(items[id]);
+          rootEl.appendChild(items[id]);
+        }
+      });
+      useAnimation && this.animateAll();
+    },
+    /**
+     * Save the current sorting
+     */
+    save: function save() {
+      var store = this.options.store;
+      store && store.set && store.set(this);
+    },
+    /**
+     * For each element in the set, get the first element that matches the selector by testing the element itself and traversing up through its ancestors in the DOM tree.
+     * @param   {HTMLElement}  el
+     * @param   {String}       [selector]  default: `options.draggable`
+     * @returns {HTMLElement|null}
+     */
+    closest: function closest$1(el, selector) {
+      return closest(el, selector || this.options.draggable, this.el, false);
+    },
+    /**
+     * Set/get option
+     * @param   {string} name
+     * @param   {*}      [value]
+     * @returns {*}
+     */
+    option: function option(name, value) {
+      var options = this.options;
+      if (value === void 0) {
+        return options[name];
+      } else {
+        var modifiedValue = PluginManager.modifyOption(this, name, value);
+        if (typeof modifiedValue !== 'undefined') {
+          options[name] = modifiedValue;
+        } else {
+          options[name] = value;
+        }
+        if (name === 'group') {
+          _prepareGroup(options);
+        }
+      }
+    },
+    /**
+     * Destroy
+     */
+    destroy: function destroy() {
+      pluginEvent('destroy', this);
+      var el = this.el;
+      el[expando] = null;
+      off(el, 'mousedown', this._onTapStart);
+      off(el, 'touchstart', this._onTapStart);
+      off(el, 'pointerdown', this._onTapStart);
+      if (this.nativeDraggable) {
+        off(el, 'dragover', this);
+        off(el, 'dragenter', this);
+      }
+      // Remove draggable attributes
+      Array.prototype.forEach.call(el.querySelectorAll('[draggable]'), function (el) {
+        el.removeAttribute('draggable');
+      });
+      this._onDrop();
+      this._disableDelayedDragEvents();
+      sortables.splice(sortables.indexOf(this.el), 1);
+      this.el = el = null;
+    },
+    _hideClone: function _hideClone() {
+      if (!cloneHidden) {
+        pluginEvent('hideClone', this);
+        if (Sortable.eventCanceled) return;
+        css(cloneEl, 'display', 'none');
+        if (this.options.removeCloneOnHide && cloneEl.parentNode) {
+          cloneEl.parentNode.removeChild(cloneEl);
+        }
+        cloneHidden = true;
+      }
+    },
+    _showClone: function _showClone(putSortable) {
+      if (putSortable.lastPutMode !== 'clone') {
+        this._hideClone();
+        return;
+      }
+      if (cloneHidden) {
+        pluginEvent('showClone', this);
+        if (Sortable.eventCanceled) return;
+
+        // show clone at dragEl or original position
+        if (dragEl.parentNode == rootEl && !this.options.group.revertClone) {
+          rootEl.insertBefore(cloneEl, dragEl);
+        } else if (nextEl) {
+          rootEl.insertBefore(cloneEl, nextEl);
+        } else {
+          rootEl.appendChild(cloneEl);
+        }
+        if (this.options.group.revertClone) {
+          this.animate(dragEl, cloneEl);
+        }
+        css(cloneEl, 'display', '');
+        cloneHidden = false;
+      }
+    }
+  };
+  function _globalDragOver( /**Event*/evt) {
+    if (evt.dataTransfer) {
+      evt.dataTransfer.dropEffect = 'move';
+    }
+    evt.cancelable && evt.preventDefault();
+  }
+  function _onMove(fromEl, toEl, dragEl, dragRect, targetEl, targetRect, originalEvent, willInsertAfter) {
+    var evt,
+      sortable = fromEl[expando],
+      onMoveFn = sortable.options.onMove,
+      retVal;
+    // Support for new CustomEvent feature
+    if (window.CustomEvent && !IE11OrLess && !Edge) {
+      evt = new CustomEvent('move', {
+        bubbles: true,
+        cancelable: true
+      });
+    } else {
+      evt = document.createEvent('Event');
+      evt.initEvent('move', true, true);
+    }
+    evt.to = toEl;
+    evt.from = fromEl;
+    evt.dragged = dragEl;
+    evt.draggedRect = dragRect;
+    evt.related = targetEl || toEl;
+    evt.relatedRect = targetRect || getRect(toEl);
+    evt.willInsertAfter = willInsertAfter;
+    evt.originalEvent = originalEvent;
+    fromEl.dispatchEvent(evt);
+    if (onMoveFn) {
+      retVal = onMoveFn.call(sortable, evt, originalEvent);
+    }
+    return retVal;
+  }
+  function _disableDraggable(el) {
+    el.draggable = false;
+  }
+  function _unsilent() {
+    _silent = false;
+  }
+  function _ghostIsFirst(evt, vertical, sortable) {
+    var firstElRect = getRect(getChild(sortable.el, 0, sortable.options, true));
+    var childContainingRect = getChildContainingRectFromElement(sortable.el, sortable.options, ghostEl);
+    var spacer = 10;
+    return vertical ? evt.clientX < childContainingRect.left - spacer || evt.clientY < firstElRect.top && evt.clientX < firstElRect.right : evt.clientY < childContainingRect.top - spacer || evt.clientY < firstElRect.bottom && evt.clientX < firstElRect.left;
+  }
+  function _ghostIsLast(evt, vertical, sortable) {
+    var lastElRect = getRect(lastChild(sortable.el, sortable.options.draggable));
+    var childContainingRect = getChildContainingRectFromElement(sortable.el, sortable.options, ghostEl);
+    var spacer = 10;
+    return vertical ? evt.clientX > childContainingRect.right + spacer || evt.clientY > lastElRect.bottom && evt.clientX > lastElRect.left : evt.clientY > childContainingRect.bottom + spacer || evt.clientX > lastElRect.right && evt.clientY > lastElRect.top;
+  }
+  function _getSwapDirection(evt, target, targetRect, vertical, swapThreshold, invertedSwapThreshold, invertSwap, isLastTarget) {
+    var mouseOnAxis = vertical ? evt.clientY : evt.clientX,
+      targetLength = vertical ? targetRect.height : targetRect.width,
+      targetS1 = vertical ? targetRect.top : targetRect.left,
+      targetS2 = vertical ? targetRect.bottom : targetRect.right,
+      invert = false;
+    if (!invertSwap) {
+      // Never invert or create dragEl shadow when target movemenet causes mouse to move past the end of regular swapThreshold
+      if (isLastTarget && targetMoveDistance < targetLength * swapThreshold) {
+        // multiplied only by swapThreshold because mouse will already be inside target by (1 - threshold) * targetLength / 2
+        // check if past first invert threshold on side opposite of lastDirection
+        if (!pastFirstInvertThresh && (lastDirection === 1 ? mouseOnAxis > targetS1 + targetLength * invertedSwapThreshold / 2 : mouseOnAxis < targetS2 - targetLength * invertedSwapThreshold / 2)) {
+          // past first invert threshold, do not restrict inverted threshold to dragEl shadow
+          pastFirstInvertThresh = true;
+        }
+        if (!pastFirstInvertThresh) {
+          // dragEl shadow (target move distance shadow)
+          if (lastDirection === 1 ? mouseOnAxis < targetS1 + targetMoveDistance // over dragEl shadow
+          : mouseOnAxis > targetS2 - targetMoveDistance) {
+            return -lastDirection;
+          }
+        } else {
+          invert = true;
+        }
+      } else {
+        // Regular
+        if (mouseOnAxis > targetS1 + targetLength * (1 - swapThreshold) / 2 && mouseOnAxis < targetS2 - targetLength * (1 - swapThreshold) / 2) {
+          return _getInsertDirection(target);
+        }
+      }
+    }
+    invert = invert || invertSwap;
+    if (invert) {
+      // Invert of regular
+      if (mouseOnAxis < targetS1 + targetLength * invertedSwapThreshold / 2 || mouseOnAxis > targetS2 - targetLength * invertedSwapThreshold / 2) {
+        return mouseOnAxis > targetS1 + targetLength / 2 ? 1 : -1;
+      }
+    }
+    return 0;
+  }
+
+  /**
+   * Gets the direction dragEl must be swapped relative to target in order to make it
+   * seem that dragEl has been "inserted" into that element's position
+   * @param  {HTMLElement} target       The target whose position dragEl is being inserted at
+   * @return {Number}                   Direction dragEl must be swapped
+   */
+  function _getInsertDirection(target) {
+    if (index$1(dragEl) < index$1(target)) {
+      return 1;
+    } else {
+      return -1;
+    }
+  }
+
+  /**
+   * Generate id
+   * @param   {HTMLElement} el
+   * @returns {String}
+   * @private
+   */
+  function _generateId(el) {
+    var str = el.tagName + el.className + el.src + el.href + el.textContent,
+      i = str.length,
+      sum = 0;
+    while (i--) {
+      sum += str.charCodeAt(i);
+    }
+    return sum.toString(36);
+  }
+  function _saveInputCheckedState(root) {
+    savedInputChecked.length = 0;
+    var inputs = root.getElementsByTagName('input');
+    var idx = inputs.length;
+    while (idx--) {
+      var el = inputs[idx];
+      el.checked && savedInputChecked.push(el);
+    }
+  }
+  function _nextTick(fn) {
+    return setTimeout(fn, 0);
+  }
+  function _cancelNextTick(id) {
+    return clearTimeout(id);
+  }
+
+  // Fixed #973:
+  if (documentExists) {
+    on(document, 'touchmove', function (evt) {
+      if ((Sortable.active || awaitingDragStarted) && evt.cancelable) {
+        evt.preventDefault();
+      }
+    });
+  }
+
+  // Export utils
+  Sortable.utils = {
+    on: on,
+    off: off,
+    css: css,
+    find: find,
+    is: function is(el, selector) {
+      return !!closest(el, selector, el, false);
+    },
+    extend: extend,
+    throttle: throttle,
+    closest: closest,
+    toggleClass: toggleClass,
+    clone: clone,
+    index: index$1,
+    nextTick: _nextTick,
+    cancelNextTick: _cancelNextTick,
+    detectDirection: _detectDirection,
+    getChild: getChild,
+    expando: expando
+  };
+
+  /**
+   * Get the Sortable instance of an element
+   * @param  {HTMLElement} element The element
+   * @return {Sortable|undefined}         The instance of Sortable
+   */
+  Sortable.get = function (element) {
+    return element[expando];
+  };
+
+  /**
+   * Mount a plugin to Sortable
+   * @param  {...SortablePlugin|SortablePlugin[]} plugins       Plugins being mounted
+   */
+  Sortable.mount = function () {
+    for (var _len = arguments.length, plugins = new Array(_len), _key = 0; _key < _len; _key++) {
+      plugins[_key] = arguments[_key];
+    }
+    if (plugins[0].constructor === Array) plugins = plugins[0];
+    plugins.forEach(function (plugin) {
+      if (!plugin.prototype || !plugin.prototype.constructor) {
+        throw "Sortable: Mounted plugin must be a constructor function, not ".concat({}.toString.call(plugin));
+      }
+      if (plugin.utils) Sortable.utils = _objectSpread2(_objectSpread2({}, Sortable.utils), plugin.utils);
+      PluginManager.mount(plugin);
+    });
+  };
+
+  /**
+   * Create sortable instance
+   * @param {HTMLElement}  el
+   * @param {Object}      [options]
+   */
+  Sortable.create = function (el, options) {
+    return new Sortable(el, options);
+  };
+
+  // Export
+  Sortable.version = version;
+
+  var autoScrolls = [],
+    scrollEl,
+    scrollRootEl,
+    scrolling = false,
+    lastAutoScrollX,
+    lastAutoScrollY,
+    touchEvt$1,
+    pointerElemChangedInterval;
+  function AutoScrollPlugin() {
+    function AutoScroll() {
+      this.defaults = {
+        scroll: true,
+        forceAutoScrollFallback: false,
+        scrollSensitivity: 30,
+        scrollSpeed: 10,
+        bubbleScroll: true
+      };
+
+      // Bind all private methods
+      for (var fn in this) {
+        if (fn.charAt(0) === '_' && typeof this[fn] === 'function') {
+          this[fn] = this[fn].bind(this);
+        }
+      }
+    }
+    AutoScroll.prototype = {
+      dragStarted: function dragStarted(_ref) {
+        var originalEvent = _ref.originalEvent;
+        if (this.sortable.nativeDraggable) {
+          on(document, 'dragover', this._handleAutoScroll);
+        } else {
+          if (this.options.supportPointer) {
+            on(document, 'pointermove', this._handleFallbackAutoScroll);
+          } else if (originalEvent.touches) {
+            on(document, 'touchmove', this._handleFallbackAutoScroll);
+          } else {
+            on(document, 'mousemove', this._handleFallbackAutoScroll);
+          }
+        }
+      },
+      dragOverCompleted: function dragOverCompleted(_ref2) {
+        var originalEvent = _ref2.originalEvent;
+        // For when bubbling is canceled and using fallback (fallback 'touchmove' always reached)
+        if (!this.options.dragOverBubble && !originalEvent.rootEl) {
+          this._handleAutoScroll(originalEvent);
+        }
+      },
+      drop: function drop() {
+        if (this.sortable.nativeDraggable) {
+          off(document, 'dragover', this._handleAutoScroll);
+        } else {
+          off(document, 'pointermove', this._handleFallbackAutoScroll);
+          off(document, 'touchmove', this._handleFallbackAutoScroll);
+          off(document, 'mousemove', this._handleFallbackAutoScroll);
+        }
+        clearPointerElemChangedInterval();
+        clearAutoScrolls();
+        cancelThrottle();
+      },
+      nulling: function nulling() {
+        touchEvt$1 = scrollRootEl = scrollEl = scrolling = pointerElemChangedInterval = lastAutoScrollX = lastAutoScrollY = null;
+        autoScrolls.length = 0;
+      },
+      _handleFallbackAutoScroll: function _handleFallbackAutoScroll(evt) {
+        this._handleAutoScroll(evt, true);
+      },
+      _handleAutoScroll: function _handleAutoScroll(evt, fallback) {
+        var _this = this;
+        var x = (evt.touches ? evt.touches[0] : evt).clientX,
+          y = (evt.touches ? evt.touches[0] : evt).clientY,
+          elem = document.elementFromPoint(x, y);
+        touchEvt$1 = evt;
+
+        // IE does not seem to have native autoscroll,
+        // Edge's autoscroll seems too conditional,
+        // MACOS Safari does not have autoscroll,
+        // Firefox and Chrome are good
+        if (fallback || this.options.forceAutoScrollFallback || Edge || IE11OrLess || Safari) {
+          autoScroll(evt, this.options, elem, fallback);
+
+          // Listener for pointer element change
+          var ogElemScroller = getParentAutoScrollElement(elem, true);
+          if (scrolling && (!pointerElemChangedInterval || x !== lastAutoScrollX || y !== lastAutoScrollY)) {
+            pointerElemChangedInterval && clearPointerElemChangedInterval();
+            // Detect for pointer elem change, emulating native DnD behaviour
+            pointerElemChangedInterval = setInterval(function () {
+              var newElem = getParentAutoScrollElement(document.elementFromPoint(x, y), true);
+              if (newElem !== ogElemScroller) {
+                ogElemScroller = newElem;
+                clearAutoScrolls();
+              }
+              autoScroll(evt, _this.options, newElem, fallback);
+            }, 10);
+            lastAutoScrollX = x;
+            lastAutoScrollY = y;
+          }
+        } else {
+          // if DnD is enabled (and browser has good autoscrolling), first autoscroll will already scroll, so get parent autoscroll of first autoscroll
+          if (!this.options.bubbleScroll || getParentAutoScrollElement(elem, true) === getWindowScrollingElement()) {
+            clearAutoScrolls();
+            return;
+          }
+          autoScroll(evt, this.options, getParentAutoScrollElement(elem, false), false);
+        }
+      }
+    };
+    return _extends(AutoScroll, {
+      pluginName: 'scroll',
+      initializeByDefault: true
+    });
+  }
+  function clearAutoScrolls() {
+    autoScrolls.forEach(function (autoScroll) {
+      clearInterval(autoScroll.pid);
+    });
+    autoScrolls = [];
+  }
+  function clearPointerElemChangedInterval() {
+    clearInterval(pointerElemChangedInterval);
+  }
+  var autoScroll = throttle(function (evt, options, rootEl, isFallback) {
+    // Bug: https://bugzilla.mozilla.org/show_bug.cgi?id=505521
+    if (!options.scroll) return;
+    var x = (evt.touches ? evt.touches[0] : evt).clientX,
+      y = (evt.touches ? evt.touches[0] : evt).clientY,
+      sens = options.scrollSensitivity,
+      speed = options.scrollSpeed,
+      winScroller = getWindowScrollingElement();
+    var scrollThisInstance = false,
+      scrollCustomFn;
+
+    // New scroll root, set scrollEl
+    if (scrollRootEl !== rootEl) {
+      scrollRootEl = rootEl;
+      clearAutoScrolls();
+      scrollEl = options.scroll;
+      scrollCustomFn = options.scrollFn;
+      if (scrollEl === true) {
+        scrollEl = getParentAutoScrollElement(rootEl, true);
+      }
+    }
+    var layersOut = 0;
+    var currentParent = scrollEl;
+    do {
+      var el = currentParent,
+        rect = getRect(el),
+        top = rect.top,
+        bottom = rect.bottom,
+        left = rect.left,
+        right = rect.right,
+        width = rect.width,
+        height = rect.height,
+        canScrollX = void 0,
+        canScrollY = void 0,
+        scrollWidth = el.scrollWidth,
+        scrollHeight = el.scrollHeight,
+        elCSS = css(el),
+        scrollPosX = el.scrollLeft,
+        scrollPosY = el.scrollTop;
+      if (el === winScroller) {
+        canScrollX = width < scrollWidth && (elCSS.overflowX === 'auto' || elCSS.overflowX === 'scroll' || elCSS.overflowX === 'visible');
+        canScrollY = height < scrollHeight && (elCSS.overflowY === 'auto' || elCSS.overflowY === 'scroll' || elCSS.overflowY === 'visible');
+      } else {
+        canScrollX = width < scrollWidth && (elCSS.overflowX === 'auto' || elCSS.overflowX === 'scroll');
+        canScrollY = height < scrollHeight && (elCSS.overflowY === 'auto' || elCSS.overflowY === 'scroll');
+      }
+      var vx = canScrollX && (Math.abs(right - x) <= sens && scrollPosX + width < scrollWidth) - (Math.abs(left - x) <= sens && !!scrollPosX);
+      var vy = canScrollY && (Math.abs(bottom - y) <= sens && scrollPosY + height < scrollHeight) - (Math.abs(top - y) <= sens && !!scrollPosY);
+      if (!autoScrolls[layersOut]) {
+        for (var i = 0; i <= layersOut; i++) {
+          if (!autoScrolls[i]) {
+            autoScrolls[i] = {};
+          }
+        }
+      }
+      if (autoScrolls[layersOut].vx != vx || autoScrolls[layersOut].vy != vy || autoScrolls[layersOut].el !== el) {
+        autoScrolls[layersOut].el = el;
+        autoScrolls[layersOut].vx = vx;
+        autoScrolls[layersOut].vy = vy;
+        clearInterval(autoScrolls[layersOut].pid);
+        if (vx != 0 || vy != 0) {
+          scrollThisInstance = true;
+          /* jshint loopfunc:true */
+          autoScrolls[layersOut].pid = setInterval(function () {
+            // emulate drag over during autoscroll (fallback), emulating native DnD behaviour
+            if (isFallback && this.layer === 0) {
+              Sortable.active._onTouchMove(touchEvt$1); // To move ghost if it is positioned absolutely
+            }
+            var scrollOffsetY = autoScrolls[this.layer].vy ? autoScrolls[this.layer].vy * speed : 0;
+            var scrollOffsetX = autoScrolls[this.layer].vx ? autoScrolls[this.layer].vx * speed : 0;
+            if (typeof scrollCustomFn === 'function') {
+              if (scrollCustomFn.call(Sortable.dragged.parentNode[expando], scrollOffsetX, scrollOffsetY, evt, touchEvt$1, autoScrolls[this.layer].el) !== 'continue') {
+                return;
+              }
+            }
+            scrollBy(autoScrolls[this.layer].el, scrollOffsetX, scrollOffsetY);
+          }.bind({
+            layer: layersOut
+          }), 24);
+        }
+      }
+      layersOut++;
+    } while (options.bubbleScroll && currentParent !== winScroller && (currentParent = getParentAutoScrollElement(currentParent, false)));
+    scrolling = scrollThisInstance; // in case another function catches scrolling as false in between when it is not
+  }, 30);
+
+  var drop = function drop(_ref) {
+    var originalEvent = _ref.originalEvent,
+      putSortable = _ref.putSortable,
+      dragEl = _ref.dragEl,
+      activeSortable = _ref.activeSortable,
+      dispatchSortableEvent = _ref.dispatchSortableEvent,
+      hideGhostForTarget = _ref.hideGhostForTarget,
+      unhideGhostForTarget = _ref.unhideGhostForTarget;
+    if (!originalEvent) return;
+    var toSortable = putSortable || activeSortable;
+    hideGhostForTarget();
+    var touch = originalEvent.changedTouches && originalEvent.changedTouches.length ? originalEvent.changedTouches[0] : originalEvent;
+    var target = document.elementFromPoint(touch.clientX, touch.clientY);
+    unhideGhostForTarget();
+    if (toSortable && !toSortable.el.contains(target)) {
+      dispatchSortableEvent('spill');
+      this.onSpill({
+        dragEl: dragEl,
+        putSortable: putSortable
+      });
+    }
+  };
+  function Revert() {}
+  Revert.prototype = {
+    startIndex: null,
+    dragStart: function dragStart(_ref2) {
+      var oldDraggableIndex = _ref2.oldDraggableIndex;
+      this.startIndex = oldDraggableIndex;
+    },
+    onSpill: function onSpill(_ref3) {
+      var dragEl = _ref3.dragEl,
+        putSortable = _ref3.putSortable;
+      this.sortable.captureAnimationState();
+      if (putSortable) {
+        putSortable.captureAnimationState();
+      }
+      var nextSibling = getChild(this.sortable.el, this.startIndex, this.options);
+      if (nextSibling) {
+        this.sortable.el.insertBefore(dragEl, nextSibling);
+      } else {
+        this.sortable.el.appendChild(dragEl);
+      }
+      this.sortable.animateAll();
+      if (putSortable) {
+        putSortable.animateAll();
+      }
+    },
+    drop: drop
+  };
+  _extends(Revert, {
+    pluginName: 'revertOnSpill'
+  });
+  function Remove() {}
+  Remove.prototype = {
+    onSpill: function onSpill(_ref4) {
+      var dragEl = _ref4.dragEl,
+        putSortable = _ref4.putSortable;
+      var parentSortable = putSortable || this.sortable;
+      parentSortable.captureAnimationState();
+      dragEl.parentNode && dragEl.parentNode.removeChild(dragEl);
+      parentSortable.animateAll();
+    },
+    drop: drop
+  };
+  _extends(Remove, {
+    pluginName: 'removeOnSpill'
+  });
+
+  Sortable.mount(new AutoScrollPlugin());
+  Sortable.mount(Remove, Revert);
+
+  var css_248z$1 = "body>*{position:relative;transform:translateZ(0)}.demo-tools-steps{background-color:#fff;border:2px solid #ddd;display:flex;flex-direction:column;font-weight:700;height:100%;min-width:200px;z-index:10001}.demo-tools-steps h2.demo-tools-steps-title{border-bottom:2px solid #eee;color:#333;font-weight:600;margin-top:0;padding-left:4px}.demo-tools-steps .demo-tools-step{border-left:4px solid #444;color:#444;cursor:pointer;padding:3px 12px}.demo-tools-steps .demo-tools-step.unfilled{font-style:italic}.demo-tools-steps .demo-tools-step.active{border-color:#52c41a;color:#52c41a}.demo-tools-steps .demo-tools-step.completed{border-color:#999;color:#999}@keyframes fade-out{0%{opacity:1;transform:translate(-50%,-50%) scale(1)}to{opacity:0;transform:translate(-50%,-50%) scale(2)}}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImV4dGVybmFsL21vZHVsZXMvZGVtby10b29scy9zdGVwcy9zdGVwcy5sZXNzIiwic3RlcHMubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUNFLGlCQUFBLENBQ0EsdUJDQ0YsQ0RFQSxrQkFHRSxxQkFBQSxDQUNBLHFCQUFBLENBSEEsWUFBQSxDQUNBLHFCQUFBLENBR0EsZUFBQSxDQUNBLFdBQUEsQ0FDQSxlQUFBLENBQ0EsYUNBRixDREdBLDRDQUdFLDRCQUFBLENBREEsVUFBQSxDQURBLGVBQUEsQ0FJQSxZQUFBLENBREEsZ0JDQUYsQ0RJQSxtQ0FFRSwwQkFBQSxDQUNBLFVBQUEsQ0FDQSxjQUFBLENBSEEsZ0JDQ0YsQ0RJRSw0Q0FDRSxpQkNGSixDRE1BLDBDQUNFLG9CQUFBLENBQ0EsYUNKRixDRE9BLDZDQUNFLGlCQUFBLENBQ0EsVUNMRixDRFFBLG9CQUNFLEdBQ0UsU0FBQSxDQUNBLHVDQ05GLENEUUEsR0FDRSxTQUFBLENBQ0EsdUNDTkYsQ0FDRiIsImZpbGUiOiJzdGVwcy5sZXNzIn0= */";
+  styleInject(css_248z$1);
+
+  class PlanStepForm {
+      static getForm() {
+          PlanStepForm.wrapper.style.display = 'flex';
+          PlanStepForm.wrapper.style.gap = '5px';
+          PlanStepForm.wrapper.style.padding = '5px';
+          PlanStepForm.button.innerText = 'Add';
+          PlanStepForm.button.addEventListener('click', PlanStepForm.handleAddClick);
+          PlanStepForm.field.addEventListener('keypress', PlanStepForm.handleKeypress);
+          PlanStepForm.wrapper.appendChild(PlanStepForm.field);
+          PlanStepForm.wrapper.appendChild(PlanStepForm.button);
+          return PlanStepForm.wrapper;
+      }
+      static planStep() {
+          window.dispatchEvent(new CustomEvent(PlanStepForm.eventTypes.PLAN_STEP, { detail: { title: PlanStepForm.field.value } }));
+          PlanStepForm.field.value = '';
+      }
+      static handleAddClick(event) {
+          PlanStepForm.planStep();
+      }
+      static handleKeypress(event) {
+          if (event.key !== 'Enter')
+              return;
+          PlanStepForm.planStep();
+      }
+  }
+  PlanStepForm.wrapper = document.createElement('div');
+  PlanStepForm.field = document.createElement('input');
+  PlanStepForm.button = document.createElement('button');
+  PlanStepForm.eventTypes = {
+      PLAN_STEP: 'DemoTools:Steps:PlanStepForm:PlanStep',
+  };
+
+  class Steps {
+      static init() {
+          Steps.state.initialized = true;
+          window.addEventListener('DemoTools:StepsChanged', Steps.handleDemoToolsStepsChanged);
+          window.addEventListener('DemoTools:ActiveStepChanged', Steps.handleDemoToolsActiveStepChanged);
+          Steps.renderSteps();
+      }
+      static handleDemoToolsStepsChanged({ detail: { steps } }) {
+          Steps.steps = steps;
+          Steps.renderSteps();
+      }
+      static handleDemoToolsActiveStepChanged({ detail: { activeStep } }) {
+          Steps.setActiveStep(activeStep);
+      }
+      static handleStepDoubleClick(index) {
+          window.dispatchEvent(new CustomEvent(Steps.eventTypes.STEP_DOUBLECLICK, { detail: { index } }));
+      }
+      static handleStepClick(index) {
+          window.dispatchEvent(new CustomEvent(Steps.eventTypes.STEP_CLICK, { detail: { index } }));
+      }
+      static add(step) {
+          Steps.steps.push(step);
+      }
+      static renderSteps() {
+          Steps.unmount();
+          if (!Steps.state.initialized || !Steps.steps) {
+              throw new Error('DemoTools: Steps are not initialized');
+          }
+          const area = document.createElement('div');
+          area.setAttribute('class', 'demo-tools demo-tools-steps');
+          const title = document.createElement('h2');
+          title.innerHTML = 'Demo steps';
+          title.setAttribute('class', 'demo-tools-steps-title');
+          const list = document.createElement('div');
+          list.setAttribute('style', 'overflow-y: auto; padding-left: 1px; display: flex; flex-direction: column; gap: 3px;');
+          list.setAttribute('class', 'demo-tools-steps-list');
+          Steps.steps.forEach(step => {
+              const div = document.createElement('div');
+              if (!step.list) {
+                  div.setAttribute('style', 'display: none;');
+              }
+              div.setAttribute('class', 'demo-tools-step');
+              if (!step.isFilled) {
+                  div.classList.add('unfilled');
+              }
+              div.innerHTML = step.title;
+              list.appendChild(div);
+          });
+          area.appendChild(title);
+          area.appendChild(PlanStepForm.getForm());
+          area.appendChild(list);
+          document.body.style.display = 'flex';
+          document.body.appendChild(area);
+          Steps.setupInteractivity();
+      }
+      static setActiveStep(index) {
+          if (!isNil(index) && !Steps.steps[index].list) {
+              return;
+          }
+          const stepEls = document.querySelectorAll('.demo-tools-steps-list .demo-tools-step');
+          for (let i = 0; i < stepEls.length; i++) {
+              if (!Steps.steps[i].list) {
+                  continue;
+              }
+              stepEls[i].classList.remove('completed');
+              stepEls[i].classList.remove('active');
+          }
+          if (isNil(index)) {
+              return;
+          }
+          for (let i = 0; i < index; i++) {
+              if (!Steps.steps[i].list) {
+                  continue;
+              }
+              stepEls[i].classList.add('completed');
+              stepEls[i].classList.remove('active');
+          }
+          stepEls[index].classList.add('active');
+          stepEls[index].scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      static allocate(width) {
+          const area = document.createElement('div');
+          area.setAttribute('class', 'demo-tools-steps');
+          if (width) {
+              area.setAttribute('style', `width: ${width}px;`);
+          }
+          document.body.style.display = 'flex';
+          document.body.appendChild(area);
+      }
+      static clear() {
+          document.body.querySelectorAll('.demo-tools-steps').forEach((el) => {
+              var _a;
+              el.setAttribute('style', `width: ${el.clientWidth}px; min-width: ${el.clientWidth}px;`);
+              (_a = el.querySelector('.demo-tools-steps-list')) === null || _a === void 0 ? void 0 : _a.remove();
+          });
+      }
+      static unmount() {
+          document.body.querySelectorAll('.demo-tools-steps').forEach(el => el.remove());
+          document.body.style.display = 'block';
+      }
+      static destroy() {
+          Steps.unmount();
+          window.removeEventListener('DemoTools:StepsChanged', Steps.handleDemoToolsStepsChanged);
+      }
+      static setupInteractivity() {
+          Sortable.create(document.querySelector('.demo-tools-steps-list'), {
+              onEnd: (evt) => {
+                  window.dispatchEvent(new CustomEvent(Steps.eventTypes.STEP_MOVE, { detail: { from: evt.oldIndex, to: evt.newIndex } }));
+              }
+          });
+          document.querySelectorAll('.demo-tools-steps-list .demo-tools-step').forEach((el, index) => {
+              el.addEventListener('dblclick', () => {
+                  Steps.handleStepDoubleClick(index);
+              });
+          });
+          document.querySelectorAll('.demo-tools-steps-list .demo-tools-step').forEach((el, index) => {
+              el.addEventListener('click', () => {
+                  Steps.handleStepClick(index);
+              });
+          });
+      }
+  }
+  Steps.steps = [];
+  Steps.state = {
+      initialized: false,
+  };
+  Steps.eventTypes = {
+      STEP_DOUBLECLICK: 'DemoTools:Steps:StepDoubleclick',
+      STEP_MOVE: 'DemoTools:Steps:StepMove',
+      STEP_CLICK: 'DemoTools:Steps:StepClick',
+  };
+
+  var css_248z = "#demo-tools-step-picker-form{display:grid;gap:5px;grid-template-columns:auto 1fr}#demo-tools-step-picker-form #demo-tools-step-picker-form-highlight-fields{display:grid;grid-column:.33333333;grid-template-columns:auto 1fr}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImV4dGVybmFsL21vZHVsZXMvZGVtby10b29scy9zdHlsZS5sZXNzIiwic3R5bGUubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSw2QkFDRSxZQUFBLENBRUEsT0FBQSxDQURBLDhCQ0VGLENESkEsMkVBT0ksWUFBQSxDQURBLHFCQUFBLENBRUEsOEJDQ0oiLCJmaWxlIjoic3R5bGUubGVzcyJ9 */";
+  styleInject(css_248z);
+
+  class StepForm {
+      static init() {
+          StepForm.driver = Ae();
+      }
+      static getFormValues() {
+          return {
+              title: document.getElementById('demo-tools-step-picker-form-title').value,
+              type: document.getElementById('demo-tools-step-picker-form-type').value,
+              shiftX: +document.getElementById('demo-tools-step-picker-form-shiftX').value,
+              shiftY: +document.getElementById('demo-tools-step-picker-form-shiftY').value,
+              shiftWidth: +document.getElementById('demo-tools-step-picker-form-shiftWidth').value,
+              shiftHeight: +document.getElementById('demo-tools-step-picker-form-shiftHeight').value,
+              interval: +document.getElementById('demo-tools-step-picker-form-interval').value,
+              list: document.getElementById('demo-tools-step-picker-form-list').checked,
+          };
+      }
+      static getPrompt(arg) {
+          return __awaiter(this, void 0, void 0, function* () {
+              if (isNil(StepForm.driver)) {
+                  throw new Error('DevTools: StepPicker is not initialized');
+              }
+              let xPath;
+              let formValues;
+              if (isNil(arg)) {
+                  throw new Error('DevTools: Step not passed');
+              }
+              if (is(String, arg)) {
+                  xPath = arg;
+              }
+              else {
+                  xPath = arg.xPath;
+                  formValues = arg;
+              }
+              return yield new Promise((resolve) => {
+                  StepForm.driver.highlight({
+                      element: getElementByXPath(xPath),
+                      popover: {
+                          description: StepForm.getForm(formValues),
+                          showButtons: ['next', 'close'],
+                          nextBtnText: 'Done',
+                          onPopoverRender: (popoverDom) => {
+                              var _a, _b;
+                              const handleKeydown = (e) => {
+                                  if (e.key === 'Enter') {
+                                      resolve(Object.assign(Object.assign({}, StepForm.getFormValues()), { xPath }));
+                                      StepForm.driver.destroy();
+                                  }
+                              };
+                              (_a = popoverDom.wrapper) === null || _a === void 0 ? void 0 : _a.removeEventListener('keydown', handleKeydown);
+                              (_b = popoverDom.wrapper) === null || _b === void 0 ? void 0 : _b.addEventListener('keydown', handleKeydown);
+                          },
+                          onNextClick: () => {
+                              resolve(Object.assign(Object.assign({}, StepForm.getFormValues()), { xPath }));
+                              StepForm.driver.destroy();
+                          },
+                          onCloseClick: () => {
+                              resolve(undefined);
+                              StepForm.driver.destroy();
+                          },
+                      },
+                  });
+              });
+          });
+      }
+      static getForm(values) {
+          return `
+      <div class="demo-tools" id="demo-tools-step-picker-form">
+        <div class="demo-tools-step-picker-form-label">Title:</div>
+        <div class="demo-tools-step-picker-form-control"><input type="text" id="demo-tools-step-picker-form-title" autofocus value="${(values === null || values === void 0 ? void 0 : values.title) || ''}" /></div>
+        <div class="demo-tools-step-picker-form-label">Interval:</div>
+        <div class="demo-tools-step-picker-form-control"><input type="number" id="demo-tools-step-picker-form-interval" value="${(values === null || values === void 0 ? void 0 : values.interval) || DemoTools.defaultInterval}" step="100" />&nbsp;ms</div>
+        <div class="demo-tools-step-picker-form-label">Listed:</div>
+        <div class="demo-tools-step-picker-form-control"><input type="checkbox" id="demo-tools-step-picker-form-list" checked="${is(Boolean, values === null || values === void 0 ? void 0 : values.list) ? values.list.toString() : 'true'}" /></div>
+        <div class="demo-tools-step-picker-form-label">Type:</div>
+        <div class="demo-tools-step-picker-form-control">
+          <select id="demo-tools-step-picker-form-type" onchange="window.devTools?.demoToolsStepPicker.onStepTypeChange()">
+            <option value="highlight" ${(values === null || values === void 0 ? void 0 : values.type) === 'highlight' || isNil(values === null || values === void 0 ? void 0 : values.type) ? 'selected' : ''}>Highlight</option>
+            <option value="click" ${(values === null || values === void 0 ? void 0 : values.type) === 'click' ? 'selected' : ''}>Click</option>
+            <option value="rightclick" ${(values === null || values === void 0 ? void 0 : values.type) === 'rightclick' ? 'selected' : ''}>Right Click</option>
+            <option value="hover" ${(values === null || values === void 0 ? void 0 : values.type) === 'hover' ? 'selected' : ''}>Hover</option>
+          </select>
+        </div>
+        <div id="demo-tools-step-picker-form-highlight-fields" style="grid-column: 1/3; display: ${(values === null || values === void 0 ? void 0 : values.type) === 'highlight' || isNil(values === null || values === void 0 ? void 0 : values.type) ? 'grid' : 'none'};">
+          <div class="demo-tools-step-picker-form-label">Shift X:</div>
+          <div class="demo-tools-step-picker-form-control"><input type="number" id="demo-tools-step-picker-form-shiftX" step="10" value="${values === null || values === void 0 ? void 0 : values.shiftX}" /></div>
+          <div class="demo-tools-step-picker-form-label">Shift Y:</div>
+          <div class="demo-tools-step-picker-form-control"><input type="number" id="demo-tools-step-picker-form-shiftY" step="10" value="${values === null || values === void 0 ? void 0 : values.shiftY}" /></div>
+          <div class="demo-tools-step-picker-form-label">Shift Width:</div>
+          <div class="demo-tools-step-picker-form-control"><input type="number" id="demo-tools-step-picker-form-shiftWidth" step="10" value="${values === null || values === void 0 ? void 0 : values.shiftWidth}" /></div>
+          <div class="demo-tools-step-picker-form-label">Shift Height:</div>
+          <div class="demo-tools-step-picker-form-control"><input type="number" id="demo-tools-step-picker-form-shiftHeight" step="10" value="${values === null || values === void 0 ? void 0 : values.shiftHeight}" /></div>
+        </div>
+      </div>
+    `;
+      }
+  }
+  setTimeout(() => {
+      window.devTools.demoToolsStepPicker = {};
+      window.devTools.demoToolsStepPicker.onStepTypeChange = () => {
+          document.getElementById('demo-tools-step-picker-form-highlight-fields').style.display = document.getElementById('demo-tools-step-picker-form-type').value === 'highlight' ? 'grid' : 'none';
+      };
+  });
+
+  class Step {
+      constructor(step) {
+          this.title = String(step.title);
+          this.interval = Number(step.interval);
+          this.type = step.type || 'custom';
+          this.list = Boolean(step.list);
+          this.selector = step.selector;
+          this.func = step.func;
+          this.element = step.element;
+          this.xPath = step.xPath;
+          this.area = step.area;
+          this.shiftX = step.shiftX;
+          this.shiftY = step.shiftY;
+          this.shiftWidth = step.shiftWidth;
+          this.shiftHeight = step.shiftHeight;
+      }
+      get isFilled() {
+          return Boolean((this.element || this.xPath || this.selector || this.func || this.area) && this.title && this.interval);
+      }
+  }
+
+  class Dom {
+      static getElement(arg) {
+          if (is(String, arg)) {
+              return document.querySelector(arg);
+          }
+          else if (is(HTMLElement, arg)) {
+              return arg;
+          }
+          else if (!isNil(arg.element)) {
+              return arg.element;
+          }
+          else if (!isNil(arg.xPath)) {
+              return getElementByXPath(arg.xPath);
+          }
+          else {
+              return document.querySelector(arg.selector);
+          }
+      }
+      static click(arg) {
+          try {
+              const element = Dom.getElement(arg);
+              if (!element) {
+                  return;
+              }
+              element.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
+              Dom.blink(element.getBoundingClientRect().x + element.getBoundingClientRect().width / 2, element.getBoundingClientRect().y + element.getBoundingClientRect().height / 2);
+          }
+          catch (e) { }
+      }
+      static rightClick(arg) {
+          try {
+              const element = Dom.getElement(arg);
+              if (!element) {
+                  return;
+              }
+              element.dispatchEvent(new MouseEvent('rightclick', { bubbles: true, cancelable: true }));
+              element.dispatchEvent(new MouseEvent('contextmenu', { bubbles: true, cancelable: true }));
+              Dom.blink(element.getBoundingClientRect().x + element.getBoundingClientRect().width / 2, element.getBoundingClientRect().y + element.getBoundingClientRect().height / 2, { color: 'green' });
+          }
+          catch (e) { }
+      }
+      static hover(arg) {
+          try {
+              const element = Dom.getElement(arg);
+              if (!element) {
+                  return;
+              }
+              element.dispatchEvent(new MouseEvent('mouseover', { bubbles: true, cancelable: true }));
+          }
+          catch (e) { }
+      }
+      static focus(selector) {
+          try {
+              const element = document.querySelector(selector);
+              if (!element) {
+                  return;
+              }
+              element.dispatchEvent(new FocusEvent('focus', { bubbles: true, cancelable: true }));
+          }
+          catch (e) { }
+      }
+      static setValue(selector, value) {
+          try {
+              const element = document.querySelector(selector);
+              if (!element) {
+                  return;
+              }
+              element.setAttribute('value', value);
+              element.value = value;
+              element.dispatchEvent(new Event('change', { bubbles: true, cancelable: true }));
+              element.dispatchEvent(new Event('input', { bubbles: true, cancelable: true }));
+          }
+          catch (e) { }
+      }
+      static blink(x, y, options = {}) {
+          const { size = 40, color = 'yellow', border = '2px solid yellow', duration = 400, } = options;
+          const circle = document.createElement('div');
+          circle.style.position = 'absolute';
+          circle.style.left = `${x - size / 2}px`;
+          circle.style.top = `${y - size / 2}px`;
+          circle.style.width = `${size}px`;
+          circle.style.height = `${size}px`;
+          circle.style.borderRadius = '50%';
+          circle.style.backgroundColor = color;
+          circle.style.border = border;
+          circle.style.pointerEvents = 'none';
+          circle.style.zIndex = '999999999';
+          circle.style.boxShadow = `0 0 10px ${color}`;
+          circle.style.transition = `transform ${duration}ms ease-in-out, opacity ${duration}ms ease-in-out`;
+          circle.style.transform = 'scale(0.2)';
+          circle.style.opacity = '1';
+          document.body.appendChild(circle);
+          circle.getBoundingClientRect();
+          circle.style.transform = 'scale(1)';
+          circle.style.opacity = '0';
+          setTimeout(() => {
+              circle.remove();
+          }, duration);
+      }
+  }
+
+  class DemoTools {
+      static addStep(step = {}) {
+          DemoTools.insertStep(step, DemoTools.steps.length);
+      }
+      static addHighlightStep(step = {}) {
+          DemoTools.addStep(Object.assign(Object.assign({}, step), { title: step.title || `Step ${DemoTools.steps.length}`, type: 'highlight' }));
+          DemoTools.dispatchStepsChangedEvent();
+      }
+      static pickStep() {
+          var _a;
+          return __awaiter(this, void 0, void 0, function* () {
+              const hoveredEls = document.querySelectorAll(':hover');
+              if (isNil(hoveredEls) || isEmpty(hoveredEls)) {
+                  return;
+              }
+              let xPath = '';
+              hoveredEls.forEach((el, i) => {
+                  let index = 0;
+                  if (el.parentElement) {
+                      index = Array.from(el.parentElement.children).indexOf(el);
+                  }
+                  xPath += `/*[${index + 1}]`;
+              });
+              if (isEmpty(xPath)) {
+                  return;
+              }
+              let step;
+              if (DemoTools.state.activeStep !== null) {
+                  step = yield DemoTools.stepForm.getPrompt({
+                      title: DemoTools.steps[DemoTools.state.activeStep].title,
+                      xPath
+                  });
+              }
+              else {
+                  step = yield DemoTools.stepForm.getPrompt(xPath);
+              }
+              if (!step) {
+                  return;
+              }
+              if (DemoTools.state.activeStep !== null) {
+                  yield DemoTools.updateStep(DemoTools.state.activeStep, step);
+                  if (((_a = DemoTools.steps[DemoTools.state.activeStep + 1]) === null || _a === void 0 ? void 0 : _a.isFilled) === false) {
+                      DemoTools.state.activeStep = DemoTools.state.activeStep + 1;
+                      DemoTools.dispatchActiveStepChangedEvent();
+                  }
+                  return;
+              }
+              else {
+                  DemoTools.addStep(step);
+                  DemoTools.dispatchStepsChangedEvent();
+              }
+          });
+      }
+      static setSteps(steps) {
+          if (isNil(steps) || isEmpty(steps)) {
+              return;
+          }
+          DemoTools.stop();
+          values(steps).forEach((step) => DemoTools.insertStep(step));
+      }
+      static insertStep(step = {}, index) {
+          const adjustedStep = new Step(Object.assign(Object.assign({}, step), { title: step.title || `Custom step ${index}`, type: step.type || 'click', list: typeof step.list === 'boolean' ? step.list : true }));
+          const index1 = !isNil(index) ? Number(index) : DemoTools.state.activeStep !== null ? DemoTools.state.activeStep + 1 : DemoTools.steps.length;
+          DemoTools.steps = insert(index1, adjustedStep, DemoTools.steps);
+          DemoTools.state.lastUpdatedStep = index1;
+          DemoTools.dispatchStepsChangedEvent();
+      }
+      static updateStep(title, step) {
+          return __awaiter(this, void 0, void 0, function* () {
+              if (!DemoTools.state.initialized) {
+                  throw new Error('DevTools: DemoTools is not initialized');
+              }
+              if (DemoTools.state.running) {
+                  DemoTools.pause();
+              }
+              let index;
+              if (!isNil(title)) {
+                  if (isNaN(Number(title))) {
+                      index = findIndex((step) => step.title.toLowerCase().includes(title.toLowerCase()), DemoTools.steps);
+                  }
+                  else {
+                      index = title;
+                  }
+                  if (index === -1) {
+                      return;
+                  }
+              }
+              else {
+                  index = Number(isNil(DemoTools.state.activeStep) ? DemoTools.state.lastUpdatedStep : DemoTools.state.activeStep || 0);
+              }
+              const updatedStep = step || (yield DemoTools.stepForm.getPrompt(DemoTools.steps[index]));
+              DemoTools.state.lastUpdatedStep = index;
+              DemoTools.steps[index] = new Step(Object.assign(Object.assign({}, DemoTools.steps[index]), updatedStep));
+              DemoTools.dispatchStepsChangedEvent();
+          });
+      }
+      static removeStep(title) {
+          let index;
+          if (isNaN(Number(title))) {
+              index = findIndex((step) => step.title.toLowerCase().includes(title.toLowerCase()), DemoTools.steps);
+          }
+          else {
+              index = title;
+          }
+          if (index === -1) {
+              return;
+          }
+          DemoTools.steps = remove(index, 1, DemoTools.steps);
+          if (DemoTools.state.activeStep === index) {
+              DemoTools.state.activeStep = null;
+              DemoTools.dispatchActiveStepChangedEvent();
+          }
+          DemoTools.dispatchStepsChangedEvent();
+      }
+      static removeAllSteps() {
+          DemoTools.steps = [];
+          DemoTools.dispatchStepsChangedEvent();
+      }
+      static doStep(title) {
+          if (!DemoTools.state.initialized) {
+              throw new Error('DevTools: DemoTools is not initialized');
+          }
+          DemoTools.state.lastUpdatedStep = null;
+          let index;
+          if (isNaN(Number(title))) {
+              index = findIndex((step) => step.title.toLowerCase().includes(title.toLowerCase()), DemoTools.steps);
+          }
+          else {
+              index = title;
+          }
+          if (index === -1 || index >= DemoTools.steps.length) {
+              return;
+          }
+          DemoTools.state.activeStep = index;
+          DemoTools.dispatchActiveStepChangedEvent();
+          if (DemoTools.steps[index].type === 'highlight') {
+              DemoTools.highlight(index);
+          }
+          else if (DemoTools.steps[index].type === 'click') {
+              Dom.click(DemoTools.steps[index]);
+          }
+          else if (DemoTools.steps[index].type === 'rightclick') {
+              Dom.rightClick(DemoTools.steps[index]);
+          }
+          else if (DemoTools.steps[index].type === 'hover') {
+              Dom.hover(DemoTools.steps[index]);
+          }
+          else {
+              DemoTools.steps[index].func();
+          }
+      }
+      static run(options = {}) {
+          return __awaiter(this, void 0, void 0, function* () {
+              DemoTools.options = Object.assign(Object.assign({}, DemoTools.options), options);
+              DemoTools.state.running = true;
+              for (let i = (options === null || options === void 0 ? void 0 : options.stepIndex) || DemoTools.state.activeStep || 0; i < DemoTools.steps.length; i++) {
+                  if (!DemoTools.state.running) {
+                      break;
+                  }
+                  DemoTools.doStep(i);
+                  const step = DemoTools.steps[i];
+                  yield new Promise(resolve => setTimeout(resolve, step.interval || DemoTools.defaultInterval));
+                  if (step.type === 'highlight') {
+                      DemoTools.unhighlight();
+                  }
+              }
+              if (DemoTools.state.activeStep === DemoTools.steps.length - 1) {
+                  DemoTools.state.running = false;
+                  DemoTools.state.activeStep = null;
+                  DemoTools.dispatchActiveStepChangedEvent();
+              }
+          });
+      }
+      static jump(index) {
+          DemoTools.pause();
+          DemoTools.state.activeStep = Number(index);
+          DemoTools.doStep(DemoTools.state.activeStep);
+      }
+      static swap(index1, index2) {
+          const tmp = DemoTools.steps[Number(index1)];
+          DemoTools.steps[Number(index1)] = DemoTools.steps[Number(index2)];
+          DemoTools.steps[Number(index2)] = tmp;
+          DemoTools.dispatchStepsChangedEvent();
+          if (index1 === DemoTools.state.activeStep || index2 === DemoTools.state.activeStep) {
+              DemoTools.dispatchActiveStepChangedEvent();
+          }
+      }
+      static move(index1, index2) {
+          const index = !isNil(index2) ? index1 : DemoTools.state.activeStep;
+          const tmp = DemoTools.steps[index];
+          DemoTools.steps.splice(index, 1);
+          DemoTools.steps.splice(!isNil(index2) ? index2 : index1, 0, tmp);
+          DemoTools.dispatchStepsChangedEvent();
+      }
+      static copy(index1, index2) {
+          const index = !isNil(index1) ? index1 : DemoTools.state.activeStep;
+          DemoTools.insertStep(DemoTools.steps[index], !isNil(index2) ? index2 : index1 + 1);
+      }
+      static stop() {
+          DemoTools.state.running = false;
+          DemoTools.state.activeStep = null;
+          DemoTools.state.lastUpdatedStep = null;
+          DemoTools.unhighlight();
+          DemoTools.dispatchActiveStepChangedEvent();
+      }
+      static pause() {
+          DemoTools.state.running = false;
+      }
+      static resume() {
+          DemoTools.run();
+      }
+      static reset() {
+          DemoTools.pause();
+          DemoTools.state.activeStep = null;
+          DemoTools.state.lastUpdatedStep = null;
+          DemoTools.unhighlight();
+          Steps.unmount();
+          DemoTools.dispatchActiveStepChangedEvent();
+      }
+      static destroy() {
+          DemoTools.stop();
+          DemoTools.removeAllSteps();
+          DemoTools.state.initialized = false;
+          Steps.destroy();
+          window.removeEventListener('keydown', DemoTools.handleKeydown);
+          DemoTools.options = {};
+      }
+      static highlight(stepIndex) {
+          if (isNil(DemoTools.steps[stepIndex])) {
+              return;
+          }
+          const { title, selector, xPath, area, shiftX, shiftY, shiftHeight, shiftWidth } = DemoTools.steps[stepIndex];
+          let areaNew = undefined;
+          if (isNil(area)) {
+              let tmpElement;
+              if (is(String, xPath)) {
+                  tmpElement = getElementByXPath(xPath);
+              }
+              else if (is(String, selector)) {
+                  tmpElement = document.querySelector(selector);
+              }
+              else {
+                  tmpElement = selector;
+              }
+              if (!tmpElement) {
+                  return;
+              }
+              const rect = tmpElement.getBoundingClientRect();
+              areaNew = {
+                  left: rect.left + (shiftX || 0) + window.scrollX,
+                  top: rect.top + (shiftY || 0) + window.scrollY,
+                  width: rect.width + (shiftWidth || 0),
+                  height: rect.height + (shiftHeight || 0),
+              };
+          }
+          const element = DemoTools.appendHighlightArea(area || areaNew);
+          if (!element) {
+              return;
+          }
+          DemoTools.driver = DemoTools.Driver(Object.assign(Object.assign({}, DemoTools.defaultDriverOptions), { steps: [{
+                      element,
+                      popover: {
+                          description: title,
+                      }
+                  }] }));
+          DemoTools.driver.drive();
+      }
+      static unhighlight() {
+          if (DemoTools.driver) {
+              DemoTools.driver.destroy();
+          }
+          const highlightArea = document.querySelector('#demo-tools-highlight-area');
+          if (highlightArea) {
+              highlightArea.remove();
+          }
+      }
+      static appendHighlightArea(area) {
+          const { left, top, width, height } = area;
+          const style = `position: absolute; left: ${left}px; top: ${top}px; width: ${width}px; height: ${height}px;`;
+          const div = document.createElement('div');
+          div.setAttribute('style', style);
+          div.setAttribute('id', 'demo-tools-highlight-area');
+          document.body.appendChild(div);
+          return div;
+      }
+      static check(selector) {
+          var _a, _b, _c;
+          (_a = document.querySelectorAll('#demo-tools-highlight-area')) === null || _a === void 0 ? void 0 : _a.forEach(el => { el.remove(); });
+          let element;
+          if (is(String, selector)) {
+              element = document.querySelector(selector);
+          }
+          else {
+              element = this.appendHighlightArea(selector);
+          }
+          if (!element) {
+              return;
+          }
+          DemoTools.driver = DemoTools.Driver(Object.assign(Object.assign({}, DemoTools.defaultDriverOptions), { onDestroyed: () => { var _a; return (_a = document.querySelectorAll('#demo-tools-highlight-area')) === null || _a === void 0 ? void 0 : _a.forEach(el => { el.remove(); }); } }));
+          DemoTools.driver.highlight({
+              element,
+              popover: {
+                  description: is(String, selector) ?
+                      `Element: ${element.nodeName.toLowerCase()}${selector}<br />parent element: ${(_b = element.parentElement) === null || _b === void 0 ? void 0 : _b.nodeName.toLowerCase()}.${Array.from((_c = element.parentElement) === null || _c === void 0 ? void 0 : _c.classList).join('.')}` :
+                      'Appended area',
+              }
+          });
+      }
+      static printSteps() {
+          console.table(DemoTools.steps.map((step) => ({ title: step.title, type: step.type })));
+      }
+      static init(options = {}) {
+          DemoTools.stop();
+          if (DemoTools.state.initialized) {
+              return;
+          }
+          DemoTools.options.renderSteps = Boolean(options.renderSteps);
+          DemoTools.options.renderStepsStyle = options.renderStepsStyle;
+          DemoTools.state.initialized = true;
+          window.addEventListener('keydown', DemoTools.handleKeydown);
+          DemoTools.stepForm.init();
+          if (options.renderSteps) {
+              DemoTools.stepList.init();
+              window.addEventListener(DemoTools.stepList.eventTypes.STEP_MOVE, DemoTools.handleStepMoved);
+              window.addEventListener(DemoTools.stepList.eventTypes.STEP_DOUBLECLICK, DemoTools.handleStepDoubleclick);
+              window.addEventListener(DemoTools.stepList.eventTypes.STEP_CLICK, DemoTools.handleStepClick);
+              window.addEventListener(PlanStepForm.eventTypes.PLAN_STEP, DemoTools.handlePlanStep);
+          }
+      }
+      static handleKeydown(e) {
+          if (e.key === 'Escape') {
+              DemoTools.pause();
+          }
+          else if (e.ctrlKey && e.altKey) {
+              if (e.key === 'p') {
+                  if (DemoTools.state.running) {
+                      DemoTools.pause();
+                      return;
+                  }
+                  DemoTools.pickStep();
+              }
+              else if (e.key === 'r') {
+                  DemoTools.run();
+              }
+              else if (e.key === 's') {
+                  DemoTools.stop();
+              }
+              else if (e.key === 'ArrowRight') {
+                  DemoTools.jump(DemoTools.state.activeStep + 1);
+              }
+              else if (e.key === 'ArrowLeft') {
+                  DemoTools.jump(DemoTools.state.activeStep - 1);
+              }
+              else if (e.key === 'ArrowUp') {
+                  DemoTools.swap(DemoTools.state.activeStep, DemoTools.state.activeStep - 1);
+              }
+              else if (e.key === 'ArrowDown') {
+                  DemoTools.swap(DemoTools.state.activeStep, DemoTools.state.activeStep + 1);
+              }
+              else if (e.key === 'u') {
+                  DemoTools.updateStep();
+              }
+              else if (e.key === 'd') {
+                  DemoTools.removeStep(DemoTools.state.activeStep);
+              }
+          }
+      }
+      static handleStepMoved(e) {
+          if (DemoTools.options.renderSteps) {
+              DemoTools.move(e.detail.from, e.detail.to);
+          }
+      }
+      static handleStepDoubleclick(e) {
+          if (DemoTools.options.renderSteps) {
+              DemoTools.jump(e.detail.index);
+          }
+      }
+      static handleStepClick(e) {
+          if (DemoTools.options.renderSteps) {
+              DemoTools.state.activeStep = e.detail.index;
+              DemoTools.dispatchActiveStepChangedEvent();
+          }
+      }
+      static handlePlanStep(e) {
+          if (DemoTools.options.renderSteps) {
+              DemoTools.addStep(e.detail);
+          }
+      }
+      static dispatchStepsChangedEvent() {
+          window.dispatchEvent(new CustomEvent('DemoTools:StepsChanged', { detail: { steps: DemoTools.steps } }));
+      }
+      static dispatchActiveStepChangedEvent() {
+          window.dispatchEvent(new CustomEvent('DemoTools:ActiveStepChanged', { detail: { activeStep: DemoTools.state.activeStep } }));
+      }
+  }
+  DemoTools.defaultInterval = 2000;
+  DemoTools.steps = [];
+  DemoTools.Driver = Ae;
+  DemoTools.stepList = Steps;
+  DemoTools.stepForm = StepForm;
+  DemoTools.dom = Dom;
+  DemoTools.options = {};
+  DemoTools.state = {
+      running: false,
+      activeStep: null,
+      initialized: false,
+      lastUpdatedStep: null,
+  };
+  DemoTools.defaultDriverOptions = {
+      showButtons: ['close'],
+      overlayOpacity: 0.3,
+  };
+
   var index = () => console.log('dev tools');
   Error.stackTradeLimit = Infinity;
   if (window) {
@@ -33991,13 +37898,14 @@ this["dev-tools"] = (function () {
       window.setVar = setVar$1;
       window.deleteVar = deleteVar;
       window.clearVars = clearVars;
-      window.diff = diff$1;
       window.stub = stub;
       window.logger = new Logger();
       window.csvParser = new JSON2CSVParser({ delimiter: '\t' });
       window.Diagnostics = Diagnostics;
       window.setOnLoad = setOnLoad;
       window.storage = storage;
+      window.__ = _$1;
+      window.demo = DemoTools;
       const persistent_vars = getVars();
       for (let variable of persistent_vars) {
           window[variable.name] = variable.value;

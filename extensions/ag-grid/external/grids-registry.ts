@@ -22,5 +22,9 @@ export default [
   {
     identifier: 'obiPendingTrades',
     idColumn: 'PendingTradeRequestId'
+  },
+  {
+    identifier: 'book',
+    idColumn: 'id'
   }
 ]

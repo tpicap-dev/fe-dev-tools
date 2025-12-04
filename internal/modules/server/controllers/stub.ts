@@ -1,9 +1,8 @@
 import { generateStub } from '../../stub-generator/stub-generator.ts'
 import ts, { InterfaceDeclaration, Node } from "npm:typescript"
 // @ts-ignore
-import { findIndex, isNil, propEq } from 'npm:ramda@0.28.0'
+import { findIndex, isNil, pick, propEq } from 'npm:ramda@0.28.0'
 import { getInterfaceParentPath } from '../../stub-generator/utils/ast.ts'
-import { pick } from 'ramda'
 
 interface IOptions {
   override?: {

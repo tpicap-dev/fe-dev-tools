@@ -1,5 +1,5 @@
 // @ts-ignore
-import { Application, Router, Status } from 'https://deno.land/x/oak/mod.ts';
+import { Application, Router, Status } from 'https://deno.land/x/oak@v12.6.1/mod.ts';
 import stub from './controllers/stub.ts'
 import Logger from '../../../modules/logger/internal/logger.ts'
 import { RouterContext } from 'https://deno.land/x/oak@v12.6.1/router.ts'

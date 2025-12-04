@@ -35,7 +35,7 @@ function toPrimitive(t, r) {
   if ("object" != _typeof(t) || !t) return t;
   var e = t[Symbol.toPrimitive];
   if (void 0 !== e) {
-    var i = e.call(t, r || "default");
+    var i = e.call(t, r);
     if ("object" != _typeof(i)) return i;
     throw new TypeError("@@toPrimitive must return a primitive value.");
   }
@@ -50,9 +50,9 @@ function toPropertyKey(t) {
 function _defineProperty(e, r, t) {
   return (r = toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
     value: t,
-    enumerable: !0,
-    configurable: !0,
-    writable: !0
+    enumerable: true,
+    configurable: true,
+    writable: true
   }) : e[r] = t, e;
 }
 
@@ -69,7 +69,7 @@ function ownKeys(e, r) {
 function _objectSpread2(e) {
   for (var r = 1; r < arguments.length; r++) {
     var t = null != arguments[r] ? arguments[r] : {};
-    r % 2 ? ownKeys(Object(t), !0).forEach(function (r) {
+    r % 2 ? ownKeys(Object(t), true).forEach(function (r) {
       _defineProperty(e, r, t[r]);
     }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) {
       Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
@@ -101,11 +101,7 @@ var randomString = function randomString() {
 
 ({
   INIT: "@@redux/INIT" + randomString(),
-  REPLACE: "@@redux/REPLACE" + randomString(),
-  PROBE_UNKNOWN_ACTION: function PROBE_UNKNOWN_ACTION() {
-    return "@@redux/PROBE_UNKNOWN_ACTION" + randomString();
-  }
-});
+  REPLACE: "@@redux/REPLACE" + randomString()});
 
 /**
  * Prints a warning in the console if it exists.
@@ -774,7 +770,7 @@ _curry1(function isEmpty(x) {
   return x != null && equals(x, empty(x));
 });
 
-var PROJECT_PATH = "D:/Users/m_botezatu/projects/equities-client-1";
+var PROJECT_PATH = "D:/Users/m_botezatu/projects/equities-client-2";
 var SRC_PATH = "src";
 var DIST_PATH = "dist";
 var BUNDLE_FILE_NAME = "equities-client.js";
@@ -794,7 +790,7 @@ var OBJECTIVES_PATH = "external";
 var EXPORTS_PATH = "shared/exports";
 var REEXPORTS_PATH = "external/reexports";
 var SERVER_PORT = "8080";
-var DEV_TOOLS_PATH = "D:/users/m_botezatu/projects/dev-tools";
+var DEV_TOOLS_PATH = "D:/users/m_botezatu/lab/dev-tools";
 var EXTERNAL_DEV_TOOLS_BUNDLE_FILENAME = "dev-tools.js";
 var EXTERNAL_REDUX_BUNDLE_FILENAME = "redux.js";
 var EXTERNAL_EXTENSIONS_BUNDLE_FILENAME = "extensions.js";

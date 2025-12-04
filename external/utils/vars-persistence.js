@@ -1,8 +1,23 @@
 import { mapObjIndexed } from 'ramda'
 
-import { isPrimitive } from './utils.js'
+import { isBoolean, isFunctionLikeString, isNumber, isObject, isPrimitive } from './utils.js'
 
 const localStorageKey = 'dev-tools';
+
+const reviveVar = (value) => {
+  if (isNumber(value)) {
+    return Number(value);
+  } else if (isBoolean(value)) {
+    return String(value).toLowerCase() === 'true'
+  } else if (isObject(value) || typeof value === 'object') {
+    return mapObjIndexed(reviveVar, isObject(value) ? JSON.parse(value) : value);
+  } else if (isFunctionLikeString(value)){
+    const wrapped = `(${value})`;
+    return eval(wrapped);
+  } else {
+    return value
+  }
+}
 
 export const setVar = (varName, value) => {
   if (!/^[a-z_A-Z0-9]+$/.test(varName)) {
@@ -15,8 +30,25 @@ export const setVar = (varName, value) => {
 
   if (isPrimitive(value)) {
     adjustedValue = { ...adjustedValue, value: String(value) };
+  } if (typeof value === 'function') {
+    adjustedValue = { ...adjustedValue, value: value.toString() };
   } else {
-    adjustedValue = { ...adjustedValue, value: JSON.stringify(value) };
+    const seen = new WeakSet()
+
+    const replacer = (key, v) => {
+      if (typeof v === 'function') {
+        return v.toString();
+      }
+      if (typeof v === 'object' && v !== null) {
+        if (seen.has(v)) {
+          return '[Circular]';
+        }
+        seen.add(v);
+      }
+      return v;
+    };
+
+    adjustedValue = { ...adjustedValue, value: JSON.stringify(value, replacer) };
   }
 
   varsObj[String(varName)] = adjustedValue;
@@ -32,7 +64,7 @@ export const getVars = () => {
   mapObjIndexed((variable, varName) => {
     switch (variable.type) {
       case 'object':
-        varsParsed.push({ name: varName, value: JSON.parse(variable.value) });
+        varsParsed.push({ name: varName, value: reviveVar(variable.value) });
         break;
 
       case 'number':

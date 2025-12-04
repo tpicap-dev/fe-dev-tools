@@ -11,13 +11,13 @@ import gridsRegistry from 'd:/users/m_botezatu/projects/dev-tools/extensions/ag-
 
 const getGrid = (criteria: string): GridReadyEvent | undefined => {
   const identifier = pipe(
-    () => (window as any).devTools.extensions.gridApis,
+    () => (window as any)?.devTools?.extensions?.gridApis,
     keys,
     find((key: string) => String(key).toLowerCase().includes(String(criteria).toLowerCase()))
   )()
 
   if (!isNil(identifier)) {
-    return (window as any).devTools.extensions.gridApis[identifier]
+    return (window as any)?.devTools?.extensions?.gridApis[identifier]
   } else {
     return undefined
   }
@@ -101,8 +101,10 @@ export const AgGridReact = ({ onGridReady, ...props }) => {
       prop('identifier')
     )(props);
 
-    (window as any).devTools.extensions.gridApis = (window as any).devTools?.extensions?.gridApis || {}
-    if (!isNil(identifier)) {
+    if ((window as any).devTools) {
+      (window as any).devTools.extensions.gridApis = (window as any).devTools?.extensions?.gridApis || {}
+    }
+    if (!isNil(identifier) && (window as any)?.devTools?.extensions?.gridApis) {
       (window as any).devTools.extensions.gridApis[identifier] = {
         api: event.api,
         columnApi: event.columnApi

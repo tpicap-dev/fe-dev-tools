@@ -1,13 +1,15 @@
-import { find, keys, modifyPath, pipe, prop, values } from 'ramda'
+import { find, forEach, is, keys, modifyPath, pipe, prop, values } from 'ramda'
 
 import { getActionByType, getActions } from './actions-cache'
 import { setState } from './actions/index'
 import enhancedReducer from './reducers/index'
 import { setVar } from "../../utils/vars-persistence"
+import { findMatch, findMatches, findProp } from '../ladash/ladash'
 
 interface IRedispatchOptions {
   shift?: number,
-  payload?: any
+  payload?: any,
+  customProp?: any,
 }
 
 export default (store: any) => ({
@@ -26,6 +28,12 @@ export default (store: any) => ({
       prop('panels'),
       (panels: {  [panelType: string]: any }) => {
         const panelTypes: string[] = keys(panels) as string[]
+        if (panelType.endsWith('$')) {
+          return pipe(
+            find((existingPanelType: string) => existingPanelType.toLowerCase() === panelType.toLowerCase().substring(0, panelType.length - 1)),
+            (existingPanelType: string) => panels[existingPanelType]
+          )(panelTypes)
+        }
         return pipe(
           find((existingPanelType: string) => existingPanelType.toLowerCase().includes(panelType.toLowerCase())),
           (existingPanelType: string) => panels[existingPanelType]
@@ -85,5 +93,25 @@ export default (store: any) => ({
       )
     )(store.getState());
     (window as any).store.setField(`${panelPath}.${path}`, value)
+  },
+  setMatchingFields: (obj, value) => {
+    const state = store.getState()
+    const matches = findMatches(state, obj)
+    let newState = state
+    forEach(({ path, value: prevValue }) => {
+      newState = { ...newState, ...modifyPath(path, () => ({ ...prevValue, ...value }), newState) }
+    }, matches)
+    setTimeout(() => store.dispatch(setState(newState)))
+    return matches.map(e => e.path)
+  },
+  setMatchingField: (obj, value, pathOrPropName = []) => {
+    const state = store.getState()
+    const path = is(String, pathOrPropName) ? findProp(state, pathOrPropName)[0]?.path : pathOrPropName
+    const match = findMatch(state, obj, path)
+    if (!match) {
+      return []
+    }
+    store.dispatch(setState(modifyPath([...path, ...match.path], () => ({ ...match.value, ...value }), state)))
+    return match.path
   }
 })

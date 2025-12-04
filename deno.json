@@ -2,7 +2,7 @@
   "tasks": {
     "setup": "deno run --allow-read --allow-write --unsafely-ignore-certificate-errors=deno.land,npmjs.org internal/modules/setup/index.ts",
     "start": " deno run --unsafely-ignore-certificate-errors=deno.land,npmjs.org --allow-read --allow-write internal/index.ts",
-    "server": "deno run --unsafely-ignore-certificate-errors=deno.land,npmjs.org --allow-read --allow-write --unstable-kv --allow-net internal/modules/server/index.ts",
+    "server": "deno run --unsafely-ignore-certificate-errors=deno.land,npmjs.org --allow-read --allow-write --unstable-kv --allow-net --allow-env internal/modules/server/index.ts",
     "launch-app": "cd internal/modules/app-launcher && sh index.sh; cd -",
     "launch-app-with-server": "deno task launch-app & deno task server",
     "format-external": "deno fmt ./external",
@@ -10,7 +10,7 @@
     "build-external-dev-tools": "npx rollup -c --bundleConfigAsCjs",
     "build-external-redux": "npx rollup -c rollup.config.redux.js --bundleConfigAsCjs",
     "build-external-ext": "npx rollup -c rollup.config.ext.js --bundleConfigAsCjs",
-    "sync-dependencies": "deno --allow-read --allow-write internal/modules/dependencies-sync/index.ts",
+    "sync-dependencies": "deno --allow-read --allow-write internal/modules/dependencies-sync/index.ts && npm i",
     "test": "deno run --unsafely-ignore-certificate-errors=deno.land,npmjs.org --allow-read --allow-write --allow-net --allow-env --allow-run internal/test.ts"
   },
   "compilerOptions": {
@@ -43,5 +43,6 @@
       "proseWrap": "preserve"
     },
     "compilerOptions": { "lib": ["es6", "dom", "es2017"] }
-  }
+  },
+  "nodeModulesDir": "auto"
 }

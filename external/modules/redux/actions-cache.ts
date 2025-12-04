@@ -1,5 +1,5 @@
 import constants from '../../../shared/constants.json'
-import { isEmpty } from 'ramda'
+import { isEmpty, mergeDeepRight } from 'ramda'
 
 let actions: any[] = []
 
@@ -15,8 +15,9 @@ export const getActionByType = (
   type: string,
   {
     shift = 0,
-    payload = {}
-  }: { shift?: number, payload?: any } = {}) => {
+    payload = {},
+    customProp = {},
+  }: { shift?: number, payload?: any, customProp?: any } = {}) => {
 
   const typeActions = actions.filter(action => action.type.includes(type))
   if (!typeActions || isEmpty(typeActions)) {
@@ -26,8 +27,21 @@ export const getActionByType = (
   if (!action) {
     return
   }
-  return {
-    ...action,
-    payload: !isEmpty(payload) ? Object.assign({}, action.payload, payload) : action.payload,
+
+  let ret = action
+
+  if (!isEmpty(payload)) {
+    ret = { ...ret, payload: Object.assign({}, ret.payload, payload) }
   }
+
+  if(!isEmpty(customProp)) {
+    try {
+      ret = mergeDeepRight(ret, customProp)
+    } catch(e) {
+      console.error('Could not assign custom prop to action')
+      console.error(e)
+    }
+  }
+
+  return ret
 }
