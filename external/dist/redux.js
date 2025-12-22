@@ -2948,34 +2948,27 @@ const getActionByType = (type, { shift = 0, payload = {}, customProp = {}, } = {
 };
 
 const isPrimitive = value => {
-  if (value === null) {
-    return true
-  }
-
-  if (typeof value === 'object' || typeof value === 'function') {
-    return false
-  }
-
-  return true
+    if (value === null) {
+        return true;
+    }
+    if (typeof value === 'object' || typeof value === 'function') {
+        return false;
+    }
+    return true;
 };
-
 const objectsMatch = (obj1, obj2) => {
-  if (typeof obj1 !== 'object' || obj1 === null || typeof obj2 !== 'object' || obj2 === null) {
-    return equals(obj1, obj2)
-  }
-
-  // eslint-disable-next-line guard-for-in
-  for (const key in obj1) {
-    if (!(key in obj2)) {
-      return false
+    if (typeof obj1 !== 'object' || obj1 === null || typeof obj2 !== 'object' || obj2 === null) {
+        return equals(obj1, obj2);
     }
-
-    if (!objectsMatch(obj1[key], obj2[key])) {
-      return false
+    for (const key in obj1) {
+        if (!(key in obj2)) {
+            return false;
+        }
+        if (!objectsMatch(obj1[key], obj2[key])) {
+            return false;
+        }
     }
-  }
-
-  return true
+    return true;
 };
 
 function devToolsMiddleware () {
@@ -3025,42 +3018,38 @@ var enhancedReducer = (appReducer) => (...args) => {
 };
 
 const localStorageKey = 'dev-tools';
-
 const setVar = (varName, value) => {
-  if (!/^[a-z_A-Z0-9]+$/.test(varName)) {
-    throw new Error(`${varName} is a not a valid variable name`)
-  }
-
-  const vars = localStorage.getItem(localStorageKey);
-  const varsObj = JSON.parse(vars) || {};
-  let adjustedValue = { type: typeof value };
-
-  if (isPrimitive(value)) {
-    adjustedValue = { ...adjustedValue, value: String(value) };
-  } if (typeof value === 'function') {
-    adjustedValue = { ...adjustedValue, value: value.toString() };
-  } else {
-    const seen = new WeakSet();
-
-    const replacer = (key, v) => {
-      if (typeof v === 'function') {
-        return v.toString();
-      }
-      if (typeof v === 'object' && v !== null) {
-        if (seen.has(v)) {
-          return '[Circular]';
-        }
-        seen.add(v);
-      }
-      return v;
-    };
-
-    adjustedValue = { ...adjustedValue, value: JSON.stringify(value, replacer) };
-  }
-
-  varsObj[String(varName)] = adjustedValue;
-  localStorage.setItem(localStorageKey, JSON.stringify(varsObj));
-  window[varName] = value;
+    if (!/^[a-z_A-Z0-9]+$/.test(varName)) {
+        throw new Error(`${varName} is a not a valid variable name`);
+    }
+    const vars = localStorage.getItem(localStorageKey);
+    const varsObj = JSON.parse(vars) || {};
+    let adjustedValue = { type: typeof value };
+    if (isPrimitive(value)) {
+        adjustedValue = Object.assign(Object.assign({}, adjustedValue), { value: String(value) });
+    }
+    if (typeof value === 'function') {
+        adjustedValue = Object.assign(Object.assign({}, adjustedValue), { value: value.toString() });
+    }
+    else {
+        const seen = new WeakSet();
+        const replacer = (key, v) => {
+            if (typeof v === 'function') {
+                return v.toString();
+            }
+            if (typeof v === 'object' && v !== null) {
+                if (seen.has(v)) {
+                    return '[Circular]';
+                }
+                seen.add(v);
+            }
+            return v;
+        };
+        adjustedValue = Object.assign(Object.assign({}, adjustedValue), { value: JSON.stringify(value, replacer) });
+    }
+    varsObj[String(varName)] = adjustedValue;
+    localStorage.setItem(localStorageKey, JSON.stringify(varsObj));
+    window[varName] = value;
 };
 
 function findProp(obj, propName) {

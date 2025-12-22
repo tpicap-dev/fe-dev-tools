@@ -2,7 +2,7 @@
   "tasks": {
     "setup": "deno run --allow-read --allow-write --unsafely-ignore-certificate-errors=deno.land,npmjs.org internal/modules/setup/index.ts",
     "start": " deno run --unsafely-ignore-certificate-errors=deno.land,npmjs.org --allow-read --allow-write internal/index.ts",
-    "server": "deno run --unsafely-ignore-certificate-errors=deno.land,npmjs.org --allow-read --allow-write --unstable-kv --allow-net --allow-env internal/modules/server/index.ts",
+    "server": "deno run --unsafely-ignore-certificate-errors=deno.land,npmjs.org --allow-read --allow-write --unstable-kv --allow-net --allow-run --allow-env internal/modules/server/index.ts",
     "launch-app": "cd internal/modules/app-launcher && sh index.sh; cd -",
     "launch-app-with-server": "deno task launch-app & deno task server",
     "format-external": "deno fmt ./external",

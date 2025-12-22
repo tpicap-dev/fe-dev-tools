@@ -1,6 +1,6 @@
 import { mapObjIndexed } from 'ramda'
 
-import { isBoolean, isFunctionLikeString, isNumber, isObject, isPrimitive } from './utils.js'
+import { isBoolean, isFunctionLikeString, isNumber, isObject, isPrimitive } from './utils'
 
 const localStorageKey = 'dev-tools';
 
@@ -26,7 +26,7 @@ export const setVar = (varName, value) => {
 
   const vars = localStorage.getItem(localStorageKey);
   const varsObj = JSON.parse(vars) || {};
-  let adjustedValue = { type: typeof value };
+  let adjustedValue: { value: any, type: any } = { type: typeof value } as any;
 
   if (isPrimitive(value)) {
     adjustedValue = { ...adjustedValue, value: String(value) };
@@ -58,7 +58,7 @@ export const setVar = (varName, value) => {
 
 export const getVars = () => {
   const vars = localStorage.getItem(localStorageKey);
-  const varsObj = JSON.parse(vars);
+  const varsObj: { [varName: string]: any } = JSON.parse(vars);
   const varsParsed = [];
 
   mapObjIndexed((variable, varName) => {

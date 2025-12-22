@@ -1,4 +1,3 @@
-import {Path} from 'https://deno.land/x/path/mod.ts';
+import { getHead } from './modules/server/controllers/git.ts'
 
-const path = new Path(Deno.cwd())
-console.log(path.elements.join('/'))
+console.log(getHead())

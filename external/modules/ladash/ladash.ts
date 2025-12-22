@@ -106,4 +106,27 @@ export const findMatches = (obj1, obj2): { path: (string | number)[], value: any
   return results;
 }
 
+export const flattenObj = (obj, prefix = '', res = {}) => {
+  if (Array.isArray(obj)) {
+    obj.forEach((v, i) => {
+      const newKey = prefix ? `${prefix}.${i}` : `${i}`
+      if (v && typeof v === 'object') flattenObj(v, newKey, res)
+      else res[newKey] = v
+    })
+    return res
+  }
+
+  for (const key in obj) {
+    const value = obj[key]
+    const newKey = prefix ? `${prefix}.${key}` : key
+
+    if (value && typeof value === 'object') {
+      flattenObj(value, newKey, res)
+    }
+    else res[newKey] = value
+  }
+
+  return res
+}
+
 export { default as diff } from '../../../shared/modules/diff/diff'

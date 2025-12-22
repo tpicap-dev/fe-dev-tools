@@ -52,7 +52,7 @@ export function isObject(string) {
 }
 
 export const setOnLoad = (fn) => {
-  setVar('onLoad', String(fn));
+  (window as any).setVar('onLoad', String(fn));
 }
 
 export const objectsMatch = (obj1, obj2) => {

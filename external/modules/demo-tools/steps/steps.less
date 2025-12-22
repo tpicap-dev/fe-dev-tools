@@ -6,30 +6,35 @@ body > * {
 .demo-tools-steps {
   display: flex;
   flex-direction: column;
-  background-color: #fff;
   border: 2px solid #ddd;
   font-weight: bold;
   height: 100%;
-  min-width: 200px;
   z-index: 10001;
-}
-
-.demo-tools-steps h2.demo-tools-steps-title {
-  font-weight: 600;
-  color: #333;
-  border-bottom: 2px solid #eee;
-  padding-left: 4px;
-  margin-top: 0;
 }
 
 .demo-tools-steps .demo-tools-step {
   padding: 3px 12px;
+  border: 1px solid #444;
   border-left: 4px solid #444;
   color: #444;
   cursor: pointer;
+  white-space: nowrap;
+  display:flex;
+  justify-content: space-between;
 
   &.unfilled {
     font-style: italic;
+  }
+
+  &.unavailable {
+    color: #d81b60;
+  }
+
+  .demo-tools-steps-step-actions {
+    button {
+      line-height: 0.4em;
+      font-size: 0.8em;
+    }
   }
 }
 
@@ -39,8 +44,7 @@ body > * {
 }
 
 .demo-tools-steps .demo-tools-step.completed {
-  border-color: #999;
-  color: #999;
+  opacity: 0.5;
 }
 
 @keyframes fade-out {

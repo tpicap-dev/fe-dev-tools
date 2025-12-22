@@ -1,9 +1,9 @@
 {
-  "PROJECT_PATH": "D:/Users/m_botezatu/projects/equities-client-2",
+  "PROJECT_PATH": "D:/Users/m_botezatu/projects/fifx-client",
   "SRC_PATH": "src",
   "DIST_PATH": "dist",
-  "BUNDLE_FILE_NAME": "equities-client.js",
-  "APP_ID": "equities-client",
+  "BUNDLE_FILE_NAME": "fifx-client.js",
+  "APP_ID": "fifx-client",
   "REDUX_OUTPUT_FILE": "external/redux.js",
   "REDUX_TEMPLATE_FILE": "internal/redux-template.js",
   "OBJECTIVES": {

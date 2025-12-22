@@ -9,3 +9,45 @@
     grid-template-columns: auto 1fr;
   }
 }
+
+.demo-tools {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+
+  h3 {
+    font-weight: 600;
+    color: #333;
+    border-bottom: 2px solid #eee;
+    padding-left: 4px;
+    margin-top: 0;
+  }
+
+  &.demo-tools-toolbar {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+
+    .demo-tools-toolbar-section {
+      &.demo-tools-toolbar-steps {
+        min-height: 60%;
+        flex: 1;
+      }
+    }
+  }
+
+  #demo-tools-info {
+    display: flex;
+    flex-direction: column;
+
+    .demo-tools-info-section {
+      padding: 2px;
+
+      &#demo-tools-info-git {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 3px;
+      }
+    }
+  }
+}

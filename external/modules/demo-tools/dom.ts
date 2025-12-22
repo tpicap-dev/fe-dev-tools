@@ -17,7 +17,7 @@ export default abstract class Dom {
       return document.querySelector(arg)
     } else if (is(HTMLElement, arg)) {
       return arg
-    } else if (!isNil((arg as IElementBoundStep).element)) {
+    } else if (!isNil((arg as IElementBoundStep).element) && is(HTMLElement, (arg as IElementBoundStep).element)) {
       return (arg as IElementBoundStep).element
     } else if (!isNil((arg as IElementBoundStep).xPath)) {
       return getElementByXPath((arg as IElementBoundStep).xPath)

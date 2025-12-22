@@ -41,7 +41,8 @@ if (extensions.preBuild) {
 }
 
 if (extensions.webpackConfig) {
-  module.exports = mergeDeepRight(config, extensions.webpackConfig)
+  const extConfig = extensions.webpackConfig.reduce((acc, cur) => mergeDeepRight(acc, cur), {})
+  module.exports = mergeDeepRight(config, extConfig)
 } else {
   module.exports = config
 }

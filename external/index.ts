@@ -9,11 +9,13 @@ import './style.less'
 import Logger from './modules/logger/logger'
 import Diagnostics from 'external/modules/sanitizer/diagnostics/Diagnostics'
 import { stub } from './stub-generator'
+import { gitHead } from './modules/git/git'
 import { setOnLoad } from './utils/utils'
 import { clearVars, deleteVar, setVar, getVars } from './utils/vars-persistence'
 import storage from '../modules/storage/external/storage'
 import * as _ from './modules/ladash/ladash'
 import DemoTools from './modules/demo-tools/demo-tools'
+import extensions from '../extensions/external'
 
 // import sandboxApi from './sandbox/api'
 
@@ -33,6 +35,7 @@ if (window) {
   (window as any).deleteVar = deleteVar;
   (window as any).clearVars = clearVars;
   (window as any).stub = stub;
+  (window as any).gitHead = gitHead;
   (window as any).logger = new Logger();
   (window as any).csvParser = new CsvParser({ delimiter: '\t' });
   (window as any).Diagnostics = Diagnostics;
@@ -50,5 +53,11 @@ if (window) {
     try {
       eval((window as any)?.onLoad)()
     } catch (e) {}
+  }
+
+  if (extensions?.expose) {
+    for (let exposeKey in extensions.expose) {
+      (window as any)[exposeKey] = extensions.expose[exposeKey]
+    }
   }
 }
