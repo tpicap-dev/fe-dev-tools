@@ -5,6 +5,7 @@ import Logger from '../../../modules/logger/internal/logger.ts'
 import { RouterContext } from 'https://deno.land/x/oak@v12.6.1/router.ts'
 import Storage from '../../../modules/storage/internal/storage.ts'
 import { getHead } from './controllers/git.ts'
+import { getProjectInfo } from './controllers/project-info.ts'
 
 const router = new Router();
 router.get('/stub/:path', (context: RouterContext<any>) => {
@@ -76,12 +77,26 @@ router.get('/storage/get/:key/:criteria', async (context) => {
   }
 })
 
-router.get('/git/head', async (context) => {
+router.get('/git/summary', async (context) => {
   context.response.type = 'json';
   try {
     const commit = await getHead()
     context.response.status = Status.OK
     context.response.body = commit
+    context.response.headers.set('Access-Control-Allow-Origin', '*')
+    context.response.headers.set('Content-Type', 'application/json')
+  } catch(e) {
+    context.response.status = Status.InternalServerError
+    console.log(e)
+  }
+})
+
+router.get('/project-info', async (context) => {
+  context.response.type = 'json';
+  try {
+    const projectInfo = await getProjectInfo()
+    context.response.status = Status.OK
+    context.response.body = projectInfo
     context.response.headers.set('Access-Control-Allow-Origin', '*')
     context.response.headers.set('Content-Type', 'application/json')
   } catch(e) {

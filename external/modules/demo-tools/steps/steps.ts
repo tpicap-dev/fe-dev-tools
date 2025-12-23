@@ -1,16 +1,15 @@
 import Sortable from 'sortablejs'
-import { equals, intersection, isNil, values } from 'ramda'
+import { isNil } from 'ramda'
 
-import { IElementBoundStep, IStep } from '../demo-tools'
 
 import PlanStepForm from 'external/modules/demo-tools/steps/plan-step-form'
-import { getElementByXPath } from 'external/utils/utils'
 
 import './steps.less'
+import Step from 'external/modules/demo-tools/step'
 
 export default class Steps {
   static area: HTMLElement = null
-  static steps: (IStep)[] = []
+  static steps: (Step)[] = []
   static state = {
     initialized: false,
   }
@@ -18,17 +17,18 @@ export default class Steps {
     STEP_DOUBLECLICK: 'DemoTools:Steps:StepDoubleclick',
     STEP_MOVE: 'DemoTools:Steps:StepMove',
     STEP_CLICK: 'DemoTools:Steps:StepClick',
+    STEP_CTRL_CLICK: 'DemoTools:Steps:StepCtrlClick',
   }
 
   static init() {
     Steps.state.initialized = true
-    window.addEventListener('DemoTools:StepsChanged', Steps.handleDemoToolsStepsChanged)
-    window.addEventListener('DemoTools:ActiveStepChanged', Steps.handleDemoToolsActiveStepChanged)
-    Steps.setElement()
+    window.addEventListener('Demo:StepsChanged', Steps.handleDemoToolsStepsChanged)
+    window.addEventListener('Demo:ActiveStepChanged', Steps.handleDemoToolsActiveStepChanged)
     PlanStepForm.init()
+    Steps.setElement()
   }
 
-  static handleDemoToolsStepsChanged({ detail: { steps } }: CustomEvent<{ steps: (IStep)[] }>) {
+  static handleDemoToolsStepsChanged({ detail: { steps } }: CustomEvent<{ steps: (Step)[] }>) {
     Steps.steps = steps
     Steps.renderStepList()
   }
@@ -41,11 +41,15 @@ export default class Steps {
     window.dispatchEvent(new CustomEvent(Steps.eventTypes.STEP_DOUBLECLICK, { detail: { index } }))
   }
 
-  static handleStepClick(index) {
-    window.dispatchEvent(new CustomEvent(Steps.eventTypes.STEP_CLICK, { detail: { index } }))
+  static handleStepClick(event: MouseEvent, index: number) {
+    if (event.ctrlKey) {
+      window.dispatchEvent(new CustomEvent(Steps.eventTypes.STEP_CTRL_CLICK, {detail: {index}}))
+    } else {
+      window.dispatchEvent(new CustomEvent(Steps.eventTypes.STEP_CLICK, {detail: {index}}))
+    }
   }
 
-  static add(step: IStep) {
+  static add(step: Step) {
     Steps.steps.push(step)
   }
 
@@ -127,13 +131,24 @@ export default class Steps {
         div.classList.add('unfilled')
       }
 
-      if (!Steps.hasCorrectXPath(step)) {
-        div.classList.add('unavailable')
-        div.setAttribute('title', 'HTMl Element looks unavailable')
-        div.innerHTML = `
-          <div>${step.title}</div>
-          <div class="demo-tools-steps-step-actions"><button onclick="window.demo?.checkStep(${index})">Check</button></div>
-        `
+      if (!step.hasCorrectXPath) {
+        if (step.xPathCheck === false) {
+          div.classList.add('unavailable')
+          div.setAttribute('title', `HTML Element looks unavailable:\n${step.xPathError}`)
+          div.innerHTML = `
+            <div>${step.title}</div>
+            <div class="demo-tools-steps-step-actions">
+              <button onclick="window.demoTools.demo?.checkStep(${index})">Check</button>
+              <button onclick="window.demoTools.demo?.ignoreXPathError(${index})">Ignore</button>
+            </div>
+          `
+        } else if (step.xPathCheck === 'ignored') {
+          div.classList.add('ignored')
+          div.setAttribute('title', 'XPath error is ignored')
+          div.innerHTML = step.title
+        } else {
+          div.innerHTML = step.title
+        }
       } else {
         div.innerHTML = step.title
       }
@@ -168,39 +183,11 @@ export default class Steps {
     document.body.querySelectorAll('.demo-tools-steps').forEach(el => el.remove())
   }
 
-  static hasCorrectXPath(step: IStep): boolean {
-    if (!(step as IElementBoundStep).xPath) {
-      return true
-    }
-
-    if (!step.element) {
-      return true
-    }
-
-    const el = getElementByXPath((step as IElementBoundStep).xPath)
-
-    if (!el) {
-      return false
-    }
-
-    if (el instanceof HTMLElement) {
-      const intersectionClasses = intersection(values(el.classList), values(step.element.classList))
-      if (Math.abs(1 - intersectionClasses.length / values(step.element.classList).length) > 0.25) {
-        return false
-      }
-
-      if (!equals(el.id, step.element.id)) {
-        return false
-      }
-    }
-
-    return true
-  }
-
   static destroy() {
     Steps.unmount()
-    window.removeEventListener('DemoTools:StepsChanged', Steps.handleDemoToolsStepsChanged)
+    window.removeEventListener('Demo:StepsChanged', Steps.handleDemoToolsStepsChanged)
     Steps.area = null
+    Steps.steps = []
     Steps.state.initialized = false
     PlanStepForm.destroy()
   }
@@ -219,8 +206,8 @@ export default class Steps {
     })
 
     Steps.area.querySelectorAll('.demo-tools-steps-list .demo-tools-step').forEach((el, index) => {
-      el.addEventListener('click', () => {
-        Steps.handleStepClick(index)
+      el.addEventListener('click', (e: MouseEvent) => {
+        Steps.handleStepClick(e, index)
       })
     })
   }

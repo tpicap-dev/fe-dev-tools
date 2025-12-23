@@ -33103,7 +33103,7 @@ this["dev-tools"] = (function () {
     }
   }
 
-  var css_248z$4 = ":root{--sans-font:-apple-system,BlinkMacSystemFont,\"Avenir Next\",Avenir,\"Nimbus Sans L\",Roboto,\"Noto Sans\",\"Segoe UI\",Arial,Helvetica,\"Helvetica Neue\",sans-serif;--mono-font:Consolas,Menlo,Monaco,\"Andale Mono\",\"Ubuntu Mono\",monospace;--standard-border-radius:5px;--border-width:1px;--bg:#fff;--accent-bg:#f5f7ff;--text:#212121;--text-light:#585858;--border:#898ea4;--accent:#0d47a1;--accent-hover:#1266e2;--accent-text:var(--bg);--code:#d81b60;--preformatted:#444;--marked:#fd3;--disabled:#efefef}.demo-tools{font-family:var(--sans-font)}@media (prefers-color-scheme:dark){.demo-tools :root{--bg:#212121;--accent-bg:#2b2b2b;--text:#dcdcdc;--text-light:#ababab;--accent:#ffb300;--accent-hover:#ffe099;--accent-text:var(--bg);--code:#f06292;--preformatted:#ccc;--disabled:#111;color-scheme:dark}.demo-tools img,.demo-tools video{opacity:.8}}.demo-tools *,.demo-tools :after,.demo-tools :before{box-sizing:border-box}.demo-tools input,.demo-tools progress,.demo-tools select,.demo-tools textarea{appearance:none;-webkit-appearance:none;-moz-appearance:none}.demo-tools header{background-color:var(--accent-bg);border-bottom:var(--border-width) solid var(--border);grid-column:-1;padding:0 .5rem 2rem;text-align:center}.demo-tools header>:only-child{margin-block-start:2rem}.demo-tools header h1{margin:1rem auto;max-width:1200px}.demo-tools header p{margin:1rem auto;max-width:40rem}.demo-tools main{padding-top:1.5rem}.demo-tools footer{border-top:var(--border-width) solid var(--border);color:var(--text-light);font-size:.9rem;margin-top:4rem;padding:2rem 1rem 1.5rem;text-align:center}.demo-tools h1{font-size:3rem}.demo-tools h2{font-size:2.6rem;margin-top:3rem}.demo-tools h3{font-size:2rem;margin-top:3rem}.demo-tools h4{font-size:1.44rem}.demo-tools h5{font-size:1.15rem}.demo-tools h6{font-size:.96rem}.demo-tools p{margin:1.5rem 0}.demo-tools h1,.demo-tools h2,.demo-tools h3,.demo-tools h4,.demo-tools h5,.demo-tools h6,.demo-tools p{overflow-wrap:break-word}.demo-tools h1,.demo-tools h2,.demo-tools h3{line-height:1.1}@media only screen and (max-width:720px){.demo-tools h1{font-size:2.5rem}.demo-tools h2{font-size:2.1rem}.demo-tools h3{font-size:1.75rem}.demo-tools h4{font-size:1.25rem}}.demo-tools a,.demo-tools a:visited{color:var(--accent)}.demo-tools a:hover{text-decoration:none}.demo-tools .button,.demo-tools a.button,.demo-tools button,.demo-tools input[type=button],.demo-tools input[type=reset],.demo-tools input[type=submit]{background-color:var(--accent);border:var(--border-width) solid var(--accent);color:var(--accent-text);font-style:normal;line-height:normal;padding:.5em;text-decoration:none}.demo-tools .button[aria-disabled=true],.demo-tools button[disabled],.demo-tools input:disabled,.demo-tools select:disabled,.demo-tools textarea:disabled{background-color:var(--disabled);border-color:var(--disabled);color:var(--text-light);cursor:not-allowed}.demo-tools input[type=range]{padding:0}.demo-tools abbr[title]{cursor:help;text-decoration-line:underline;text-decoration-style:dotted}.demo-tools .button:not([aria-disabled=true]):hover,.demo-tools button:enabled:hover,.demo-tools input[type=button]:enabled:hover,.demo-tools input[type=reset]:enabled:hover,.demo-tools input[type=submit]:enabled:hover{background-color:var(--accent-hover);border-color:var(--accent-hover);cursor:pointer}.demo-tools .button:focus-visible,.demo-tools button:focus-visible:where(:enabled),.demo-tools input:enabled:focus-visible:where([type=submit],[type=reset],[type=button]){outline:2px solid var(--accent);outline-offset:1px}.demo-tools header nav{font-size:1rem;line-height:2;padding:1rem 0 0}.demo-tools header nav ol,.demo-tools header nav ul{align-content:space-around;align-items:center;display:flex;flex-direction:row;flex-wrap:wrap;justify-content:center;list-style-type:none;margin:0;padding:0}.demo-tools header nav ol li,.demo-tools header nav ul li{display:inline-block}.demo-tools header nav a,.demo-tools header nav a:visited{border:var(--border-width) solid var(--border);border-radius:var(--standard-border-radius);color:var(--text);display:inline-block;margin:0 .5rem 1rem;padding:.1rem 1rem;text-decoration:none}.demo-tools header nav a.current,.demo-tools header nav a:hover,.demo-tools header nav a[aria-current=page],.demo-tools header nav a[aria-current=true]{background:var(--bg);border-color:var(--accent);color:var(--accent);cursor:pointer}@media only screen and (max-width:720px){.demo-tools header nav a{border:none;line-height:1;padding:0;text-decoration:underline}.demo-tools header nav a.current{background:none}}.demo-tools aside,.demo-tools details,.demo-tools pre,.demo-tools progress{background-color:var(--accent-bg);border:var(--border-width) solid var(--border);border-radius:var(--standard-border-radius);margin-bottom:1rem}.demo-tools aside{float:right;font-size:1rem;margin-inline-start:15px;padding:0 15px;width:30%}.demo-tools [dir=rtl] aside{float:left}@media only screen and (max-width:720px){.demo-tools aside{float:none;margin-inline-start:0;width:100%}}.demo-tools article,.demo-tools dialog,.demo-tools fieldset{border:var(--border-width) solid var(--border);border-radius:var(--standard-border-radius);margin-bottom:1rem;padding:1rem}.demo-tools article h2:first-child,.demo-tools article h3:first-child,.demo-tools section h2:first-child,.demo-tools section h3:first-child{margin-top:1rem}.demo-tools section{border-bottom:var(--border-width) solid var(--border);border-top:var(--border-width) solid var(--border);margin:3rem 0;padding:2rem 1rem}.demo-tools section+section,.demo-tools section:first-child{border-top:0;padding-top:0}.demo-tools section+section{margin-top:0}.demo-tools section:last-child{border-bottom:0;padding-bottom:0}.demo-tools details{padding:.7rem 1rem}.demo-tools summary{cursor:pointer;font-weight:700;margin:-.7rem -1rem;padding:.7rem 1rem;word-break:break-all}.demo-tools details[open]>summary+*{margin-top:0}.demo-tools details[open]>summary{margin-bottom:.5rem}.demo-tools details[open]>:last-child{margin-bottom:0}.demo-tools table{border-collapse:collapse;margin:1.5rem 0}.demo-tools figure>table{margin:0;width:max-content}.demo-tools td,.demo-tools th{border:var(--border-width) solid var(--border);padding:.5rem;text-align:start}.demo-tools th{font-weight:700}.demo-tools th,.demo-tools tr:nth-child(2n){background-color:var(--accent-bg)}.demo-tools table caption{font-weight:700;margin-bottom:.5rem}.demo-tools .button,.demo-tools button,.demo-tools input,.demo-tools select,.demo-tools textarea{border-radius:var(--standard-border-radius);box-shadow:none;display:inline-block;font-family:inherit;font-size:inherit;max-width:100%;padding:.5em}.demo-tools input,.demo-tools select,.demo-tools textarea{background-color:var(--bg);border:var(--border-width) solid var(--border);color:var(--text)}.demo-tools label{display:block}.demo-tools textarea:not([cols]){width:100%}.demo-tools select:not([multiple]){background-image:linear-gradient(45deg,transparent 49%,var(--text) 51%),linear-gradient(135deg,var(--text) 51%,transparent 49%);background-position:calc(100% - 15px),calc(100% - 10px);background-repeat:no-repeat;background-size:5px 5px,5px 5px;padding-inline-end:25px}.demo-tools [dir=rtl] select:not([multiple]){background-position:10px,15px}.demo-tools input[type=checkbox],.demo-tools input[type=radio]{position:relative;vertical-align:middle;width:min-content}.demo-tools input[type=checkbox]+label,.demo-tools input[type=radio]+label{display:inline-block}.demo-tools input[type=radio]{border-radius:100%}.demo-tools input[type=checkbox]:checked,.demo-tools input[type=radio]:checked{background-color:var(--accent)}.demo-tools input[type=checkbox]:checked:after{background-color:transparent;border-bottom:.08em solid var(--bg);border-radius:0;border-right:.08em solid var(--bg);content:\" \";font-size:1.8em;height:.4em;left:.18em;position:absolute;top:.04em;transform:rotate(45deg);width:.2em}.demo-tools input[type=radio]:checked:after{background-color:var(--bg);border-radius:100%;content:\" \";font-size:1.8em;height:.3em;left:.125em;position:absolute;top:.125em;width:.3em}@media only screen and (max-width:720px){.demo-tools input,.demo-tools select,.demo-tools textarea{width:100%}}.demo-tools input[type=color]{height:2.5rem;padding:.2rem}.demo-tools input[type=file]{border:0}.demo-tools hr{background:var(--border);border:none;height:var(--border-width);margin:1rem auto}.demo-tools mark{background-color:var(--marked);border-radius:var(--standard-border-radius);color:#000;padding:2px 5px}.demo-tools mark a{color:#0d47a1}.demo-tools img,.demo-tools video{border-radius:var(--standard-border-radius);height:auto;max-width:100%}.demo-tools figure{display:block;margin:0;overflow-x:auto}.demo-tools figure>img,.demo-tools figure>picture>img{display:block;margin-inline:auto}.demo-tools figcaption{color:var(--text-light);font-size:.9rem;left:0;margin-block:1rem;position:sticky;text-align:center}.demo-tools blockquote{border-inline-start:.35rem solid var(--accent);color:var(--text-light);font-style:italic;margin-block:2rem;margin-inline-end:0;margin-inline-start:2rem;padding:.4rem .8rem}.demo-tools cite{font-size:.9rem;font-style:normal}.demo-tools cite,.demo-tools dt{color:var(--text-light)}.demo-tools code,.demo-tools kbd,.demo-tools pre,.demo-tools pre span,.demo-tools samp{color:var(--code);font-family:var(--mono-font)}.demo-tools kbd{border:var(--border-width) solid var(--preformatted);border-bottom:3px solid var(--preformatted);border-radius:var(--standard-border-radius);color:var(--preformatted);padding:.1rem .4rem}.demo-tools pre{color:var(--preformatted);max-width:100%;overflow:auto;padding:1rem 1.4rem}.demo-tools pre code{background:none;color:var(--preformatted);margin:0;padding:0}.demo-tools progress{width:100%}.demo-tools progress:indeterminate{background-color:var(--accent-bg)}.demo-tools progress::-webkit-progress-bar{background-color:var(--accent-bg);border-radius:var(--standard-border-radius)}.demo-tools progress::-webkit-progress-value{background-color:var(--accent);border-radius:var(--standard-border-radius)}.demo-tools progress::-moz-progress-bar{background-color:var(--accent);border-radius:var(--standard-border-radius);transition-duration:.3s;transition-property:width}.demo-tools progress:indeterminate::-moz-progress-bar{background-color:var(--accent-bg)}.demo-tools dialog{background-color:var(--bg);margin:auto;max-width:40rem}.demo-tools dialog::backdrop{background-color:var(--bg);opacity:.8}@media only screen and (max-width:720px){.demo-tools dialog{max-width:calc(100vw - 2rem)}}.demo-tools sub,.demo-tools sup{position:relative;vertical-align:baseline}.demo-tools sup{top:-.4em}.demo-tools sub{top:.3em}.demo-tools .notice{background:var(--accent-bg);border:var(--border-width) solid var(--border);border-radius:var(--standard-border-radius);margin:2rem 0;padding:1.5rem}.demo-tools div.notice p:first-of-type{margin-top:0}.demo-tools div.notice p:last-of-type{margin-bottom:0}@media print{@page{margin:1cm}.demo-tools header{background-color:unset}.demo-tools footer,.demo-tools header nav{display:none}.demo-tools article{border:none;padding:0}.demo-tools a[href^=http]:after{content:\" <\" attr(href) \">\"}.demo-tools abbr[title]:after{content:\" (\" attr(title) \")\"}.demo-tools a{text-decoration:none}.demo-tools p{orphans:3;widows:3}.demo-tools hr{border-top:var(--border-width) solid var(--border)}.demo-tools mark{border:var(--border-width) solid var(--border)}.demo-tools figure,.demo-tools img,.demo-tools pre,.demo-tools svg,.demo-tools table{break-inside:avoid}.demo-tools pre code{white-space:pre-wrap}}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImV4dGVybmFsL3N0eWxlLmxlc3MiLCJzdHlsZS5sZXNzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUVBLE1BRUUsMkpBQUEsQ0FHQSx1RUFBQSxDQUNBLDRCQUFBLENBQ0Esa0JBQUEsQ0FHQSxTQUFBLENBQ0EsbUJBQUEsQ0FDQSxjQUFBLENBQ0Esb0JBQUEsQ0FDQSxnQkFBQSxDQUNBLGdCQUFBLENBQ0Esc0JBQUEsQ0FDQSx1QkFBQSxDQUNBLGNBQUEsQ0FDQSxtQkFBQSxDQUNBLGFBQUEsQ0FDQSxrQkNERixDRElBLFlBQ0UsNEJDaUNGLENEOUJFLG1DQUFBLGtCQUdJLFlBQUEsQ0FDQSxtQkFBQSxDQUNBLGNBQUEsQ0FDQSxvQkFBQSxDQUNBLGdCQUFBLENBQ0Esc0JBQUEsQ0FDQSx1QkFBQSxDQUNBLGNBQUEsQ0FDQSxtQkFBQSxDQUNBLGVBQUEsQ0FWQSxpQkM2Q0osQ0QvQ0Esa0NBa0JJLFVDaUNKLENBQ0YsQ0R4REEscURBNkJJLHFCQ2dDSixDRDdEQSwrRUFzQ0ksZUFBQSxDQUNBLHVCQUFBLENBQ0Esb0JDNkJKLENEckVBLG1CQStDSSxpQ0FBQSxDQUNBLHFEQUFBLENBR0EsY0FBQSxDQURBLG9CQUFBLENBREEsaUJDMkJKLENENUVBLCtCQXVESSx1QkN3QkosQ0QvRUEsc0JBNERJLGdCQUFBLENBREEsZ0JDd0JKLENEbkZBLHFCQWlFSSxnQkFBQSxDQURBLGVDdUJKLENEdkZBLGlCQXVFSSxrQkNtQkosQ0QxRkEsbUJBZ0ZJLGtEQUFBLENBSEEsdUJBQUEsQ0FDQSxlQUFBLENBSEEsZUFBQSxDQUNBLHdCQUFBLENBR0EsaUJDbUJKLENEbEdBLGVBc0ZJLGNDZUosQ0RyR0EsZUEwRkksZ0JBQUEsQ0FDQSxlQ2NKLENEekdBLGVBK0ZJLGNBQUEsQ0FDQSxlQ2FKLENEN0dBLGVBb0dJLGlCQ1lKLENEaEhBLGVBd0dJLGlCQ1dKLENEbkhBLGVBNEdJLGdCQ1VKLENEdEhBLGNBZ0hJLGVDU0osQ0R6SEEsd0dBc0hJLHdCQ1lKLENEbElBLDZD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 */";
+  var css_248z$4 = ":root{--sans-font:-apple-system,BlinkMacSystemFont,\"Avenir Next\",Avenir,\"Nimbus Sans L\",Roboto,\"Noto Sans\",\"Segoe UI\",Arial,Helvetica,\"Helvetica Neue\",sans-serif;--mono-font:Consolas,Menlo,Monaco,\"Andale Mono\",\"Ubuntu Mono\",monospace;--standard-border-radius:5px;--border-width:1px;--bg:#fff;--accent-bg:#f5f7ff;--text:#212121;--text-light:#585858;--border:#898ea4;--accent:#0d47a1;--accent-hover:#1266e2;--accent-text:var(--bg);--code:#d81b60;--preformatted:#444;--marked:#fd3;--disabled:#efefef}.demo-tools{color:var(--text);font-family:var(--sans-font);font-size:12px;font-weight:500}@media (prefers-color-scheme:dark){.demo-tools :root{--bg:#212121;--accent-bg:#2b2b2b;--text:#dcdcdc;--text-light:#ababab;--accent:#ffb300;--accent-hover:#ffe099;--accent-text:var(--bg);--code:#f06292;--preformatted:#ccc;--disabled:#111;color-scheme:dark}.demo-tools img,.demo-tools video{opacity:.8}}.demo-tools *,.demo-tools :after,.demo-tools :before{box-sizing:border-box}.demo-tools input,.demo-tools progress,.demo-tools select,.demo-tools textarea{appearance:none;-webkit-appearance:none;-moz-appearance:none}.demo-tools header{background-color:var(--accent-bg);border-bottom:var(--border-width) solid var(--border);grid-column:-1;padding:0 .5rem 2rem;text-align:center}.demo-tools header>:only-child{margin-block-start:2rem}.demo-tools header h1{margin:1rem auto;max-width:1200px}.demo-tools header p{margin:1rem auto;max-width:40rem}.demo-tools main{padding-top:1.5rem}.demo-tools footer{border-top:var(--border-width) solid var(--border);color:var(--text-light);font-size:.9rem;margin-top:4rem;padding:2rem 1rem 1.5rem;text-align:center}.demo-tools h1{font-size:3rem}.demo-tools h2{font-size:2.6rem;margin-top:3rem}.demo-tools h3{font-size:2rem;margin-top:3rem}.demo-tools h4{font-size:1.44rem}.demo-tools h5{font-size:1.15rem}.demo-tools h6{font-size:.96rem}.demo-tools p{margin:1.5rem 0}.demo-tools h1,.demo-tools h2,.demo-tools h3,.demo-tools h4,.demo-tools h5,.demo-tools h6,.demo-tools p{overflow-wrap:break-word}.demo-tools h1,.demo-tools h2,.demo-tools h3{line-height:1.1}@media only screen and (max-width:720px){.demo-tools h1{font-size:2.5rem}.demo-tools h2{font-size:2.1rem}.demo-tools h3{font-size:1.75rem}.demo-tools h4{font-size:1.25rem}}.demo-tools a,.demo-tools a:visited{color:var(--accent)}.demo-tools a:hover{text-decoration:none}.demo-tools .button,.demo-tools a.button,.demo-tools button,.demo-tools input[type=button],.demo-tools input[type=reset],.demo-tools input[type=submit]{background-color:var(--accent);border:var(--border-width) solid var(--accent);color:var(--accent-text);font-style:normal;line-height:normal;padding:.5em;text-decoration:none}.demo-tools .button[aria-disabled=true],.demo-tools button[disabled],.demo-tools input:disabled,.demo-tools select:disabled,.demo-tools textarea:disabled{background-color:var(--disabled);border-color:var(--disabled);color:var(--text-light);cursor:not-allowed}.demo-tools input[type=range]{padding:0}.demo-tools abbr[title]{cursor:help;text-decoration-line:underline;text-decoration-style:dotted}.demo-tools .button:not([aria-disabled=true]):hover,.demo-tools button:enabled:hover,.demo-tools input[type=button]:enabled:hover,.demo-tools input[type=reset]:enabled:hover,.demo-tools input[type=submit]:enabled:hover{background-color:var(--accent-hover);border-color:var(--accent-hover);cursor:pointer}.demo-tools .button:focus-visible,.demo-tools button:focus-visible:where(:enabled),.demo-tools input:enabled:focus-visible:where([type=submit],[type=reset],[type=button]){outline:2px solid var(--accent);outline-offset:1px}.demo-tools header nav{font-size:1rem;line-height:2;padding:1rem 0 0}.demo-tools header nav ol,.demo-tools header nav ul{align-content:space-around;align-items:center;display:flex;flex-direction:row;flex-wrap:wrap;justify-content:center;list-style-type:none;margin:0;padding:0}.demo-tools header nav ol li,.demo-tools header nav ul li{display:inline-block}.demo-tools header nav a,.demo-tools header nav a:visited{border:var(--border-width) solid var(--border);border-radius:var(--standard-border-radius);color:var(--text);display:inline-block;margin:0 .5rem 1rem;padding:.1rem 1rem;text-decoration:none}.demo-tools header nav a.current,.demo-tools header nav a:hover,.demo-tools header nav a[aria-current=page],.demo-tools header nav a[aria-current=true]{background:var(--bg);border-color:var(--accent);color:var(--accent);cursor:pointer}@media only screen and (max-width:720px){.demo-tools header nav a{border:none;line-height:1;padding:0;text-decoration:underline}.demo-tools header nav a.current{background:none}}.demo-tools aside,.demo-tools details,.demo-tools pre,.demo-tools progress{background-color:var(--accent-bg);border:var(--border-width) solid var(--border);border-radius:var(--standard-border-radius);margin-bottom:1rem}.demo-tools aside{float:right;font-size:1rem;margin-inline-start:15px;padding:0 15px;width:30%}.demo-tools [dir=rtl] aside{float:left}@media only screen and (max-width:720px){.demo-tools aside{float:none;margin-inline-start:0;width:100%}}.demo-tools article,.demo-tools dialog,.demo-tools fieldset{border:var(--border-width) solid var(--border);border-radius:var(--standard-border-radius);margin-bottom:1rem;padding:1rem}.demo-tools article h2:first-child,.demo-tools article h3:first-child,.demo-tools section h2:first-child,.demo-tools section h3:first-child{margin-top:1rem}.demo-tools section{border-bottom:var(--border-width) solid var(--border);border-top:var(--border-width) solid var(--border);margin:3rem 0;padding:2rem 1rem}.demo-tools section+section,.demo-tools section:first-child{border-top:0;padding-top:0}.demo-tools section+section{margin-top:0}.demo-tools section:last-child{border-bottom:0;padding-bottom:0}.demo-tools details{padding:.7rem 1rem}.demo-tools summary{cursor:pointer;font-weight:700;margin:-.7rem -1rem;padding:.7rem 1rem;word-break:break-all}.demo-tools details[open]>summary+*{margin-top:0}.demo-tools details[open]>summary{margin-bottom:.5rem}.demo-tools details[open]>:last-child{margin-bottom:0}.demo-tools table{border-collapse:collapse;margin:1.5rem 0}.demo-tools figure>table{margin:0;width:max-content}.demo-tools td,.demo-tools th{border:var(--border-width) solid var(--border);padding:.5rem;text-align:start}.demo-tools th{font-weight:700}.demo-tools th,.demo-tools tr:nth-child(2n){background-color:var(--accent-bg)}.demo-tools table caption{font-weight:700;margin-bottom:.5rem}.demo-tools .button,.demo-tools button,.demo-tools input,.demo-tools select,.demo-tools textarea{border-radius:var(--standard-border-radius);box-shadow:none;display:inline-block;font-family:inherit;font-size:inherit;max-width:100%;padding:.5em}.demo-tools input,.demo-tools select,.demo-tools textarea{background-color:var(--bg);border:var(--border-width) solid var(--border);color:var(--text)}.demo-tools label{display:block}.demo-tools textarea:not([cols]){width:100%}.demo-tools select:not([multiple]){background-image:linear-gradient(45deg,transparent 49%,var(--text) 51%),linear-gradient(135deg,var(--text) 51%,transparent 49%);background-position:calc(100% - 15px),calc(100% - 10px);background-repeat:no-repeat;background-size:5px 5px,5px 5px;padding-inline-end:25px}.demo-tools [dir=rtl] select:not([multiple]){background-position:10px,15px}.demo-tools input[type=checkbox],.demo-tools input[type=radio]{position:relative;vertical-align:middle;width:min-content}.demo-tools input[type=checkbox]+label,.demo-tools input[type=radio]+label{display:inline-block}.demo-tools input[type=radio]{border-radius:100%}.demo-tools input[type=checkbox]:checked,.demo-tools input[type=radio]:checked{background-color:var(--accent)}.demo-tools input[type=checkbox]:checked:after{background-color:transparent;border-bottom:.08em solid var(--bg);border-radius:0;border-right:.08em solid var(--bg);content:\" \";font-size:1.8em;height:.4em;left:.18em;position:absolute;top:.04em;transform:rotate(45deg);width:.2em}.demo-tools input[type=radio]:checked:after{background-color:var(--bg);border-radius:100%;content:\" \";font-size:1.8em;height:.3em;left:.125em;position:absolute;top:.125em;width:.3em}@media only screen and (max-width:720px){.demo-tools input,.demo-tools select,.demo-tools textarea{width:100%}}.demo-tools input[type=color]{height:2.5rem;padding:.2rem}.demo-tools input[type=file]{border:0}.demo-tools hr{background:var(--border);border:none;height:var(--border-width);margin:1rem auto}.demo-tools mark{background-color:var(--marked);border-radius:var(--standard-border-radius);color:#000;padding:2px 5px}.demo-tools mark a{color:#0d47a1}.demo-tools img,.demo-tools video{border-radius:var(--standard-border-radius);height:auto;max-width:100%}.demo-tools figure{display:block;margin:0;overflow-x:auto}.demo-tools figure>img,.demo-tools figure>picture>img{display:block;margin-inline:auto}.demo-tools figcaption{color:var(--text-light);font-size:.9rem;left:0;margin-block:1rem;position:sticky;text-align:center}.demo-tools blockquote{border-inline-start:.35rem solid var(--accent);color:var(--text-light);font-style:italic;margin-block:2rem;margin-inline-end:0;margin-inline-start:2rem;padding:.4rem .8rem}.demo-tools cite{font-size:.9rem;font-style:normal}.demo-tools cite,.demo-tools dt{color:var(--text-light)}.demo-tools code,.demo-tools kbd,.demo-tools pre,.demo-tools pre span,.demo-tools samp{color:var(--code);font-family:var(--mono-font)}.demo-tools kbd{border:var(--border-width) solid var(--preformatted);border-bottom:3px solid var(--preformatted);border-radius:var(--standard-border-radius);color:var(--preformatted);padding:.1rem .4rem}.demo-tools pre{color:var(--preformatted);max-width:100%;overflow:auto;padding:1rem 1.4rem}.demo-tools pre code{background:none;color:var(--preformatted);margin:0;padding:0}.demo-tools progress{width:100%}.demo-tools progress:indeterminate{background-color:var(--accent-bg)}.demo-tools progress::-webkit-progress-bar{background-color:var(--accent-bg);border-radius:var(--standard-border-radius)}.demo-tools progress::-webkit-progress-value{background-color:var(--accent);border-radius:var(--standard-border-radius)}.demo-tools progress::-moz-progress-bar{background-color:var(--accent);border-radius:var(--standard-border-radius);transition-duration:.3s;transition-property:width}.demo-tools progress:indeterminate::-moz-progress-bar{background-color:var(--accent-bg)}.demo-tools dialog{background-color:var(--bg);margin:auto;max-width:40rem}.demo-tools dialog::backdrop{background-color:var(--bg);opacity:.8}@media only screen and (max-width:720px){.demo-tools dialog{max-width:calc(100vw - 2rem)}}.demo-tools sub,.demo-tools sup{position:relative;vertical-align:baseline}.demo-tools sup{top:-.4em}.demo-tools sub{top:.3em}.demo-tools .notice{background:var(--accent-bg);border:var(--border-width) solid var(--border);border-radius:var(--standard-border-radius);margin:2rem 0;padding:1.5rem}.demo-tools div.notice p:first-of-type{margin-top:0}.demo-tools div.notice p:last-of-type{margin-bottom:0}@media print{@page{margin:1cm}.demo-tools header{background-color:unset}.demo-tools footer,.demo-tools header nav{display:none}.demo-tools article{border:none;padding:0}.demo-tools a[href^=http]:after{content:\" <\" attr(href) \">\"}.demo-tools abbr[title]:after{content:\" (\" attr(title) \")\"}.demo-tools a{text-decoration:none}.demo-tools p{orphans:3;widows:3}.demo-tools hr{border-top:var(--border-width) solid var(--border)}.demo-tools mark{border:var(--border-width) solid var(--border)}.demo-tools figure,.demo-tools img,.demo-tools pre,.demo-tools svg,.demo-tools table{break-inside:avoid}.demo-tools pre code{white-space:pre-wrap}}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImV4dGVybmFsL3N0eWxlLmxlc3MiLCJzdHlsZS5sZXNzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUVBLE1BRUUsMkpBQUEsQ0FHQSx1RUFBQSxDQUNBLDRCQUFBLENBQ0Esa0JBQUEsQ0FHQSxTQUFBLENBQ0EsbUJBQUEsQ0FDQSxjQUFBLENBQ0Esb0JBQUEsQ0FDQSxnQkFBQSxDQUNBLGdCQUFBLENBQ0Esc0JBQUEsQ0FDQSx1QkFBQSxDQUNBLGNBQUEsQ0FDQSxtQkFBQSxDQUNBLGFBQUEsQ0FDQSxrQkNERixDRElBLFlBRUUsaUJBQUEsQ0FEQSw0QkFBQSxDQUdBLGNBQUEsQ0FEQSxlQ2tDRixDRDlCRSxtQ0FBQSxrQkFHSSxZQUFBLENBQ0EsbUJBQUEsQ0FDQSxjQUFBLENBQ0Esb0JBQUEsQ0FDQSxnQkFBQSxDQUNBLHNCQUFBLENBQ0EsdUJBQUEsQ0FDQSxjQUFBLENBQ0EsbUJBQUEsQ0FDQSxlQUFBLENBVkEsaUJDNkNKLENEL0NBLGtDQWtCSSxVQ2lDSixDQUNGLENEM0RBLHFEQWdDSSxxQkNnQ0osQ0RoRUEsK0VBeUNJLGVBQUEsQ0FDQSx1QkFBQSxDQUNBLG9CQzZCSixDRHhFQSxtQkFrREksaUNBQUEsQ0FDQSxxREFBQSxDQUdBLGNBQUEsQ0FEQSxvQkFBQSxDQURBLGlCQzJCSixDRC9FQSwrQkEwREksdUJDd0JKLENEbEZBLHNCQStESSxnQkFBQSxDQURBLGdCQ3dCSixDRHRGQSxxQkFvRUksZ0JBQUEsQ0FEQSxlQ3VCSixDRDFGQSxpQkEwRUksa0JDbUJKLENEN0ZBLG1CQW1GSSxrREFBQSxDQUhBLHVCQUFBLENBQ0EsZUFBQSxDQUhBLGVBQUEsQ0FDQSx3QkFBQSxDQUdBLGlCQ21CSixDRHJHQSxlQXlGSSxjQ2VKLENEeEdBLGVBNkZJLGdCQUFBLENBQ0EsZUNjSixDRDVHQSxlQWtHSSxjQUFBLENBQ0EsZUNhSixDRGhIQSxlQXVHSSxpQkNZSixDRG5IQSxlQTJHSSxpQkNXSixDRHRIQSxlQStHSSxnQkNVSixDRHpIQSxjQW1ISSxl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 */";
   styleInject(css_248z$4);
 
   function diff$1(obj1 = {}, obj2 = {}, exclude) {
@@ -33458,7 +33458,7 @@ this["dev-tools"] = (function () {
           return value;
       }
   };
-  const setVar$1 = (varName, value) => {
+  const setVar = (varName, value) => {
       if (!/^[a-z_A-Z0-9]+$/.test(varName)) {
           throw new Error(`${varName} is a not a valid variable name`);
       }
@@ -33512,6 +33512,12 @@ this["dev-tools"] = (function () {
       }, varsObj);
       return varsParsed;
   };
+  const getVar = (varName) => {
+      var _a;
+      const vars = localStorage.getItem(localStorageKey);
+      const varsObj = JSON.parse(vars);
+      return reviveVar((_a = varsObj[varName]) === null || _a === void 0 ? void 0 : _a.value);
+  };
   const deleteVar = varName => {
       const vars = localStorage.getItem(localStorageKey);
       const varsObj = JSON.parse(vars);
@@ -33541,25 +33547,7 @@ this["dev-tools"] = (function () {
           return null;
       }).then(result => {
           if (!isNil(result) && !isEmpty(result) && !isNil(varName)) {
-              setVar$1(String(varName), result);
-          }
-          return result;
-      })
-          .catch(e => {
-          throw new Error(e);
-      });
-  };
-
-  const gitHead$1 = (varName) => {
-      return fetch(`http://localhost:${SERVER_PORT}/git/head`)
-          .then(result => {
-          if (!isNil(result) && !isEmpty(result)) {
-              return result.json();
-          }
-          return null;
-      }).then(result => {
-          if (!isNil(result) && !isEmpty(result) && !isNil(varName)) {
-              setVar$1(String(varName), result);
+              setVar(String(varName), result);
           }
           return result;
       })
@@ -37091,19 +37079,23 @@ this["dev-tools"] = (function () {
           PlanStepForm.setElement();
       }
       static setElement() {
+          PlanStepForm.area = document.createElement('div');
           PlanStepForm.area.style.display = 'flex';
           PlanStepForm.area.style.gap = '5px';
           PlanStepForm.area.style.padding = '5px';
-          PlanStepForm.button.innerText = 'Add';
-          PlanStepForm.button.addEventListener('click', PlanStepForm.handleAddClick);
-          PlanStepForm.field.addEventListener('keypress', PlanStepForm.handleKeypress);
-          PlanStepForm.field.style.flex = '1';
-          PlanStepForm.area.appendChild(PlanStepForm.field);
-          PlanStepForm.area.appendChild(PlanStepForm.button);
+          const field = document.createElement('input');
+          const button = document.createElement('button');
+          button.innerText = 'Add';
+          button.addEventListener('click', PlanStepForm.handleAddClick);
+          field.addEventListener('keypress', PlanStepForm.handleKeypress);
+          field.style.flex = '1';
+          PlanStepForm.area.appendChild(field);
+          PlanStepForm.area.appendChild(button);
       }
       static planStep() {
-          window.dispatchEvent(new CustomEvent(PlanStepForm.eventTypes.PLAN_STEP, { detail: { title: PlanStepForm.field.value } }));
-          PlanStepForm.field.value = '';
+          const field = PlanStepForm.area.querySelector('input');
+          window.dispatchEvent(new CustomEvent(PlanStepForm.eventTypes.PLAN_STEP, { detail: { title: field.value } }));
+          field.value = '';
       }
       static handleAddClick(event) {
           PlanStepForm.planStep();
@@ -37114,27 +37106,25 @@ this["dev-tools"] = (function () {
           PlanStepForm.planStep();
       }
       static destroy() {
-          PlanStepForm.button.removeEventListener('click', PlanStepForm.handleAddClick);
-          PlanStepForm.field.removeEventListener('keypress', PlanStepForm.handleKeypress);
+          PlanStepForm.area.remove();
+          PlanStepForm.area = null;
       }
   }
-  PlanStepForm.area = document.createElement('div');
-  PlanStepForm.field = document.createElement('input');
-  PlanStepForm.button = document.createElement('button');
+  PlanStepForm.area = null;
   PlanStepForm.eventTypes = {
-      PLAN_STEP: 'DemoTools:Steps:PlanStepForm:PlanStep',
+      PLAN_STEP: 'Demo:Steps:PlanStepForm:PlanStep',
   };
 
-  var css_248z$2 = "body>*{position:relative;transform:translateZ(0)}.demo-tools-steps{border:2px solid #ddd;display:flex;flex-direction:column;font-weight:700;height:100%;z-index:10001}.demo-tools-steps .demo-tools-step{border:1px solid #444;border-left-width:4px;color:#444;cursor:pointer;display:flex;justify-content:space-between;padding:3px 12px;white-space:nowrap}.demo-tools-steps .demo-tools-step.unfilled{font-style:italic}.demo-tools-steps .demo-tools-step.unavailable{color:#d81b60}.demo-tools-steps .demo-tools-step .demo-tools-steps-step-actions button{font-size:.8em;line-height:.4em}.demo-tools-steps .demo-tools-step.active{border-color:#52c41a;color:#52c41a}.demo-tools-steps .demo-tools-step.completed{opacity:.5}@keyframes fade-out{0%{opacity:1;transform:translate(-50%,-50%) scale(1)}to{opacity:0;transform:translate(-50%,-50%) scale(2)}}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImV4dGVybmFsL21vZHVsZXMvZGVtby10b29scy9zdGVwcy9zdGVwcy5sZXNzIiwic3RlcHMubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUNFLGlCQUFBLENBQ0EsdUJDQ0YsQ0RFQSxrQkFHRSxxQkFBQSxDQUZBLFlBQUEsQ0FDQSxxQkFBQSxDQUVBLGVBQUEsQ0FDQSxXQUFBLENBQ0EsYUNBRixDREdBLG1DQUdFLHFCQUFBLENBQUEscUJBQUEsQ0FDQSxVQUFBLENBQ0EsY0FBQSxDQUVBLFlBQUEsQ0FDQSw2QkFBQSxDQVBBLGdCQUFBLENBS0Esa0JDQ0YsQ0RHRSw0Q0FDRSxpQkNESixDRElFLCtDQUNFLGFDRkosQ0RiQSx5RUFxQk0sY0FBQSxDQURBLGdCQ0hOLENEU0EsMENBQ0Usb0JBQUEsQ0FDQSxhQ1BGLENEVUEsNkNBQ0UsVUNSRixDRFdBLG9CQUNFLEdBQ0UsU0FBQSxDQUNBLHVDQ1RGLENEV0EsR0FDRSxTQUFBLENBQ0EsdUNDVEYsQ0FDRiIsImZpbGUiOiJzdGVwcy5sZXNzIn0= */";
+  var css_248z$2 = "body>*{position:relative;transform:translateZ(0)}.demo-tools-steps{border:2px solid #ddd;display:flex;flex-direction:column;font-weight:700;height:100%;z-index:10001}.demo-tools-steps .demo-tools-step{border:1px solid #444;border-left-width:4px;color:#444;cursor:pointer;display:flex;justify-content:space-between;padding:3px 12px;white-space:nowrap}.demo-tools-steps .demo-tools-step.unfilled{font-style:italic}.demo-tools-steps .demo-tools-step.active.unavailable,.demo-tools-steps .demo-tools-step.unavailable{color:#d81b60}.demo-tools-steps .demo-tools-step.ignored{text-decoration:underline wavy}.demo-tools-steps .demo-tools-step .demo-tools-steps-step-actions button{font-size:.8em;line-height:.4em}.demo-tools-steps .demo-tools-step.active{border-color:#52c41a;color:#52c41a}.demo-tools-steps .demo-tools-step.completed{opacity:.5}@keyframes fade-out{0%{opacity:1;transform:translate(-50%,-50%) scale(1)}to{opacity:0;transform:translate(-50%,-50%) scale(2)}}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImV4dGVybmFsL21vZHVsZXMvZGVtby10b29scy9zdGVwcy9zdGVwcy5sZXNzIiwic3RlcHMubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUNFLGlCQUFBLENBQ0EsdUJDQ0YsQ0RFQSxrQkFHRSxxQkFBQSxDQUZBLFlBQUEsQ0FDQSxxQkFBQSxDQUVBLGVBQUEsQ0FDQSxXQUFBLENBQ0EsYUNBRixDREdBLG1DQUdFLHFCQUFBLENBQUEscUJBQUEsQ0FDQSxVQUFBLENBQ0EsY0FBQSxDQUVBLFlBQUEsQ0FDQSw2QkFBQSxDQVBBLGdCQUFBLENBS0Esa0JDQ0YsQ0RHRSw0Q0FDRSxpQkNESixDRElFLHFHQUNFLGFDREosQ0RJRSwyQ0FDRSw4QkNGSixDRGpCQSx5RUF5Qk0sY0FBQSxDQURBLGdCQ0hOLENEU0EsMENBQ0Usb0JBQUEsQ0FDQSxhQ1BGLENEVUEsNkNBQ0UsVUNSRixDRFdBLG9CQUNFLEdBQ0UsU0FBQSxDQUNBLHVDQ1RGLENEV0EsR0FDRSxTQUFBLENBQ0EsdUNDVEYsQ0FDRiIsImZpbGUiOiJzdGVwcy5sZXNzIn0= */";
   styleInject(css_248z$2);
 
   class Steps {
       static init() {
           Steps.state.initialized = true;
-          window.addEventListener('DemoTools:StepsChanged', Steps.handleDemoToolsStepsChanged);
-          window.addEventListener('DemoTools:ActiveStepChanged', Steps.handleDemoToolsActiveStepChanged);
-          Steps.setElement();
+          window.addEventListener('Demo:StepsChanged', Steps.handleDemoToolsStepsChanged);
+          window.addEventListener('Demo:ActiveStepChanged', Steps.handleDemoToolsActiveStepChanged);
           PlanStepForm.init();
+          Steps.setElement();
       }
       static handleDemoToolsStepsChanged({ detail: { steps } }) {
           Steps.steps = steps;
@@ -37146,8 +37136,13 @@ this["dev-tools"] = (function () {
       static handleStepDoubleClick(index) {
           window.dispatchEvent(new CustomEvent(Steps.eventTypes.STEP_DOUBLECLICK, { detail: { index } }));
       }
-      static handleStepClick(index) {
-          window.dispatchEvent(new CustomEvent(Steps.eventTypes.STEP_CLICK, { detail: { index } }));
+      static handleStepClick(event, index) {
+          if (event.ctrlKey) {
+              window.dispatchEvent(new CustomEvent(Steps.eventTypes.STEP_CTRL_CLICK, { detail: { index } }));
+          }
+          else {
+              window.dispatchEvent(new CustomEvent(Steps.eventTypes.STEP_CLICK, { detail: { index } }));
+          }
       }
       static add(step) {
           Steps.steps.push(step);
@@ -37215,13 +37210,26 @@ this["dev-tools"] = (function () {
               if (!step.isFilled) {
                   div.classList.add('unfilled');
               }
-              if (!Steps.hasCorrectXPath(step)) {
-                  div.classList.add('unavailable');
-                  div.setAttribute('title', 'HTMl Element looks unavailable');
-                  div.innerHTML = `
-          <div>${step.title}</div>
-          <div class="demo-tools-steps-step-actions"><button onclick="window.demo?.checkStep(${index})">Check</button></div>
-        `;
+              if (!step.hasCorrectXPath) {
+                  if (step.xPathCheck === false) {
+                      div.classList.add('unavailable');
+                      div.setAttribute('title', `HTML Element looks unavailable:\n${step.xPathError}`);
+                      div.innerHTML = `
+            <div>${step.title}</div>
+            <div class="demo-tools-steps-step-actions">
+              <button onclick="window.demoTools.demo?.checkStep(${index})">Check</button>
+              <button onclick="window.demoTools.demo?.ignoreXPathError(${index})">Ignore</button>
+            </div>
+          `;
+                  }
+                  else if (step.xPathCheck === 'ignored') {
+                      div.classList.add('ignored');
+                      div.setAttribute('title', 'XPath error is ignored');
+                      div.innerHTML = step.title;
+                  }
+                  else {
+                      div.innerHTML = step.title;
+                  }
               }
               else {
                   div.innerHTML = step.title;
@@ -37252,32 +37260,11 @@ this["dev-tools"] = (function () {
       static unmount() {
           document.body.querySelectorAll('.demo-tools-steps').forEach(el => el.remove());
       }
-      static hasCorrectXPath(step) {
-          if (!step.xPath) {
-              return true;
-          }
-          if (!step.element) {
-              return true;
-          }
-          const el = getElementByXPath(step.xPath);
-          if (!el) {
-              return false;
-          }
-          if (el instanceof HTMLElement) {
-              const intersectionClasses = intersection(values(el.classList), values(step.element.classList));
-              if (Math.abs(1 - intersectionClasses.length / values(step.element.classList).length) > 0.25) {
-                  return false;
-              }
-              if (!equals(el.id, step.element.id)) {
-                  return false;
-              }
-          }
-          return true;
-      }
       static destroy() {
           Steps.unmount();
-          window.removeEventListener('DemoTools:StepsChanged', Steps.handleDemoToolsStepsChanged);
+          window.removeEventListener('Demo:StepsChanged', Steps.handleDemoToolsStepsChanged);
           Steps.area = null;
+          Steps.steps = [];
           Steps.state.initialized = false;
           PlanStepForm.destroy();
       }
@@ -37293,8 +37280,8 @@ this["dev-tools"] = (function () {
               });
           });
           Steps.area.querySelectorAll('.demo-tools-steps-list .demo-tools-step').forEach((el, index) => {
-              el.addEventListener('click', () => {
-                  Steps.handleStepClick(index);
+              el.addEventListener('click', (e) => {
+                  Steps.handleStepClick(e, index);
               });
           });
       }
@@ -37308,9 +37295,10 @@ this["dev-tools"] = (function () {
       STEP_DOUBLECLICK: 'DemoTools:Steps:StepDoubleclick',
       STEP_MOVE: 'DemoTools:Steps:StepMove',
       STEP_CLICK: 'DemoTools:Steps:StepClick',
+      STEP_CTRL_CLICK: 'DemoTools:Steps:StepCtrlClick',
   };
 
-  var css_248z$1 = "#demo-tools-step-picker-form{display:grid;gap:5px;grid-template-columns:auto 1fr}#demo-tools-step-picker-form #demo-tools-step-picker-form-highlight-fields{display:grid;grid-column:.33333333;grid-template-columns:auto 1fr}.demo-tools{background-color:#fff;display:flex;flex-direction:column}.demo-tools h3{border-bottom:2px solid #eee;color:#333;font-weight:600;margin-top:0;padding-left:4px}.demo-tools.demo-tools-toolbar{display:flex;flex-direction:column;width:500px}.demo-tools.demo-tools-toolbar .demo-tools-toolbar-section.demo-tools-toolbar-steps{flex:1;min-height:60%}.demo-tools #demo-tools-info{display:flex;flex-direction:column}.demo-tools #demo-tools-info .demo-tools-info-section{padding:2px}.demo-tools #demo-tools-info .demo-tools-info-section#demo-tools-info-git{display:grid;gap:3px;grid-template-columns:auto 1fr}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImV4dGVybmFsL21vZHVsZXMvZGVtby10b29scy9zdHlsZS5sZXNzIiwic3R5bGUubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSw2QkFDRSxZQUFBLENBRUEsT0FBQSxDQURBLDhCQ0VGLENESkEsMkVBT0ksWUFBQSxDQURBLHFCQUFBLENBRUEsOEJDQ0osQ0RHQSxZQUNFLHFCQUFBLENBQ0EsWUFBQSxDQUNBLHFCQ0RGLENERkEsZUFRSSw0QkFBQSxDQURBLFVBQUEsQ0FEQSxlQUFBLENBSUEsWUFBQSxDQURBLGdCQ0FKLENESUUsK0JBQ0UsWUFBQSxDQUNBLHFCQUFBLENBQ0EsV0NGSixDREtNLG9GQUVFLE1BQUEsQ0FEQSxjQ0ZSLENEbEJBLDZCQTJCSSxZQUFBLENBQ0EscUJDTkosQ0R0QkEsc0RBK0JNLFdDTk4sQ0RRTSwwRUFDRSxZQUFBLENBRUEsT0FBQSxDQURBLDhCQ0xSIiwiZmlsZSI6InN0eWxlLmxlc3MifQ== */";
+  var css_248z$1 = "#demo-tools-step-picker-form{align-items:center;display:grid;gap:5px;grid-template-columns:auto 1fr}#demo-tools-step-picker-form #demo-tools-step-picker-form-highlight-fields{display:grid;grid-column:.33333333;grid-template-columns:auto 1fr}.demo-tools{background-color:#fff;display:flex;flex-direction:column}.demo-tools h3{border-bottom:2px solid #eee;color:#333;font-weight:600;margin-top:0;padding-left:4px}.demo-tools.demo-tools-toolbar{display:flex;flex-direction:column;width:500px}.demo-tools.demo-tools-toolbar .demo-tools-toolbar-section.demo-tools-toolbar-steps{flex:1;min-height:60%}.demo-tools #demo-tools-info{display:flex;flex-direction:column}.demo-tools #demo-tools-info .demo-tools-info-section{display:grid;gap:0 5px;grid-template-columns:auto 1fr;padding:2px}.demo-tools #demo-tools-info .demo-tools-info-section *{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImV4dGVybmFsL21vZHVsZXMvZGVtby10b29scy9zdHlsZS5sZXNzIiwic3R5bGUubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSw2QkFJRSxrQkFBQSxDQUhBLFlBQUEsQ0FFQSxPQUFBLENBREEsOEJDR0YsQ0RMQSwyRUFRSSxZQUFBLENBREEscUJBQUEsQ0FFQSw4QkNDSixDREdBLFlBQ0UscUJBQUEsQ0FDQSxZQUFBLENBQ0EscUJDREYsQ0RGQSxlQVFJLDRCQUFBLENBREEsVUFBQSxDQURBLGVBQUEsQ0FJQSxZQUFBLENBREEsZ0JDQUosQ0RJRSwrQkFDRSxZQUFBLENBQ0EscUJBQUEsQ0FDQSxXQ0ZKLENES00sb0ZBRUUsTUFBQSxDQURBLGNDRlIsQ0RsQkEsNkJBMkJJLFlBQUEsQ0FDQSxxQkNOSixDRHRCQSxzREFnQ00sWUFBQSxDQUVBLFNBQUEsQ0FEQSw4QkFBQSxDQUZBLFdDSE4sQ0Q1QkEsd0RBdUNRLGVBQUEsQ0FEQSxzQkFBQSxDQURBLGtCQ0pSIiwiZmlsZSI6InN0eWxlLmxlc3MifQ== */";
   styleInject(css_248z$1);
 
   class StepForm {
@@ -37328,11 +37316,17 @@ this["dev-tools"] = (function () {
               interval: +document.getElementById('demo-tools-step-picker-form-interval').value,
               list: document.getElementById('demo-tools-step-picker-form-list').checked,
               xPath: document.getElementById('demo-tools-step-picker-form-xPath').value,
+              value: document.getElementById('demo-tools-step-picker-form-type').value === 'setValue' ?
+                  document.getElementById('demo-tools-step-picker-form-value').value :
+                  undefined,
+              keyboardKey: document.getElementById('demo-tools-step-picker-form-type').value === 'keyboard' ?
+                  document.getElementById('demo-tools-step-picker-form-keyboardKey').value :
+                  undefined,
           };
       }
       static setFormValues(values) {
           Object.entries(values).forEach(([key, value]) => {
-              document.getElementById(`demo-tools-step-picker-form-${key}`).value = value;
+              document.getElementById(`demo-tools-step-picker-form-${key}`).value = String(value);
           });
       }
       static getPrompt(arg) {
@@ -37398,28 +37392,30 @@ this["dev-tools"] = (function () {
         <div class="demo-tools-step-picker-form-label">Title:</div>
         <div class="demo-tools-step-picker-form-control"><input type="text" id="demo-tools-step-picker-form-title" autofocus value="${(values === null || values === void 0 ? void 0 : values.title) || ''}" /></div>
         <div class="demo-tools-step-picker-form-label">Interval:</div>
-        <div class="demo-tools-step-picker-form-control"><input type="number" id="demo-tools-step-picker-form-interval" value="${(values === null || values === void 0 ? void 0 : values.interval) || DemoTools.defaultInterval}" step="100" />&nbsp;ms</div>
+        <div class="demo-tools-step-picker-form-control"><input type="number" id="demo-tools-step-picker-form-interval" value="${(values === null || values === void 0 ? void 0 : values.interval) || Demo.defaultInterval}" step="100" />&nbsp;ms</div>
         <div class="demo-tools-step-picker-form-label">Listed:</div>
         <div class="demo-tools-step-picker-form-control"><input type="checkbox" id="demo-tools-step-picker-form-list" checked="${is(Boolean, values === null || values === void 0 ? void 0 : values.list) ? values.list.toString() : 'true'}" /></div>
         <div class="demo-tools-step-picker-form-label">Type:</div>
         <div class="demo-tools-step-picker-form-control">
-          <select id="demo-tools-step-picker-form-type" onchange="window.demo.stepForm.onStepTypeChange()">
+          <select id="demo-tools-step-picker-form-type" onchange="window.demoTools.demo.stepForm.onStepTypeChange()">
             <option value="highlight" ${(values === null || values === void 0 ? void 0 : values.type) === 'highlight' || isNil(values === null || values === void 0 ? void 0 : values.type) ? 'selected' : ''}>Highlight</option>
             <option value="click" ${(values === null || values === void 0 ? void 0 : values.type) === 'click' ? 'selected' : ''}>Click</option>
             <option value="rightclick" ${(values === null || values === void 0 ? void 0 : values.type) === 'rightclick' ? 'selected' : ''}>Right Click</option>
             <option value="hover" ${(values === null || values === void 0 ? void 0 : values.type) === 'hover' ? 'selected' : ''}>Hover</option>
+            <option value="setValue" ${(values === null || values === void 0 ? void 0 : values.type) === 'setValue' ? 'selected' : ''}>Set Value</option>
+            <option value="keyboard" ${(values === null || values === void 0 ? void 0 : values.type) === 'keyboard' ? 'selected' : ''}>Keyboard</option>
           </select>
         </div>
         <div class="demo-tools-step-picker-form-label">Ascend:</div>
         <div class="demo-tools-step-picker-form-control" style="align-items: flex-start;display: flex;gap: 5px;">
-          <select id="demo-tools-step-picker-form-xPath" style="width: 50px;" onchange="window.demo.stepForm.onXpathChange()">
+          <select id="demo-tools-step-picker-form-xPath" style="width: 50px;" onchange="window.demoTools.demo.stepForm.onXpathChange()">
             ${xPathSegments.map((_, index) => {
             return `<option value="/${xPathSegments.slice(0, xPathSegments.length - index).join('/')}">${index}</option>`;
         })}
           </select>
           <span title="${element.localName}.${(_a = element.classList.value) === null || _a === void 0 ? void 0 : _a.replaceAll(' ', '.')}" style="color: blue; font-size: 1.2em; line-height: 1em; cursor: pointer;">&#9432;</span>
           </div>
-        <div id="demo-tools-step-picker-form-highlight-fields" style="gap: 5px; grid-column: 1/3; display: ${(values === null || values === void 0 ? void 0 : values.type) === 'highlight' || isNil(values === null || values === void 0 ? void 0 : values.type) ? 'grid' : 'none'};">
+        <div id="demo-tools-step-picker-form-highlight-fields" style="gap: 5px; align-items: center; grid-column: 1/3; grid-template-columns: auto 1fr; display: ${(values === null || values === void 0 ? void 0 : values.type) === 'highlight' || isNil(values === null || values === void 0 ? void 0 : values.type) ? 'grid' : 'none'};">
           <div class="demo-tools-step-picker-form-label">Shift X:</div>
           <div class="demo-tools-step-picker-form-control"><input type="number" id="demo-tools-step-picker-form-shiftX" step="10" value="${values === null || values === void 0 ? void 0 : values.shiftX}" /></div>
           <div class="demo-tools-step-picker-form-label">Shift Y:</div>
@@ -37429,26 +37425,48 @@ this["dev-tools"] = (function () {
           <div class="demo-tools-step-picker-form-label">Shift Height:</div>
           <div class="demo-tools-step-picker-form-control"><input type="number" id="demo-tools-step-picker-form-shiftHeight" step="10" value="${values === null || values === void 0 ? void 0 : values.shiftHeight}" /></div>
         </div>
+        <div id="demo-tools-step-picker-form-setValue-fields" style="gap: 5px; align-items: center; grid-column: 1/3; grid-template-columns: auto 1fr; display: ${(values === null || values === void 0 ? void 0 : values.type) === 'setValue' ? 'grid' : 'none'};">
+          <div class="demo-tools-step-picker-form-label">Value:</div>
+          <div class="demo-tools-step-picker-form-control"><input type="text" id="demo-tools-step-picker-form-value" value="${(values === null || values === void 0 ? void 0 : values.value) || ''}" /></div>
+        </div>
+        <div id="demo-tools-step-picker-form-keyboard-fields" style="gap: 5px; align-items: center; grid-column: 1/3; grid-template-columns: auto 1fr; display: ${(values === null || values === void 0 ? void 0 : values.type) === 'keyboard' ? 'grid' : 'none'};">
+          <div class="demo-tools-step-picker-form-label">Keyboard Key:</div>
+          <div class="demo-tools-step-picker-form-control">
+            <select id="demo-tools-step-picker-form-keyboardKey" value="${(values === null || values === void 0 ? void 0 : values.keyboardKey) || 'Enter'}">
+                <option value="Enter">Enter</option>
+                <option value="Escape">Escape</option>
+                <option value="Tab">Tab</option>
+                <option value="Delete">Delete</option>
+                <option value="Backspace">Backspace</option>
+                <option value="ArrowUp">Arrow Up</option>
+                <option value="ArrowDown">Arrow Down</option>
+                <option value="ArrowLeft">Arrow Left</option>
+                <option value="ArrowRight">Arrow Right</option>
+            </select>
+          </div>
+        </div>
       </div>
     `;
       }
       static onStepTypeChange() {
           document.getElementById('demo-tools-step-picker-form-highlight-fields').style.display = document.getElementById('demo-tools-step-picker-form-type').value === 'highlight' ? 'grid' : 'none';
+          document.getElementById('demo-tools-step-picker-form-setValue-fields').style.display = document.getElementById('demo-tools-step-picker-form-type').value === 'setValue' ? 'grid' : 'none';
+          document.getElementById('demo-tools-step-picker-form-keyboard-fields').style.display = document.getElementById('demo-tools-step-picker-form-type').value === 'keyboard' ? 'grid' : 'none';
       }
       static onXpathChange() {
           var _a;
-          const driver = (_a = window.demo) === null || _a === void 0 ? void 0 : _a.stepForm.driver;
-          const formValues = window.demo.stepForm.getFormValues();
+          const driver = (_a = window.demoTools.demo) === null || _a === void 0 ? void 0 : _a.stepForm.driver;
+          const formValues = window.demoTools.demo.stepForm.getFormValues();
           const xPath = document.getElementById('demo-tools-step-picker-form-xPath').value;
           const element = getElementByXPath(xPath);
           driver.getActiveStep().element = element;
           driver.highlight(driver.getActiveStep());
           setTimeout(() => {
               var _a, _b;
-              (_a = window.demo) === null || _a === void 0 ? void 0 : _a.stepForm.setFormValues(formValues);
+              (_a = window.demoTools.demo) === null || _a === void 0 ? void 0 : _a.stepForm.setFormValues(formValues);
               const infoIcon = document.getElementById('demo-tools-step-picker-form-xPath').nextElementSibling;
               if (infoIcon) {
-                  infoIcon.title = element.localName + '.' + ((_b = element.classList.value) === null || _b === void 0 ? void 0 : _b.replace(/ +/g, '.'));
+                  infoIcon.title = element.localName + (element.classList.value ? '.' + ((_b = element.classList.value) === null || _b === void 0 ? void 0 : _b.replace(/ +/g, '.')) : '');
               }
           }, 1000);
       }
@@ -37459,25 +37477,74 @@ this["dev-tools"] = (function () {
       }
   }
 
+  var X_PATH_ERROR;
+  (function (X_PATH_ERROR) {
+      X_PATH_ERROR["CLASS_MISTMATCH"] = "Class mistmatch: ";
+      X_PATH_ERROR["ID_MISTMATCH"] = "ID mistmatch: ";
+      X_PATH_ERROR["ELEMENT_NOT_FOUND"] = "Element not found";
+  })(X_PATH_ERROR || (X_PATH_ERROR = {}));
   class Step {
       constructor(step) {
+          var _a, _b, _c;
           this.title = String(step.title);
           this.interval = Number(step.interval) || Step.defaultInterval;
-          this.type = step.type || 'custom';
+          this.type = String(step.type || 'custom');
           this.list = Boolean(step.list);
-          this.selector = step.selector;
-          this.func = step.type === 'custom' ? step.func : undefined;
-          this.element = step.element;
-          this.xPath = step.xPath;
-          this.area = step.area;
-          this.shiftX = step.shiftX;
-          this.shiftY = step.shiftY;
-          this.shiftWidth = step.shiftWidth;
-          this.shiftHeight = step.shiftHeight;
-          this.customData = step.customData;
+          this.selector = step.selector ? String(step.selector) : undefined;
+          this.func = step.type === 'custom' && typeof step.func === 'function' ? step.func : undefined;
+          this.element = (step === null || step === void 0 ? void 0 : step.element) ? {
+              classList: Object.values((_a = step === null || step === void 0 ? void 0 : step.element) === null || _a === void 0 ? void 0 : _a.classList),
+              id: String(((_b = step === null || step === void 0 ? void 0 : step.element) === null || _b === void 0 ? void 0 : _b.id) || ''),
+              localName: String(((_c = step === null || step === void 0 ? void 0 : step.element) === null || _c === void 0 ? void 0 : _c.localName) || '')
+          } : undefined;
+          this.xPath = step.xPath ? String(step.xPath) : undefined;
+          this.area = step.area ? {
+              left: Number(step.area.left || 0),
+              top: Number(step.area.top || 0),
+              width: Number(step.area.width || 0),
+              height: Number(step.area.height || 0),
+          } : undefined;
+          this.shiftX = Number(step.shiftX || 0);
+          this.shiftY = Number(step.shiftY || 0);
+          this.shiftWidth = Number(step.shiftWidth || 0);
+          this.shiftHeight = Number(step.shiftHeight || 0);
+          this.customData = step.customData ? JSON.stringify(step.customData) : undefined;
+          this.xPathCheck = typeof step.xPathCheck === 'boolean' ? step.xPathCheck : 'ignored';
+          this.value = step.value ? String(step.value) : undefined;
+          this.keyboardKey = step.keyboardKey ? String(step.keyboardKey) : undefined;
       }
       get isFilled() {
           return Boolean((this.element || this.xPath || this.selector || this.func || this.area) && this.title && this.interval);
+      }
+      get xPathError() {
+          if (!this.xPath) {
+              return null;
+          }
+          if (!this.element) {
+              return null;
+          }
+          const el = getElementByXPath(this.xPath);
+          if (!el) {
+              return `${X_PATH_ERROR.ELEMENT_NOT_FOUND}: ${this.element.toString()}`;
+          }
+          if (el instanceof HTMLElement) {
+              if (!equals(el.id, this.element.id)) {
+                  return `${X_PATH_ERROR.ID_MISTMATCH}: ${el.id || '-empty-'} !== ${this.element.id || '-empty-'}`;
+              }
+              const intersectionClasses = intersection(values(el.classList), values(this.element.classList));
+              const excessiveClasses = values(el.classList).filter(c => !values(this.element.classList).includes(c));
+              const missingClasses = values(this.element.classList).filter(c => !values(el.classList).includes(c));
+              if (Math.abs(1 - intersectionClasses.length / values(this.element.classList).length) > 0.25) {
+                  return `${X_PATH_ERROR.CLASS_MISTMATCH}\n\tMissing classes: ${missingClasses.join(', ')}\n\tExcessive classes: ${excessiveClasses.join(', ')}`;
+              }
+          }
+          return null;
+      }
+      get hasCorrectXPath() {
+          return this.xPathError === null;
+      }
+      get isElementBound() {
+          return !isNil(this.selector) || !isNil(this.xPath) || !isNil(this.area);
       }
   }
   Step.defaultInterval = 2000;
@@ -37507,16 +37574,27 @@ this["dev-tools"] = (function () {
                           showButtons: ['next', 'previous', 'close'],
                           nextBtnText: 'Approve',
                           prevBtnText: 'Close',
+                          onPopoverRender: (popoverDom) => {
+                              var _a, _b;
+                              const handleKeydown = (e) => {
+                                  if (e.key === 'Enter') {
+                                      CheckStepPrompt.resolve(resolve, Object.assign(Object.assign({}, step), { xPathCheck: true }));
+                                      CheckStepPrompt.driver.destroy();
+                                  }
+                              };
+                              (_a = popoverDom.wrapper) === null || _a === void 0 ? void 0 : _a.removeEventListener('keydown', handleKeydown);
+                              (_b = popoverDom.wrapper) === null || _b === void 0 ? void 0 : _b.addEventListener('keydown', handleKeydown);
+                          },
                           onNextClick: () => {
-                              CheckStepPrompt.resolve(resolve, step);
+                              CheckStepPrompt.resolve(resolve, Object.assign(Object.assign({}, step), { xPathCheck: true }));
                               CheckStepPrompt.driver.destroy();
                           },
                           onPrevClick: () => {
-                              resolve(undefined);
+                              CheckStepPrompt.resolve(resolve, undefined);
                               CheckStepPrompt.driver.destroy();
                           },
                           onCloseClick: () => {
-                              resolve(undefined);
+                              CheckStepPrompt.resolve(resolve, undefined);
                               CheckStepPrompt.driver.destroy();
                           },
                       }
@@ -37529,6 +37607,10 @@ this["dev-tools"] = (function () {
           return `${element.localName}.${(_a = element.classList.value) === null || _a === void 0 ? void 0 : _a.replaceAll(' ', '.')}`;
       }
       static resolve(resolve, step) {
+          if (isNil(step)) {
+              resolve(undefined);
+              return;
+          }
           const element = pick(['classList', 'id', 'localName'], getElementByXPath(step.xPath));
           resolve(Object.assign(Object.assign({}, step), { element }));
       }
@@ -37595,9 +37677,9 @@ this["dev-tools"] = (function () {
           catch (e) {
           }
       }
-      static focus(selector) {
+      static focus(arg) {
           try {
-              const element = document.querySelector(selector);
+              const element = Dom.getElement(arg);
               if (!element) {
                   return;
               }
@@ -37606,16 +37688,29 @@ this["dev-tools"] = (function () {
           catch (e) {
           }
       }
-      static setValue(selector, value) {
+      static keydown(arg, key) {
           try {
-              const element = document.querySelector(selector);
+              const element = Dom.getElement(arg);
               if (!element) {
                   return;
               }
+              element.dispatchEvent(new KeyboardEvent('keydown', { key, code: key, bubbles: true }));
+          }
+          catch (e) {
+          }
+      }
+      static setValue(arg, value) {
+          var _a;
+          try {
+              const element = Dom.getElement(arg);
+              if (!element) {
+                  return;
+              }
+              const nativeSetter = (_a = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')) === null || _a === void 0 ? void 0 : _a.set;
               element.setAttribute('value', value);
-              element.value = value;
-              element.dispatchEvent(new Event('change', { bubbles: true, cancelable: true }));
-              element.dispatchEvent(new Event('input', { bubbles: true, cancelable: true }));
+              nativeSetter.call(element, value);
+              element.dispatchEvent(new Event('change', { bubbles: true }));
+              element.dispatchEvent(new Event('input', { bubbles: true }));
           }
           catch (e) {
           }
@@ -37982,6 +38077,30 @@ this["dev-tools"] = (function () {
   Terminal.windowConsole = window.console;
   Terminal.filter = '';
 
+  class DevServer {
+      static get(path, varName) {
+          return fetch(`http://localhost:${SERVER_PORT}/${String(path)}`)
+              .then(result => {
+              if (!isNil(result) && !isEmpty(result)) {
+                  return result.json();
+              }
+              return null;
+          }).then(result => {
+              if (!isNil(result) && !isEmpty(result) && !isNil(varName)) {
+                  setVar(String(varName), result);
+              }
+              return result;
+          })
+              .catch(e => {
+              throw new Error(e);
+          });
+      }
+  }
+
+  const fetchGitSummary = (varName) => {
+      return DevServer.get('git/summary', varName);
+  };
+
   class Info {
       static init() {
           Info.initialized = true;
@@ -37991,16 +38110,24 @@ this["dev-tools"] = (function () {
           Info.area = document.createElement('div');
           Info.area.setAttribute('id', 'demo-tools-info');
           Info.area.appendChild(Info.getHeaderElement());
-          Info.area.appendChild(Info.getGitLoadingElement());
+          Info.area.appendChild(Info.getLoadingElement());
           Info.getGitElement()
               .then(el => Info.area.appendChild(el))
-              .finally(() => { var _a; return (_a = Info.area.querySelector('.demo-tools-info-git-loading')) === null || _a === void 0 ? void 0 : _a.remove(); });
+              .then(() => Info.getProjectInfoElement())
+              .then(el => Info.area.appendChild(el))
+              .finally(() => Info.area.querySelectorAll('.demo-tools-info-loading').forEach(el => el.remove()));
+      }
+      static getHeaderElement() {
+          const title = document.createElement('h3');
+          title.innerHTML = 'Info';
+          title.setAttribute('class', 'demo-tools-info-title');
+          return title;
       }
       static getGitElement() {
           return __awaiter(this, void 0, void 0, function* () {
               let commit = {};
               try {
-                  commit = yield gitHead();
+                  commit = yield fetchGitSummary();
               }
               catch (e) {
               }
@@ -38011,26 +38138,40 @@ this["dev-tools"] = (function () {
       <div>Commit Id:</div>
       <div>${commit.commit || 'unknown'}</div>
       <div>Date:</div>
-      <div>${commit.date || 'unknown'}</div>
+      <div>${commit.date ? format(new Date(commit.date), 'yyyy-MM-dd HH:mm:ss') : 'unknown'}</div>
       <div>Message:</div>
-      <div>${commit.message || 'unknown'}</div>
+      <div title="${commit.message}">${commit.message || 'unknown'}</div>
       <div>Branch:</div>
-      <div>${commit.branch || 'unknown'}</div>`;
+      <div>${commit.branch || 'unknown'}</div>
+      <div>Branch switched:</div>
+      <div>${commit.branchSwitchTime || 'unknown'}</div>`;
               element.innerHTML = innerHTML;
               return element;
           });
       }
-      static getHeaderElement() {
-          const title = document.createElement('h3');
-          title.innerHTML = 'Info';
-          title.setAttribute('class', 'demo-tools-info-title');
-          return title;
-      }
-      static getGitLoadingElement() {
+      static getLoadingElement() {
           const element = document.createElement('div');
-          element.setAttribute('class', 'demo-tools-info-git-loading');
+          element.setAttribute('class', 'demo-tools-info-loading');
           element.innerHTML = 'Loading...';
           return element;
+      }
+      static getProjectInfoElement() {
+          return __awaiter(this, void 0, void 0, function* () {
+              let projectInfo = {};
+              try {
+                  projectInfo = yield DevServer.get('project-info');
+              }
+              catch (e) {
+              }
+              const element = document.createElement('div');
+              element.classList.add('demo-tools-info-section');
+              const innerHTML = `
+    <div>Compiled at:</div>
+    <div>${projectInfo.bundleMTime ? format(new Date(projectInfo.bundleMTime), 'yyyy-MM-dd HH:mm:ss') : 'unknown'}</div>
+    `;
+              element.innerHTML = innerHTML;
+              return element;
+          });
       }
       static destroy() {
           Info.initialized = false;
@@ -38046,8 +38187,8 @@ this["dev-tools"] = (function () {
           Info.init();
           Toolbar.state.initialized = true;
           Toolbar.mount();
-          window.addEventListener('DemoTools:DemoRun', Toolbar.handleDemoRunEvent);
-          window.addEventListener('DemoTools:DemoStop', Toolbar.handleDemoStopEvent);
+          window.addEventListener('Demo:DemoRun', Toolbar.handleDemoRunEvent);
+          window.addEventListener('Demo:DemoStop', Toolbar.handleDemoStopEvent);
       }
       static mount() {
           var _a, _b;
@@ -38092,8 +38233,8 @@ this["dev-tools"] = (function () {
           Steps.destroy();
           Info.destroy();
           Toolbar.state.initialized = false;
-          window.removeEventListener('DemoTools:DemoRun', Toolbar.handleDemoRunEvent);
-          window.removeEventListener('DemoTools:DemoStop', Toolbar.handleDemoStopEvent);
+          window.removeEventListener('Demo:DemoRun', Toolbar.handleDemoRunEvent);
+          window.removeEventListener('Demo:DemoStop', Toolbar.handleDemoStopEvent);
       }
       static handleDemoRunEvent() {
           Toolbar.hideSection('info');
@@ -38112,15 +38253,59 @@ this["dev-tools"] = (function () {
   Toolbar.area = null;
 
   let steps = [];
-  class DemoTools {
-      static get steps() { return Object.assign({}, steps); }
-      static addStep(step = {}) {
-          DemoTools.insertStep(step, steps.length);
+  class Demo {
+      get steps() { return [...steps]; }
+      constructor(options = {}) {
+          this.Driver = Ae;
+          this.stepList = Steps;
+          this.stepForm = StepForm;
+          this.dom = Dom;
+          this.terminal = Terminal;
+          this.options = {};
+          this.initialState = {
+              running: false,
+              activeStep: null,
+              initialized: false,
+              lastUpdatedStep: null,
+          };
+          this.state = Object.assign({}, this.initialState);
+          this.defaultDriverOptions = {
+              showButtons: ['close'],
+              overlayOpacity: 0.3,
+          };
+          steps = [];
+          this.options.renderToolbar = options.renderToolbar === false ? false : true;
+          this.options.renderStepsStyle = options.renderStepsStyle;
+          this.options.interval = options.interval;
+          StepForm.init();
+          CheckStepPrompt.init();
+          window.addEventListener('keydown', EventHandlers.handleKeydown);
+          if (this.options.renderToolbar) {
+              Toolbar.init();
+              window.addEventListener(Steps.eventTypes.STEP_MOVE, EventHandlers.handleStepMoved);
+              window.addEventListener(Steps.eventTypes.STEP_DOUBLECLICK, EventHandlers.handleStepDoubleclick);
+              window.addEventListener(Steps.eventTypes.STEP_CLICK, EventHandlers.handleStepClick);
+              window.addEventListener(Steps.eventTypes.STEP_CTRL_CLICK, EventHandlers.handleStepCtrlClick);
+              window.addEventListener(PlanStepForm.eventTypes.PLAN_STEP, EventHandlers.handlePlanStep);
+          }
+          if (options.steps) {
+              this.setSteps(values(options.steps));
+          }
+          this.state.initialized = true;
       }
-      static addHighlightStep(step = {}) {
-          DemoTools.addStep(Object.assign(Object.assign({}, step), { title: step.title || `Step ${steps.length}`, type: 'highlight' }));
+      static getInstance(options = {}) {
+          if (!Demo.instance && !isEmpty(options)) {
+              Demo.instance = new Demo(options);
+          }
+          return Demo.instance;
       }
-      static pickStep() {
+      addStep(step = {}) {
+          this.insertStep(step, steps.length);
+      }
+      addHighlightStep(step = {}) {
+          this.addStep(Object.assign(Object.assign({}, step), { title: step.title || `Step ${steps.length}`, type: 'highlight' }));
+      }
+      pickStep() {
           var _a;
           return __awaiter(this, void 0, void 0, function* () {
               const hoveredEls = document.querySelectorAll(':hover');
@@ -38139,9 +38324,9 @@ this["dev-tools"] = (function () {
                   return;
               }
               let step;
-              if (DemoTools.state.activeStep !== null) {
+              if (this.state.activeStep !== null) {
                   step = yield StepForm.getPrompt({
-                      title: steps[DemoTools.state.activeStep].title,
+                      title: steps[this.state.activeStep].title,
                       xPath
                   });
               }
@@ -38151,43 +38336,43 @@ this["dev-tools"] = (function () {
               if (!step) {
                   return;
               }
-              if (DemoTools.state.activeStep !== null) {
-                  yield DemoTools.updateStep(DemoTools.state.activeStep, step);
-                  if (((_a = steps[DemoTools.state.activeStep + 1]) === null || _a === void 0 ? void 0 : _a.isFilled) === false) {
-                      DemoTools.select(DemoTools.state.activeStep + 1);
+              if (this.state.activeStep !== null) {
+                  yield this.updateStep(this.state.activeStep, step);
+                  if (((_a = steps[this.state.activeStep + 1]) === null || _a === void 0 ? void 0 : _a.isFilled) === false) {
+                      this.select(this.state.activeStep + 1);
                   }
                   else {
-                      DemoTools.select(null);
+                      this.select(null);
                   }
                   return;
               }
               else {
-                  DemoTools.addStep(step);
+                  this.addStep(step);
               }
           });
       }
-      static setSteps(steps) {
+      setSteps(steps) {
           if (isNil(steps) || isEmpty(steps)) {
               return;
           }
-          DemoTools.stop();
-          values(steps).forEach((step) => DemoTools.insertStep(step));
-          DemoTools.select(0);
+          this.stop();
+          values(steps).forEach((step) => this.insertStep(Object.assign(Object.assign({}, step), { xPathCheck: false })));
+          this.select(0);
       }
-      static insertStep(step = {}, index) {
+      insertStep(step = {}, index) {
           const adjustedStep = new Step(Object.assign(Object.assign({}, step), { title: step.title || `Custom step ${index}`, type: step.type || 'click', list: typeof step.list === 'boolean' ? step.list : true }));
-          const index1 = !isNil(index) ? Number(index) : DemoTools.state.activeStep !== null ? DemoTools.state.activeStep + 1 : steps.length;
+          const index1 = !isNil(index) ? Number(index) : this.state.activeStep !== null ? this.state.activeStep + 1 : steps.length;
           steps = insert(index1, adjustedStep, steps);
-          DemoTools.state.lastUpdatedStep = index1;
-          DemoTools.onStepsChanged();
+          this.state.lastUpdatedStep = index1;
+          this.dispatchStepsChangedEvent();
       }
-      static updateStep(title, step) {
+      updateStep(title, step) {
           return __awaiter(this, void 0, void 0, function* () {
-              if (!DemoTools.state.initialized) {
+              if (!this.state.initialized) {
                   throw new Error('DevTools: DemoTools is not initialized');
               }
-              if (DemoTools.state.running) {
-                  DemoTools.pause();
+              if (this.state.running) {
+                  this.pause();
               }
               let index;
               if (!isNil(title)) {
@@ -38197,20 +38382,20 @@ this["dev-tools"] = (function () {
                   else {
                       index = title;
                   }
-                  if (index === -1) {
-                      return;
-                  }
               }
               else {
-                  index = Number(isNil(DemoTools.state.activeStep) ? DemoTools.state.lastUpdatedStep : DemoTools.state.activeStep || 0);
+                  index = Number(isNil(this.state.activeStep) ? this.state.lastUpdatedStep : this.state.activeStep || 0);
+              }
+              if (index >= steps.length || index < 0) {
+                  return;
               }
               const updatedStep = step || (yield StepForm.getPrompt(steps[index]));
-              DemoTools.state.lastUpdatedStep = index;
+              this.state.lastUpdatedStep = index;
               steps[index] = new Step(Object.assign(Object.assign({}, steps[index]), updatedStep));
-              DemoTools.onStepsChanged();
+              this.dispatchStepsChangedEvent();
           });
       }
-      static removeStep(title) {
+      removeStep(title) {
           let index;
           if (isNaN(Number(title))) {
               index = findIndex((step) => step.title.toLowerCase().includes(title.toLowerCase()), steps);
@@ -38222,24 +38407,21 @@ this["dev-tools"] = (function () {
               return;
           }
           steps = remove(index, 1, steps);
-          if (DemoTools.state.activeStep === index) {
-              DemoTools.select(null);
+          if (this.state.activeStep === index) {
+              this.select(null);
           }
-          DemoTools.onStepsChanged();
+          this.dispatchStepsChangedEvent();
       }
-      static removeAllSteps() {
+      removeAllSteps() {
           steps = [];
-          DemoTools.onStepsChanged();
+          this.dispatchStepsChangedEvent();
       }
-      static clear() {
-          DemoTools.removeAllSteps();
-      }
-      static doStep(title) {
+      doStep(title) {
           var _a;
-          if (!DemoTools.state.initialized) {
+          if (!this.state.initialized) {
               throw new Error('DevTools: DemoTools is not initialized');
           }
-          DemoTools.state.lastUpdatedStep = null;
+          this.state.lastUpdatedStep = null;
           let index;
           if (isNaN(Number(title))) {
               index = findIndex((step) => step.title.toLowerCase().includes(title.toLowerCase()), steps);
@@ -38250,9 +38432,9 @@ this["dev-tools"] = (function () {
           if (index === -1 || index >= steps.length) {
               return;
           }
-          DemoTools.select(index);
+          this.select(index);
           if (steps[index].type === 'highlight') {
-              DemoTools.highlight(index);
+              this.highlight(index);
           }
           else if (steps[index].type === 'click') {
               Dom.click(steps[index]);
@@ -38263,99 +38445,110 @@ this["dev-tools"] = (function () {
           else if (steps[index].type === 'hover') {
               Dom.hover(steps[index]);
           }
+          else if (steps[index].type === 'setValue') {
+              Dom.setValue(steps[index], steps[index].value);
+          }
+          else if (steps[index].type === 'keyboard') {
+              Dom.keydown(steps[index], steps[index].keyboardKey);
+          }
           else {
               (_a = steps[index]) === null || _a === void 0 ? void 0 : _a.func();
           }
       }
-      static run(options = {}) {
+      run(options = {}) {
           return __awaiter(this, void 0, void 0, function* () {
-              DemoTools.dispatchRunEvent();
-              DemoTools.options = Object.assign(Object.assign({}, DemoTools.options), options);
-              DemoTools.state.running = true;
-              for (let i = (options === null || options === void 0 ? void 0 : options.from) || DemoTools.state.activeStep || 0; i <= ((options === null || options === void 0 ? void 0 : options.till) || steps.length - 1); i++) {
-                  if (!DemoTools.state.running) {
+              this.dispatchRunEvent();
+              this.options = Object.assign(Object.assign({}, this.options), options);
+              this.state.running = true;
+              for (let i = (options === null || options === void 0 ? void 0 : options.from) || this.state.activeStep || 0; i <= ((options === null || options === void 0 ? void 0 : options.till) || steps.length - 1); i++) {
+                  if (!this.state.running) {
                       break;
                   }
-                  DemoTools.doStep(i);
+                  this.doStep(i);
                   const step = steps[i];
-                  yield new Promise(resolve => setTimeout(resolve, (step === null || step === void 0 ? void 0 : step.interval) || DemoTools.options.interval || DemoTools.defaultInterval));
+                  yield new Promise(resolve => setTimeout(resolve, (step === null || step === void 0 ? void 0 : step.interval) || this.options.interval || Demo.defaultInterval));
                   if (step.type === 'highlight') {
-                      DemoTools.unhighlight();
+                      this.unhighlight();
                   }
               }
-              if (DemoTools.state.activeStep === (options === null || options === void 0 ? void 0 : options.till) || steps.length - 1) {
-                  DemoTools.stop();
+              if (this.state.activeStep === ((options === null || options === void 0 ? void 0 : options.till) || steps.length - 1)) {
+                  this.stop();
               }
           });
       }
-      static jump(index) {
+      jump(index) {
           if (index < 0 || index >= steps.length) {
               return;
           }
-          DemoTools.doStep(index);
+          this.doStep(index);
       }
-      static select(index) {
-          DemoTools.state.activeStep = index;
-          DemoTools.dispatchActiveStepChangedEvent();
+      select(index) {
+          this.state.activeStep = index;
+          this.dispatchActiveStepChangedEvent();
       }
-      static swap(index1, index2) {
+      swap(index1, index2) {
           if (isNil(index1) || isNil(index2) || index1 === index2 || index1 < 0 || index2 < 0 || index1 >= steps.length || index2 >= steps.length) {
               return;
           }
           const tmp = steps[Number(index1)];
           steps[Number(index1)] = steps[Number(index2)];
           steps[Number(index2)] = tmp;
-          DemoTools.onStepsChanged();
-          if (index1 === DemoTools.state.activeStep || index2 === DemoTools.state.activeStep) {
-              if (index1 === DemoTools.state.activeStep) {
-                  DemoTools.select(index2);
+          this.dispatchStepsChangedEvent();
+          if (index1 === this.state.activeStep || index2 === this.state.activeStep) {
+              if (index1 === this.state.activeStep) {
+                  this.select(index2);
               }
               else {
-                  DemoTools.select(index1);
+                  this.select(index1);
               }
           }
       }
-      static move(index1, index2) {
-          const index = !isNil(index2) ? index1 : DemoTools.state.activeStep;
+      move(index1, index2) {
+          const index = !isNil(index2) ? index1 : this.state.activeStep;
           const tmp = steps[index];
           steps.splice(index, 1);
           steps.splice(!isNil(index2) ? index2 : index1, 0, tmp);
-          DemoTools.onStepsChanged();
+          this.dispatchStepsChangedEvent();
       }
-      static copy(index1, index2) {
-          const index = !isNil(index1) ? index1 : DemoTools.state.activeStep;
-          DemoTools.insertStep(steps[index], !isNil(index2) ? index2 : index1 + 1);
+      copy(index1, index2) {
+          const index = !isNil(index1) ? index1 : this.state.activeStep;
+          this.insertStep(steps[index], !isNil(index2) ? index2 : index1 + 1);
       }
-      static stop() {
-          DemoTools.pause();
-          DemoTools.state.lastUpdatedStep = null;
-          DemoTools.unhighlight();
-          DemoTools.select(null);
-          DemoTools.dispatchStopEvent();
+      stop() {
+          this.pause();
+          this.state.lastUpdatedStep = null;
+          this.unhighlight();
+          this.select(null);
+          this.dispatchStopEvent();
       }
-      static pause() {
-          DemoTools.state.running = false;
+      pause() {
+          this.state.running = false;
       }
-      static resume() {
-          DemoTools.run();
+      resume() {
+          this.run();
       }
-      static destroy() {
-          DemoTools.stop();
-          DemoTools.removeAllSteps();
+      destroy() {
+          this.removeAllSteps();
+          this.close();
+      }
+      close() {
+          this.stop();
+          this.state = Object.assign({}, this.initialState);
+          window.removeEventListener('keydown', EventHandlers.handleKeydown);
+          if (this.options.renderToolbar) {
+              window.removeEventListener(Steps.eventTypes.STEP_MOVE, EventHandlers.handleStepMoved);
+              window.removeEventListener(Steps.eventTypes.STEP_DOUBLECLICK, EventHandlers.handleStepDoubleclick);
+              window.removeEventListener(Steps.eventTypes.STEP_CLICK, EventHandlers.handleStepClick);
+              window.removeEventListener(Steps.eventTypes.STEP_CTRL_CLICK, EventHandlers.handleStepCtrlClick);
+              window.removeEventListener(PlanStepForm.eventTypes.PLAN_STEP, EventHandlers.handlePlanStep);
+          }
+          this.options = {};
           Toolbar.destroy();
           CheckStepPrompt.destroy();
           StepForm.destroy();
-          DemoTools.state = Object.assign({}, DemoTools.initialState);
-          window.removeEventListener('keydown', DemoTools.handleKeydown);
-          if (DemoTools.options.renderToolbar) {
-              window.removeEventListener(Steps.eventTypes.STEP_MOVE, DemoTools.handleStepMoved);
-              window.removeEventListener(Steps.eventTypes.STEP_DOUBLECLICK, DemoTools.handleStepDoubleclick);
-              window.removeEventListener(Steps.eventTypes.STEP_CLICK, DemoTools.handleStepClick);
-              window.removeEventListener(PlanStepForm.eventTypes.PLAN_STEP, DemoTools.handlePlanStep);
-          }
-          DemoTools.options = {};
+          Demo.instance = undefined;
       }
-      static highlight(stepIndex) {
+      highlight(stepIndex) {
           if (isNil(steps[stepIndex])) {
               return;
           }
@@ -38383,28 +38576,28 @@ this["dev-tools"] = (function () {
                   height: rect.height + (shiftHeight || 0),
               };
           }
-          const element = DemoTools.appendHighlightArea(area || areaNew);
+          const element = this.appendHighlightArea(area || areaNew);
           if (!element) {
               return;
           }
-          DemoTools.driver = DemoTools.Driver(Object.assign(Object.assign({}, DemoTools.defaultDriverOptions), { steps: [{
+          this.driver = this.Driver(Object.assign(Object.assign({}, this.defaultDriverOptions), { steps: [{
                       element,
                       popover: {
                           description: title,
                       }
                   }] }));
-          DemoTools.driver.drive();
+          this.driver.drive();
       }
-      static unhighlight() {
-          if (DemoTools.driver) {
-              DemoTools.driver.destroy();
+      unhighlight() {
+          if (this.driver) {
+              this.driver.destroy();
           }
           const highlightArea = document.querySelectorAll('#demo-tools-highlight-area');
           if (highlightArea) {
               highlightArea.forEach(el => el.remove());
           }
       }
-      static appendHighlightArea(area) {
+      appendHighlightArea(area) {
           const { left, top, width, height } = area;
           const style = `position: absolute; left: ${left}px; top: ${top}px; width: ${width}px; height: ${height}px;`;
           const div = document.createElement('div');
@@ -38413,7 +38606,7 @@ this["dev-tools"] = (function () {
           document.body.appendChild(div);
           return div;
       }
-      static check(selector) {
+      check(selector) {
           var _a, _b, _c;
           (_a = document.querySelectorAll('#demo-tools-highlight-area')) === null || _a === void 0 ? void 0 : _a.forEach(el => { el.remove(); });
           let element;
@@ -38421,13 +38614,13 @@ this["dev-tools"] = (function () {
               element = document.querySelector(selector);
           }
           else {
-              element = DemoTools.appendHighlightArea(selector);
+              element = this.appendHighlightArea(selector);
           }
           if (!element) {
               return;
           }
-          DemoTools.driver = DemoTools.Driver(Object.assign(Object.assign({}, DemoTools.defaultDriverOptions), { onDestroyed: () => { var _a; return (_a = document.querySelectorAll('#demo-tools-highlight-area')) === null || _a === void 0 ? void 0 : _a.forEach(el => { el.remove(); }); } }));
-          DemoTools.driver.highlight({
+          this.driver = this.Driver(Object.assign(Object.assign({}, this.defaultDriverOptions), { onDestroyed: () => { var _a; return (_a = document.querySelectorAll('#demo-tools-highlight-area')) === null || _a === void 0 ? void 0 : _a.forEach(el => { el.remove(); }); } }));
+          this.driver.highlight({
               element,
               popover: {
                   description: is(String, selector) ?
@@ -38436,182 +38629,183 @@ this["dev-tools"] = (function () {
               }
           });
       }
-      static printSteps() {
+      printSteps() {
           console.table(steps.map((step) => ({ title: step.title, type: step.type })));
       }
-      static checkStep(index) {
+      checkStep(index) {
           const step = steps[index];
           CheckStepPrompt.getPrompt(step)
               .then(result => {
               if (result) {
-                  DemoTools.updateStep(index, result);
+                  this.updateStep(index, result);
               }
           });
       }
-      static init(options = {}) {
-          DemoTools.stop();
-          if (DemoTools.state.initialized) {
-              return;
-          }
-          DemoTools.options.renderToolbar = options.renderToolbar === false ? false : true;
-          DemoTools.options.renderStepsStyle = options.renderStepsStyle;
-          DemoTools.options.persist = options.persist === false ? false : true;
-          DemoTools.options.interval = options.interval;
-          DemoTools.state.initialized = true;
-          window.addEventListener('keydown', DemoTools.handleKeydown);
-          StepForm.init();
-          CheckStepPrompt.init();
-          if (options.renderToolbar) {
-              Toolbar.init();
-              window.addEventListener(Steps.eventTypes.STEP_MOVE, DemoTools.handleStepMoved);
-              window.addEventListener(Steps.eventTypes.STEP_DOUBLECLICK, DemoTools.handleStepDoubleclick);
-              window.addEventListener(Steps.eventTypes.STEP_CLICK, DemoTools.handleStepClick);
-              window.addEventListener(PlanStepForm.eventTypes.PLAN_STEP, DemoTools.handlePlanStep);
-          }
-          if (DemoTools.options.persist) {
-              DemoTools.setSteps(window.demoToolsSteps);
-          }
+      ignoreXPathError(index) {
+          this.updateStep(index, { xPathCheck: 'ignored' });
       }
-      static restore() {
-          if (!DemoTools.state.initialized) {
-              throw new Error('DevTools: DemoTools is not initialized');
-          }
-          if (DemoTools.options.persist) {
-              DemoTools.setSteps(window.demoToolsSteps);
-          }
+      dispatchStepsChangedEvent() {
+          window.dispatchEvent(new CustomEvent('Demo:StepsChanged', { detail: { steps: steps } }));
       }
-      static isElementBoundStep(step) {
-          return !isNil(step.selector) || !isNil(step.xPath) || !isNil(step.area);
+      dispatchActiveStepChangedEvent() {
+          window.dispatchEvent(new CustomEvent('Demo:ActiveStepChanged', { detail: { activeStep: this.state.activeStep } }));
       }
-      static onStepsChanged() {
-          if (DemoTools.options.persist) {
-              try {
-                  setVar('demoToolsSteps', steps);
-              }
-              catch (e) {
-                  console.error(e);
-              }
-          }
-          DemoTools.dispatchStepsChangedEvent();
+      dispatchRunEvent() {
+          window.dispatchEvent(new CustomEvent('Demo:DemoRun'));
       }
+      dispatchStopEvent() {
+          window.dispatchEvent(new CustomEvent('Demo:DemoStop'));
+      }
+  }
+  Demo.defaultInterval = 2000;
+  class EventHandlers {
       static handleKeydown(e) {
-          if (e.key === 'Escape') {
-              DemoTools.pause();
-          }
-          else if (e.ctrlKey && e.altKey) {
+          if (e.ctrlKey && e.altKey) {
               switch (e.key) {
                   case 'p': {
-                      if (DemoTools.state.running) {
-                          DemoTools.pause();
+                      if (DemoTools.demo.state.running) {
+                          DemoTools.demo.pause();
                           return;
                       }
-                      DemoTools.pickStep();
+                      DemoTools.demo.pickStep();
                       break;
                   }
                   case 'r': {
-                      DemoTools.run();
+                      DemoTools.demo.run();
                       break;
                   }
                   case 's': {
-                      DemoTools.stop();
+                      DemoTools.demo.stop();
                       break;
                   }
                   case 'ArrowRight': {
-                      if (DemoTools.state.activeStep !== null && DemoTools.state.activeStep < steps.length - 1) {
+                      if (DemoTools.demo.state.activeStep !== null && DemoTools.demo.state.activeStep < steps.length - 1) {
                           if (e.shiftKey) {
-                              DemoTools.select(DemoTools.state.activeStep + 1);
+                              DemoTools.demo.select(DemoTools.demo.state.activeStep + 1);
                           }
                           else {
-                              DemoTools.jump(DemoTools.state.activeStep + 1);
+                              DemoTools.demo.jump(DemoTools.demo.state.activeStep + 1);
                           }
                       }
                       break;
                   }
                   case 'ArrowLeft': {
-                      if (DemoTools.state.activeStep !== null && DemoTools.state.activeStep > 0) {
+                      if (DemoTools.demo.state.activeStep !== null && DemoTools.demo.state.activeStep > 0) {
                           if (e.shiftKey) {
-                              DemoTools.select(DemoTools.state.activeStep - 1);
+                              DemoTools.demo.select(DemoTools.demo.state.activeStep - 1);
                           }
                           else {
-                              DemoTools.jump(DemoTools.state.activeStep - 1);
+                              DemoTools.demo.jump(DemoTools.demo.state.activeStep - 1);
                           }
                       }
                       break;
                   }
                   case 'ArrowUp': {
-                      DemoTools.swap(DemoTools.state.activeStep, DemoTools.state.activeStep - 1);
+                      DemoTools.demo.swap(DemoTools.demo.state.activeStep, DemoTools.demo.state.activeStep - 1);
                       break;
                   }
                   case 'ArrowDown': {
-                      DemoTools.swap(DemoTools.state.activeStep, DemoTools.state.activeStep + 1);
+                      DemoTools.demo.swap(DemoTools.demo.state.activeStep, DemoTools.demo.state.activeStep + 1);
                       break;
                   }
                   case 'u': {
-                      if (DemoTools.isElementBoundStep(steps[DemoTools.state.activeStep])) {
-                          DemoTools.updateStep();
+                      if (steps[DemoTools.demo.state.activeStep].isElementBound) {
+                          DemoTools.demo.updateStep();
                       }
                       break;
                   }
                   case 'd': {
-                      DemoTools.removeStep(DemoTools.state.activeStep);
+                      DemoTools.demo.removeStep(DemoTools.demo.state.activeStep);
                       break;
                   }
                   case 'c': {
-                      DemoTools.checkStep(DemoTools.state.activeStep);
+                      DemoTools.demo.checkStep(DemoTools.demo.state.activeStep);
                       break;
                   }
               }
           }
       }
       static handleStepMoved(e) {
-          DemoTools.move(e.detail.from, e.detail.to);
+          DemoTools.demo.move(e.detail.from, e.detail.to);
       }
       static handleStepDoubleclick(e) {
-          DemoTools.jump(e.detail.index);
+          DemoTools.demo.jump(e.detail.index);
       }
       static handleStepClick(e) {
-          DemoTools.pause();
-          if (e.detail.index === DemoTools.state.activeStep) {
-              DemoTools.select(null);
+          DemoTools.demo.pause();
+          if (e.detail.index === DemoTools.demo.state.activeStep) {
+              DemoTools.demo.select(null);
           }
           else {
-              DemoTools.select(e.detail.index);
+              DemoTools.demo.select(e.detail.index);
           }
       }
+      static handleStepCtrlClick(e) {
+          DemoTools.demo.updateStep(e.detail.index);
+      }
       static handlePlanStep(e) {
-          DemoTools.addStep(e.detail);
-      }
-      static dispatchStepsChangedEvent() {
-          window.dispatchEvent(new CustomEvent('DemoTools:StepsChanged', { detail: { steps: steps } }));
-      }
-      static dispatchActiveStepChangedEvent() {
-          window.dispatchEvent(new CustomEvent('DemoTools:ActiveStepChanged', { detail: { activeStep: DemoTools.state.activeStep } }));
-      }
-      static dispatchRunEvent() {
-          window.dispatchEvent(new CustomEvent('DemoTools:DemoRun'));
-      }
-      static dispatchStopEvent() {
-          window.dispatchEvent(new CustomEvent('DemoTools:DemoStop'));
+          DemoTools.demo.addStep(e.detail);
       }
   }
-  DemoTools.defaultInterval = 2000;
-  DemoTools.Driver = Ae;
-  DemoTools.stepList = Steps;
-  DemoTools.stepForm = StepForm;
-  DemoTools.dom = Dom;
-  DemoTools.terminal = Terminal;
+
+  const DEMOS_KEY = 'demos';
+  class DemoTools {
+      static init(options = {}) {
+          var _a;
+          return __awaiter(this, void 0, void 0, function* () {
+              if (DemoTools.initialized) {
+                  return;
+              }
+              if (isNil(getVar(DEMOS_KEY))) {
+                  setVar(DEMOS_KEY, {});
+              }
+              let gitSummary;
+              try {
+                  gitSummary = yield fetchGitSummary();
+              }
+              catch (e) { }
+              const title = options.title || (gitSummary === null || gitSummary === void 0 ? void 0 : gitSummary.branch) || 'default';
+              DemoTools.demo = Demo.getInstance(Object.assign(Object.assign({}, options.demoOptions), { steps: ((_a = options.demoOptions) === null || _a === void 0 ? void 0 : _a.steps) || DemoTools.getDemos()[title] || [] }));
+              DemoTools.options.title = title;
+              window.addEventListener('Demo:StepsChanged', DemoTools.handleStepsChanged);
+              DemoTools.initialized = true;
+          });
+      }
+      static getDemos() {
+          return getVar(DEMOS_KEY) || {};
+      }
+      static getDemo(title) {
+          const demos = DemoTools.getDemos();
+          return values(demos[title || DemoTools.options.title] || []);
+      }
+      static removeDemo(title) {
+          const demos = DemoTools.getDemos();
+          demos === null || demos === void 0 ? true : delete demos[title || DemoTools.options.title];
+          setVar(DEMOS_KEY, demos);
+      }
+      static removeDemos() {
+          setVar(DEMOS_KEY, {});
+      }
+      static listDemos() {
+          console.table(values(mapObjIndexed((steps, title) => ({ title, stepsNumber: (values(steps) || []).length }), DemoTools.getDemos())));
+      }
+      static setDemo(title, steps) {
+          const demos = DemoTools.getDemos();
+          demos[title] = steps;
+          setVar(DEMOS_KEY, demos);
+      }
+      static handleStepsChanged({ detail: { steps } }) {
+          DemoTools.setDemo(DemoTools.options.title, steps);
+      }
+      static destroy() {
+          DemoTools.demo.close();
+          DemoTools.demo = null;
+          window.removeEventListener('Demo:StepsChanged', DemoTools.handleStepsChanged);
+          DemoTools.initialized = false;
+      }
+  }
+  DemoTools.initialized = false;
   DemoTools.options = {};
-  DemoTools.initialState = {
-      running: false,
-      activeStep: null,
-      initialized: false,
-      lastUpdatedStep: null,
-  };
-  DemoTools.state = Object.assign({}, DemoTools.initialState);
-  DemoTools.defaultDriverOptions = {
-      showButtons: ['close'],
-      overlayOpacity: 0.3,
-  };
 
   function _typeof(o) {
     "@babel/helpers - typeof";
@@ -38853,18 +39047,17 @@ this["dev-tools"] = (function () {
       window.numeral = numeral;
       window.decimal = Decimal;
       window.d = datefns;
-      window.setVar = setVar$1;
+      window.setVar = setVar;
       window.deleteVar = deleteVar;
       window.clearVars = clearVars;
       window.stub = stub;
-      window.gitHead = gitHead$1;
       window.logger = new Logger();
       window.csvParser = new JSON2CSVParser({ delimiter: '\t' });
       window.Diagnostics = Diagnostics;
       window.setOnLoad = setOnLoad;
       window.storage = storage;
       window.__ = _$1;
-      window.demo = DemoTools;
+      window.demoTools = DemoTools;
       const persistent_vars = getVars();
       for (let variable of persistent_vars) {
           window[variable.name] = variable.value;

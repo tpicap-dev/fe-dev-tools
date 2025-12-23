@@ -1,5 +1,5 @@
 import { is, isNil } from 'ramda'
-import { IElementBoundStep } from './demo-tools'
+import { IElementBoundStep } from './demo'
 import { getElementByXPath } from '../../utils/utils'
 
 interface IBlinkOptions {
@@ -70,14 +70,16 @@ export default abstract class Dom {
         return
       }
 
+      element.dispatchEvent(new MouseEvent('mouseenter', {bubbles: true, cancelable: true}))
       element.dispatchEvent(new MouseEvent('mouseover', {bubbles: true, cancelable: true}))
     } catch (e) {
     }
   }
 
-  static focus(selector: string) {
+  static focus(arg: string | HTMLElement | IElementBoundStep) {
     try {
-      const element = document.querySelector(selector)
+      const element = Dom.getElement(arg)
+
       if (!element) {
         return
       }
@@ -87,21 +89,37 @@ export default abstract class Dom {
     }
   }
 
-  static setValue(selector: string, value: string) {
+  static keydown(arg: string | HTMLElement | IElementBoundStep, key: string) {
     try {
-      const element = document.querySelector(selector) as HTMLInputElement
+      const element = Dom.getElement(arg)
+
       if (!element) {
         return
       }
+
+      element.dispatchEvent(new KeyboardEvent('keydown', { key, code: key, bubbles: true }))
+    } catch (e) {
+    }
+  }
+
+  static setValue(arg: string | HTMLElement | IElementBoundStep, value: string) {
+    try {
+      const element = Dom.getElement(arg)
+
+      if (!element) {
+        return
+      }
+
+      const nativeSetter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')?.set;
 
       element.setAttribute(
         'value',
         value
       )
 
-      element.value = value
-      element.dispatchEvent(new Event('change', {bubbles: true, cancelable: true}))
-      element.dispatchEvent(new Event('input', {bubbles: true, cancelable: true}))
+      nativeSetter.call(element, value)
+      element.dispatchEvent(new Event('change', { bubbles: true }))
+      element.dispatchEvent(new Event('input', { bubbles: true }))
     } catch (e) {
     }
   }

@@ -1,9 +1,7 @@
 export default abstract class PlanStepForm {
-  static area = document.createElement('div')
-  static field = document.createElement('input')
-  static button = document.createElement('button')
+  static area = null
   static eventTypes = {
-    PLAN_STEP: 'DemoTools:Steps:PlanStepForm:PlanStep',
+    PLAN_STEP: 'Demo:Steps:PlanStepForm:PlanStep',
   }
 
   static init() {
@@ -11,20 +9,25 @@ export default abstract class PlanStepForm {
   }
 
   static setElement() {
+    PlanStepForm.area = document.createElement('div')
     PlanStepForm.area.style.display = 'flex'
     PlanStepForm.area.style.gap = '5px'
     PlanStepForm.area.style.padding = '5px'
-    PlanStepForm.button.innerText = 'Add'
-    PlanStepForm.button.addEventListener('click', PlanStepForm.handleAddClick)
-    PlanStepForm.field.addEventListener('keypress',PlanStepForm.handleKeypress)
-    PlanStepForm.field.style.flex = '1'
-    PlanStepForm.area.appendChild(PlanStepForm.field)
-    PlanStepForm.area.appendChild(PlanStepForm.button)
+
+    const field = document.createElement('input')
+    const button = document.createElement('button')
+    button.innerText = 'Add'
+    button.addEventListener('click', PlanStepForm.handleAddClick)
+    field.addEventListener('keypress',PlanStepForm.handleKeypress)
+    field.style.flex = '1'
+    PlanStepForm.area.appendChild(field)
+    PlanStepForm.area.appendChild(button)
   }
 
   static planStep() {
-    window.dispatchEvent(new CustomEvent(PlanStepForm.eventTypes.PLAN_STEP, { detail: { title: PlanStepForm.field.value }}))
-    PlanStepForm.field.value = ''
+    const field = PlanStepForm.area.querySelector('input')
+    window.dispatchEvent(new CustomEvent(PlanStepForm.eventTypes.PLAN_STEP, { detail: { title: field.value }}))
+    field.value = ''
   }
 
   static handleAddClick(event) {
@@ -38,8 +41,8 @@ export default abstract class PlanStepForm {
   }
 
   static destroy() {
-    PlanStepForm.button.removeEventListener('click', PlanStepForm.handleAddClick)
-    PlanStepForm.field.removeEventListener('keypress',PlanStepForm.handleKeypress)
+    PlanStepForm.area.remove()
+    PlanStepForm.area = null
   }
 
 }

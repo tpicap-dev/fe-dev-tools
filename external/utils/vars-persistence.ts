@@ -82,6 +82,12 @@ export const getVars = () => {
   return varsParsed
 }
 
+export const getVar = (varName) => {
+  const vars = localStorage.getItem(localStorageKey);
+  const varsObj = JSON.parse(vars);
+  return reviveVar(varsObj[varName]?.value)
+}
+
 export const deleteVar = varName => {
   const vars = localStorage.getItem(localStorageKey);
   const varsObj = JSON.parse(vars);

@@ -21,8 +21,8 @@ export default class Toolbar {
     Toolbar.state.initialized = true
     Toolbar.mount()
 
-    window.addEventListener('DemoTools:DemoRun', Toolbar.handleDemoRunEvent)
-    window.addEventListener('DemoTools:DemoStop', Toolbar.handleDemoStopEvent)
+    window.addEventListener('Demo:DemoRun', Toolbar.handleDemoRunEvent)
+    window.addEventListener('Demo:DemoStop', Toolbar.handleDemoStopEvent)
   }
 
   static mount() {
@@ -79,8 +79,8 @@ export default class Toolbar {
     Info.destroy()
     Toolbar.state.initialized = false
 
-    window.removeEventListener('DemoTools:DemoRun', Toolbar.handleDemoRunEvent)
-    window.removeEventListener('DemoTools:DemoStop', Toolbar.handleDemoStopEvent)
+    window.removeEventListener('Demo:DemoRun', Toolbar.handleDemoRunEvent)
+    window.removeEventListener('Demo:DemoStop', Toolbar.handleDemoStopEvent)
   }
 
   static handleDemoRunEvent() {

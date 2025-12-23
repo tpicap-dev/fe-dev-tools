@@ -9,7 +9,6 @@ import './style.less'
 import Logger from './modules/logger/logger'
 import Diagnostics from 'external/modules/sanitizer/diagnostics/Diagnostics'
 import { stub } from './stub-generator'
-import { gitHead } from './modules/git/git'
 import { setOnLoad } from './utils/utils'
 import { clearVars, deleteVar, setVar, getVars } from './utils/vars-persistence'
 import storage from '../modules/storage/external/storage'
@@ -35,14 +34,13 @@ if (window) {
   (window as any).deleteVar = deleteVar;
   (window as any).clearVars = clearVars;
   (window as any).stub = stub;
-  (window as any).gitHead = gitHead;
   (window as any).logger = new Logger();
   (window as any).csvParser = new CsvParser({ delimiter: '\t' });
   (window as any).Diagnostics = Diagnostics;
   (window as any).setOnLoad = setOnLoad;
   (window as any).storage = storage;
   (window as any).__ = _;
-  (window as any).demo = DemoTools
+  (window as any).demoTools = DemoTools
 
   const persistent_vars = getVars();
   for (let variable of persistent_vars) {
