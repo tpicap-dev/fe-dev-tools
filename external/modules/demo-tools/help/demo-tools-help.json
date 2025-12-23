@@ -1,0 +1,454 @@
+{
+  "api": {
+    "demoTools": {
+      "init": {
+        "type": "function",
+        "static": true,
+        "async": true,
+        "parameters": [
+          { "name": "options", "type": "IOptions", "optional": true }
+        ],
+        "returnType": "Promise<void>",
+        "description": "Initializes DemoTools once. Ensures persisted demos storage exists, optionally fetches git summary to derive a default title, creates/obtains a Demo singleton populated with steps (from options or persisted demos), registers 'Demo:StepsChanged' listener and marks DemoTools as initialized."
+      },
+      "getDemos": {
+        "type": "function",
+        "static": true,
+        "async": false,
+        "parameters": [],
+        "returnType": "{ [title: string]: IStep[] }",
+        "description": "Returns the persisted map of demos (title -> steps). Returns an empty object when nothing is stored."
+      },
+      "getDemo": {
+        "type": "function",
+        "static": true,
+        "async": false,
+        "parameters": [
+          { "name": "title", "type": "string", "optional": true }
+        ],
+        "returnType": "IStep[]",
+        "description": "Returns steps array for the given demo title, or for the current options.title when title is omitted. Uses persisted demos as the source."
+      },
+      "removeDemo": {
+        "type": "function",
+        "static": true,
+        "async": false,
+        "parameters": [
+          { "name": "title", "type": "string", "optional": true }
+        ],
+        "returnType": "void",
+        "description": "Deletes the persisted demo with the provided title (or current options.title if omitted) and persists the updated demos map."
+      },
+      "removeDemos": {
+        "type": "function",
+        "static": true,
+        "async": false,
+        "parameters": [],
+        "returnType": "void",
+        "description": "Clears all persisted demos by setting the demos storage to an empty object."
+      },
+      "listDemos": {
+        "type": "function",
+        "static": true,
+        "async": false,
+        "parameters": [],
+        "returnType": "void",
+        "description": "Logs a table to console showing persisted demos with title and number of steps for each."
+      },
+      "setDemo": {
+        "type": "function",
+        "static": true,
+        "async": false,
+        "parameters": [
+          { "name": "title", "type": "string" },
+          { "name": "steps", "type": "IStep[]" }
+        ],
+        "returnType": "void",
+        "description": "Stores or updates the demo under the given title with the provided steps and persists the demos map."
+      },
+      "handleStepsChanged": {
+        "type": "function",
+        "static": true,
+        "async": false,
+        "parameters": [
+          { "name": "event", "type": "CustomEvent<{ steps: Step[] }>" }
+        ],
+        "returnType": "void",
+        "description": "Event handler for 'Demo:StepsChanged' events; extracts steps from event.detail and persists them under the current options.title."
+      },
+      "destroy": {
+        "type": "function",
+        "static": true,
+        "async": false,
+        "parameters": [],
+        "returnType": "void",
+        "description": "Destroys DemoTools: closes and clears the Demo singleton if present, removes the 'Demo:StepsChanged' event listener, and marks DemoTools as uninitialized."
+      },
+      "demo": {
+        "type": "class",
+        "getSteps": {
+          "type": "function",
+          "static": false,
+          "async": false,
+          "parameters": [],
+          "returnType": "Step[]",
+          "description": "Getter that returns a shallow copy of internal steps array."
+        },
+        "getInstance": {
+          "type": "function",
+          "static": true,
+          "async": false,
+          "parameters": [
+            { "name": "options", "type": "IOptions", "optional": true }
+          ],
+          "returnType": "Demo",
+          "description": "Returns singleton Demo instance, creating it with provided options if it does not exist."
+        },
+        "addStep": {
+          "type": "function",
+          "static": false,
+          "async": false,
+          "parameters": [
+            { "name": "step", "type": "IStep", "optional": true }
+          ],
+          "returnType": "void",
+          "description": "Appends a new step to the end of the steps list (delegates to insertStep)."
+        },
+        "addHighlightStep": {
+          "type": "function",
+          "static": false,
+          "async": false,
+          "parameters": [
+            { "name": "step", "type": "Omit<IHighlightingStep, 'type'>", "optional": true }
+          ],
+          "returnType": "void",
+          "description": "Adds a highlight-type step with default title if missing."
+        },
+        "pickStep": {
+          "type": "function",
+          "static": false,
+          "async": true,
+          "parameters": [],
+          "returnType": "Promise<void>",
+          "description": "Captures the currently hovered element(s), builds an XPath, prompts the user for step details via StepForm, and either updates the active step or adds a new step."
+        },
+        "setSteps": {
+          "type": "function",
+          "static": false,
+          "async": false,
+          "parameters": [
+            { "name": "steps", "type": "IStep[] | { [key: number]: IStep }" }
+          ],
+          "returnType": "void",
+          "description": "Replaces current steps with provided collection (stops any running demo first), inserts each provided step, and selects the first step."
+        },
+        "insertStep": {
+          "type": "function",
+          "static": false,
+          "async": false,
+          "parameters": [
+            { "name": "step", "type": "IStep", "optional": true },
+            { "name": "index", "type": "number", "optional": true }
+          ],
+          "returnType": "void",
+          "description": "Creates an adjusted Step instance and inserts it at the specified index (or activeStep+1 or end). Updates lastUpdatedStep and dispatches steps-changed event."
+        },
+        "updateStep": {
+          "type": "function",
+          "static": false,
+          "async": true,
+          "parameters": [
+            { "name": "title", "type": "string | number", "optional": true },
+            { "name": "step", "type": "Partial<IStep>", "optional": true }
+          ],
+          "returnType": "Promise<void>",
+          "description": "Updates a step by index or title. If not provided, prompts user for updated data. Pauses run if running. Ensures xPathCheck is reset when xPath changes, replaces the step and dispatches steps-changed event."
+        },
+        "removeStep": {
+          "type": "function",
+          "static": false,
+          "async": false,
+          "parameters": [
+            { "name": "title", "type": "string | number" }
+          ],
+          "returnType": "void",
+          "description": "Removes step by index or by title substring match. If the removed step was active, clears selection. Dispatches steps-changed event."
+        },
+        "removeAllSteps": {
+          "type": "function",
+          "static": false,
+          "async": false,
+          "parameters": [],
+          "returnType": "void",
+          "description": "Clears all steps and dispatches steps-changed event."
+        },
+        "doStep": {
+          "type": "function",
+          "static": false,
+          "async": false,
+          "parameters": [
+            { "name": "title", "type": "string | number" }
+          ],
+          "returnType": "void",
+          "description": "Executes a single step by index or title. Selects the step and performs actions depending on step.type (highlight, click, rightclick, hover, setValue, keyboard, or custom function)."
+        },
+        "run": {
+          "type": "function",
+          "static": false,
+          "async": true,
+          "parameters": [
+            { "name": "options", "type": "IRunOptions", "optional": true }
+          ],
+          "returnType": "Promise<void>",
+          "description": "Runs steps sequentially from options.from (or activeStep or 0) to options.till (or last). Dispatches run event, honors per-step interval or global interval, unhighlights after highlight steps, and stops when finished or paused."
+        },
+        "jump": {
+          "type": "function",
+          "static": false,
+          "async": false,
+          "parameters": [
+            { "name": "index", "type": "number" }
+          ],
+          "returnType": "void",
+          "description": "Validates index and executes the step at that index (delegates to doStep)."
+        },
+        "select": {
+          "type": "function",
+          "static": false,
+          "async": false,
+          "parameters": [
+            { "name": "index", "type": "number | null" }
+          ],
+          "returnType": "void",
+          "description": "Sets activeStep in state and dispatches active-step-changed event."
+        },
+        "swap": {
+          "type": "function",
+          "static": false,
+          "async": false,
+          "parameters": [
+            { "name": "index1", "type": "number" },
+            { "name": "index2", "type": "number" }
+          ],
+          "returnType": "void",
+          "description": "Swaps two steps by index (with validation), dispatches steps-changed event, and updates active selection if needed."
+        },
+        "move": {
+          "type": "function",
+          "static": false,
+          "async": false,
+          "parameters": [
+            { "name": "index1", "type": "number" },
+            { "name": "index2", "type": "number", "optional": true }
+          ],
+          "returnType": "void",
+          "description": "Moves a step from index to index2 (or moves activeStep if index2 omitted). Updates steps array and dispatches steps-changed event."
+        },
+        "copy": {
+          "type": "function",
+          "static": false,
+          "async": false,
+          "parameters": [
+            { "name": "index1", "type": "number", "optional": true },
+            { "name": "index2", "type": "number", "optional": true }
+          ],
+          "returnType": "void",
+          "description": "Copies a step (from index1 or activeStep) and inserts the copy at index2 or adjacent position."
+        },
+        "stop": {
+          "type": "function",
+          "static": false,
+          "async": false,
+          "parameters": [],
+          "returnType": "void",
+          "description": "Stops the demo run (pauses), clears lastUpdatedStep, removes highlight areas, clears selection and dispatches stop event."
+        },
+        "pause": {
+          "type": "function",
+          "static": false,
+          "async": false,
+          "parameters": [],
+          "returnType": "void",
+          "description": "Sets running state to false to pause execution."
+        },
+        "resume": {
+          "type": "function",
+          "static": false,
+          "async": false,
+          "parameters": [],
+          "returnType": "void",
+          "description": "Resumes execution by calling run() with no options."
+        },
+        "destroy": {
+          "type": "function",
+          "static": false,
+          "async": false,
+          "parameters": [],
+          "returnType": "void",
+          "description": "Removes all steps and fully closes/destroys the demo instance (delegates to close)."
+        },
+        "close": {
+          "type": "function",
+          "static": false,
+          "async": false,
+          "parameters": [],
+          "returnType": "void",
+          "description": "Stops demo, resets internal state, removes event listeners, destroys UI helpers (Toolbar, prompts, forms), clears Options instance and clears singleton instance."
+        },
+        "highlight": {
+          "type": "function",
+          "static": false,
+          "async": false,
+          "parameters": [
+            { "name": "stepIndex", "type": "number" }
+          ],
+          "returnType": "void",
+          "description": "Highlights area for the specified highlighting step: determines area (from step.area or computes from selector/xPath), appends highlight area element, initializes driver.js with that element and drives the tour."
+        },
+        "unhighlight": {
+          "type": "function",
+          "static": false,
+          "async": false,
+          "parameters": [],
+          "returnType": "void",
+          "description": "Destroys any active driver instance and removes any appended highlight area DOM nodes."
+        },
+        "appendHighlightArea": {
+          "type": "function",
+          "static": false,
+          "async": false,
+          "parameters": [
+            { "name": "area", "type": "IArea" }
+          ],
+          "returnType": "HTMLDivElement",
+          "description": "Creates, styles and appends a div overlay to document.body for a given area and returns that div."
+        },
+        "check": {
+          "type": "function",
+          "static": false,
+          "async": false,
+          "parameters": [
+            { "name": "selector", "type": "string | IArea" }
+          ],
+          "returnType": "void",
+          "description": "Used to quickly inspect an element or area: removes any existing highlight area, resolves element (from selector or appended area), then uses driver.js highlight to show a popover with a description. Ensures cleanup on driver destroy."
+        },
+        "printSteps": {
+          "type": "function",
+          "static": false,
+          "async": false,
+          "parameters": [],
+          "returnType": "void",
+          "description": "Logs a console.table showing each step's title and type."
+        },
+        "checkStep": {
+          "type": "function",
+          "static": false,
+          "async": false,
+          "parameters": [
+            { "name": "index", "type": "number" },
+            { "name": "event", "type": "MouseEvent", "optional": true }
+          ],
+          "returnType": "void",
+          "description": "Stops propagation of optional event, opens CheckStepPrompt for the step at index and applies updates returned by the prompt."
+        },
+        "fixStepXPath": {
+          "type": "function",
+          "static": false,
+          "async": false,
+          "parameters": [
+            { "name": "index", "type": "number" },
+            { "name": "event", "type": "MouseEvent", "optional": true }
+          ],
+          "returnType": "void",
+          "description": "Attempts to locate a more robust XPath for the step's element by finding a nearest ancestor/child with the same localName and classes, builds a new XPath, and prompts the user to confirm the anticipated element; if confirmed, updates the step."
+        },
+        "ignoreXPathError": {
+          "type": "function",
+          "static": false,
+          "async": false,
+          "parameters": [
+            { "name": "index", "type": "number" },
+            { "name": "event", "type": "MouseEvent" }
+          ],
+          "returnType": "void",
+          "description": "Stops event propagation and marks the step's xPathCheck as 'ignored' via updateStep."
+        },
+        "dispatchStepsChangedEvent": {
+          "type": "function",
+          "static": false,
+          "async": false,
+          "parameters": [],
+          "returnType": "void",
+          "description": "Dispatches a CustomEvent 'Demo:StepsChanged' with current steps in detail."
+        },
+        "dispatchActiveStepChangedEvent": {
+          "type": "function",
+          "static": false,
+          "async": false,
+          "parameters": [],
+          "returnType": "void",
+          "description": "Dispatches a CustomEvent 'Demo:ActiveStepChanged' with activeStep index in detail."
+        },
+        "dispatchRunEvent": {
+          "type": "function",
+          "static": false,
+          "async": false,
+          "parameters": [],
+          "returnType": "void",
+          "description": "Dispatches a CustomEvent 'Demo:DemoRun' to signal demo run start."
+        },
+        "dispatchStopEvent": {
+          "type": "function",
+          "static": false,
+          "async": false,
+          "parameters": [],
+          "returnType": "void",
+          "description": "Dispatches a CustomEvent 'Demo:DemoStop' to signal demo stop."
+        }
+      }
+    }
+  },
+  "hotKeys": [
+    {
+      "hotKey": "Ctrl+Alt+P",
+      "description": "Pause the running demo or start picking the currently hovered element as a new step."
+    },
+    {
+      "hotKey": "Ctrl+Alt+R",
+      "description": "Start/resume running the demo steps."
+    },
+    {
+      "hotKey": "Ctrl+Alt+S",
+      "description": "Stop the demo run and clear selection/highlights."
+    },
+    {
+      "hotKey": "Ctrl+Alt+ArrowRight",
+      "description": "Advance to the next step: with Shift -> select the next step; without Shift -> execute (jump to) the next step."
+    },
+    {
+      "hotKey": "Ctrl+Alt+ArrowLeft",
+      "description": "Move to the previous step: with Shift -> select the previous step; without Shift -> execute (jump to) the previous step."
+    },
+    {
+      "hotKey": "Ctrl+Alt+ArrowUp",
+      "description": "Swap the active step with the previous step (move it up)."
+    },
+    {
+      "hotKey": "Ctrl+Alt+ArrowDown",
+      "description": "Swap the active step with the next step (move it down)."
+    },
+    {
+      "hotKey": "Ctrl+Alt+U",
+      "description": "Open update flow for the active step (only if the step is element-bound)."
+    },
+    {
+      "hotKey": "Ctrl+Alt+D",
+      "description": "Remove the active step."
+    },
+    {
+      "hotKey": "Ctrl+Alt+C",
+      "description": "Open check prompt for the active step to validate or fix its target element."
+    }
+  ]
+}

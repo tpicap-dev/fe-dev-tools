@@ -26,11 +26,18 @@ body > * {
     font-style: italic;
   }
 
-  &.unavailable {
+  &.unavailable, &.active.unavailable {
     color: #d81b60;
   }
 
+  &.ignored {
+    text-decoration: underline wavy;
+  }
+
   .demo-tools-steps-step-actions {
+    display: flex;
+    gap: 3px;
+
     button {
       line-height: 0.4em;
       font-size: 0.8em;

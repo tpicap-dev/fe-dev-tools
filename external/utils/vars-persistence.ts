@@ -1,6 +1,6 @@
-import { mapObjIndexed } from 'ramda'
+import { map, mapObjIndexed } from 'ramda'
 
-import { isBoolean, isFunctionLikeString, isNumber, isObject, isPrimitive } from './utils'
+import { isArray, isBoolean, isFunctionLikeString, isNumber, isObject, isPrimitive } from './utils'
 
 const localStorageKey = 'dev-tools';
 
@@ -10,6 +10,9 @@ const reviveVar = (value) => {
   } else if (isBoolean(value)) {
     return String(value).toLowerCase() === 'true'
   } else if (isObject(value) || typeof value === 'object') {
+    if (isArray(value) || value?.constructor === Array) {
+      return map(reviveVar, isArray(value) ? JSON.parse(value) : value);
+    }
     return mapObjIndexed(reviveVar, isObject(value) ? JSON.parse(value) : value);
   } else if (isFunctionLikeString(value)){
     const wrapped = `(${value})`;
@@ -26,7 +29,7 @@ export const setVar = (varName, value) => {
 
   const vars = localStorage.getItem(localStorageKey);
   const varsObj = JSON.parse(vars) || {};
-  let adjustedValue: { value: any, type: any } = { type: typeof value } as any;
+  let adjustedValue: { value: any, type: any } = { type: value?.constructor === Array ? 'array' : typeof value } as any;
 
   if (isPrimitive(value)) {
     adjustedValue = { ...adjustedValue, value: String(value) };
@@ -63,6 +66,10 @@ export const getVars = () => {
 
   mapObjIndexed((variable, varName) => {
     switch (variable.type) {
+      case 'array':
+        varsParsed.push({ name: varName, value: reviveVar(variable.value) });
+        break;
+
       case 'object':
         varsParsed.push({ name: varName, value: reviveVar(variable.value) });
         break;
@@ -80,6 +87,12 @@ export const getVars = () => {
   }, varsObj)
 
   return varsParsed
+}
+
+export const getVar = (varName) => {
+  const vars = localStorage.getItem(localStorageKey);
+  const varsObj = JSON.parse(vars);
+  return reviveVar(varsObj[varName]?.value)
 }
 
 export const deleteVar = varName => {

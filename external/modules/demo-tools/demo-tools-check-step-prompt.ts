@@ -1,8 +1,9 @@
 import { Driver, driver } from 'driver.js'
 import { isNil, pick } from 'ramda'
 
-import { IElementBoundStep } from './demo-tools'
+import { IElementBoundStep } from './demo'
 import { getElementByXPath } from '../../utils/utils'
+import Step from 'external/modules/demo-tools/step'
 
 export default abstract class CheckStepPrompt {
   static initialized = false;
@@ -17,7 +18,7 @@ export default abstract class CheckStepPrompt {
    * @param {IElementBoundStep} arg - A step object
    * @returns {Promise<IElementBoundStep>} A promise that resolves when the form has been submitted
    */
-  static async getPrompt(step: IElementBoundStep): Promise<IElementBoundStep | undefined> {
+  static async getPrompt(step: IElementBoundStep, popoverTitle?: string): Promise<IElementBoundStep | undefined> {
     if (isNil(CheckStepPrompt.driver)) {
       throw new Error('DevTools: CheckStepPrompt is not initialized')
     }
@@ -26,7 +27,7 @@ export default abstract class CheckStepPrompt {
       throw new Error('DevTools: Step not passed')
     }
 
-    const element = getElementByXPath((step as IElementBoundStep).xPath) as HTMLElement
+    const element = getElementByXPath(step.xPath) as HTMLElement
 
     if (isNil(element)) {
       throw new Error('DevTools: Element not found')
@@ -36,20 +37,31 @@ export default abstract class CheckStepPrompt {
       CheckStepPrompt.driver.highlight({
         element,
         popover: {
+          title: popoverTitle || 'Element Check',
           description: CheckStepPrompt.getDescription(element),
           showButtons: ['next', 'previous', 'close'],
           nextBtnText: 'Approve',
           prevBtnText: 'Close',
+          onPopoverRender: (popoverDom) => {
+            const handleKeydown = (e: KeyboardEvent) => {
+              if (e.key === 'Enter') {
+                CheckStepPrompt.resolve(resolve, { ...step, xPathCheck: true })
+                CheckStepPrompt.driver.destroy()
+              }
+            }
+            popoverDom.wrapper?.removeEventListener('keydown', handleKeydown)
+            popoverDom.wrapper?.addEventListener('keydown', handleKeydown)
+          },
           onNextClick: () => {
-            CheckStepPrompt.resolve(resolve, step)
+            CheckStepPrompt.resolve(resolve, { ...step, xPathCheck: true })
             CheckStepPrompt.driver.destroy()
           },
           onPrevClick: () => {
-            resolve(undefined)
+            CheckStepPrompt.resolve(resolve, undefined)
             CheckStepPrompt.driver.destroy()
           },
           onCloseClick: () => {
-            resolve(undefined)
+            CheckStepPrompt.resolve(resolve, undefined)
             CheckStepPrompt.driver.destroy()
           },
         }
@@ -61,7 +73,11 @@ export default abstract class CheckStepPrompt {
     return `${element.localName}.${element.classList.value?.replaceAll(' ', '.')}`
   }
 
-  static resolve(resolve, step: IElementBoundStep) {
+  static resolve(resolve, step?: IElementBoundStep) {
+    if (isNil(step)) {
+      resolve(undefined)
+      return
+    }
     // @ts-ignore
     const element = pick(['classList', 'id', 'localName'], getElementByXPath(step.xPath))
     resolve({ ...step, element })

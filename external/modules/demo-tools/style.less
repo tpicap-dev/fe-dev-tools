@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 5px;
+  align-items: center;
 
   #demo-tools-step-picker-form-highlight-fields {
     grid-column: 1/3;
@@ -42,11 +43,35 @@
 
     .demo-tools-info-section {
       padding: 2px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0px 5px;
 
-      &#demo-tools-info-git {
-        display: grid;
-        grid-template-columns: auto 1fr;
-        gap: 3px;
+      * {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+  }
+
+  &.demo-tools-help-popover {
+    inset: 10px !important;
+    max-width: max-content;
+    max-height: 100%;
+    margin: 20px;
+
+    #driver-popover-description {
+      overflow: auto;
+      max-height: calc(100vh - 170px);
+    }
+
+    .demo-tools-help {
+      display: flex;
+      gap: 20px;
+
+      td {
+        vertical-align: top;
       }
     }
   }

@@ -51,6 +51,15 @@ export function isObject(string) {
   }
 }
 
+export function isArray(string) {
+  try {
+    const obj = JSON.parse(string)
+    return obj !== null && obj?.constructor === Array
+  } catch {
+    return false
+  }
+}
+
 export const setOnLoad = (fn) => {
   (window as any).setVar('onLoad', String(fn));
 }

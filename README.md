@@ -14,7 +14,7 @@ FE developer helper for debugging and testing browser applications. Provides opt
 
 Clone the repository:
    ```bash
-  git clone https://scm.tpicapcloud.com/fusion/equities/dev-tools
+  git clone https://github.com/tpicap-dev/fe-dev-tools.git
    ```
 
 
@@ -56,6 +56,9 @@ Objects and functions are made available on window for quick interactive debuggi
     - setPanelField(panelType: string, path: string, value: any): set panel-relative state field
     - setMatchingField(obj: any, value: any, pathOrPropName? = []): updates object matching obj in store, by merging it with value param 
     - setMatchingFields(obj, value): updates all objects matching obj in store, by merging it with value param
+    - logger — lightweight namespaced logger attached to store for quick persistence and inspection
+        - logger.on(): turn on logging redux actions to console
+        - logger.off(): turn off logging redux actions to console
 
 - logger
     - log(value: any): store value in localStorage
@@ -88,16 +91,16 @@ Key features
 - Highlight elements or arbitrary areas and show a popover description (powered by driver.js).
 - Run demo sequences with configurable intervals, pause/resume/stop.
 - Interactive "picker" that captures hovered element XPath to create highlight/click steps.
-- Optional persistence of steps to the global state so demos can be restored on reload.
+- Support for multiple named demo storages (persist multiple demo sets) so you can keep different walkthroughs for different flows.
 - Keyboard shortcuts for quick control while developing demos.
 
 Basic usage (browser)
 1. Initialize:
    ```javascript
    // in your app bootstrap code
-   DemoTools.init({ renderToolbar: true, persist: false, interval: 2000 })
+   DemoTools.init({ renderToolbar: true, interval: 2000 })
    // or use the global if index.ts is used:
-   window.demo.init({ renderToolbar: true })
+   window.demo.init({ renderToolbar: true, title: 'Demo name' })
    ```
 
 2. Add steps:
@@ -120,8 +123,7 @@ Basic usage (browser)
     - Call DemoTools.pickStep() to capture the currently hovered element as a step via a small prompt UI.
 
 Keyboard shortcuts (while DemoTools is initialized)
-- Esc — pause
-- Ctrl + Alt + P — pick element (press while hovering an element)
+- Ctrl + Alt + P — pick element (press while hovering an element), pause
 - Ctrl + Alt + R — run
 - Ctrl + Alt + S — stop
 - Ctrl + Alt + ArrowRight / ArrowLeft — jump/step (with Shift to only select)
@@ -132,23 +134,30 @@ Keyboard shortcuts (while DemoTools is initialized)
 
 API summary
 - DemoTools.init(options)
-    - options.renderToolbar: boolean (default true)
-    - options.persist: boolean (default true)
-    - options.interval: number (ms default 2000)
-- DemoTools.addStep(step)
-- DemoTools.addHighlightStep(step)
-- DemoTools.insertStep(step, index)
-- DemoTools.updateStep(titleOrIndex?, newStep?)
-- DemoTools.removeStep(titleOrIndex)
-- DemoTools.removeAllSteps()
-- DemoTools.clear()
-- DemoTools.doStep(titleOrIndex)
-- DemoTools.run({ from?, till?, interval? })
-- DemoTools.pause(), DemoTools.resume(), DemoTools.stop()
-- DemoTools.pickStep()
-- DemoTools.printSteps()
-- DemoTools.restore() — restore persisted steps from global variable
-- DemoTools.destroy() — teardown UI hooks and listeners
+    - options.title: string (default 'default')
+    - options.demoOptions.title: string (default options.title)
+    - options.demoOptions.renderToolbar: boolean (default true)
+    - options.demoOptions.interval: number (ms default 2000)
+    - options.demoOptions.steps: array (default [])
+- DemoTools.getDemos()
+- DemoTools.getDemo(demoName)
+- DemoTools.setDemo(demoName, steps)
+- DemoTools.listDemos()
+- DemoTools.removeDemo(demoName)
+- DemoTools.destroy()
+- DemoTools.demo.addStep(step)
+- DemoTools.demo.addHighlightStep(step)
+- DemoTools.demo.insertStep(step, index)
+- DemoTools.demo.updateStep(titleOrIndex?, newStep?)
+- DemoTools.demo.removeStep(titleOrIndex)
+- DemoTools.demo.removeAllSteps()
+- DemoTools.demo.doStep(titleOrIndex)
+- DemoTools.demo.run({ from?, till?, interval? })
+- DemoTools.demo.pause(), DemoTools.resume(), DemoTools.stop()
+- DemoTools.demo.pickStep()
+- DemoTools.demo.printSteps()
+- DemoTools.demo.restore() — restore persisted steps from global variable
+- DemoTools.demo.destroy() — teardown UI hooks and listeners
 
 ## To-do / roadmap
 

@@ -10,3 +10,4 @@ wdio.conf.js
 *.bak
 .vscode
 node_modules
+dev-tools.js
