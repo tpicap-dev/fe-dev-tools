@@ -1,8 +1,8 @@
 import { isEmpty, isNil } from 'ramda';
 import { setVar } from '../../utils/vars-persistence'
-import { PROJECT_PATH, SERVER_PORT, SRC_PATH } from '../../../shared/constants.json'
+import { SERVER_PORT } from '../../../shared/constants.json'
 
-export const gitHead = (varName?: string) => {
+export const fetchGitSummary = (varName?: string) => {
   return fetch(`http://localhost:${SERVER_PORT}/git/head`)
     .then(result => {
       if (!isNil(result) && !isEmpty(result)) {

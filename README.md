@@ -120,8 +120,7 @@ Basic usage (browser)
     - Call DemoTools.pickStep() to capture the currently hovered element as a step via a small prompt UI.
 
 Keyboard shortcuts (while DemoTools is initialized)
-- Esc — pause
-- Ctrl + Alt + P — pick element (press while hovering an element)
+- Ctrl + Alt + P — pick element (press while hovering an element), pause
 - Ctrl + Alt + R — run
 - Ctrl + Alt + S — stop
 - Ctrl + Alt + ArrowRight / ArrowLeft — jump/step (with Shift to only select)
