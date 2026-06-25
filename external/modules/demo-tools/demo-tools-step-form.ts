@@ -1,40 +1,63 @@
 import { Driver, driver } from 'driver.js'
-import { is, isNil, pick } from 'ramda'
+import { clone, filter, is, isEmpty, isNil, pick, pipe, values } from 'ramda'
 
-import Demo, { IStep, IElementBoundStep, IHighlightingStep, IInputBoundStep } from './demo'
+import Demo, { IStep, IElementBoundStep, IElementBoundStepBase, IHighlightingStep, IInputBoundStep } from './demo'
+import dom from 'external/modules/demo-tools/dom/dom'
 import './style.less'
 import { getElementByXPath } from '../../utils/utils'
+
+interface IFormValues extends IElementBoundStepBase {
+  useSelector: boolean;
+  selectorLvl0: string;
+  selectorLvl0Checked: boolean;
+  selectorLvl1: string;
+  selectorLvl1Checked: boolean;
+  selectorLvl2: string;
+  selectorLvl2Checked: boolean;
+  selectorLvl3: string;
+  selectorLvl3Checked: boolean;
+}
 
 export default abstract class StepForm {
   static driver: Driver;
 
   static init() {
-    StepForm.driver = driver()
+    StepForm.driver = driver({
+      popoverClass: 'demo-tools-driver-popover',
+    })
   }
 
   static getFormValues() {
     return {
       title: (document.getElementById('demo-tools-step-picker-form-title') as HTMLInputElement).value,
       type: (document.getElementById('demo-tools-step-picker-form-type') as HTMLInputElement).value as IStep['type'],
+      description: (document.getElementById('demo-tools-step-picker-form-description') as HTMLInputElement).value,
       shiftX: +(document.getElementById('demo-tools-step-picker-form-shiftX') as HTMLInputElement).value,
       shiftY: +(document.getElementById('demo-tools-step-picker-form-shiftY') as HTMLInputElement).value,
       shiftWidth: +(document.getElementById('demo-tools-step-picker-form-shiftWidth') as HTMLInputElement).value,
       shiftHeight: +(document.getElementById('demo-tools-step-picker-form-shiftHeight') as HTMLInputElement).value,
       interval: +(document.getElementById('demo-tools-step-picker-form-interval') as HTMLInputElement).value,
       list: (document.getElementById('demo-tools-step-picker-form-list') as HTMLInputElement).checked,
-      xPath: (document.getElementById('demo-tools-step-picker-form-xPath') as HTMLInputElement).value,
+      xPath: StepForm.getSelectorValue() ? null : (document.getElementById('demo-tools-step-picker-form-xPath') as HTMLInputElement).value,
       value: (document.getElementById('demo-tools-step-picker-form-type') as HTMLInputElement).value === 'setValue' ?
         (document.getElementById('demo-tools-step-picker-form-value') as HTMLInputElement).value :
         undefined,
       keyboardKey: (document.getElementById('demo-tools-step-picker-form-type') as HTMLInputElement).value === 'keyboard' ?
         (document.getElementById('demo-tools-step-picker-form-keyboardKey') as HTMLInputElement).value :
         undefined,
-    } as IElementBoundStep & IInputBoundStep;
+      selector: StepForm.getSelectorValue(),
+      scrollAxe: (document.getElementById('demo-tools-step-picker-form-scrollAxe') as HTMLInputElement).value,
+      scrollBy: (document.getElementById('demo-tools-step-picker-form-scrollBy') as HTMLInputElement).value,
+    } as unknown as IFormValues;
   }
 
   static setFormValues(values: Partial<IElementBoundStep>) {
     Object.entries(values).forEach(([key, value]) => {
-      (document.getElementById(`demo-tools-step-picker-form-${key}`) as HTMLInputElement).value = String(value)
+      const formElement = document.getElementById(`demo-tools-step-picker-form-${key}`) as HTMLInputElement
+
+      if(formElement) {
+        formElement.value = String(value)
+      }
     })
   }
 
@@ -47,41 +70,50 @@ export default abstract class StepForm {
       throw new Error('DevTools: StepPicker is not initialized')
     }
 
-    let xPath
-    let formValues
+    let formValues = {} as any
+    let element = {} as any
 
     if (isNil(arg)) {
       throw new Error('DevTools: Step not passed')
     }
 
     if (is(String, arg)) {
-      xPath = arg
-      formValues = { xPath }
-    } else {
-      xPath = (arg as IElementBoundStep).xPath
+      element = getElementByXPath(arg) as HTMLElement
+      formValues = { xPath: arg }
+    } else if ((arg as IElementBoundStep).selector) {
+      element = document.querySelector((arg as IElementBoundStep).selector)
+      formValues = arg
+    } else if ((arg as IElementBoundStep).xPath) {
+      element = getElementByXPath((arg as IElementBoundStep).xPath) as HTMLElement
       formValues = arg
     }
 
+
     return await new Promise<IElementBoundStep | undefined>((resolve) => {
       StepForm.driver.highlight({
-        element: getElementByXPath(xPath) as HTMLElement,
+        element,
         popover: {
+          popoverClass: 'demo-tools-driver-popover',
           description: StepForm.getForm(formValues),
           showButtons: ['next', 'close'],
           nextBtnText: 'Done',
           onPopoverRender: (popoverDom) => {
             const handleKeydown = (e: KeyboardEvent) => {
               if (e.key === 'Enter') {
-                StepForm.resolveForm(resolve)
-                StepForm.driver.destroy()
+                if (StepForm.resolveForm(resolve)) {
+                  StepForm.driver.destroy()
+                }
               }
             }
+
+            setTimeout(() => popoverDom.wrapper.querySelector('input')?.focus(), 100)
             popoverDom.wrapper?.removeEventListener('keydown', handleKeydown)
             popoverDom.wrapper?.addEventListener('keydown', handleKeydown)
           },
           onNextClick: () => {
-            StepForm.resolveForm(resolve)
-            StepForm.driver.destroy()
+            if (StepForm.resolveForm(resolve)) {
+              StepForm.driver.destroy()
+            }
           },
           onCloseClick: () => {
             resolve(undefined)
@@ -93,14 +125,38 @@ export default abstract class StepForm {
   }
 
   static resolveForm(resolve) {
-    const values = StepForm.getFormValues()
-    // @ts-ignore
-    const element = pick(['classList', 'id', 'localName'], getElementByXPath(values.xPath))
-    resolve({ ...values, element })
+    const formValues = StepForm.getFormValues()
+    const element = formValues.xPath ? getElementByXPath(formValues.xPath) : document.querySelector(formValues.selector)
+    const resElement = {
+      classList: pipe(values, filter(cl => cl !== 'driver-active-element'))(element?.classList || []),
+      id: element?.id,
+      localName: element?.localName,
+    }
+
+    if ((isEmpty(resElement.classList) || isNil(resElement.classList)) && (isEmpty(resElement.id) || isNil(resElement.id))) {
+      if (!confirm('Element class list and id are missing')) {
+        return false
+      }
+    }
+    resolve({ ...formValues, element: resElement })
+    return true
   }
 
-  static getForm(values?: Partial<IElementBoundStep>): string {
-    const element = values?.element || getElementByXPath(values?.xPath || '')
+  static getForm(values?: Partial<IFormValues>): string {
+    let element
+    if(values?.element) {
+      element = values?.element
+    } else if (values?.selector) {
+      element = document.querySelector(values?.selector)
+    } else if (values?.xPath) {
+      element = getElementByXPath(values?.xPath) as HTMLElement
+    } else {
+      throw new Error('DevTools: Step element is missing')
+    }
+
+    if (!element) {
+      throw new Error('DevTools: Step element is missing')
+    }
     const xPathSegments = (values.xPath || '').split('/').filter(Boolean)
     return `
       <div class="demo-tools" id="demo-tools-step-picker-form">
@@ -119,6 +175,7 @@ export default abstract class StepForm {
             <option value="hover" ${values?.type === 'hover' ? 'selected' : ''}>Hover</option>
             <option value="setValue" ${values?.type === 'setValue' ? 'selected' : ''}>Set Value</option>
             <option value="keyboard" ${values?.type === 'keyboard' ? 'selected' : ''}>Keyboard</option>
+            <option value="scroll" ${values?.type === 'scroll' ? 'selected' : ''}>Scroll</option>
           </select>
         </div>
         <div class="demo-tools-step-picker-form-label">Ascend:</div>
@@ -130,9 +187,15 @@ export default abstract class StepForm {
               })
             }
           </select>
-          <span title="${element.localName}.${element.classList.join('.')}" style="color: blue; font-size: 1.2em; line-height: 1em; cursor: pointer;">&#9432;</span>
-          </div>
+          <span title="${element.localName}.${[...element.classList].join('.')}" style="color: blue; font-size: 1.2em; line-height: 1em; cursor: pointer;">&#9432;</span>
+        </div>
+        <div class="demo-tools-step-picker-form-label">Selector:</div>
+        <div class="demo-tools-step-picker-form-control">
+            <input type="checkbox" id="demo-tools-step-picker-form-useSelector" onclick="window.demoTools.demo.stepForm.onUseSelectorClick()" ${values?.selector ? 'checked' : ''} />
+        </div>
         <div id="demo-tools-step-picker-form-highlight-fields" style="gap: 5px; align-items: center; grid-column: 1/3; grid-template-columns: auto 1fr; display: ${values?.type === 'highlight'|| isNil(values?.type) ? 'grid' : 'none'};">
+          <div class="demo-tools-step-picker-form-label">Description:</div>
+          <div class="demo-tools-step-picker-form-control"><input type="text" id="demo-tools-step-picker-form-description" value="${(values as IHighlightingStep)?.description || ''}" /></div>
           <div class="demo-tools-step-picker-form-label">Shift X:</div>
           <div class="demo-tools-step-picker-form-control"><input type="number" id="demo-tools-step-picker-form-shiftX" step="10" value="${(values as IHighlightingStep)?.shiftX}" /></div>
           <div class="demo-tools-step-picker-form-label">Shift Y:</div>
@@ -162,14 +225,103 @@ export default abstract class StepForm {
             </select>
           </div>
         </div>
+        <div id="demo-tools-step-picker-form-scroll-fields" style="gap: 5px; align-items: center; grid-column: 1/3; grid-template-columns: auto 1fr; display: ${values?.type === 'keyboard' ? 'grid' : 'none'};">
+          <div class="demo-tools-step-picker-form-label">Axe:</div>
+          <div class="demo-tools-step-picker-form-control">
+            <select id="demo-tools-step-picker-form-scrollAxe" value="${values?.scrollAxe || 'y'}">
+                <option value="y">Y</option>
+                <option value="x">X</option>
+            </select>
+          </div>
+          <div class="demo-tools-step-picker-form-label">Scroll by:</div>
+          <div class="demo-tools-step-picker-form-control">
+            <input id="demo-tools-step-picker-form-scrollBy" value="${values?.scrollBy || 100}" type="number" />&nbsp;px
+          </div>
+        </div>
+        <div id="demo-tools-step-picker-form-selector-fields" style="gap: 5px; grid-column: 1 / 3; flex-direction: column; display: ${values?.useSelector || values?.selector ? 'flex' : 'none'};">
+          <div class="demo-tools-step-picker-form-label">Element selector</div>
+          <div class="demo-tools-step-picker-form-control">
+            <input type="text" id="demo-tools-step-picker-form-selectorLvl0" value="${values?.selector || StepForm.getSelectorLvlValue(element, 0)}" title="${values?.selector || StepForm.getSelectorLvlValue(element, 0)}" />
+            <input type="checkbox" id="demo-tools-step-picker-form-selectorLvl0Checked" checked="true" />
+          </div>
+          <div class="demo-tools-step-picker-form-control">
+            <input type="text" id="demo-tools-step-picker-form-selectorLvl1" value="${StepForm.getSelectorLvlValue(element, 1)}" title="${StepForm.getSelectorLvlValue(element, 1)}" />
+            <input type="checkbox" id="demo-tools-step-picker-form-selectorLvl1Checked" checked="true" />
+          </div>
+          <div class="demo-tools-step-picker-form-control">
+            <input type="text" id="demo-tools-step-picker-form-selectorLvl2" value="${StepForm.getSelectorLvlValue(element, 2)}" title="${StepForm.getSelectorLvlValue(element, 2)}" />
+            <input type="checkbox" id="demo-tools-step-picker-form-selectorLvl2Checked" checked="true" />
+          </div>
+          <div class="demo-tools-step-picker-form-control">
+            <input type="text" id="demo-tools-step-picker-form-selectorLvl3" value="${StepForm.getSelectorLvlValue(element, 3)}" title="${StepForm.getSelectorLvlValue(element, 3)}" />
+            <input type="checkbox" id="demo-tools-step-picker-form-selectorLvl3Checked" checked="true" />
+          </div>
+          <div class="demo-tools-step-picker-form-control">
+            <input type="text" id="demo-tools-step-picker-form-selectorLvl4" value="${StepForm.getSelectorLvlValue(element, 4)}" title="${StepForm.getSelectorLvlValue(element, 4)}" />
+            <input type="checkbox" id="demo-tools-step-picker-form-selectorLvl4Checked" checked="true" />
+          </div>
+        </div>
       </div>
     `
+  }
+
+  static getSelectorValue() {
+    const values = {
+      useSelector: (document.getElementById('demo-tools-step-picker-form-useSelector') as HTMLInputElement).checked,
+      selectorLvl0: (document.getElementById('demo-tools-step-picker-form-selectorLvl0') as HTMLInputElement).value,
+      selectorLvl0Checked: (document.getElementById('demo-tools-step-picker-form-selectorLvl0Checked') as HTMLInputElement).checked,
+      selectorLvl1: (document.getElementById('demo-tools-step-picker-form-selectorLvl1') as HTMLInputElement).value,
+      selectorLvl1Checked: (document.getElementById('demo-tools-step-picker-form-selectorLvl1Checked') as HTMLInputElement).checked,
+      selectorLvl2: (document.getElementById('demo-tools-step-picker-form-selectorLvl2') as HTMLInputElement).value,
+      selectorLvl2Checked: (document.getElementById('demo-tools-step-picker-form-selectorLvl2Checked') as HTMLInputElement).checked,
+      selectorLvl3: (document.getElementById('demo-tools-step-picker-form-selectorLvl3') as HTMLInputElement).value,
+      selectorLvl3Checked: (document.getElementById('demo-tools-step-picker-form-selectorLvl3Checked') as HTMLInputElement).checked,
+      selectorLvl4: (document.getElementById('demo-tools-step-picker-form-selectorLvl4') as HTMLInputElement).value,
+      selectorLvl4Checked: (document.getElementById('demo-tools-step-picker-form-selectorLvl4Checked') as HTMLInputElement).checked,
+    }
+    if (!values.useSelector) {
+      return
+    } else {
+      const selectors = []
+      if (values.selectorLvl4 && values.selectorLvl4Checked) {
+        selectors.push(values.selectorLvl4)
+      }
+      if (values.selectorLvl3 && values.selectorLvl3Checked) {
+        selectors.push(values.selectorLvl3)
+      }
+      if (values.selectorLvl2 && values.selectorLvl2Checked) {
+        selectors.push(values.selectorLvl2)
+      }
+      if (values.selectorLvl1 && values.selectorLvl1Checked) {
+        selectors.push(values.selectorLvl1)
+      }
+      if (values.selectorLvl0 && values.selectorLvl0Checked) {
+        selectors.push(values.selectorLvl0)
+      }
+      return selectors.join(' ')
+    }
+  }
+
+  static getSelectorLvlValue(element: HTMLElement, lvl: number) {
+    const parentElement = dom.getNthParent(element, lvl)
+    if (!parentElement) {
+      return ''
+    }
+    const selectors = [parentElement.localName]
+    if (parentElement.id) {
+      selectors.push(`#${parentElement.id}`)
+    }
+    if (parentElement.classList.length) {
+      selectors.push(`.${[...parentElement.classList].join('.')}`)
+    }
+    return selectors.join('')
   }
 
   static onStepTypeChange() {
     document.getElementById('demo-tools-step-picker-form-highlight-fields').style.display = (document.getElementById('demo-tools-step-picker-form-type') as HTMLInputElement).value === 'highlight' ? 'grid' : 'none'
     document.getElementById('demo-tools-step-picker-form-setValue-fields').style.display = (document.getElementById('demo-tools-step-picker-form-type') as HTMLInputElement).value === 'setValue' ? 'grid' : 'none'
     document.getElementById('demo-tools-step-picker-form-keyboard-fields').style.display = (document.getElementById('demo-tools-step-picker-form-type') as HTMLInputElement).value === 'keyboard' ? 'grid' : 'none'
+    document.getElementById('demo-tools-step-picker-form-scroll-fields').style.display = (document.getElementById('demo-tools-step-picker-form-type') as HTMLInputElement).value === 'scroll' ? 'grid' : 'none'
   }
 
   static onXpathChange() {
@@ -178,14 +330,24 @@ export default abstract class StepForm {
     const xPath = (document.getElementById('demo-tools-step-picker-form-xPath') as HTMLInputElement).value
     const element = getElementByXPath(xPath)
     driver.getActiveStep().element = element
-    driver.highlight(driver.getActiveStep())
+    driver.highlight({
+      ...driver.getActiveStep(),
+      popover: {
+        ...driver.getActiveStep().popover,
+        description: StepForm.getForm(formValues),
+      },
+    })
+    driver.refresh()
     setTimeout(() => {
-      (window as any).demoTools.demo?.stepForm.setFormValues(formValues)
       const infoIcon = ((document.getElementById('demo-tools-step-picker-form-xPath') as HTMLInputElement).nextElementSibling as HTMLElement)
       if (infoIcon) {
         infoIcon.title = element.localName + (element.classList.value ? '.' + element.classList.value?.replace(/ +/g, '.') : '')
       }
     }, 1000)
+  }
+
+  static onUseSelectorClick() {
+    document.getElementById('demo-tools-step-picker-form-selector-fields').style.display = (document.getElementById('demo-tools-step-picker-form-useSelector') as HTMLInputElement).checked ? 'flex' : 'none'
   }
 
   static destroy() {

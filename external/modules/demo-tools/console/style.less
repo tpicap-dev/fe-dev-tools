@@ -1,0 +1,42 @@
+.demo-tools.console {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: calc(100% - 397px);
+  overflow: hidden;
+  font-family: monospace;
+  padding: 8px;
+  box-sizing: border-box;
+  min-height: 200px;
+  max-height: 200px;
+  border:1px solid #bbb;
+  z-index: 9999;
+
+  .topbar {
+    padding: 6px;
+    border-bottom: 1px solid #bbb;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    input {
+      flex: 1;
+      outline: none;
+      padding: 4px 6px;
+      width: 300px;
+    }
+  }
+
+  .logs  {
+    flex: 1;
+    overflow: auto;
+    padding-top: 8px;
+
+    & > div{
+      margin-top: 1px;
+      overflow-wrap: anywhere;
+      display: flex;
+      gap: 5px;
+    }
+  }
+}

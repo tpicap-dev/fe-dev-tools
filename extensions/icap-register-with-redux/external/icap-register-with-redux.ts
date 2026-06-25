@@ -1,8 +1,8 @@
 import webpackConfig from './webpack.config'
 import constants from '../../../shared/constants.json'
-import * as fs from 'fs/promises'
+import * as fs from 'node:fs/promises'
 
-export default class AgGrid {
+export default class IcapRegisterWithRedux {
 
   static webpackConfig = webpackConfig
   static async preBuild() {

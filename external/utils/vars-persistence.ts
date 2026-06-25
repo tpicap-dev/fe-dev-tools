@@ -4,7 +4,7 @@ import { isArray, isBoolean, isFunctionLikeString, isNumber, isObject, isPrimiti
 
 const localStorageKey = 'dev-tools';
 
-const reviveVar = (value) => {
+export const reviveVar = (value) => {
   if (isNumber(value)) {
     return Number(value);
   } else if (isBoolean(value)) {
@@ -22,19 +22,13 @@ const reviveVar = (value) => {
   }
 }
 
-export const setVar = (varName, value) => {
-  if (!/^[a-z_A-Z0-9]+$/.test(varName)) {
-    throw new Error(`${varName} is a not a valid variable name`)
-  }
-
-  const vars = localStorage.getItem(localStorageKey);
-  const varsObj = JSON.parse(vars) || {};
-  let adjustedValue: { value: any, type: any } = { type: value?.constructor === Array ? 'array' : typeof value } as any;
+export const stringifyVar = (value: any) => {
+  let adjustedValue: any;
 
   if (isPrimitive(value)) {
-    adjustedValue = { ...adjustedValue, value: String(value) };
+    return String(value);
   } if (typeof value === 'function') {
-    adjustedValue = { ...adjustedValue, value: value.toString() };
+    return value.toString();
   } else {
     const seen = new WeakSet()
 
@@ -51,8 +45,18 @@ export const setVar = (varName, value) => {
       return v;
     };
 
-    adjustedValue = { ...adjustedValue, value: JSON.stringify(value, replacer) };
+    return JSON.stringify(value, replacer);
   }
+}
+
+export const setVar = (varName, value) => {
+  if (!/^[a-z_A-Z0-9]+$/.test(varName)) {
+    throw new Error(`${varName} is a not a valid variable name`)
+  }
+
+  const vars = localStorage.getItem(localStorageKey);
+  const varsObj = JSON.parse(vars) || {};
+  let adjustedValue: { value: any, type: any } = { type: value?.constructor === Array ? 'array' : typeof value, value: stringifyVar(value) } as any;
 
   varsObj[String(varName)] = adjustedValue;
   localStorage.setItem(localStorageKey, JSON.stringify(varsObj));
@@ -90,9 +94,10 @@ export const getVars = () => {
 }
 
 export const getVar = (varName) => {
+  if ((window as any)[varName] !== undefined) return (window as any)[varName];
   const vars = localStorage.getItem(localStorageKey);
   const varsObj = JSON.parse(vars);
-  return reviveVar(varsObj[varName]?.value)
+  return varsObj?.[varName]?.value ? reviveVar(varsObj?.[varName]?.value) : varsObj?.[varName]?.value
 }
 
 export const deleteVar = varName => {

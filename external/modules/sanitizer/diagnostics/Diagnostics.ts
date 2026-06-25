@@ -1,6 +1,6 @@
 import { all, equals, filter as filterR, flatten, is, map } from 'ramda'
 
-import Logger from 'external/modules/logger/logger'
+import Logger from 'shared/modules/Logger/Logger'
 import Statistics, { IBasicStatistics } from 'external/modules/sanitizer/diagnostics/Statistics'
 import ISanitizerEvent from 'external/modules/sanitizer/interfaces/ISanitizerEvent'
 import ISanitizerEventParams from 'external/modules/sanitizer/interfaces/ISanitizerEventParams'
@@ -9,9 +9,8 @@ import SanitizerEventTypes from 'external/modules/sanitizer/SanitizerEventTypes'
 import IAmendment from 'external/modules/sanitizer/interfaces/IAmendment'
 
 type Format = 'csv'
-const logger = new Logger()
 // @ts-ignore
-logger.setOptions({ diff: false })
+Logger.setOptions({ diff: false })
 
 declare namespace csvParser {
   function parse(arg: any): any;
@@ -78,19 +77,19 @@ export default class Diagnostics {
       return
     }
     // @ts-ignore
-    logger.log(new SanitizerEvent(params))
+    Logger.log(new SanitizerEvent(params))
   }
 
   static values(params?: IValuesParams): ISanitizerEvent[] {
     if (!Diagnostics.enabled) {
       return []
     }
-    const values: any = !params?.filter ? flatten(logger.getValues() as any) : Diagnostics.filter(params?.filter)
+    const values: any = !params?.filter ? flatten(Logger.getValues() as any) : Diagnostics.filter(params?.filter)
     return Diagnostics.output({ format: params?.format, data: values })
   }
 
   static reset(): void {
-    logger.reset()
+    Logger.reset()
   }
 
   static errors(params?: IErrorsParams): ISanitizerEvent[] {

@@ -1,12 +1,25 @@
+import MenuBar from 'external/modules/demo-tools/menu-bar/menu-bar'
 import Steps from 'external/modules/demo-tools/steps/steps'
-import Terminal from 'external/modules/demo-tools/terminal'
+// import Terminal from 'external/modules/demo-tools/terminal'
 import Info from 'external/modules/demo-tools/info'
+import { options } from 'external/modules/demo-tools/demo'
+
+export interface IToolbarOptions {
+  showInfo?: boolean;
+  showSteps?: boolean;
+  showMenuBar?: boolean;
+  showTerminal?: boolean;
+}
 
 export default class Toolbar {
   static state = {
     initialized: false,
   }
+  static eventTypes = {
+    ELEMENT_SET: 'DemoTools:Toolbar:ElementSet',
+  }
   static sections: string[] = [
+    'menuBar',
     'steps',
     // 'terminal',
     'info',
@@ -14,23 +27,29 @@ export default class Toolbar {
   static area: HTMLElement = null
 
   static init() {
-    Steps.init()
-    // Terminal.init()
-    Info.init()
-
-    Toolbar.state.initialized = true
-    Toolbar.mount()
-
     window.addEventListener('Demo:DemoRun', Toolbar.handleDemoRunEvent)
     window.addEventListener('Demo:DemoStop', Toolbar.handleDemoStopEvent)
+    window.addEventListener(Info.eventTypes.ELEMENT_SET, Toolbar.handleInfoElementSet)
+    if (options.mode === 'compose') {
+      MenuBar.init()
+    }
+    // Terminal.init()
+    Steps.init()
+    Info.init()
+    Toolbar.mount()
+
+    Toolbar.state.initialized = true
   }
 
   static mount() {
     Toolbar.setElement()
 
-    Toolbar.area.querySelector('.demo-tools-toolbar-steps')?.appendChild(Steps.area)
+    if (options.mode === 'compose') {
+      Toolbar.area.querySelector('.demo-tools-toolbar-menuBar')?.appendChild(MenuBar.area)
+    }
+    Toolbar.area.querySelector('.demo-tools-toolbar-steps')?.replaceChildren(Steps.area)
     // Toolbar.area.querySelector('.demo-tools-toolbar-terminal')?.appendChild(Terminal.area)
-    Toolbar.area.querySelector('.demo-tools-toolbar-info')?.appendChild(Info.area)
+    Info.area && Toolbar.area.querySelector('.demo-tools-toolbar-info')?.appendChild(Info.area)
 
     document.body.style.display = 'flex'
     document.body.appendChild(Toolbar.area)
@@ -73,21 +92,29 @@ export default class Toolbar {
 
   static destroy() {
     Toolbar.unmount()
-    Terminal.destroy()
-    document.body.style.display = 'block'
+    if (options.mode === 'compose') {
+      MenuBar.destroy()
+    }
+    // Terminal.destroy()
     Steps.destroy()
     Info.destroy()
+    document.body.style.display = 'block'
     Toolbar.state.initialized = false
 
     window.removeEventListener('Demo:DemoRun', Toolbar.handleDemoRunEvent)
     window.removeEventListener('Demo:DemoStop', Toolbar.handleDemoStopEvent)
+    window.removeEventListener(Info.eventTypes.ELEMENT_SET, Toolbar.handleInfoElementSet)
   }
 
   static handleDemoRunEvent() {
-    Toolbar.hideSection('info')
+    // Toolbar.hideSection('info')
   }
 
   static handleDemoStopEvent() {
-    Toolbar.showSection('info')
+    // Toolbar.showSection('info')
+  }
+
+  static handleInfoElementSet() {
+    setTimeout(() => window.dispatchEvent(new CustomEvent(Toolbar.eventTypes.ELEMENT_SET)))
   }
 }

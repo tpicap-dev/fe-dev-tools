@@ -108,3 +108,7 @@ export const getElementByXPath = (xpath) => {
     xpath1 = xpath1.substring(0, xpath1.lastIndexOf('/'));
   }while (!isEmpty(xpath1) && !result?.singleNodeValue)
 }
+
+export const stringToSlug = (str) => {
+  return str.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');
+}

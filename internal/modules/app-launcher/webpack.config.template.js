@@ -14,7 +14,7 @@ const devToolsScriptRelativePath = path
   .relative(process.cwd(), devToolsScriptPath)
   .split('\\')
   .join('/')
-console.log('dev-tools webpack config') // eslint-disable-line no-console
+console.log('dev-tools local webpack config') // eslint-disable-line no-console
 console.log('project path:', constants.PROJECT_PATH) // eslint-disable-line no-console
 console.log('dev-tools script path:', devToolsScriptPath)
 console.log(new Date().toLocaleString())

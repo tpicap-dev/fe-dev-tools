@@ -6,7 +6,6 @@ body > * {
 .demo-tools-steps {
   display: flex;
   flex-direction: column;
-  border: 2px solid #ddd;
   font-weight: bold;
   height: 100%;
   z-index: 10001;
@@ -21,6 +20,7 @@ body > * {
   white-space: nowrap;
   display:flex;
   justify-content: space-between;
+  font-weight: 500;
 
   &.unfilled {
     font-style: italic;
@@ -34,14 +34,36 @@ body > * {
     text-decoration: underline wavy;
   }
 
-  .demo-tools-steps-step-actions {
-    display: flex;
-    gap: 3px;
+  &.type-section {
+    font-weight: 800;
+    padding-bottom: 6px;
+    padding-top: 6px;
+    padding-left:7px;
+  }
 
-    button {
-      line-height: 0.4em;
-      font-size: 0.8em;
+  .demo-tools-steps-edit-form {
+    display: flex;
+    gap: 5px;
+
+    input {
+      height: 15px !important;
     }
+
+    input[type="text"] {
+      padding: 2px .5em !important;
+    }
+
+    input[type="number"] {
+      padding: 2px 0  0px .5em !important;
+    }
+
+    > div:nth-child(1) {
+      min-width: 15px;
+    }
+  }
+
+  .demo-tools-step-label {
+    color: #1266e2;
   }
 }
 

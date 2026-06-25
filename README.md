@@ -10,33 +10,59 @@ FE developer helper for debugging and testing browser applications. Provides opt
 - Persist and manage small dev variables in localStorage
 - Expose helpers: ramda, numeral, decimal, date-fns, and simple utilities (diff, stub, etc.)
 
-## Installation
+## Installation and Usage
+   <p>Prerequisite: Deno (>v2.5.3) should be installed.</p>
 
-Clone the repository:
+### 1st Option
+
+1. Clone the repository:
    ```bash
-  git clone https://github.com/tpicap-dev/fe-dev-tools.git
+    git clone https://scm.tpicapcloud.com/fusion/ux/dev-tools.git
    ```
-
-
-## Building
-
-Prerequisite: Deno (tested with v1.29.1) must be installed.
-
-1. Edit `shared/constants.js` and set `PROJECT_PATH` to the absolute path of the equities-client project you want to integrate with.
-2. From the dev-tools repo root run:
+2. Building
+   2.1. Edit `shared/constants.js` and set `PROJECT_PATH` to the absolute path of the equities-client project you want to integrate with.
+   2.2. From the dev-tools repo root:
+   
    ```bash
    deno task build-external
    ```
+   This bundles the JS files for use in the browser.
+3. To bundle the app with dev-tools included for local development:
+   <p>In dev-tools repo:</p>
 
-This prepares the JS files for use in the browser.
+    ```bash
+    deno task launch-app
+    ```
+4. Optionally run the dev-tools server:
+    ```bash
+    deno task server
+    ```
+### 2nd Option
 
-## Make features available in the browser
-
-To use dev-tools inside the equities-client app during local development:
-
-In dev-tools repo:
-   ```bash
-   deno task launch-app
+1. Install the package as node module
+    ```bash
+   npm install @icap/dev-tools
+    ```
+2.  Update webpack config to include the dev-tools package:
+    ```javascript
+    // webpack.config.js
+    const InjectPlugin = require('webpack-inject-plugin').default
+    
+    module.exports = {
+        // ...
+        plugins: [new InjectPlugin(() => `import './node_modules/@icap/dev-tools/external/dist/dev-tools.js';`)]
+        resolve: {
+            alias: {
+              redux$: `node_modules/@icap/dev-tools/external/dist/redux.js`
+            }
+        }
+    }
+    ```
+3. Optionally add script to package.json, which runs the dev-tools server in parallel with your app:
+    ```json
+    "scripts": {
+        "dev-tools-server": "deno run --unstable-kv --allow-env --allow-net --allow-write --allow-read --allow-run node_modules/@icap/dev-tools/internal/modules/server/dist/server.js",
+    }
    ```
 
 ## Exposed API (summary)
@@ -158,8 +184,6 @@ API summary
 - DemoTools.demo.printSteps()
 - DemoTools.demo.restore() — restore persisted steps from global variable
 - DemoTools.demo.destroy() — teardown UI hooks and listeners
-
-## To-do / roadmap
 
 ## License & contribution
 

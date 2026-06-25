@@ -23,6 +23,27 @@ class Storage {
       .catch(e => {
       })
   }
+  public set = (key: string, value?: any) => {
+    return fetch(
+      `http://localhost:${SERVER_PORT}/storage/set/${encodeURIComponent(`${key}`)}`,
+      {
+        method: 'POST',
+        body: JSON.stringify(value),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        mode: 'no-cors'
+      }).then(result => {
+      if (!isNil(result) && !isEmpty(result)) {
+        return result.json()
+      }
+      return null
+    }).then(result => {
+      return result
+    })
+      .catch(e => {
+      })
+  }
 
   public clear = (key: string) => {
     return fetch(`http://localhost:${SERVER_PORT}/storage/clear/${encodeURIComponent(`${key}`)}`)
@@ -39,9 +60,9 @@ class Storage {
       })
   }
 
-  public get = (logsKey: string, criteria: any) => {
+  public get = (key: string) => {
     return fetch(
-      `http://localhost:${SERVER_PORT}/storage/get/${encodeURIComponent(`${logsKey}`)}/${encodeURIComponent(`${JSON.stringify(criteria)}`)}`
+      `http://localhost:${SERVER_PORT}/storage/get/${encodeURIComponent(`${key}`)}`
     ).then(result => {
         if (!isNil(result) && !isEmpty(result)) {
           return result.json()

@@ -66,23 +66,13 @@
         "returnType": "void",
         "description": "Stores or updates the demo under the given title with the provided steps and persists the demos map."
       },
-      "handleStepsChanged": {
-        "type": "function",
-        "static": true,
-        "async": false,
-        "parameters": [
-          { "name": "event", "type": "CustomEvent<{ steps: Step[] }>" }
-        ],
-        "returnType": "void",
-        "description": "Event handler for 'Demo:StepsChanged' events; extracts steps from event.detail and persists them under the current options.title."
-      },
-      "destroy": {
+      "close": {
         "type": "function",
         "static": true,
         "async": false,
         "parameters": [],
         "returnType": "void",
-        "description": "Destroys DemoTools: closes and clears the Demo singleton if present, removes the 'Demo:StepsChanged' event listener, and marks DemoTools as uninitialized."
+        "description": "Closes DemoTools: closes and clears the Demo singleton if present, removes the 'Demo:StepsChanged' event listener, and marks DemoTools as uninitialized."
       },
       "demo": {
         "type": "class",
@@ -93,16 +83,6 @@
           "parameters": [],
           "returnType": "Step[]",
           "description": "Getter that returns a shallow copy of internal steps array."
-        },
-        "getInstance": {
-          "type": "function",
-          "static": true,
-          "async": false,
-          "parameters": [
-            { "name": "options", "type": "IOptions", "optional": true }
-          ],
-          "returnType": "Demo",
-          "description": "Returns singleton Demo instance, creating it with provided options if it does not exist."
         },
         "addStep": {
           "type": "function",
@@ -313,16 +293,6 @@
           "returnType": "void",
           "description": "Destroys any active driver instance and removes any appended highlight area DOM nodes."
         },
-        "appendHighlightArea": {
-          "type": "function",
-          "static": false,
-          "async": false,
-          "parameters": [
-            { "name": "area", "type": "IArea" }
-          ],
-          "returnType": "HTMLDivElement",
-          "description": "Creates, styles and appends a div overlay to document.body for a given area and returns that div."
-        },
         "check": {
           "type": "function",
           "static": false,
@@ -340,71 +310,6 @@
           "parameters": [],
           "returnType": "void",
           "description": "Logs a console.table showing each step's title and type."
-        },
-        "checkStep": {
-          "type": "function",
-          "static": false,
-          "async": false,
-          "parameters": [
-            { "name": "index", "type": "number" },
-            { "name": "event", "type": "MouseEvent", "optional": true }
-          ],
-          "returnType": "void",
-          "description": "Stops propagation of optional event, opens CheckStepPrompt for the step at index and applies updates returned by the prompt."
-        },
-        "fixStepXPath": {
-          "type": "function",
-          "static": false,
-          "async": false,
-          "parameters": [
-            { "name": "index", "type": "number" },
-            { "name": "event", "type": "MouseEvent", "optional": true }
-          ],
-          "returnType": "void",
-          "description": "Attempts to locate a more robust XPath for the step's element by finding a nearest ancestor/child with the same localName and classes, builds a new XPath, and prompts the user to confirm the anticipated element; if confirmed, updates the step."
-        },
-        "ignoreXPathError": {
-          "type": "function",
-          "static": false,
-          "async": false,
-          "parameters": [
-            { "name": "index", "type": "number" },
-            { "name": "event", "type": "MouseEvent" }
-          ],
-          "returnType": "void",
-          "description": "Stops event propagation and marks the step's xPathCheck as 'ignored' via updateStep."
-        },
-        "dispatchStepsChangedEvent": {
-          "type": "function",
-          "static": false,
-          "async": false,
-          "parameters": [],
-          "returnType": "void",
-          "description": "Dispatches a CustomEvent 'Demo:StepsChanged' with current steps in detail."
-        },
-        "dispatchActiveStepChangedEvent": {
-          "type": "function",
-          "static": false,
-          "async": false,
-          "parameters": [],
-          "returnType": "void",
-          "description": "Dispatches a CustomEvent 'Demo:ActiveStepChanged' with activeStep index in detail."
-        },
-        "dispatchRunEvent": {
-          "type": "function",
-          "static": false,
-          "async": false,
-          "parameters": [],
-          "returnType": "void",
-          "description": "Dispatches a CustomEvent 'Demo:DemoRun' to signal demo run start."
-        },
-        "dispatchStopEvent": {
-          "type": "function",
-          "static": false,
-          "async": false,
-          "parameters": [],
-          "returnType": "void",
-          "description": "Dispatches a CustomEvent 'Demo:DemoStop' to signal demo stop."
         }
       }
     }

@@ -2,6 +2,8 @@ import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import typescript from 'rollup-plugin-typescript2'
 import json from '@rollup/plugin-json'
+import terser from '@rollup/plugin-terser'
+import { visualizer } from 'rollup-plugin-visualizer'
 
 const constants = require(`./shared/constants.json`)
 
@@ -15,9 +17,13 @@ export default {
     sourcemap: true
   },
   plugins: [
-    resolve(),
+    typescript({ tsconfig: './external/tsconfig.json', include: ['external/**/*.ts'] }),
     commonjs(),
+    resolve(),
     json(),
-    typescript({ tsconfig: './external/tsconfig.json' }),
+    terser(),
+    visualizer({
+      filename: './external/bundle-stats/redux.html',
+    })
   ]
 }

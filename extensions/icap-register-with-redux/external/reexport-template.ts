@@ -2,18 +2,22 @@ import { pipe } from 'ramda'
 
 export {
   createShellApp,
+  // @ts-ignore
   createApp,
   createNameSpacedKeys,
   createStream,
-  shellSelectors,
   shellActions,
+  // @ts-ignore
   shellActionTypes,
+  // @ts-ignore
   registerMqConnections,
+  // @ts-ignoree
   dispatchWithPanelId,
+  // @ts-ignore
   registerToolbarItem,
   isParentWindow,
 } from '%PROJECT_PATH%/node_modules/@icap/app-tools/src/index.js'
-import { registerWithRedux as originalRegisterWithRedux } from '%PROJECT_PATH%/node_modules/@icap/app-tools/src/index.js'
+import { registerWithRedux as originalRegisterWithRedux,shellSelectors as originalShellSelectors } from '%PROJECT_PATH%/node_modules/@icap/app-tools/src/index.js'
 import devToolsStore from '../../../external/modules/redux/store'
 import extStore from './store'
 
@@ -29,4 +33,9 @@ export const registerWithRedux = ({APP_ID}) => {
   (window as any).store = store
 
   return store
+}
+
+export const shellSelectors = {
+  ...originalShellSelectors,
+  permissionsSelector: () => (window as any).store.getState().permissions,
 }

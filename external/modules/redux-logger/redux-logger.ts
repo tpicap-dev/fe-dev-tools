@@ -1,8 +1,13 @@
-import { getVar, setVar } from '../../../external/utils/vars-persistence'
+import { getVar, reviveVar, setVar, stringifyVar } from '../../../external/utils/vars-persistence'
+import { isEmpty } from 'ramda'
 
 export default class ReduxLogger {
   static get isOn() {
     return Boolean(getVar('reduxLogger'))
+  }
+
+  static get callbacks() {
+    return (getVar('reduxLoggerCallbacks') || []).map(reviveVar)
   }
 
   static on() {
@@ -39,6 +44,19 @@ export default class ReduxLogger {
     setVar('reduxLoggerExclude', excludes.filter(e => !String(e).includes(String(actionType).toLowerCase())))
   }
 
+  static addCallback(callback: any) {
+    const callbacks = getVar('reduxLoggerCallbacks') || []
+    if (isEmpty(callbacks)) {
+      setVar('reduxLoggerCallbacks', [])
+    }
+
+    setVar('reduxLoggerCallbacks', [...callbacks, stringifyVar(callback)])
+  }
+
+  static removeCallbacks() {
+    setVar('reduxLoggerCallbacks', [])
+  }
+
   static middleware (store) {
     return next =>
       action => {
@@ -52,19 +70,16 @@ export default class ReduxLogger {
 
         const { type } = action
 
-        const timer = Date.now()
-        const result = next(action)
-        const reducerTime = `Reducer ${Date.now() - timer}ms`
-
         console.groupCollapsed(...(action.error || action.err ? [`%c${type}`, 'color: red'] : [type]))
         console.info('Dispatching', action)
         console.log('Next state', store.getState())
-        console.log(`${reducerTime}`)
-        console.log(new Date().toUTCString())
         // @ts-ignore
         console.groupEnd(type)
 
-        return result
+
+        ReduxLogger.callbacks.forEach(callback => { try { callback?.(action) } catch (e) { console.error(e) } })
+
+        return next(action)
       }
   }
 }

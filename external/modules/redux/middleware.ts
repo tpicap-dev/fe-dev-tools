@@ -1,6 +1,6 @@
-import { any, hasPath, isNil, whereEq } from 'ramda'
+import { any, isNil } from 'ramda'
 
-import { addAction } from './actions-cache'
+import { addAction, isCachingOn } from './actions-cache'
 import { objectsMatch} from '../../utils/utils'
 
 export default function () {
@@ -15,6 +15,9 @@ export default function () {
         ) {
           return
         }
+      }
+      if (!isCachingOn()) {
+        return next(action)
       }
       const newAction = {
         id: id++,

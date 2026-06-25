@@ -1,0 +1,62 @@
+USAGE:
+------
+deno run ast.ts --pattern=<string> --path=<string> --preset=<string>
+
+-------------------------------------------------------------------------------
+REQUIRED ARGUMENTS:
+1. --pattern <string>
+   Description: The file pattern (glob) to match files for processing.
+   Example:
+     --pattern="**/*.ts"
+
+2. --preset <string>
+   Description: Specifies the operational preset for processing files.
+   Accepted Values:
+     - jest-2-vitest: Converts Jest test files into Vitest format.
+     - Additional presets may be implemented in the future.
+   Example:
+     --preset=jest-2-vitest
+3. --path <string>
+   Description: The base directory with tests. This can also be used to scope processing to a specific folder.
+   Example:
+     --path=src/tests
+
+-------------------------------------------------------------------------------
+OPTIONAL ARGUMENTS:
+
+1. --projectPath <string>
+   Description: The root path of the project. If not specified, a default constant (PROJECT_PATH) will be used.
+   Example:
+     --projectPath="/d/projects/project-name"
+
+2. --verbose
+   Description: Enables verbose logging. Displays live logs as the script processes files.
+   Default: false (disabled)
+   Usage:
+     --verbose
+
+3. --runTests
+   Description: Runs tests for the files generated or processed by the script. Requires `npx vitest` to be present.
+   Default: false (disabled)
+   Usage:
+     --runTests
+
+-------------------------------------------------------------------------------
+EXAMPLES:
+1. Basic usage
+   Converting Jest tests in the "tests" folder to Vitest format:
+   deno run ast.ts --pattern="**/*.spec.ts" --path="tests" --preset=jest-2-vitest
+
+2. Running tests after processing
+   Converting files and running tests immediately:
+   deno run ast.ts --pattern="**/*.test.js" --preset=jest-2-vitest --runTests --projectPath="/path/to/project"
+
+3. Verbose logging
+   Running with verbose mode to display live logs:
+   deno run ast.ts --pattern="**/*.js" --verbose --preset=jest-2-vitest
+
+-------------------------------------------------------------------------------
+NOTES:
+1. The script will throw an error if required arguments --pattern or --preset are missing.
+2. Ensure that `npx vitest` is installed and available in your environment before using the --runTests argument.
+3. Use absolute paths for --projectPath and --path to avoid unexpected behavior.

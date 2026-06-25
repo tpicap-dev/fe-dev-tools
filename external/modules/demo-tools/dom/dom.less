@@ -1,0 +1,15 @@
+.demo-tools-cursor {
+  position: absolute;
+  min-width: 18px;
+  min-height: 23px;
+  pointer-events: none;
+  z-index: 99999;
+  background-image: url(mouse-cursor.png);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;  transform: translateX(-5px);
+
+  &.demo-tools-cursor-click {
+    transform: rotateY(-15deg) rotateX(15deg) translateX(-5px);
+  }
+}

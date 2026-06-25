@@ -26,5 +26,13 @@ export default [
   {
     identifier: 'book',
     idColumn: 'id'
-  }
+  },
+  {
+    identifier: 'my-firm-trades',
+    idColumn: 'Date',
+  },
+  {
+    identifier: 'rfq-manager',
+    idColumn: 'GroupName',
+  },
 ]

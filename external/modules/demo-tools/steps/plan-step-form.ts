@@ -16,7 +16,10 @@ export default abstract class PlanStepForm {
 
     const field = document.createElement('input')
     const button = document.createElement('button')
+    field.setAttribute('type', 'text')
+    field.classList.add('lg')
     button.innerText = 'Add'
+    button.classList.add('lg')
     button.addEventListener('click', PlanStepForm.handleAddClick)
     field.addEventListener('keypress',PlanStepForm.handleKeypress)
     field.style.flex = '1'
@@ -41,7 +44,7 @@ export default abstract class PlanStepForm {
   }
 
   static destroy() {
-    PlanStepForm.area.remove()
+    PlanStepForm.area?.remove()
     PlanStepForm.area = null
   }
 

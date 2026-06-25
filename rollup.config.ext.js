@@ -1,7 +1,9 @@
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
-import typescript from 'rollup-plugin-typescript2'
+import typescript from '@rollup/plugin-typescript'
 import json from '@rollup/plugin-json'
+import { visualizer } from 'rollup-plugin-visualizer'
+import terser from '@rollup/plugin-terser'
 
 const constants = require(`./shared/constants.json`)
 
@@ -12,12 +14,18 @@ export default {
     format: 'cjs',
     name: 'extensions',
     extend: true,
-    sourcemap: true
+    sourcemap: true,
   },
   plugins: [
-    resolve(),
+    resolve({
+      extensions: ['.ts', '.js']
+    }),
     commonjs(),
     json(),
     typescript({ tsconfig: './external/tsconfig.json' }),
+    terser(),
+    visualizer({
+      filename: './external/bundle-stats/extensions.html',
+    })
   ]
 }

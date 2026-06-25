@@ -3,6 +3,7 @@ import commonjs from '@rollup/plugin-commonjs'
 import typescript from 'rollup-plugin-typescript2'
 import json from '@rollup/plugin-json'
 import IcapRegisterWithRedux from './icap-register-with-redux.ts'
+import terser from '@rollup/plugin-terser'
 
 const constants = require(`../../../shared/constants.json`)
 
@@ -17,15 +18,14 @@ export default {
   input: './extensions/icap-register-with-redux/external/reexport.ts',
   output: {
     file: `./extensions/icap-register-with-redux/external/dist/${constants.EXTERNAL_REDUX_BUNDLE_FILENAME}`,
-    format: 'cjs',
+    format: 'es',
     name: 'redux-toolkit',
-    extend: true,
-    sourcemap: true
   },
   plugins: [
     resolve(),
     commonjs(),
     json(),
-    typescript({ tsconfig: './external/tsconfig.json' }),
+    typescript({ tsconfig: './external/tsconfig.json', include: ['extensions/**/*.ts', 'external/**/*.ts'] }),
+    terser(),
   ]
 }

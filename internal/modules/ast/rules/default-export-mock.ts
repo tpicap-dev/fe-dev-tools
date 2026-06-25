@@ -3,14 +3,14 @@ import * as t from 'npm:@babel/types';
 import Rule from './rule.ts'
 
 export default class DefaultExportMock extends Rule implements IRule {
-  name = 'default-export-mock'
+  override name = 'default-export-mock'
 
-  getVisitor = () => ({
-    CallExpression: (path) => this.visit(path),
+  override getVisitor = () => ({
+    CallExpression: (path: any) => this.visit(path),
   })
 
 
-  hasDefaultProperty = (node) => {
+  hasDefaultProperty = (node: any) => {
     return (
       t.isObjectExpression(node) &&
       node.properties.some(
@@ -21,20 +21,20 @@ export default class DefaultExportMock extends Rule implements IRule {
     );
   }
 
-  wrapWithDefault = (node) => {
+  wrapWithDefault = (node: any) => {
     return t.objectExpression([
       t.objectProperty(t.identifier("default"), node),
     ])
   }
 
-  checkNestedFunction = (path) => {
-    const parentPath = path.findParent(p => {
+  checkNestedFunction = (path: any) => {
+    const parentPath = path.findParent((p: any) => {
       return p.isFunction() && (
-        p.findParent(p1 => {
+        p.findParent((p1: any) => {
           return p1.isFunction() && (
-            p1.findParent(p2 => {
+            p1.findParent((p2: any) => {
               return p2.get("callee")?.isMemberExpression() &&
-                p2.get("callee")?.get('object').isIdentifier({ name: 'jest' })
+                p2.get("callee")?.get('object').isIdentifier({ name: 'vi' })
             })
           )
         })
@@ -44,7 +44,7 @@ export default class DefaultExportMock extends Rule implements IRule {
     return parentPath
   }
 
-  visit = (path) =>  {
+  override visit = (path: any) =>  {
     const callee = path.get("callee");
 
 // match jest.mock(...) or vi.mock(...)
@@ -63,11 +63,11 @@ export default class DefaultExportMock extends Rule implements IRule {
 
 // 👉 Now traverse ONLY inside the factory
     factory.traverse({
-      ReturnStatement: (returnPath) => {
+      ReturnStatement: (returnPath: any) => {
         const arg = returnPath.node.argument;
         if (!arg) return;
 
-        if (t.isObjectExpression(arg) || this.hasDefaultProperty(arg) || checkNestedFunction(returnPath)) return;
+        if (t.isObjectExpression(arg) || this.hasDefaultProperty(arg) || this.checkNestedFunction(returnPath)) return;
 
         returnPath.node.argument = this.wrapWithDefault(arg);
       },
@@ -80,7 +80,7 @@ export default class DefaultExportMock extends Rule implements IRule {
     ) {
       const body = factory.get("body");
 
-      if (!t.isObjectExpression(body.node) && !checkNestedFunction(factory)) {
+      if (!t.isObjectExpression(body.node) && !this.checkNestedFunction(factory)) {
         body.replaceWith(this.wrapWithDefault(body.node));
       }
     }

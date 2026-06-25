@@ -6,6 +6,7 @@ export interface IGitSummary {
   message: string,
   branch: string,
   branchSwitchTime: string,
+  tag: string,
 }
 
 export const fetchGitSummary = (varName?: string): Promise<IGitSummary> => {

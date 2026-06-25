@@ -1,4 +1,4 @@
-import { is, isNil, whereEq } from 'npm:ramda@0.28.0'
+// import { is, isNil, whereEq } from 'npm:ramda@0.28.0'
 
 import Storage from '../../storage/internal/storage.ts'
 
@@ -15,7 +15,7 @@ export default class Logger {
 
     const counterKey = [this.countersKey, key]
     const count = ((await this.storage.get(counterKey)).value as number)
-    const index: number = isNil(count) ? -1 : count
+    const index: number = !count ? -1 : count
 
     if (index >= this.limit) {
       for (let i =0; i < index -this.limit; i++) {
@@ -30,7 +30,10 @@ export default class Logger {
 
   public async get(key: string) {
     const logs = await this.storage.list([this.key, key])
-    const retLogs = []
+    const retLogs: any[] = []
+    if (!logs) {
+      return retLogs
+    }
     for await (const entry of logs) {
       retLogs.push(entry.value)
     }
@@ -38,23 +41,29 @@ export default class Logger {
     return retLogs
   }
 
-  public async getEntry(key: string, criteria?: any) {
-    const logs = await this.storage.list([this.key, key])
-    if (!criteria || !is(Object, criteria)) {
-      return logs.next()
-    }
-    for await (const entry of logs) {
-      if (whereEq(criteria, entry?.value?.value)) {
-        return entry?.value?.value
-      }
-    }
-
-    return null
-  }
+  // public async getEntry(key: string, criteria?: any) {
+  //   const logs = await this.storage.list([this.key, key])
+  //   if (!criteria || typeof criteria === 'object') {
+  //     return (logs as any)?.next()
+  //   }
+  //   if (!logs) {
+  //     return null
+  //   }
+  //   for await (const entry of logs) {
+  //     if (whereEq(criteria, entry?.value?.value)) {
+  //       return entry?.value?.value
+  //     }
+  //   }
+  //
+  //   return null
+  // }
 
   public async clear(key: string) {
     const logs = await this.storage.list([this.key, key])
     const counterKey = [this.countersKey, key]
+    if (!logs) {
+      return
+    }
 
     for await (const entry of logs) {
       this.storage.delete(entry.key)

@@ -13,8 +13,8 @@ export const getInterfaceParent = (interfaceDeclaration: InterfaceDeclaration): 
 }
 
 export const getInterfaceParentPath = (statements: Node): string | null => {
-  const interfaceDeclarationIndex = findIndex(propEq('kind', ts.SyntaxKind.InterfaceDeclaration), statements.getChildren())
-  const importStatements = filter(propEq('kind', ts.SyntaxKind.ImportDeclaration), statements.getChildren())
+  const interfaceDeclarationIndex = findIndex<any>(propEq<any,any>('kind', ts.SyntaxKind.InterfaceDeclaration), statements.getChildren())
+  const importStatements = filter<any,any>(propEq<any,any>('kind', ts.SyntaxKind.ImportDeclaration), statements.getChildren())
   const interfaceDeclaration = statements.getChildAt(interfaceDeclarationIndex)
   const interfaceParent = getInterfaceParent(interfaceDeclaration as InterfaceDeclaration)
 
@@ -28,18 +28,18 @@ export const getInterfaceParentPath = (statements: Node): string | null => {
     path(['expression', 'escapedText'])
   )(interfaceParent)
 
-  return getInterfacePath(statements, interfaceParentName)
+  return getInterfacePath(statements, interfaceParentName as string)
 }
 
 export const getInterfacePath = (statements: Node, interfaceName: string): string | null => {
-  const importStatements = filter(propEq('kind', ts.SyntaxKind.ImportDeclaration), statements.getChildren())
+  const importStatements = filter<any,any>(propEq<any,any>('kind', ts.SyntaxKind.ImportDeclaration), statements.getChildren())
   const interfaceImportNode = find((importStatement: ImportDeclaration) => importStatement?.importClause?.name?.escapedText === interfaceName, importStatements)
 
   if (isNil(interfaceImportNode)) {
     return null
   }
 
-  const relativePath = interfaceImportNode?.moduleSpecifier?.text
+  const relativePath = (interfaceImportNode?.moduleSpecifier as any)?.text
 
   return `${PROJECT_PATH}/${SRC_PATH}/${relativePath}.ts`
 }

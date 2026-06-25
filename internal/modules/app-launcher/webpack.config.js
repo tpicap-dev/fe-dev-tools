@@ -14,7 +14,7 @@ const devToolsScriptRelativePath = path
   .relative(process.cwd(), devToolsScriptPath)
   .split('\\')
   .join('/')
-console.log('dev-tools webpack config') // eslint-disable-line no-console
+console.log('dev-tools local webpack config') // eslint-disable-line no-console
 console.log('project path:', process.cwd()) // eslint-disable-line no-console
 console.log('dev-tools script path:', devToolsScriptPath)
 console.log(new Date().toLocaleString())
@@ -22,16 +22,16 @@ const config = {
   ...webpackConfig,
   plugins: [
     ...webpackConfig.plugins,
-    new InjectPlugin(function() {
-      return `import '${devToolsScriptRelativePath}'`;
-    }),
+    // new InjectPlugin(function() {
+    //   return `import '${devToolsScriptRelativePath}'`;
+    // }),
     new DevToolsPlugin(),
   ],
   resolve: {
     ...webpackConfig.resolve,
     alias: {
       ...webpackConfig.resolve.alias,
-      redux$: `${devToolsPath}/external/${constants.DEV_TOOLS_EXTERNAL_DIST_PATH}/${constants.EXTERNAL_REDUX_BUNDLE_FILENAME}`,
+      // redux$: `${devToolsPath}/external/${constants.DEV_TOOLS_EXTERNAL_DIST_PATH}/${constants.EXTERNAL_REDUX_BUNDLE_FILENAME}`,
     }
   }
 }

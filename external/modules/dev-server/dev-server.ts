@@ -8,7 +8,11 @@ export default abstract class DevServer {
     return fetch(`http://localhost:${SERVER_PORT}/${String(path)}`)
       .then(result => {
         if (!isNil(result) && !isEmpty(result)) {
-          return result.json()
+          if (result.headers.get('Content-Type')?.includes('application/json')) {
+            return result.json()
+          } else {
+            return result.text()
+          }
         }
         return null
       }).then(result => {
@@ -20,6 +24,28 @@ export default abstract class DevServer {
       })
       .catch(e => {
         throw new Error(e)
+      })
+  }
+
+  static set = (path: string, value?: any) => {
+    return fetch(
+      `http://localhost:${SERVER_PORT}/${String(path)}`,
+      {
+        method: 'POST',
+        body: JSON.stringify(value),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        mode: 'no-cors'
+      }).then(result => {
+      if (!isNil(result) && !isEmpty(result)) {
+        return result.json()
+      }
+      return null
+    }).then(result => {
+      return result
+    })
+      .catch(e => {
       })
   }
 }

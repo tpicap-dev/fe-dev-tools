@@ -6,7 +6,7 @@ import enhancedReducer from './reducers/index'
 import { setVar } from "../../utils/vars-persistence"
 import { findMatch, findMatches, findProp } from '../ladash/ladash'
 
-interface IRedispatchOptions {
+export interface IRedispatchOptions {
   shift?: number,
   payload?: any,
   customProp?: any,
@@ -18,7 +18,7 @@ export default (store: any) => ({
     return store.replaceReducer(enhancedReducer(arg))
   },
   // get state() { return store.getState() },
-  state() { return store.getState() },
+  // state() { return store.getState() },
   panelState: (panelType: string) => {
     if (!panelType) {
       return undefined

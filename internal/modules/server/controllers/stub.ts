@@ -29,10 +29,10 @@ const stubF = (path: string | null, options?: IOptions): any => {
   if (!statements) {
     throw new Error('Declaration not found')
   }
-  const interfaceDeclarationIndex = findIndex(propEq('kind', ts.SyntaxKind.InterfaceDeclaration), statements.getChildren())
+  const interfaceDeclarationIndex = findIndex<any>(propEq<any,any>('kind', ts.SyntaxKind.InterfaceDeclaration), statements.getChildren())
   const interfaceDeclaration = statements.getChildAt(interfaceDeclarationIndex)
   if (!interfaceDeclaration) {
-    const typeDeclarationIndex = findIndex(propEq('kind', ts.SyntaxKind.TypeAliasDeclaration), statements.getChildren())
+    const typeDeclarationIndex = findIndex<any>(propEq<any,any>('kind', ts.SyntaxKind.TypeAliasDeclaration), statements.getChildren())
     const typeDeclaration = statements.getChildAt(typeDeclarationIndex) as any
     return generateStub(statements, typeDeclaration.type as InterfaceDeclaration)
   }
@@ -51,7 +51,7 @@ const stubF = (path: string | null, options?: IOptions): any => {
     if (!isNil(options?.override?.include)) {
       const stubPart = pick(options?.override?.include, stub)
       stub = {
-        ...options?.override?.object,
+        ...(options?.override?.object as any || {}),
         ...stubPart,
       }
     }
@@ -67,7 +67,7 @@ const stubF = (path: string | null, options?: IOptions): any => {
     if (isNil(options?.override?.exclude) && isNil(options?.override?.include)) {
       stub = {
         ...stub,
-        ...options?.override?.object
+        ...(options?.override?.object as any || {})
       }
     }
   }

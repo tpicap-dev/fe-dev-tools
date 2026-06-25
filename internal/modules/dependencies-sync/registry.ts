@@ -1,1 +1,1 @@
-export default ['redux', '@icap/fusion-ag-grid', 'typescript']
+export default ['redux', 'typescript']

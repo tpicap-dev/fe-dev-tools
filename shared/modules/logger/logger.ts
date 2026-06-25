@@ -1,52 +1,57 @@
 import { isEmpty, values } from 'ramda'
-import diff from '../../../shared/modules/diff/diff'
+import diff from '../diff/diff'
 
 interface ILoggerOptions {
 	diff?: boolean;
 }
 
 class Logger {
-  private values: any[][] = [[]];
-	static defaultOptions: ILoggerOptions = {
-		diff: true
-	};
-	private options: ILoggerOptions;
-	
-	constructor (options: ILoggerOptions = {}) {
-		this.options = { ...Logger.defaultOptions, ...options }
+  static live: boolean = false;
+  static values: any[][] = [[]];
+  static prefix: string = '';
+	static options: ILoggerOptions = {
+    diff: false
+  };
+
+  static setOptions(options: ILoggerOptions) {
+    Logger.options = { ...Logger.options, ...options }
 	}
 
-	public setOptions(options: ILoggerOptions) {
-		this.options = { ...this.options, ...options }
-	}
-
-  public log() {
-    if(isEmpty(arguments)) {
+  static log(...args: any[]) {
+    if(isEmpty(args)) {
       return
     }
 		
 		let record
 
-		if (this.options.diff) {
-			record = [...values(arguments), ...values(arguments).map((argument: any, i: number) => diff(argument || {}, this.values[this.values.length - 1][i] || {}))]
+		if (Logger.options.diff) {
+			record = [...values(args), ...values(args).map((argument: any, i: number) => diff(args || {}, Logger.values[Logger.values.length - 1][i] || {}))]
 		} else {
-			record = [...values(arguments)]
+			record = [...values(args)]
 		}
 
 
-    this.values.push(record)
+    Logger.values.push(record)
+
+    if (Logger.live) {
+      if (Logger.prefix) {
+        console.log(Logger.prefix + ':', ...args)
+      } else {
+        console.log(...args)
+      }
+    }
   }
 
-  public print() {
-    console.table(this.values);
+  static print() {
+    console.table(Logger.values);
   }
 
-  public reset() {
-    this.values = [[]];
+  static reset() {
+    Logger.values = [[]];
   }
 
-	public getValues() {
-		return this.values
+  static getValues() {
+		return Logger.values
 	}
 }
 

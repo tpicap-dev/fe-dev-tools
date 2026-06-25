@@ -3,15 +3,22 @@
     "setup": "deno run --allow-read --allow-write --unsafely-ignore-certificate-errors=deno.land,npmjs.org internal/modules/setup/index.ts",
     "start": " deno run --unsafely-ignore-certificate-errors=deno.land,npmjs.org --allow-read --allow-write internal/index.ts",
     "server": "deno run --unsafely-ignore-certificate-errors=deno.land,npmjs.org --allow-read --allow-write --unstable-kv --allow-net --allow-run --allow-env internal/modules/server/index.ts",
-    "launch-app": "cd internal/modules/app-launcher && sh index.sh; cd -",
+    "server:bundle": "deno bundle --output internal/modules/server/dist/server.js internal/modules/server/index.ts",
+    "server:compile": "deno bundle --output internal/modules/server/dist/server-tmp.js internal/modules/server/index.ts && deno compile --target x86_64-pc-windows-msvc --unsafely-ignore-certificate-errors=dl.deno.land,deno.land,npmjs.org --allow-read --allow-write --unstable-kv --allow-net --allow-run --allow-env --no-check --output internal/modules/server/dist/server.exe internal/modules/server/dist/server-tmp.js && rm internal/modules/server/dist/server-tmp.js",
+    "launch-app": "cd internal/modules/app-launcher && sh index.sh",
     "launch-app-with-server": "deno task launch-app & deno task server",
     "format-external": "deno fmt ./external",
-    "build-external": "deno task build-external-dev-tools && deno task build-external-ext && deno task build-external-redux",
+    "build-external": "deno task build-external-dev-tools && deno task build-external-ext && deno task build-external-redux && deno task build-external-ext-standalone",
     "build-external-dev-tools": "npx rollup -c --bundleConfigAsCjs",
     "build-external-redux": "npx rollup -c rollup.config.redux.js --bundleConfigAsCjs",
     "build-external-ext": "npx rollup -c rollup.config.ext.js --bundleConfigAsCjs",
+    "build-external-ext-standalone": "npx rollup -c extensions/icap-register-with-redux/external/rollup.config.ts --bundleConfigAsCjs && npx rollup -c extensions/ag-grid/external/rollup.config.ts --bundleConfigAsCjs",
     "sync-dependencies": "deno --allow-read --allow-write internal/modules/dependencies-sync/index.ts && npm i",
-    "test": "deno run --unsafely-ignore-certificate-errors=deno.land,npmjs.org --allow-read --allow-write --allow-net --allow-env --allow-run internal/test.ts"
+    "test": "deno run --unsafely-ignore-certificate-errors=deno.land,npmjs.org --allow-read --allow-write --allow-net --allow-env --allow-run internal/test.ts",
+    "ast:jest2vitest": "deno run --unsafely-ignore-certificate-errors=deno.land,npmjs.org --allow-read --allow-write --allow-env --allow-run --unstable-kv --unstable-sloppy-imports internal/modules/ast/ast.ts --preset=jest-2-vitest",
+    "ast:wrapping-calls": "deno run --unsafely-ignore-certificate-errors=deno.land,npmjs.org --allow-read --allow-write --allow-env --allow-run --unstable-kv --unstable-sloppy-imports internal/modules/ast/ast.ts --preset=wrapping-calls",
+    "ast:compile": "deno compile --unsafely-ignore-certificate-errors=deno.land,dl.deno.land,npmjs.org --allow-read --allow-write --allow-env --allow-run --unstable-sloppy-imports --target x86_64-pc-windows-msvc --output=internal/modules/ast/dist/ast.exe internal/modules/ast/ast.ts",
+    "ast:babel-traverse:bundle": "npx rollup -c internal/modules/ast/rollup.config.babel-traverse.ts --bundleConfigAsCjs"
   },
   "compilerOptions": {
 
